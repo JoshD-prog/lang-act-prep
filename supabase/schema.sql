@@ -81,6 +81,7 @@ create table if not exists contact_inquiries (
   student_school text,
   interest text,
   message text not null,
+  reviewed boolean not null default false,
   created_at timestamptz not null default now()
 );
 

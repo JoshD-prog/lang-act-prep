@@ -72,9 +72,23 @@ create table if not exists cms_sections (
   unique (page_slug, section_key)
 );
 
+create table if not exists contact_inquiries (
+  id uuid primary key default gen_random_uuid(),
+  full_name text not null,
+  email text not null,
+  phone text,
+  student_grade text,
+  student_school text,
+  interest text,
+  message text not null,
+  created_at timestamptz not null default now()
+);
+
 create index if not exists idx_scholarship_college_slug on college_scholarship_tiers (college_slug);
 create index if not exists idx_enrollment_class_slug on enrollment_leads (class_slug);
 create index if not exists idx_enrollment_school_slug on enrollment_leads (school_slug);
+create index if not exists idx_contact_inquiries_email on contact_inquiries (email);
+create index if not exists idx_contact_inquiries_created_at on contact_inquiries (created_at desc);
 
 -- seed class offerings
 insert into class_offerings (slug, title, schedule, format, price_cents, seats_available, featured)
@@ -132,6 +146,7 @@ alter table college_scholarship_tiers enable row level security;
 alter table enrollment_leads enable row level security;
 alter table cms_pages enable row level security;
 alter table cms_sections enable row level security;
+alter table contact_inquiries enable row level security;
 
 -- public read for site data
 drop policy if exists "public read class_offerings" on class_offerings;
@@ -159,4 +174,4 @@ create policy "public read cms sections"
 on cms_sections for select
 using (true);
 
--- writes for enrollment leads are intended to occur from server role only.
+-- writes for enrollment leads and contact inquiries are intended to occur from server role only.

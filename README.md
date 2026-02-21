@@ -71,6 +71,7 @@ Notes:
 - `/schools/[slug]`
 - `/resources`
 - `/529-update`
+- `/contact`
 
 ## Stripe Flow
 - `POST /api/checkout` creates a Stripe checkout session.

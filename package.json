@@ -9,6 +9,12 @@
     "build": "vite build",
     "preview": "vite preview",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "db:init": "bunx supabase init",
+    "db:login": "bunx supabase login",
+    "db:link": "bunx supabase link --project-ref $SUPABASE_PROJECT_REF",
+    "db:new": "bunx supabase migration new",
+    "db:push": "bunx supabase db push",
+    "db:reset": "bunx supabase db reset",
     "lint": "prettier --check .",
     "format": "prettier --write ."
   },

@@ -32,7 +32,32 @@ source ~/.zshrc
    ```
 
 ## Database
-Apply `supabase/schema.sql` to create tables and seed starter data for classes, schools, and scholarship tiers.
+Use Supabase migrations in `supabase/migrations` as the source of truth.
+
+1. Install/login/init CLI:
+   ```bash
+   bun run db:login
+   bun run db:init
+   ```
+2. Set your project ref and link:
+   ```bash
+   export SUPABASE_PROJECT_REF=your-project-ref
+   bun run db:link
+   ```
+3. Apply migrations:
+   ```bash
+   bun run db:push
+   ```
+
+Baseline migration:
+- `supabase/migrations/20260221000100_init_schema.sql`
+
+Notes:
+- `supabase/schema.sql` remains a schema snapshot/reference.
+- Create new migrations with:
+  ```bash
+  bun run db:new <migration_name>
+  ```
 
 ## Important Routes
 - `/` home

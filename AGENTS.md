@@ -16,7 +16,8 @@ The implementation uses SvelteKit (Svelte 5 + TypeScript), Tailwind CSS, Supabas
 - Shared view components are in `src/lib/components`.
 - Shared content descriptors and static fallbacks are in `src/lib/content`.
 - Server-side data and integration helpers are in `src/lib/server`.
-- Supabase schema and seed SQL is in `supabase/schema.sql`.
+- Supabase migrations are in `supabase/migrations`.
+- `supabase/schema.sql` is a snapshot/reference file.
 
 ## Key Routes
 - `/` home
@@ -58,4 +59,5 @@ The implementation uses SvelteKit (Svelte 5 + TypeScript), Tailwind CSS, Supabas
 1. Inspect existing route and shared component before adding new files.
 2. Prefer minimal changes within existing structures.
 3. Keep new table/field additions reflected in both SQL and TypeScript mappers.
-4. Run validation with Bun before finalizing: `bun run check` or `bun run build`.
+4. For DB changes, create a migration (`bun run db:new <name>`) and apply with `bun run db:push`.
+5. Run validation with Bun before finalizing: `bun run check` or `bun run build`.

@@ -3,5 +3,6 @@
 node_modules
 .svelte-kit
 .vercel
+supabase/.temp
 build
 .DS_Store

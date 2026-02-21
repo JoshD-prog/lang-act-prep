@@ -21,6 +21,7 @@ export function calculateScholarshipProjections(gpa: number, act: number, tiers:
   for (const [, groupedTiers] of collegeMap.entries()) {
     const ordered = orderScholarshipTiers(groupedTiers);
     const qualified = ordered.filter((tier) => gpa >= tier.minGpa && act >= tier.minAct).at(-1);
+    const currentAnnualAward = qualified?.annualAwardUsd ?? 0;
 
     const nextTiers = ordered
       .filter((tier) => {
@@ -31,14 +32,43 @@ export function calculateScholarshipProjections(gpa: number, act: number, tiers:
       })
       .slice(0, 2);
 
+    const actScoreSavings = ordered
+      .filter((tier) => gpa >= tier.minGpa && tier.minAct > act)
+      .map((tier) => ({
+        tierName: tier.tierName,
+        targetAct: tier.minAct,
+        actIncrease: tier.minAct - act,
+        totalAnnualAwardUsd: tier.annualAwardUsd,
+        additionalAnnualAwardUsd: tier.annualAwardUsd - currentAnnualAward
+      }))
+      .filter((opportunity) => opportunity.additionalAnnualAwardUsd > 0)
+      .slice(0, 2);
+
     projections.push({
       collegeName: ordered[0]?.collegeName ?? 'College',
       qualifiedTier: qualified,
-      nextTiers
+      nextTiers,
+      actScoreSavings
     });
   }
 
-  return projections.sort((a, b) => a.collegeName.localeCompare(b.collegeName));
+  return projections.sort((a, b) => {
+    const aQualified = Boolean(a.qualifiedTier);
+    const bQualified = Boolean(b.qualifiedTier);
+
+    if (aQualified !== bQualified) {
+      return aQualified ? -1 : 1;
+    }
+
+    const aAward = a.qualifiedTier?.annualAwardUsd ?? 0;
+    const bAward = b.qualifiedTier?.annualAwardUsd ?? 0;
+
+    if (aAward !== bAward) {
+      return bAward - aAward;
+    }
+
+    return a.collegeName.localeCompare(b.collegeName);
+  });
 }
 
 export async function getClassOfferings(): Promise<ClassOffering[]> {

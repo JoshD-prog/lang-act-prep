@@ -42,4 +42,11 @@ export interface ScholarshipProjection {
   collegeName: string;
   qualifiedTier?: CollegeTier;
   nextTiers: CollegeTier[];
+  actScoreSavings: {
+    tierName: string;
+    targetAct: number;
+    actIncrease: number;
+    totalAnnualAwardUsd: number;
+    additionalAnnualAwardUsd: number;
+  }[];
 }

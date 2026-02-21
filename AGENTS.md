@@ -4,6 +4,10 @@
 This repository contains the ACT Prep Classes marketing and enrollment website.
 The implementation uses SvelteKit (Svelte 5 + TypeScript), Tailwind CSS, Supabase, and Stripe.
 
+## Greenfield Policy
+- This project is in a greenfield phase.
+- For major requested app changes, prioritize the requested new direction and do not preserve backward compatibility unless explicitly asked.
+
 ## Primary Goals
 - Present clear class information and pricing.
 - Support a clear enrollment journey to Stripe checkout.

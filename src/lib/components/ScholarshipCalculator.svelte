@@ -44,6 +44,24 @@
           {/each}
         </ul>
       {/if}
+
+      {#if projection.actScoreSavings.length > 0}
+        <h4 class="mt-4 text-sm font-bold uppercase tracking-[0.16em] text-slate-500">ACT score savings</h4>
+        <ul class="mt-2 space-y-2">
+          {#each projection.actScoreSavings as opportunity}
+            <li class="rounded-xl bg-emerald-50 px-3 py-2 text-sm text-emerald-900">
+              <strong>ACT +{opportunity.actIncrease}</strong> (to {opportunity.targetAct}) could add
+              <strong> {money.format(opportunity.additionalAnnualAwardUsd)}/year</strong>
+              for a new total of {money.format(opportunity.totalAnnualAwardUsd)}/year via
+              {opportunity.tierName}.
+            </li>
+          {/each}
+        </ul>
+      {:else if projection.nextTiers.length > 0}
+        <p class="mt-4 rounded-xl bg-slate-50 px-3 py-2 text-sm text-slate-700">
+          No ACT-only savings path at this GPA yet. A GPA increase may also be needed for the next tier.
+        </p>
+      {/if}
     </article>
   {/each}
 </section>

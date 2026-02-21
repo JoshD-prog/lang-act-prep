@@ -1,22 +1,22 @@
 <script lang="ts">
   import PageSection from '$lib/components/PageSection.svelte';
-  import { salesFunnelSections } from '$lib/content/site';
+  import { enrollmentJourneySections } from '$lib/content/site';
 </script>
 
 <svelte:head>
-  <title>Sales Funnel | ACT Prep Classes</title>
+  <title>How It Works | ACT Prep Classes</title>
 </svelte:head>
 
 <section class="rounded-3xl border border-slate-200 bg-white p-8 shadow-lg shadow-slate-900/5">
-  <p class="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">Enrollment flow</p>
-  <h1 class="mt-2 text-4xl font-black text-ink">Simple funnel from interest to paid enrollment.</h1>
+  <p class="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">Enrollment journey</p>
+  <h1 class="mt-2 text-4xl font-black text-ink">A simple path from first step to class kickoff.</h1>
   <p class="mt-4 max-w-2xl text-lg text-slate-600">
-    The full journey is designed for clarity, speed, and fewer drop-offs.
+    We keep enrollment clear and fast so families can focus on prep, not paperwork.
   </p>
 </section>
 
 <div class="mt-8 grid gap-4 md:grid-cols-3">
-  {#each salesFunnelSections as section}
+  {#each enrollmentJourneySections as section}
     <PageSection {section} />
   {/each}
 </div>

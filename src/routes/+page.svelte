@@ -18,8 +18,8 @@
   body="We help students build score gains with structured coaching, timed practice, and clear scholarship targets across local and flagship colleges."
   primaryCtaLabel="Start enrollment"
   primaryCtaHref="/enroll"
-  secondaryCtaLabel="See the funnel"
-  secondaryCtaHref="/sales-funnel"
+  secondaryCtaLabel="How it works"
+  secondaryCtaHref="/how-it-works"
 />
 
 <div class="grid gap-5 md:grid-cols-3">

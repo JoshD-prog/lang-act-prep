@@ -6,7 +6,7 @@ The implementation uses SvelteKit (Svelte 5 + TypeScript), Tailwind CSS, Supabas
 
 ## Primary Goals
 - Present clear class information and pricing.
-- Support a clean enrollment funnel to Stripe checkout.
+- Support a clear enrollment journey to Stripe checkout.
 - Provide school-specific landing pages that map to the same core offering.
 - Provide a scholarship calculator that shows current and next scholarship tiers.
 - Keep structure compatible with future CMS integration.
@@ -22,7 +22,7 @@ The implementation uses SvelteKit (Svelte 5 + TypeScript), Tailwind CSS, Supabas
 - `/` home
 - `/about`
 - `/classes`
-- `/sales-funnel`
+- `/how-it-works`
 - `/resources`, `/resources/for-parents`, `/resources/for-educators`
 - `/529-update`
 - `/scholarship-calculator`

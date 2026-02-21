@@ -38,7 +38,7 @@ Apply `supabase/schema.sql` to create tables and seed starter data for classes, 
 - `/` home
 - `/about`
 - `/classes`
-- `/sales-funnel`
+- `/how-it-works`
 - `/enroll`
 - `/checkout`
 - `/scholarship-calculator`

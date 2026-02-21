@@ -38,7 +38,7 @@ export const homepageSections: CmsSection[] = [
   }
 ];
 
-export const salesFunnelSections: CmsSection[] = [
+export const enrollmentJourneySections: CmsSection[] = [
   {
     id: 'step-1',
     eyebrow: 'Step 1',

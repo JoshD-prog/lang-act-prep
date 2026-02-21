@@ -22,6 +22,9 @@
         Questions about fit, schedule, or scholarship strategy? Reach us at
         <a href="mailto:hello@actprepclasses.com" class="font-semibold text-sky">hello@actprepclasses.com</a>.
       </p>
+      <a href="/contact" class="mt-3 inline-flex text-sm font-semibold text-sky hover:underline">
+        Request more information
+      </a>
     </section>
   </div>
 </footer>

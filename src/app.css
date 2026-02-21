@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --paper: #f8fafc;
+  --card: #ffffff;
+  --ink: #0f172a;
+  --accent: #14b8a6;
+  --accent-alt: #f59e0b;
+  --muted: #64748b;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 10% 10%, rgba(20, 184, 166, 0.08), transparent 40%),
+    radial-gradient(circle at 85% 15%, rgba(245, 158, 11, 0.08), transparent 35%),
+    linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  font-family: 'Manrope', 'Avenir Next', 'Segoe UI', sans-serif;
+}
+
+a {
+  color: inherit;
+}

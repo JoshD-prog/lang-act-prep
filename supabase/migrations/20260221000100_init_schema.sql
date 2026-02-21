@@ -134,23 +134,28 @@ alter table cms_pages enable row level security;
 alter table cms_sections enable row level security;
 
 -- public read for site data
-create policy if not exists "public read class_offerings"
+drop policy if exists "public read class_offerings" on class_offerings;
+create policy "public read class_offerings"
 on class_offerings for select
 using (true);
 
-create policy if not exists "public read schools"
+drop policy if exists "public read schools" on schools;
+create policy "public read schools"
 on schools for select
 using (true);
 
-create policy if not exists "public read scholarship tiers"
+drop policy if exists "public read scholarship tiers" on college_scholarship_tiers;
+create policy "public read scholarship tiers"
 on college_scholarship_tiers for select
 using (true);
 
-create policy if not exists "public read cms pages"
+drop policy if exists "public read cms pages" on cms_pages;
+create policy "public read cms pages"
 on cms_pages for select
 using (true);
 
-create policy if not exists "public read cms sections"
+drop policy if exists "public read cms sections" on cms_sections;
+create policy "public read cms sections"
 on cms_sections for select
 using (true);
 

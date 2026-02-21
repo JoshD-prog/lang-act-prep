@@ -8,6 +8,7 @@ export const navItems = [
   { href: '/schools', label: 'Schools' },
   { href: '/resources', label: 'Resources' },
   { href: '/529-update', label: '529 Update' },
+  { href: '/contact', label: 'Contact' },
   { href: '/enroll', label: 'Enroll' }
 ];
 

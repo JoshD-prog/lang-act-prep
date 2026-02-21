@@ -26,6 +26,7 @@ The implementation uses SvelteKit (Svelte 5 + TypeScript), Tailwind CSS, Supabas
 - `/how-it-works`
 - `/resources`, `/resources/for-parents`, `/resources/for-educators`
 - `/529-update`
+- `/contact`
 - `/scholarship-calculator`
 - `/schools` and `/schools/[slug]`
 - `/enroll`
@@ -37,6 +38,7 @@ The implementation uses SvelteKit (Svelte 5 + TypeScript), Tailwind CSS, Supabas
 - `schools`: school-specific page metadata.
 - `college_scholarship_tiers`: thresholds used by calculator.
 - `enrollment_leads`: intake form submissions.
+- `contact_inquiries`: contact form submissions.
 - `cms_pages` + `cms_sections`: future CMS-oriented content structure.
 
 ## Environment Variables

@@ -19,10 +19,9 @@
     <section>
       <h3 class="text-sm font-semibold uppercase tracking-wide text-slate-500">Contact</h3>
       <p class="mt-3 text-sm text-slate-700">
-        Questions about fit, schedule, or scholarship strategy? Reach us at
-        <a href="mailto:hello@actprepclasses.com" class="font-semibold text-sky">hello@actprepclasses.com</a>.
+        Questions about fit, schedule, or scholarship strategy?
       </p>
-      <a href="/contact" class="mt-3 inline-flex text-sm font-semibold text-sky hover:underline">
+      <a href="/contact" class="mt-2 inline-flex text-sm font-semibold text-sky hover:underline">
         Request more information
       </a>
     </section>

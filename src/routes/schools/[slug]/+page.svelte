@@ -5,7 +5,7 @@
 </script>
 
 <svelte:head>
-  <title>{data.school.name} | ACT Prep Classes</title>
+  <title>{data.school.name} | KC Cram Course</title>
 </svelte:head>
 
 <section class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-lg shadow-slate-900/5">

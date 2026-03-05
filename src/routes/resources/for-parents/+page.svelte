@@ -1,5 +1,5 @@
 <svelte:head>
-  <title>For Parents | ACT Prep Classes</title>
+  <title>For Parents | KC Cram Course</title>
 </svelte:head>
 
 <section class="rounded-3xl border border-slate-200 bg-white p-8">

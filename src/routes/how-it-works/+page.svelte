@@ -4,7 +4,7 @@
 </script>
 
 <svelte:head>
-  <title>How It Works | ACT Prep Classes</title>
+  <title>How It Works | KC Cram Course</title>
 </svelte:head>
 
 <section class="rounded-3xl border border-slate-200 bg-white p-8 shadow-lg shadow-slate-900/5">
@@ -24,5 +24,5 @@
 <section class="mt-8 rounded-3xl border border-slate-200 bg-white p-8">
   <h2 class="text-2xl font-black text-ink">Ready to begin?</h2>
   <p class="mt-3 text-slate-600">Start enrollment now and secure your preferred class while seats remain.</p>
-  <a href="/enroll" class="mt-5 inline-flex rounded-full bg-sky px-6 py-3 text-sm font-bold text-white">Go to enrollment</a>
+  <a href="/classes" class="mt-5 inline-flex rounded-full bg-sky px-6 py-3 text-sm font-bold text-white">View upcoming classes</a>
 </section>

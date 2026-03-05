@@ -1,5 +1,5 @@
 <svelte:head>
-  <title>Enrollment Confirmed | ACT Prep Classes</title>
+  <title>Enrollment Confirmed | KC Cram Course</title>
 </svelte:head>
 
 <section class="mx-auto max-w-2xl rounded-3xl border border-emerald-200 bg-emerald-50 p-8">

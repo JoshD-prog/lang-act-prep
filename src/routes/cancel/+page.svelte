@@ -1,5 +1,5 @@
 <svelte:head>
-  <title>Checkout Canceled | ACT Prep Classes</title>
+  <title>Checkout Canceled | KC Cram Course</title>
 </svelte:head>
 
 <section class="mx-auto max-w-2xl rounded-3xl border border-amber-200 bg-amber-50 p-8">

@@ -7,7 +7,7 @@
 
 <header class="sticky top-0 z-40 border-b border-slate-200/80 bg-white/85 backdrop-blur">
   <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 md:px-6">
-    <a href="/" class="text-lg font-extrabold tracking-tight text-ink">ACT Prep Classes</a>
+    <a href="/" class="text-lg font-extrabold tracking-tight text-ink">KC Cram Course</a>
     <nav class="hidden gap-5 text-sm font-semibold text-slate-700 md:flex">
       {#each navItems as item}
         <a
@@ -20,10 +20,10 @@
     </nav>
     <div class="flex items-center gap-2">
       <a
-        href="/enroll"
-        class="hidden rounded-full bg-sky px-4 py-2 text-sm font-bold text-white shadow-glow transition hover:bg-teal-500 md:inline-flex"
+        href="/classes"
+        class="hidden rounded-full bg-sky px-5 py-2.5 text-sm font-bold text-white shadow-glow transition hover:bg-teal-500 md:inline-flex"
       >
-        Enroll
+        View Dates
       </a>
       <button
         type="button"

@@ -5,7 +5,7 @@
 </script>
 
 <svelte:head>
-  <title>Contact | ACT Prep Classes</title>
+  <title>Contact | KC Cram Course</title>
 </svelte:head>
 
 <section class="rounded-3xl border border-slate-200 bg-white p-8 shadow-lg shadow-slate-900/5">
@@ -39,17 +39,6 @@
   <label class="block">
     <span class="text-sm font-semibold text-slate-700">Student school (optional)</span>
     <input name="studentSchool" class="mt-1 w-full rounded-xl border-slate-300" value={form?.values?.studentSchool ?? ''} />
-  </label>
-  <label class="block">
-    <span class="text-sm font-semibold text-slate-700">What are you interested in? (optional)</span>
-    <select name="interest" class="mt-1 w-full rounded-xl border-slate-300">
-      <option value="" selected={(form?.values?.interest ?? '') === ''}>Select one</option>
-      <option value="class-options" selected={form?.values?.interest === 'class-options'}>Class options</option>
-      <option value="pricing" selected={form?.values?.interest === 'pricing'}>Pricing</option>
-      <option value="school-specific-enrollment" selected={form?.values?.interest === 'school-specific-enrollment'}>School-specific enrollment</option>
-      <option value="scholarship-planning" selected={form?.values?.interest === 'scholarship-planning'}>Scholarship planning</option>
-      <option value="schedule-fit" selected={form?.values?.interest === 'schedule-fit'}>Schedule fit</option>
-    </select>
   </label>
 
   <label class="block md:col-span-2">

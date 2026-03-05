@@ -5,19 +5,19 @@
 </script>
 
 <svelte:head>
-  <title>ACT Cram Course | Build Scores, Unlock Scholarships</title>
+  <title>KC Cram Course – The Week Before the Test</title>
   <meta
     name="description"
-    content="ACT cram classes with score strategy, scholarship guidance, and school-specific enrollment paths."
+    content="Four focused 90-minute sessions designed to maximize your ACT score right before test day."
   />
 </svelte:head>
 
 <Hero
-  eyebrow="ACT prep built for real student schedules"
+  eyebrow="ACT prep designed for real student schedules"
   title="Score higher, qualify for stronger scholarships, and enroll with confidence."
   body="We help students reach their goals with structured coaching, timed practice, and clear scholarship targets across local and flagship colleges."
   primaryCtaLabel="Start enrollment"
-  primaryCtaHref="/enroll"
+  primaryCtaHref="/classes"
   secondaryCtaLabel="How it works"
   secondaryCtaHref="/how-it-works"
 />

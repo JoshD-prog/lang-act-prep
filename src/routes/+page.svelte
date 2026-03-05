@@ -5,17 +5,17 @@
 </script>
 
 <svelte:head>
-  <title>ACT Prep Classes | Build Scores, Unlock Scholarships</title>
+  <title>ACT Cram Course | Build Scores, Unlock Scholarships</title>
   <meta
     name="description"
-    content="ACT prep classes with score strategy, scholarship guidance, and school-specific enrollment paths."
+    content="ACT cram classes with score strategy, scholarship guidance, and school-specific enrollment paths."
   />
 </svelte:head>
 
 <Hero
   eyebrow="ACT prep built for real student schedules"
   title="Score higher, qualify for stronger scholarships, and enroll with confidence."
-  body="We help students build score gains with structured coaching, timed practice, and clear scholarship targets across local and flagship colleges."
+  body="We help students reach their goals with structured coaching, timed practice, and clear scholarship targets across local and flagship colleges."
   primaryCtaLabel="Start enrollment"
   primaryCtaHref="/enroll"
   secondaryCtaLabel="How it works"

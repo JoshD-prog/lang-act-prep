@@ -18,6 +18,7 @@ export interface ClassOffering {
   priceCents: number;
   seatsAvailable: number;
   featured?: boolean;
+  stripePriceId?: string;
 }
 
 export interface School {

@@ -79,23 +79,24 @@ export async function getClassOfferings(): Promise<ClassOffering[]> {
 
   const { data, error } = await supabase
     .from('class_offerings')
-    .select('id, slug, title, schedule, format, price_cents, seats_available, featured')
+    .select('id, slug, title, schedule, format, price_cents, seats_available, featured, stripe_price_id')
     .order('featured', { ascending: false });
 
   if (error || !data) {
     return classOfferings;
   }
 
-  return data.map((item) => ({
-    id: item.id,
-    slug: item.slug,
-    title: item.title,
-    schedule: item.schedule,
-    format: item.format,
-    priceCents: item.price_cents,
-    seatsAvailable: item.seats_available,
-    featured: item.featured
-  }));
+    return data.map((item) => ({
+      id: item.id,
+      slug: item.slug,
+      title: item.title,
+      schedule: item.schedule,
+      format: item.format,
+      priceCents: item.price_cents,
+      seatsAvailable: item.seats_available,
+      featured: item.featured,
+      stripePriceId: item.stripe_price_id
+}));
 }
 
 export async function getSchools(): Promise<School[]> {

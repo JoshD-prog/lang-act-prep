@@ -41,6 +41,6 @@ export const actions: Actions = {
       });
     }
 
-    redirect(303, sessionUrl);
+    throw redirect(303, sessionUrl);
   }
 };

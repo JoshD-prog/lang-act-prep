@@ -1,7 +1,10 @@
 <script lang="ts">
+  import { injectAnalytics } from '@vercel/analytics/sveltekit';
   import '../app.css';
   import Footer from '$lib/components/Footer.svelte';
   import Nav from '$lib/components/Nav.svelte';
+
+  injectAnalytics();
 </script>
 
 <div class="flex min-h-screen flex-col">

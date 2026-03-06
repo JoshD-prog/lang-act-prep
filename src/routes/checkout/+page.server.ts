@@ -1,12 +1,16 @@
 import { createCheckoutSession } from '$lib/server/checkout';
+import { env } from '$env/dynamic/private';
 import { fail, redirect } from '@sveltejs/kit';
 import type { Actions } from './$types';
 
 export async function load({ url }) {
+  const stripeReady = Boolean(env.STRIPE_SECRET_KEY && env.STRIPE_PRICE_ID);
+
   return {
     classSlug: url.searchParams.get('class') ?? '',
     schoolSlug: url.searchParams.get('school') ?? '',
-    email: url.searchParams.get('email') ?? ''
+    email: url.searchParams.get('email') ?? '',
+    stripeReady
   };
 }
 

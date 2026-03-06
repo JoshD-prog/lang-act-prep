@@ -8,6 +8,14 @@
   <title>Checkout | KC Cram Course</title>
 </svelte:head>
 
+{#if !data.stripeReady}
+  <section class="mx-auto mb-4 max-w-3xl rounded-2xl border border-amber-300 bg-amber-50 p-4">
+    <p class="text-sm font-semibold text-amber-900">
+      Not ready yet: Checkout is temporarily unavailable while Stripe setup is being completed.
+    </p>
+  </section>
+{/if}
+
 <section class="mx-auto max-w-3xl rounded-3xl border border-slate-200 bg-white p-8 shadow-lg shadow-slate-900/5">
   <p class="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">Payment</p>
   <h1 class="mt-2 text-4xl font-black text-ink">Complete enrollment payment.</h1>
@@ -32,6 +40,11 @@
       <p class="rounded-xl bg-amber-50 p-3 text-sm text-amber-900">{form.message}</p>
     {/if}
 
-    <button class="rounded-full bg-sky px-6 py-3 text-sm font-bold text-white">Pay with Stripe</button>
+    <button
+      class={`rounded-full px-6 py-3 text-sm font-bold text-white ${data.stripeReady ? 'bg-sky' : 'cursor-not-allowed bg-slate-400'}`}
+      disabled={!data.stripeReady}
+    >
+      Pay with Stripe
+    </button>
   </form>
 </section>

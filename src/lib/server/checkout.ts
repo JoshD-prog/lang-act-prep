@@ -6,9 +6,15 @@ interface CheckoutInput {
   classSlug: string;
   schoolSlug?: string;
   email: string;
+  leadId?: string;
 }
 
-export async function createCheckoutSession({ classSlug, schoolSlug, email }: CheckoutInput) {
+export async function createCheckoutSession({
+  classSlug,
+  schoolSlug,
+  email,
+  leadId
+}: CheckoutInput) {
   const stripe = createStripeClient();
   if (!stripe) {
     return null;
@@ -29,7 +35,8 @@ export async function createCheckoutSession({ classSlug, schoolSlug, email }: Ch
     line_items: [{ price: offering.stripePriceId, quantity: 1 }],
     metadata: {
       class_slug: classSlug,
-      school_slug: schoolSlug ?? 'general'
+      school_slug: schoolSlug ?? 'general',
+      lead_id: leadId ?? ''
     },
     success_url: `${baseUrl}/success?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${baseUrl}/cancel`

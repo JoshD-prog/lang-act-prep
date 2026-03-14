@@ -5,12 +5,6 @@ import { getClassOfferings, getSchools } from '$lib/server/data';
 import { fail, redirect } from '@sveltejs/kit';
 import type { Actions } from './$types';
 
-import Stripe from 'stripe';
-import { STRIPE_SECRET_KEY, PUBLIC_SITE_URL } from '$env/static/private';
-
-// Stripe client (server-side only)
-const stripe = new Stripe(STRIPE_SECRET_KEY, { apiVersion: '2024-06-20' });
-
 export async function load({ url }) {
   const selectedClass = url.searchParams.get('class') ?? '';
   const selectedSchool = url.searchParams.get('school') ?? '';
@@ -39,62 +33,44 @@ export const actions: Actions = {
       });
     }
 
-    // Save enrollment lead (non-blocking if Supabase client isn't configured)
+    let leadId: string | null = null;
+
     const supabase = createAdminSupabaseClient();
     if (supabase) {
-      const { error: insertError } = await supabase.from('enrollment_leads').insert({
-        student_name: studentName,
-        parent_email: parentEmail,
-        class_slug: classSlug,
-        school_slug: schoolSlug || null,
-        notes: notes || null
-      });
+      const { data: insertedLead, error: insertError } = await supabase
+        .from('enrollment_leads')
+        .insert({
+          student_name: studentName,
+          parent_email: parentEmail,
+          class_slug: classSlug,
+          school_slug: schoolSlug || null,
+          notes: notes || null
+        })
+        .select('id')
+        .single();
 
       if (insertError) {
         return fail(500, {
           message: 'We could not save your enrollment lead. Please try again.'
         });
       }
+
+      leadId = insertedLead?.id ?? null;
     }
 
-    // Look up the selected class so we can get its Stripe price id
-    const offerings = await getClassOfferings();
-    const offering = offerings.find((c) => c.slug === classSlug);
-
-    if (!offering) {
-      return fail(404, { message: 'Selected class not found.' });
-    }
-
-    // Option 2: per-class Stripe price id from Supabase (recommended)
-    const priceId = offering.stripePriceId;
-
-    if (!priceId) {
-      return fail(500, { message: 'Missing Stripe price id for this class.' });
-    }
-
-    // Ensure this is set in .env
-    // Example local: PUBLIC_SITE_URL=http://localhost:5173
-    const siteUrl = PUBLIC_SITE_URL || 'http://localhost:5173';
-
-    const session = await stripe.checkout.sessions.create({
-      mode: 'payment',
-      customer_email: parentEmail,
-      line_items: [{ price: priceId, quantity: 1 }],
-      metadata: {
-        class_slug: classSlug,
-        school_slug: schoolSlug || '',
-        student_name: studentName
-      },
-      success_url: `${siteUrl}/enroll/success?class=${encodeURIComponent(classSlug)}`,
-      cancel_url: `${siteUrl}/enroll?class=${encodeURIComponent(classSlug)}${
-        schoolSlug ? `&school=${encodeURIComponent(schoolSlug)}` : ''
-      }`
+    const params = new URLSearchParams({
+      class: classSlug,
+      email: parentEmail
     });
 
-    if (!session.url) {
-      return fail(500, { message: 'Could not start Stripe checkout. Please try again.' });
+    if (schoolSlug) {
+      params.set('school', schoolSlug);
     }
 
-    throw redirect(303, session.url);
+    if (leadId) {
+      params.set('lead', leadId);
+    }
+
+    throw redirect(303, `/checkout?${params.toString()}`);
   }
 };

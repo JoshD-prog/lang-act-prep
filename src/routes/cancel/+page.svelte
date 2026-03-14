@@ -1,12 +1,24 @@
 <svelte:head>
-  <title>Checkout Canceled | KC Cram Course</title>
+  <title>Payment cancelled | KC Cram Course</title>
 </svelte:head>
 
-<section class="mx-auto max-w-2xl rounded-3xl border border-amber-200 bg-amber-50 p-8">
-  <p class="text-xs font-bold uppercase tracking-[0.16em] text-amber-800">Checkout canceled</p>
-  <h1 class="mt-2 text-4xl font-black text-amber-900">No charge was made.</h1>
-  <p class="mt-4 text-amber-900/90">
-    You can return to enrollment at any time to complete payment.
+<section class="mx-auto max-w-3xl rounded-3xl border border-slate-200 bg-white p-8 shadow-lg shadow-slate-900/5">
+  <p class="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">
+    Payment cancelled
   </p>
-  <a href="/enroll" class="mt-6 inline-flex rounded-full bg-amber-900 px-6 py-3 text-sm font-bold text-white">Return to enroll</a>
+
+  <h1 class="mt-2 text-4xl font-black text-ink">
+    Your payment was not completed.
+  </h1>
+
+  <p class="mt-4 text-lg text-slate-600">
+    You can return to checkout and complete enrollment whenever you're ready.
+  </p>
+
+  <a
+    href="/classes"
+    class="mt-6 inline-flex rounded-full bg-sky px-6 py-3 text-sm font-bold text-white"
+  >
+    Return to classes
+  </a>
 </section>

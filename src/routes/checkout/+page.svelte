@@ -26,6 +26,7 @@
   <form method="POST" class="mt-6 grid gap-4">
     <input type="hidden" name="classSlug" value={data.classSlug} />
     <input type="hidden" name="schoolSlug" value={data.schoolSlug} />
+    <input type="hidden" name="leadId" value={data.leadId} />
     <label>
       <span class="text-sm font-semibold text-slate-700">Parent email for receipt</span>
       <input name="email" type="email" required value={data.email} class="mt-1 w-full rounded-xl border-slate-300" />

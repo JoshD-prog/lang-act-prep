@@ -50,7 +50,9 @@ export const POST: RequestHandler = async ({ request }) => {
           .eq('id', leadId)
           .single();
 
-        if (!leadLookupError && lead && lead.payment_status !== 'paid') {
+        if (leadLookupError) {
+          console.error('Lead lookup failed:', leadLookupError);
+        } else if (lead && lead.payment_status !== 'paid') {
           const { error: updateLeadError } = await supabase
             .from('enrollment_leads')
             .update({
@@ -64,24 +66,39 @@ export const POST: RequestHandler = async ({ request }) => {
             })
             .eq('id', leadId);
 
-          if (!updateLeadError) {
+          if (updateLeadError) {
+            console.error('Lead update failed:', updateLeadError);
+          } else {
             const { data: classRows, error: classLookupError } = await supabase
               .from('class_offerings')
               .select('id, seats_available')
               .eq('slug', classSlug)
               .limit(1);
 
-            if (!classLookupError && classRows && classRows.length > 0) {
+            if (classLookupError) {
+              console.error('Class lookup failed:', classLookupError);
+            } else if (!classRows || classRows.length === 0) {
+              console.error('No class_offerings row found for slug:', classSlug);
+            } else {
               const classRow = classRows[0];
               const currentSeats = Number(classRow.seats_available ?? 0);
 
               if (currentSeats > 0) {
-                await supabase
+                const { error: seatUpdateError } = await supabase
                   .from('class_offerings')
                   .update({
                     seats_available: currentSeats - 1
                   })
                   .eq('id', classRow.id);
+
+                if (seatUpdateError) {
+                  console.error('Seat decrement failed:', seatUpdateError);
+                }
+              } else {
+                console.warn(
+                  'Seat decrement skipped because seats_available was already 0 for:',
+                  classSlug
+                );
               }
             }
           }

@@ -2,6 +2,12 @@
   import type { ActionData, PageData } from './$types';
 
   let { data, form }: { data: PageData; form: ActionData } = $props();
+
+  let selectedClass = form?.classSlug ?? data.selectedClass ?? '';
+
+  const selectedClassOffering = $derived(
+    data.classes.find((classOffering) => classOffering.slug === selectedClass)
+  );
 </script>
 
 <svelte:head>
@@ -12,38 +18,67 @@
   <p class="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">Enrollment</p>
   <h1 class="mt-2 text-4xl font-black text-ink">Secure your spot in the next cohort.</h1>
   <p class="mt-4 max-w-3xl text-lg text-slate-600">
-    Complete this form to lock class preference and proceed to secure payment.
+    Select your class, confirm the schedule and location, and enter your student and parent information to continue to checkout.
   </p>
 </section>
+
+{#if selectedClassOffering}
+  <div class="mt-6 rounded-2xl bg-slate-50 p-5 text-sm text-slate-700">
+    <p class="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">Selected Class</p>
+
+    <p class="mt-2 text-base font-semibold text-slate-900">
+      {selectedClassOffering.title}
+    </p>
+
+    <p class="mt-1 text-slate-600">{selectedClassOffering.schedule}</p>
+
+    {#if selectedClassOffering.location}
+      <p class="mt-1 text-slate-600">{selectedClassOffering.location}</p>
+    {/if}
+
+    <p class="mt-2 text-slate-600">{selectedClassOffering.format}</p>
+
+    <p class="mt-2 text-xs uppercase tracking-wide text-slate-500">
+      {selectedClassOffering.seatsAvailable} seats remaining
+    </p>
+  </div>
+{/if}
 
 <form method="POST" class="mt-8 grid gap-4 rounded-3xl border border-slate-200 bg-white p-6 md:grid-cols-2">
   <label class="block">
     <span class="text-sm font-semibold text-slate-700">Student name</span>
-    <input name="studentName" class="mt-1 w-full rounded-xl border-slate-300" required />
+    <input
+      name="studentName"
+      value={form?.studentName ?? ''}
+      class="mt-1 w-full rounded-xl border-slate-300"
+      required
+    />
   </label>
+
   <label class="block">
     <span class="text-sm font-semibold text-slate-700">Parent email</span>
-    <input name="parentEmail" type="email" class="mt-1 w-full rounded-xl border-slate-300" required />
+    <input
+      name="parentEmail"
+      type="email"
+      value={form?.parentEmail ?? ''}
+      class="mt-1 w-full rounded-xl border-slate-300"
+      required
+    />
   </label>
 
   <label class="block">
     <span class="text-sm font-semibold text-slate-700">Class</span>
-    <select name="classSlug" class="mt-1 w-full rounded-xl border-slate-300" required>
-      <option value="" disabled selected={data.selectedClass === ''}>Select class</option>
+    <select
+      name="classSlug"
+      bind:value={selectedClass}
+      class="mt-1 w-full rounded-xl border-slate-300"
+      required
+    >
+      <option value="" disabled>Select class</option>
       {#each data.classes as classOffering}
-        <option value={classOffering.slug} selected={classOffering.slug === data.selectedClass}>
-          {classOffering.title} ({classOffering.schedule})
+        <option value={classOffering.slug}>
+          {classOffering.title} — {classOffering.schedule}
         </option>
-      {/each}
-    </select>
-  </label>
-
-  <label class="block">
-    <span class="text-sm font-semibold text-slate-700">School (optional)</span>
-    <select name="schoolSlug" class="mt-1 w-full rounded-xl border-slate-300">
-      <option value="" selected={data.selectedSchool === ''}>General enrollment</option>
-      {#each data.schools as school}
-        <option value={school.slug} selected={school.slug === data.selectedSchool}>{school.name}</option>
       {/each}
     </select>
   </label>
@@ -55,7 +90,7 @@
       rows="4"
       placeholder="Share timeline, target score, or scheduling constraints"
       class="mt-1 w-full rounded-xl border-slate-300"
-    ></textarea>
+    >{form?.notes ?? ''}</textarea>
   </label>
 
   {#if form?.message}
@@ -63,6 +98,8 @@
   {/if}
 
   <div class="md:col-span-2 flex justify-end">
-    <button class="rounded-full bg-ink px-6 py-3 text-sm font-bold text-white">Continue to checkout</button>
+    <button class="rounded-full bg-ink px-6 py-3 text-sm font-bold text-white">
+      Continue to checkout
+    </button>
   </div>
 </form>

@@ -1,31 +1,56 @@
 import { createCheckoutSession } from '$lib/server/checkout';
-import { json } from '@sveltejs/kit';
+import { env } from '$env/dynamic/private';
+import { fail, redirect } from '@sveltejs/kit';
+import { getClassOfferings } from '$lib/server/data';
+import type { Actions } from './$types';
 
-export async function POST({ request }) {
-  const body = await request.json().catch(() => null);
+export async function load({ url }) {
+  const stripeReady = Boolean(env.STRIPE_SECRET_KEY);
 
-  const classSlug = String(body?.classSlug ?? '').trim();
-  const schoolSlug = String(body?.schoolSlug ?? '').trim();
-  const email = String(body?.email ?? '').trim();
+  const classSlug = url.searchParams.get('class') ?? '';
+  const email = url.searchParams.get('email') ?? '';
+  const leadId = url.searchParams.get('lead') ?? '';
 
-  if (!classSlug || !email) {
-    return json({ error: 'classSlug and email are required.' }, { status: 400 });
-  }
+  const offerings = await getClassOfferings();
+  const offering = offerings.find((c) => c.slug === classSlug);
 
-  const sessionUrl = await createCheckoutSession({
+  return {
     classSlug,
-    schoolSlug,
-    email
-  });
-
-  if (!sessionUrl) {
-    return json(
-      {
-        error: 'Stripe is not configured. Add STRIPE_SECRET_KEY and STRIPE_PRICE_ID.'
-      },
-      { status: 500 }
-    );
-  }
-
-  return json({ checkoutUrl: sessionUrl }, { status: 200 });
+    classTitle: offering?.title ?? classSlug,
+    classSchedule: offering?.schedule ?? '',
+    email,
+    leadId,
+    stripeReady
+  };
 }
+
+export const actions: Actions = {
+  default: async ({ request }) => {
+    const form = await request.formData();
+
+    const classSlug = String(form.get('classSlug') ?? '').trim();
+    const email = String(form.get('email') ?? '').trim();
+    const leadId = String(form.get('leadId') ?? '').trim();
+
+    if (!classSlug || !email) {
+      return fail(400, {
+        message: 'Missing class selection or parent email.'
+      });
+    }
+
+    const sessionUrl = await createCheckoutSession({
+      classSlug,
+      email,
+      leadId
+    });
+
+    if (!sessionUrl) {
+      return fail(500, {
+        message:
+          'Stripe is not configured yet, or this class is missing a Stripe price id.'
+      });
+    }
+
+    throw redirect(303, sessionUrl);
+  }
+};

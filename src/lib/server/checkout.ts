@@ -4,14 +4,12 @@ import { getClassOfferings } from '$lib/server/data';
 
 interface CheckoutInput {
   classSlug: string;
-  schoolSlug?: string;
   email: string;
   leadId?: string;
 }
 
 export async function createCheckoutSession({
   classSlug,
-  schoolSlug,
   email,
   leadId
 }: CheckoutInput) {
@@ -34,10 +32,9 @@ export async function createCheckoutSession({
     customer_email: email,
     line_items: [{ price: offering.stripePriceId, quantity: 1 }],
     metadata: {
-      class_slug: classSlug,
-      school_slug: schoolSlug ?? 'general',
-      lead_id: leadId ?? ''
-    },
+  class_slug: classSlug,
+  lead_id: leadId ?? ''
+},
     success_url: `${baseUrl}/success?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${baseUrl}/cancel`
   });

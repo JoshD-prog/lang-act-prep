@@ -79,8 +79,9 @@ export async function getClassOfferings(): Promise<ClassOffering[]> {
 
   const { data, error } = await supabase
     .from('class_offerings')
-    .select('id, slug, title, schedule, format, price_cents, seats_available, featured, stripe_price_id')
-    .order('featured', { ascending: false });
+    .select('id, slug, title, schedule, location, format, price_cents, seats_available, featured, stripe_price_id')
+    .order('featured', { ascending: false })
+    .order('start_date', { ascending: true });
 
   if (error || !data) {
     return classOfferings;
@@ -91,10 +92,11 @@ export async function getClassOfferings(): Promise<ClassOffering[]> {
       slug: item.slug,
       title: item.title,
       schedule: item.schedule,
+      location: item.location,
       format: item.format,
       priceCents: item.price_cents,
       seatsAvailable: item.seats_available,
-      featured: item.featured,
+            featured: item.featured,
       stripePriceId: item.stripe_price_id
 }));
 }

@@ -2,32 +2,35 @@ import type { ClassOffering, CollegeTier, School } from '$lib/types';
 
 export const classOfferings: ClassOffering[] = [
   {
-    id: 'cls-foundations',
-    slug: 'foundations-8-week',
-    title: 'ACT Foundations (8 Weeks)',
-    schedule: 'Tuesdays + Thursdays, 6:30 PM',
-    format: 'In-person',
-    priceCents: 62500,
-    seatsAvailable: 18,
+    id: 'cls-june-2026',
+    slug: 'act-cram-june-2026',
+    title: 'June ACT Cram Course',
+    schedule: 'Mon–Thu, June 8–11, 6:30–8:00 PM',
+    location: 'Shawnee Civic Center — final room details sent after enrollment',
+    format: '4 sessions · 90 minutes each',
+    priceCents: 29900,
+    seatsAvailable: 30,
     featured: true
   },
   {
-    id: 'cls-intensive',
-    slug: 'intensive-4-week',
-    title: 'ACT Intensive (4 Weeks)',
-    schedule: 'Mondays + Wednesdays, 7:00 PM',
-    format: 'Hybrid',
-    priceCents: 48500,
-    seatsAvailable: 12
+    id: 'cls-july-2026',
+    slug: 'act-cram-july-2026',
+    title: 'July ACT Cram Course',
+    schedule: 'Mon–Thu, July 6–9, 6:30–8:00 PM',
+    location: 'Shawnee Civic Center — final room details sent after enrollment',
+    format: '4 sessions · 90 minutes each',
+    priceCents: 29900,
+    seatsAvailable: 30
   },
   {
-    id: 'cls-bootcamp',
-    slug: 'saturday-bootcamp',
-    title: 'Saturday Strategy Bootcamp',
-    schedule: 'Saturdays, 9:00 AM - 1:00 PM',
-    format: 'Online',
-    priceCents: 21500,
-    seatsAvailable: 24
+    id: 'cls-september-2026',
+    slug: 'act-cram-september-2026',
+    title: 'September ACT Cram Course',
+    schedule: 'Mon–Thu, September 14–17, 6:30–8:00 PM',
+    location: 'Piper Location — final room details sent after enrollment',
+    format: '4 sessions · 90 minutes each',
+    priceCents: 29900,
+    seatsAvailable: 30
   }
 ];
 

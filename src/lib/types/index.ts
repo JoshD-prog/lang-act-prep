@@ -14,10 +14,12 @@ export interface ClassOffering {
   slug: string;
   title: string;
   schedule: string;
+  location: string;
   format: string;
   priceCents: number;
   seatsAvailable: number;
   featured?: boolean;
+  stripePriceId?: string | null;
 }
 
 export interface School {

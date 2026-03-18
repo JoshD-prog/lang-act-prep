@@ -1,15 +1,27 @@
 import { env } from '$env/dynamic/private';
 import { createStripeClient } from '$lib/server/stripe';
+import { getClassOfferings } from '$lib/server/data';
 
 interface CheckoutInput {
   classSlug: string;
-  schoolSlug?: string;
   email: string;
+  leadId?: string;
 }
 
-export async function createCheckoutSession({ classSlug, schoolSlug, email }: CheckoutInput) {
+export async function createCheckoutSession({
+  classSlug,
+  email,
+  leadId
+}: CheckoutInput) {
   const stripe = createStripeClient();
-  if (!stripe || !env.STRIPE_PRICE_ID) {
+  if (!stripe) {
+    return null;
+  }
+
+  const offerings = await getClassOfferings();
+  const offering = offerings.find((c) => c.slug === classSlug);
+
+  if (!offering?.stripePriceId) {
     return null;
   }
 
@@ -18,11 +30,11 @@ export async function createCheckoutSession({ classSlug, schoolSlug, email }: Ch
   const session = await stripe.checkout.sessions.create({
     mode: 'payment',
     customer_email: email,
-    line_items: [{ price: env.STRIPE_PRICE_ID, quantity: 1 }],
+    line_items: [{ price: offering.stripePriceId, quantity: 1 }],
     metadata: {
-      class_slug: classSlug,
-      school_slug: schoolSlug ?? 'general'
-    },
+  class_slug: classSlug,
+  lead_id: leadId ?? ''
+},
     success_url: `${baseUrl}/success?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${baseUrl}/cancel`
   });

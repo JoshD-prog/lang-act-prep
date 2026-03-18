@@ -1,24 +1,24 @@
 <svelte:head>
-  <title>Enrollment complete | KC Cram Course</title>
+  <title>Payment cancelled | KC Cram Course</title>
 </svelte:head>
 
 <section class="mx-auto max-w-3xl rounded-3xl border border-slate-200 bg-white p-8 shadow-lg shadow-slate-900/5">
   <p class="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">
-    Enrollment complete
+    Payment cancelled
   </p>
 
   <h1 class="mt-2 text-4xl font-black text-ink">
-    You're enrolled.
+    Your payment was not completed.
   </h1>
 
   <p class="mt-4 text-lg text-slate-600">
-    Your payment has been received. You will receive an email with course details and next steps.
+    You can return and complete enrollment whenever you're ready.
   </p>
 
   <a
     href="/classes"
     class="mt-6 inline-flex rounded-full bg-sky px-6 py-3 text-sm font-bold text-white"
   >
-    Back to classes
+    Return to classes
   </a>
 </section>

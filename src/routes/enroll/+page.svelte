@@ -3,7 +3,13 @@
 
   let { data, form }: { data: PageData; form: ActionData } = $props();
 
-  let selectedClass = form?.classSlug ?? data.selectedClass ?? '';
+  let selectedClass = $state('');
+
+  $effect(() => {
+    if (!selectedClass) {
+      selectedClass = form?.classSlug ?? data.selectedClass ?? '';
+    }
+  });
 
   const selectedClassOffering = $derived(
     data.classes.find((classOffering) => classOffering.slug === selectedClass)

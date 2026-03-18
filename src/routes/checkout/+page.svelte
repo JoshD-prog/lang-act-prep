@@ -27,27 +27,41 @@
     <input type="hidden" name="classSlug" value={data.classSlug} />
     <input type="hidden" name="leadId" value={data.leadId} />
 
-    <div class="rounded-2xl bg-slate-50 p-5 text-sm text-slate-700">
-      <p class="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">Enrollment Summary</p>
+    <!-- UPDATED SUMMARY BLOCK -->
+    <div class="rounded-2xl bg-slate-50 p-6 text-sm text-slate-700">
+      <p class="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">
+        Enrollment Summary
+      </p>
 
-      <p class="mt-2 text-base font-semibold text-slate-900">
+      <p class="mt-2 text-lg font-semibold text-slate-900">
         {data.classTitle || 'Not selected'}
       </p>
 
-      {#if data.classSchedule}
-        <p class="mt-1 text-slate-600">{data.classSchedule}</p>
-      {/if}
+      <div class="mt-4 space-y-1 text-slate-700">
+        {#if data.classSchedule}
+          <p>
+            <span class="font-semibold">Dates & Time:</span>
+            {data.classSchedule}
+          </p>
+        {/if}
 
-      {#if data.classLocation}
-        <p class="mt-1 text-slate-600">{data.classLocation}</p>
-      {/if}
+        {#if data.classLocation}
+          <p>
+            <span class="font-semibold">Location:</span>
+            {data.classLocation}
+          </p>
+        {/if}
 
-      {#if data.classFormat}
-        <p class="mt-2 text-slate-600">{data.classFormat}</p>
-      {/if}
+        {#if data.classFormat}
+          <p>
+            <span class="font-semibold">Format:</span>
+            {data.classFormat}
+          </p>
+        {/if}
+      </div>
 
-      <p class="mt-3 text-slate-600">
-        Payment is processed securely through Stripe.
+      <p class="mt-4 text-sm text-slate-600">
+        Your seat will be reserved once payment is completed. Full course details will be emailed immediately after checkout.
       </p>
     </div>
 

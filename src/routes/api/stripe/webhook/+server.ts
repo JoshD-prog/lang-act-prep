@@ -2,6 +2,11 @@ import Stripe from 'stripe';
 import type { RequestHandler } from './$types';
 import { STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET } from '$env/static/private';
 import { createAdminSupabaseClient } from '$lib/server/supabase';
+import {
+  sendAdminEnrollmentNotification,
+  sendParentConfirmationEmail
+} from '$lib/server/email';
+import { getClassOfferings } from '$lib/server/data';
 
 const stripe = new Stripe(STRIPE_SECRET_KEY, {
   apiVersion: '2024-06-20'
@@ -99,6 +104,51 @@ export const POST: RequestHandler = async ({ request }) => {
                   'Seat decrement skipped because seats_available was already 0 for:',
                   classSlug
                 );
+              }
+            }
+
+            const { data: fullLead, error: fullLeadError } = await supabase
+              .from('enrollment_leads')
+              .select('student_name, parent_email')
+              .eq('id', leadId)
+              .single();
+
+            if (fullLeadError) {
+              console.error('Lead detail lookup failed:', fullLeadError);
+            }
+
+            const offerings = await getClassOfferings();
+            const offering = offerings.find((c) => c.slug === classSlug);
+
+            const studentName = fullLead?.student_name ?? 'Student';
+            const parentEmail = fullLead?.parent_email ?? '';
+            const classTitle = offering?.title ?? classSlug;
+            const classSchedule = offering?.schedule ?? '';
+            const classLocation = offering?.location ?? '';
+
+            if (parentEmail) {
+              try {
+                await sendParentConfirmationEmail({
+                  parentEmail,
+                  studentName,
+                  classTitle,
+                  classSchedule,
+                  classLocation
+                });
+              } catch (err) {
+                console.error('Parent confirmation email failed:', err);
+              }
+
+              try {
+                await sendAdminEnrollmentNotification({
+                  studentName,
+                  parentEmail,
+                  classTitle,
+                  classSchedule,
+                  leadId
+                });
+              } catch (err) {
+                console.error('Admin notification email failed:', err);
               }
             }
           }

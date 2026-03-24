@@ -38,19 +38,19 @@ export const enrollmentJourneySections: CmsSection[] = [
   {
     id: 'step-1',
     eyebrow: 'Step 1',
-    title: 'Choose your ACT test date',
-    body: 'Select the ACT test date you are preparing for and enroll in the cram course scheduled during the week leading up to that exam.'
+    title: 'Choose your ACT test date and enroll',
+    body: 'Select the ACT date you are preparing for and reserve your seat in the cram course scheduled during the week leading up to that test.'
   },
   {
     id: 'step-2',
     eyebrow: 'Step 2',
-    title: 'Attend the four-session cram course',
-    body: 'Each class includes strategy, pacing systems, and high-yield review so students walk into the test with a clear plan for every section.'
+    title: 'Attend four focused sessions during test week',
+    body: 'Each 90-minute class covers strategy, pacing systems, and high-yield review so students know exactly how to approach each section.'
   },
   {
     id: 'step-3',
     eyebrow: 'Step 3',
-    title: 'Take the ACT with confidence',
-    body: 'Students approach test day with proven timing strategies, targeted practice, and a clear understanding of how to manage each section of the exam.'
+    title: 'Take the ACT with a clear plan',
+    body: 'Students enter test day with practiced timing, section strategies, and a structured approach they can execute under pressure.'
   }
 ];

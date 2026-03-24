@@ -27,6 +27,9 @@ export async function createCheckoutSession({
 
   const baseUrl = env.PUBLIC_SITE_URL || env.SITE_URL || 'http://localhost:5173';
 
+    console.log('BASE URL:', baseUrl);
+    console.log('PROMO CODES ENABLED');
+
   const session = await stripe.checkout.sessions.create({
     mode: 'payment',
     customer_email: email,

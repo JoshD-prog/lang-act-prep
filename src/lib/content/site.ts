@@ -9,26 +9,26 @@ export const navItems = [
 
 export const homepageSections: CmsSection[] = [
   {
-    id: 'who-its-for',
-    eyebrow: 'Who this is for',
-    title: 'Students who want a clear plan for test week.',
-    body: 'Best fit for motivated students who already know the basics, need structure and pacing, and want high-yield review the week before the ACT.',
+    id: 'what-it-is',
+    eyebrow: 'What it is',
+    title: 'A four-session ACT cram course built for the week before your test.',
+    body: 'Students get focused instruction in strategy, pacing, and high-yield review across the most important ACT question types in four 90-minute sessions.',
     ctaLabel: 'See upcoming dates',
     ctaHref: '/classes'
   },
   {
-    id: 'difference',
-    eyebrow: 'What makes this different',
-    title: 'A cram course built around strategy, timing, and the most-tested skills.',
-    body: 'Four focused sessions: section strategy, timed practice, targeted review, and a test-day execution plan, all without dragging into a long program.',
+    id: 'who-its-for',
+    eyebrow: 'Who it is for',
+    title: 'Best for students who want structure, accountability, and a stronger test-day plan.',
+    body: 'This course is designed for students who already know some of the material but need sharper timing, better decision-making, and targeted review before the ACT.',
     ctaLabel: 'How it works',
     ctaHref: '/how-it-works'
   },
   {
-    id: 'credibility',
-    eyebrow: 'Results & credibility',
-    title: 'Teaching ACT/SAT since 2015, built for real score gains.',
-    body: 'This course is designed to produce measurable improvement through repeatable pacing systems, mistake patterns, and high-frequency content review.',
+    id: 'why-it-works',
+    eyebrow: 'Why it works',
+    title: 'Built around real strategy, timed practice, and the most-tested skills.',
+    body: 'Instead of dragging students through a long prep program, this course focuses on the highest-yield ideas, common mistake patterns, and practical systems they can use immediately on test day.',
     ctaLabel: 'Meet the instructor',
     ctaHref: '/about'
   },

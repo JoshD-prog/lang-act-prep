@@ -13,10 +13,10 @@
 </svelte:head>
 
 <Hero
-  eyebrow="ACT prep designed for real student schedules"
-  title="Score higher, qualify for stronger scholarships, and enroll with confidence."
-  body="We help students reach their goals with structured coaching, timed practice, and clear scholarship targets across local and flagship colleges."
-  primaryCtaLabel="Start enrollment"
+  eyebrow="ACT prep built for the week before your test"
+  title="Raise your ACT score in the week before test day."
+  body="Four focused sessions to sharpen pacing, improve strategy, and maximize your performance. Designed for busy students who need results fast."
+  primaryCtaLabel="Reserve your seat"
   primaryCtaHref="/classes"
   secondaryCtaLabel="How it works"
   secondaryCtaHref="/how-it-works"

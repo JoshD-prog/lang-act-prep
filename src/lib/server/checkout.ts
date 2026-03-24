@@ -34,10 +34,11 @@ export async function createCheckoutSession({
     mode: 'payment',
     customer_email: email,
     line_items: [{ price: offering.stripePriceId, quantity: 1 }],
+    allow_promotion_codes: true,
     metadata: {
-  class_slug: classSlug,
-  lead_id: leadId ?? ''
-},
+      class_slug: classSlug,
+      lead_id: leadId ?? ''
+    },
     success_url: `${baseUrl}/success?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${baseUrl}/cancel`
   });

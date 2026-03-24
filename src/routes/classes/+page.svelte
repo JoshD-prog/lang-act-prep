@@ -44,7 +44,7 @@
     <article class="rounded-3xl border border-slate-200 bg-white p-6 shadow-lg shadow-slate-900/5">
       {#if classOffering.featured}
         <p class="inline-flex rounded-full bg-teal-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-teal-800">
-          Most popular
+          Ending Soonest
         </p>
       {/if}
 

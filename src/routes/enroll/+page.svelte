@@ -29,24 +29,28 @@
 </section>
 
 {#if selectedClassOffering}
-  <div class="mt-6 rounded-2xl bg-slate-50 p-5 text-sm text-slate-700">
-    <p class="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">Selected Class</p>
+  <div class="mt-6 flex justify-center">
+    <div class="w-full max-w-xl rounded-2xl border border-slate-200 bg-slate-50 p-6 text-sm text-slate-700 shadow-sm">
+      <p class="text-center text-xs font-bold uppercase tracking-[0.16em] text-slate-500">Selected Class</p>
 
-    <p class="mt-2 text-base font-semibold text-slate-900">
-      {selectedClassOffering.title}
-    </p>
+      <p class="mt-2 text-center text-base font-semibold text-slate-900">
+        {selectedClassOffering.title}
+      </p>
 
-    <p class="mt-1 text-slate-600">{selectedClassOffering.schedule}</p>
+      <div class="mt-3 space-y-1 text-center">
+        <p class="text-slate-600">{selectedClassOffering.schedule}</p>
 
-    {#if selectedClassOffering.location}
-      <p class="mt-1 text-slate-600">{selectedClassOffering.location}</p>
-    {/if}
+        {#if selectedClassOffering.location}
+          <p class="text-slate-600">{selectedClassOffering.location}</p>
+        {/if}
 
-    <p class="mt-2 text-slate-600">{selectedClassOffering.format}</p>
+        <p class="text-slate-600">{selectedClassOffering.format}</p>
+      </div>
 
-    <p class="mt-2 text-xs uppercase tracking-wide text-slate-500">
-      {selectedClassOffering.seatsAvailable} seats remaining
-    </p>
+      <p class="mt-3 text-center text-xs uppercase tracking-wide text-slate-500">
+        {selectedClassOffering.seatsAvailable} seats remaining
+      </p>
+    </div>
   </div>
 {/if}
 

@@ -63,9 +63,25 @@ function normalizeEligibleStates(value: string[] | string | null | undefined): s
     .map((item) => item.trim().toUpperCase())
     .filter(Boolean);
 }
+function normalizeResidencyInput(residency: string) {
+  const value = residency.trim().toUpperCase();
 
+  const stateMap: Record<string, string> = {
+    MISSOURI: 'MO',
+    KANSAS: 'KS',
+    NEBRASKA: 'NE',
+    ARKANSAS: 'AR',
+    OKLAHOMA: 'OK',
+    IOWA: 'IA',
+    ILLINOIS: 'IL',
+    TENNESSEE: 'TN',
+    KENTUCKY: 'KY'
+  };
+
+  return stateMap[value] ?? value;
+}
 function matchesResidency(tier: ScholarshipTierRow, residency: string) {
-  const normalizedResidency = residency.trim().toUpperCase();
+  const normalizedResidency = normalizeResidencyInput(residency);
   const states = normalizeEligibleStates(tier.eligible_states);
 
   if (tier.residency_rule_type === 'all_students') return true;
@@ -114,6 +130,9 @@ function getPathLabel(
   }
 
   if (tier.status === 'act_needed') {
+    if (tier.actGap <= 0) {
+      return tier.min_act != null ? `Reach ACT ${tier.min_act}` : 'Improve ACT';
+    }
     return `Improve ACT by ${tier.actGap}`;
   }
 
@@ -143,6 +162,30 @@ function isDominatedPath(
   return sameOrHarderGpa && sameOrHarderAct && strictlyHarderInOne;
 }
 
+function isAboveMaxBound(tier: {
+  max_unweighted_gpa: number | null;
+  max_act: number | null;
+}, gpa: number, act: number) {
+  const aboveGpaMax =
+    tier.max_unweighted_gpa != null && gpa > tier.max_unweighted_gpa;
+
+  const aboveActMax =
+    tier.max_act != null && act > tier.max_act;
+
+  return aboveGpaMax || aboveActMax;
+}
+
+function getPathPenalty(
+  tier: {
+    max_unweighted_gpa: number | null;
+    max_act: number | null;
+  },
+  gpa: number,
+  act: number
+) {
+  return isAboveMaxBound(tier, gpa, act) ? 1000 : 0;
+}
+
 export function calculateScholarshipProjections({
   gpa,
   act,
@@ -164,11 +207,21 @@ export function calculateScholarshipProjections({
     const ordered = [...schoolTiers].sort((a, b) => a.tier_rank - b.tier_rank);
 
     const evaluated = ordered.map((tier) => {
-      const meetsGPA =
-        tier.min_unweighted_gpa == null || gpa >= tier.min_unweighted_gpa;
+      const meetsMinGPA =
+  tier.min_unweighted_gpa == null || gpa >= tier.min_unweighted_gpa;
 
-      const meetsACT =
+      const meetsMaxGPA =
+        tier.max_unweighted_gpa == null || gpa <= tier.max_unweighted_gpa;
+
+      const meetsGPA = meetsMinGPA && meetsMaxGPA;
+
+      const meetsMinACT =
         tier.min_act == null || act >= tier.min_act;
+
+      const meetsMaxACT =
+        tier.max_act == null || act <= tier.max_act;
+
+      const meetsACT = meetsMinACT && meetsMaxACT;
 
       const gpaGap =
         tier.min_unweighted_gpa == null
@@ -210,12 +263,19 @@ export function calculateScholarshipProjections({
         })[0];
 
             const candidateNextTiers = evaluated.filter((tier) => {
-      if (hasQualified) {
-        return tier.projected_total_usd > primary.projected_total_usd;
-      }
+              if (hasQualified) {
+                return (
+                  tier.projected_total_usd > primary.projected_total_usd &&
+                  tier.tier_name !== primary.tier_name
+                );
+              }
 
-      return tier.projected_total_usd >= primary.projected_total_usd;
-    });
+              return (
+                tier.projected_total_usd > primary.projected_total_usd ||
+                (tier.projected_total_usd === primary.projected_total_usd &&
+                  tier.tier_name !== primary.tier_name)
+              );
+            });
 
     const groupedNextTargets = Object.values(
       candidateNextTiers.reduce<Record<string, typeof candidateNextTiers>>((acc, tier) => {
@@ -228,6 +288,10 @@ export function calculateScholarshipProjections({
     )
       .map((group) => {
         const sortedPaths = [...group].sort((a, b) => {
+          const aPenalty = getPathPenalty(a, gpa, act);
+          const bPenalty = getPathPenalty(b, gpa, act);
+          if (aPenalty !== bPenalty) return aPenalty - bPenalty;
+
           const scoreDiff = getPathScore(a) - getPathScore(b);
           if (scoreDiff !== 0) return scoreDiff;
 
@@ -238,12 +302,14 @@ export function calculateScholarshipProjections({
           return a.tier_rank - b.tier_rank;
         });
 
-                const nonDominatedPaths = sortedPaths.filter((tier, index, arr) => {
-          return !arr.some((other, otherIndex) => {
-            if (index === otherIndex) return false;
-            return isDominatedPath(tier, other);
+        const nonDominatedPaths = sortedPaths
+          .filter((tier) => !isAboveMaxBound(tier, gpa, act))
+          .filter((tier, index, arr) => {
+            return !arr.some((other, otherIndex) => {
+              if (index === otherIndex) return false;
+              return isDominatedPath(tier, other);
+            });
           });
-        });
 
         const uniquePathLabels = nonDominatedPaths
           .map((tier) => ({

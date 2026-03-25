@@ -1,10 +1,11 @@
 import type { CmsSection } from '$lib/types';
 
 export const navItems = [
-  { href: '/', label: 'Home' },
-  { href: '/about', label: 'About' },
   { href: '/classes', label: 'Classes' },
-  { href: '/contact', label: 'Contact' },
+  { href: '/how-it-works', label: 'How It Works' },
+  { href: '/scholarship-calculator', label: 'Scholarship Calculator' },
+  { href: '/529-update', label: '529 Plan' },
+  { href: '/about', label: 'About' }
 ];
 
 export const homepageSections: CmsSection[] = [

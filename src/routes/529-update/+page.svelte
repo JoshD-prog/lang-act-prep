@@ -44,7 +44,7 @@
     {
       label: 'Timeline',
       plan529: 'Years',
-      act: 'Weeks to months'
+      act: '1 week'
     },
     {
       label: 'Function',
@@ -54,12 +54,12 @@
     {
       label: 'Predictability',
       plan529: 'Market-based',
-      act: 'Often threshold-based'
+      act: 'Threshold-based'
     },
     {
       label: 'Financial impact',
-      plan529: 'Steady long-term savings',
-      act: 'Potentially large short-term ROI'
+      plan529: 'Depleting long-term savings',
+      act: 'ROI that preserves savings, 529 or otherwise'
     }
   ];
 </script>
@@ -142,7 +142,42 @@
       </p>
     </div>
 
-    <h2 class="mt-10 text-2xl font-extrabold text-ink">A simple ROI example</h2>
+    <h2 class="mt-10 text-2xl font-extrabold text-ink">What a $300 ACT prep course can realistically return</h2>
+    <div class="mt-5 rounded-2xl border border-slate-200 bg-slate-50 p-6">
+      <div class="grid gap-6 md:grid-cols-2">
+        <div>
+          <p class="text-sm font-bold uppercase tracking-[0.12em] text-slate-500">Investment</p>
+          <p class="mt-2 text-3xl font-black text-ink">$300 ACT prep course</p>
+          <p class="mt-4 text-sm leading-6 text-slate-600">
+            In some situations, families may also be able to use 529 funds for this type of course, which can further
+            improve the effective return.
+          </p>
+        </div>
+        <div>
+          <p class="text-sm font-bold uppercase tracking-[0.12em] text-slate-500">Potential outcome</p>
+          <ul class="mt-3 space-y-2 text-slate-700">
+            <li>+2 ACT points</li>
+            <li>+$2,000–$6,000 per year in scholarships</li>
+            <li>
+              Four-year value:
+              <span class="font-bold text-ink">$8,000–$24,000</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="mt-6 rounded-2xl bg-white p-5 text-center shadow-sm shadow-slate-900/5">
+        <p class="text-sm font-semibold uppercase tracking-[0.12em] text-slate-500">Estimated return on a $300 investment</p>
+        <p class="mt-2 text-4xl font-black text-ink">26× – 80×</p>
+      </div>
+
+      <p class="mt-4 text-xs leading-5 text-slate-500">
+        Estimates are illustrative and based on common merit scholarship step-ups. Actual results vary by school,
+        residency, GPA, current score band, and final score improvement.
+      </p>
+    </div>
+
+    <h2 class="mt-10 text-2xl font-extrabold text-ink">A simple student example</h2>
     <div class="mt-5 rounded-2xl border border-slate-200 bg-white p-6">
       <div class="grid gap-6 md:grid-cols-2">
         <div>

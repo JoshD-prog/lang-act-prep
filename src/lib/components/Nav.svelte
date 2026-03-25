@@ -7,7 +7,13 @@
 
 <header class="sticky top-0 z-40 border-b border-slate-200/80 bg-white/85 backdrop-blur">
   <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 md:px-6">
-    <a href="/" class="text-lg font-extrabold tracking-tight text-ink">KC Cram Course</a>
+    <a href="/" class="inline-flex items-center">
+      <img
+        src="/branding/logo.png"
+        alt="KC Cram Course"
+        class="h-24 w-auto object-contain"
+      />
+    </a>
     <nav class="hidden gap-5 text-sm font-semibold text-slate-700 md:flex">
       {#each navItems as item}
         <a

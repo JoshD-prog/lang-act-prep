@@ -27,14 +27,18 @@ export async function createCheckoutSession({
 
   const baseUrl = env.PUBLIC_SITE_URL || env.SITE_URL || 'http://localhost:5173';
 
+    console.log('BASE URL:', baseUrl);
+    console.log('PROMO CODES ENABLED');
+
   const session = await stripe.checkout.sessions.create({
     mode: 'payment',
     customer_email: email,
     line_items: [{ price: offering.stripePriceId, quantity: 1 }],
+    allow_promotion_codes: true,
     metadata: {
-  class_slug: classSlug,
-  lead_id: leadId ?? ''
-},
+      class_slug: classSlug,
+      lead_id: leadId ?? ''
+    },
     success_url: `${baseUrl}/success?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${baseUrl}/cancel`
   });

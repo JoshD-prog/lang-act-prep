@@ -17,7 +17,7 @@
   </p>
 </section>
 
-<form class="mt-8 grid gap-4 rounded-3xl border border-slate-200 bg-white p-6 md:grid-cols-3" method="GET" action="/scholarship-calculator">
+<form class="mt-8 grid gap-4 rounded-3xl border border-slate-200 bg-white p-6 md:grid-cols-4" method="GET" action="/scholarship-calculator">
   <label class="block">
     <span class="text-sm font-semibold text-slate-700">GPA</span>
     <input
@@ -31,6 +31,7 @@
       required
     />
   </label>
+
   <label class="block">
     <span class="text-sm font-semibold text-slate-700">ACT score</span>
     <input
@@ -43,11 +44,44 @@
       required
     />
   </label>
-  <div class="flex items-end">
+
+  <label class="block">
+    <span class="text-sm font-semibold text-slate-700">Residency</span>
+    <select
+      name="residency"
+      class="mt-1 w-full rounded-xl border-slate-300"
+    >
+      <option value="KS" selected={data.residency === 'KS'}>Kansas</option>
+      <option value="MO" selected={data.residency === 'MO'}>Missouri</option>
+      <option value="NE" selected={data.residency === 'NE'}>Nebraska</option>
+      <option value="AR" selected={data.residency === 'AR'}>Arkansas</option>
+      <option value="OK" selected={data.residency === 'OK'}>Oklahoma</option>
+      <option value="OTHER" selected={data.residency === 'OTHER'}>Other / Out of state</option>
+    </select>
+  </label>
+
+  <label class="block">
+    <span class="text-sm font-semibold text-slate-700">School filter</span>
+    <select
+      name="filter"
+      class="mt-1 w-full rounded-xl border-slate-300"
+    >
+      <option value="all" selected={data.filter === 'all'}>All schools</option>
+      <option value="local" selected={data.filter === 'local'}>Local colleges</option>
+      <option value="best" selected={data.filter === 'best'}>Best scholarships</option>
+      <option value="default" selected={data.filter === 'default'}>Default</option>
+    </select>
+  </label>
+
+  <div class="md:col-span-4 flex items-end">
     <button class="w-full rounded-full bg-sky px-5 py-3 text-sm font-bold text-white">Calculate</button>
   </div>
 </form>
 
 <div class="mt-8">
-  <ScholarshipCalculator projections={data.projections} gpa={data.gpa} act={data.act} />
+  <ScholarshipCalculator
+    projections={data.projections}
+    gpa={data.gpa}
+    act={data.act}
+  />
 </div>

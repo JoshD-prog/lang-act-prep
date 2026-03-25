@@ -43,27 +43,51 @@ type CalculatorInput = {
   tiers: ScholarshipTierRow[];
 };
 
+function normalizeEligibleStates(value: string[] | string | null | undefined): string[] {
+  if (!value) return [];
+
+  if (Array.isArray(value)) {
+    return value
+      .flatMap((item) =>
+        String(item)
+          .replace(/[{}]/g, '')
+          .split(',')
+      )
+      .map((item) => item.trim().toUpperCase())
+      .filter(Boolean);
+  }
+
+  return String(value)
+    .replace(/[{}]/g, '')
+    .split(',')
+    .map((item) => item.trim().toUpperCase())
+    .filter(Boolean);
+}
+
 function matchesResidency(tier: ScholarshipTierRow, residency: string) {
+  const normalizedResidency = residency.trim().toUpperCase();
+  const states = normalizeEligibleStates(tier.eligible_states);
+
   if (tier.residency_rule_type === 'all_students') return true;
 
   if (tier.residency_rule_type === 'specific_states') {
-    return tier.eligible_states?.includes(residency) ?? false;
+    return states.includes(normalizedResidency);
   }
 
   if (tier.residency_rule_type === 'in_state') {
-    return tier.eligible_states?.includes(residency) ?? false;
+    return states.includes(normalizedResidency);
   }
 
   if (tier.residency_rule_type === 'out_of_state') {
-    return !(tier.eligible_states?.includes(residency) ?? false);
+    return !states.includes(normalizedResidency);
   }
 
   if (tier.residency_rule_type === 'regional') {
-    return tier.eligible_states?.includes(residency) ?? false;
+    return states.includes(normalizedResidency);
   }
 
   if (tier.residency_rule_type === 'metro_exception') {
-    return tier.eligible_states?.includes(residency) ?? false;
+    return states.includes(normalizedResidency);
   }
 
   return true;

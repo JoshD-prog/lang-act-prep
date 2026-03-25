@@ -100,6 +100,49 @@ function matchesFilter(tier: ScholarshipTierRow, filter: string) {
   return true;
 }
 
+function getPathLabel(
+  tier: {
+    min_unweighted_gpa: number | null;
+    min_act: number | null;
+    gpaGap: number;
+    actGap: number;
+    status: 'qualified' | 'act_needed' | 'gpa_needed' | 'gpa_and_act_needed';
+  }
+) {
+  if (tier.status === 'qualified') {
+    return 'Already qualified';
+  }
+
+  if (tier.status === 'act_needed') {
+    return `Improve ACT by ${tier.actGap}`;
+  }
+
+  if (tier.status === 'gpa_needed') {
+    return `Improve GPA to ${tier.min_unweighted_gpa?.toFixed(2)}`;
+  }
+
+  return `Improve GPA to ${tier.min_unweighted_gpa?.toFixed(2)} and ACT to ${tier.min_act}`;
+}
+
+function getPathScore(tier: { gpaGap: number; actGap: number }) {
+  return tier.actGap + tier.gpaGap * 10;
+}
+function isDominatedPath(
+  candidate: { min_unweighted_gpa: number | null; min_act: number | null },
+  other: { min_unweighted_gpa: number | null; min_act: number | null }
+) {
+  const candidateGpa = candidate.min_unweighted_gpa ?? 0;
+  const candidateAct = candidate.min_act ?? 0;
+  const otherGpa = other.min_unweighted_gpa ?? 0;
+  const otherAct = other.min_act ?? 0;
+
+  const sameOrHarderGpa = candidateGpa >= otherGpa;
+  const sameOrHarderAct = candidateAct >= otherAct;
+  const strictlyHarderInOne = candidateGpa > otherGpa || candidateAct > otherAct;
+
+  return sameOrHarderGpa && sameOrHarderAct && strictlyHarderInOne;
+}
+
 export function calculateScholarshipProjections({
   gpa,
   act,
@@ -166,9 +209,68 @@ export function calculateScholarshipProjections({
           return a.tier_rank - b.tier_rank;
         })[0];
 
-    const nextSteps = evaluated
-      .filter((tier) => tier.tier_rank > primary.tier_rank)
+            const candidateNextTiers = evaluated.filter((tier) => {
+      if (hasQualified) {
+        return tier.projected_total_usd > primary.projected_total_usd;
+      }
+
+      return tier.projected_total_usd >= primary.projected_total_usd;
+    });
+
+    const groupedNextTargets = Object.values(
+      candidateNextTiers.reduce<Record<string, typeof candidateNextTiers>>((acc, tier) => {
+        const key = `${tier.tier_name}__${tier.projected_total_usd}`;
+
+        if (!acc[key]) acc[key] = [];
+        acc[key].push(tier);
+        return acc;
+      }, {})
+    )
+      .map((group) => {
+        const sortedPaths = [...group].sort((a, b) => {
+          const scoreDiff = getPathScore(a) - getPathScore(b);
+          if (scoreDiff !== 0) return scoreDiff;
+
+          const aOnlyAct = a.gpaGap === 0 ? 0 : 1;
+          const bOnlyAct = b.gpaGap === 0 ? 0 : 1;
+          if (aOnlyAct !== bOnlyAct) return aOnlyAct - bOnlyAct;
+
+          return a.tier_rank - b.tier_rank;
+        });
+
+                const nonDominatedPaths = sortedPaths.filter((tier, index, arr) => {
+          return !arr.some((other, otherIndex) => {
+            if (index === otherIndex) return false;
+            return isDominatedPath(tier, other);
+          });
+        });
+
+        const uniquePathLabels = nonDominatedPaths
+          .map((tier) => ({
+            label: getPathLabel(tier),
+            tier
+          }))
+          .filter((path, index, arr) => {
+            return arr.findIndex((candidate) => candidate.label === path.label) === index;
+          })
+          .slice(0, 3);
+
+        const representative = sortedPaths[0];
+
+        return {
+          tier_name: representative.tier_name,
+          projected_total_usd: representative.projected_total_usd,
+          annual_award_usd: representative.annual_award_usd,
+          requires_separate_application: representative.requires_separate_application,
+          application_note: representative.application_note,
+          paths: uniquePathLabels.map((path) => path.label),
+          bestPathTier: representative
+        };
+      })
+      .sort((a, b) => a.projected_total_usd - b.projected_total_usd)
       .slice(0, hasQualified ? 3 : 2);
+
+    const nextSteps = groupedNextTargets;
 
     const highestTier = ordered[ordered.length - 1];
     const actExceedsHighest =

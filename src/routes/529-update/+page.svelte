@@ -1,31 +1,259 @@
 <svelte:head>
-  <title>529 Update | KC Cram Course</title>
+  <title>Can You Use a 529 Plan for ACT Prep? | KC Cram Course</title>
+  <meta
+    name="description"
+    content="Learn how 529 plans may apply to ACT or SAT prep after recent federal changes, how merit scholarships work, and how to estimate the ROI of a higher ACT score."
+  />
 </svelte:head>
 
-<section class="rounded-3xl border border-slate-200 bg-white p-8 shadow-lg shadow-slate-900/5">
-  <p class="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">529 update</p>
-  <h1 class="mt-2 text-4xl font-black text-ink">How families may use 529 plans for ACT prep expenses.</h1>
-  <p class="mt-4 text-slate-600">
-    Families are increasingly using 529 funds for qualified K-12 education expenses and related academic support.
-    We recommend confirming details with your tax advisor and plan administrator before purchase.
+<script lang="ts">
+  const scholarshipExamples = [
+    {
+      score: 'ACT 24',
+      amount: '$3,000/year'
+    },
+    {
+      score: 'ACT 26',
+      amount: '$5,000/year'
+    },
+    {
+      score: 'ACT 28',
+      amount: '$8,000/year'
+    },
+    {
+      score: 'ACT 30',
+      amount: '$12,000/year'
+    }
+  ];
+
+  const questionsToAsk = [
+    'Does your 529 plan allow expanded K–12 educational expenses such as tutoring or educational classes outside the home?',
+    'What documentation is required for reimbursement or direct payment?',
+    'Are there annual usage limits or state-specific rules that affect your strategy?',
+    'Does your tax professional view ACT or SAT prep as qualifying under the current rules for your situation?'
+  ];
+
+  const recordSupport = [
+    'Detailed enrollment receipts',
+    'Program schedule confirmation',
+    'Named student roster documentation',
+    'Course description showing structured academic instruction'
+  ];
+
+  const comparisonRows = [
+    {
+      label: 'Timeline',
+      plan529: 'Years',
+      act: 'Weeks to months'
+    },
+    {
+      label: 'Function',
+      plan529: 'Pay for college',
+      act: 'Reduce cost through scholarships'
+    },
+    {
+      label: 'Predictability',
+      plan529: 'Market-based',
+      act: 'Often threshold-based'
+    },
+    {
+      label: 'Financial impact',
+      plan529: 'Steady long-term savings',
+      act: 'Potentially large short-term ROI'
+    }
+  ];
+</script>
+
+<section class="rounded-3xl border border-slate-200 bg-white p-8 shadow-lg shadow-slate-900/5 md:p-10">
+  <p class="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">529 plans and ACT prep</p>
+  <h1 class="mt-2 max-w-4xl text-4xl font-black leading-tight text-ink md:text-5xl">
+    Can you use a 529 plan for ACT or SAT prep?
+  </h1>
+  <p class="mt-5 max-w-3xl text-base leading-7 text-slate-600 md:text-lg">
+    Recent federal changes expanded 529 usage to include certain tutoring and educational classes. That may
+    include ACT or SAT prep in some situations. The bigger point for families, though, is this: a 529 plan helps
+    you pay for college, while a higher ACT score can help you pay less for college.
   </p>
+
+  <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+    <a
+      href="/scholarship-calculator"
+      class="inline-flex items-center justify-center rounded-full bg-ink px-6 py-3 text-sm font-bold text-white transition hover:opacity-90"
+    >
+      Use the scholarship calculator
+    </a>
+    <a
+      href="/enroll"
+      class="inline-flex items-center justify-center rounded-full border border-slate-300 px-6 py-3 text-sm font-bold text-ink transition hover:bg-slate-50"
+    >
+      Explore the ACT cram course
+    </a>
+  </div>
 </section>
 
-<section class="mt-8 grid gap-5 md:grid-cols-2">
-  <article class="rounded-2xl border border-slate-200 bg-white p-6">
-    <h2 class="text-xl font-extrabold text-ink">What to ask before enrolling</h2>
-    <ul class="mt-4 space-y-2 text-sm text-slate-700">
-      <li>Does your state plan classify prep as an eligible K-12 educational expense?</li>
-      <li>What documentation is required for reimbursement or direct payment?</li>
-      <li>Are there annual usage limits that affect your strategy?</li>
-    </ul>
+<section class="mt-10 grid gap-6 lg:grid-cols-[1.5fr_0.9fr]">
+  <article class="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm shadow-slate-900/5">
+    <h2 class="text-2xl font-extrabold text-ink">What a 529 plan actually does</h2>
+    <p class="mt-4 text-base leading-7 text-slate-700">
+      A 529 plan is a tax-advantaged account designed to help families save for education expenses. It is a strong
+      long-term payment tool. Families contribute over time, invest those funds, and then use them for qualifying
+      expenses such as tuition and other eligible education costs.
+    </p>
+    <p class="mt-4 text-base leading-7 text-slate-700">
+      What many families miss is that saving and price reduction are not the same thing. A 529 plan helps you cover
+      costs that already exist. A stronger ACT score may help reduce those costs before you pay them.
+    </p>
+
+    <h2 class="mt-10 text-2xl font-extrabold text-ink">Can a 529 plan cover ACT or SAT prep?</h2>
+    <p class="mt-4 text-base leading-7 text-slate-700">
+      Under recent federal changes, 529 plans may now cover certain tutoring and educational classes outside the
+      home. Because ACT and SAT prep are structured academic courses, many families and advisors now view prep as
+      potentially eligible under that expanded language.
+    </p>
+    <div class="mt-5 rounded-2xl border border-amber-200 bg-amber-50 p-5">
+      <p class="text-sm font-semibold uppercase tracking-[0.14em] text-amber-800">Important note</p>
+      <p class="mt-2 text-sm leading-6 text-amber-900">
+        ACT and SAT prep are not explicitly named in the current federal language. Families should confirm eligibility
+        with their tax professional and plan administrator before using 529 funds this way.
+      </p>
+    </div>
+
+    <h2 class="mt-10 text-2xl font-extrabold text-ink">Why the scholarship side matters more</h2>
+    <p class="mt-4 text-base leading-7 text-slate-700">
+      Even if your 529 can help pay for prep, the highest-value part of the strategy is usually not the payment
+      method. It is the return. Many colleges offer automatic or semi-automatic merit scholarships tied to GPA and
+      ACT score bands. Small score increases can move a student into a higher scholarship tier and reduce the total
+      cost of college by thousands per year.
+    </p>
+
+    <div class="mt-6 rounded-2xl border border-slate-200 bg-slate-50 p-6">
+      <h3 class="text-lg font-extrabold text-ink">Illustrative scholarship ladder</h3>
+      <div class="mt-4 grid gap-3 sm:grid-cols-2">
+        {#each scholarshipExamples as example}
+          <div class="rounded-2xl bg-white p-4 shadow-sm shadow-slate-900/5">
+            <p class="text-sm font-bold uppercase tracking-[0.12em] text-slate-500">{example.score}</p>
+            <p class="mt-1 text-xl font-black text-ink">{example.amount}</p>
+          </div>
+        {/each}
+      </div>
+      <p class="mt-4 text-sm leading-6 text-slate-600">
+        These are representative scholarship tiers for illustration. Actual awards vary by school, residency, GPA,
+        and published merit policies.
+      </p>
+    </div>
+
+    <h2 class="mt-10 text-2xl font-extrabold text-ink">A simple ROI example</h2>
+    <div class="mt-5 rounded-2xl border border-slate-200 bg-white p-6">
+      <div class="grid gap-6 md:grid-cols-2">
+        <div>
+          <p class="text-sm font-bold uppercase tracking-[0.12em] text-slate-500">Student profile</p>
+          <ul class="mt-3 space-y-2 text-slate-700">
+            <li>GPA: 3.7</li>
+            <li>ACT: 27</li>
+            <li>Current award: $6,000/year</li>
+          </ul>
+        </div>
+        <div>
+          <p class="text-sm font-bold uppercase tracking-[0.12em] text-slate-500">After a score increase</p>
+          <ul class="mt-3 space-y-2 text-slate-700">
+            <li>ACT: 30</li>
+            <li>Updated award: $10,000/year</li>
+            <li>Difference: $4,000/year</li>
+            <li>Four-year value: <span class="font-bold text-ink">$16,000</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="mt-10 text-2xl font-extrabold text-ink">529 plan vs. ACT score strategy</h2>
+    <div class="mt-5 overflow-hidden rounded-2xl border border-slate-200">
+      <table class="min-w-full divide-y divide-slate-200 text-left">
+        <thead class="bg-slate-50">
+          <tr>
+            <th class="px-4 py-3 text-xs font-bold uppercase tracking-[0.12em] text-slate-500">Factor</th>
+            <th class="px-4 py-3 text-xs font-bold uppercase tracking-[0.12em] text-slate-500">529 plan</th>
+            <th class="px-4 py-3 text-xs font-bold uppercase tracking-[0.12em] text-slate-500">ACT score strategy</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-200 bg-white">
+          {#each comparisonRows as row}
+            <tr>
+              <td class="px-4 py-4 text-sm font-semibold text-ink">{row.label}</td>
+              <td class="px-4 py-4 text-sm text-slate-700">{row.plan529}</td>
+              <td class="px-4 py-4 text-sm text-slate-700">{row.act}</td>
+            </tr>
+          {/each}
+        </tbody>
+      </table>
+    </div>
+
+    <h2 class="mt-10 text-2xl font-extrabold text-ink">How families can use both together</h2>
+    <p class="mt-4 text-base leading-7 text-slate-700">
+      The strongest approach is usually not choosing one or the other. It is using them in sequence. First, use a
+      scholarship strategy to reduce the price. Then use your 529 plan to help cover what remains. If your 529 can
+      also be used for prep under your plan rules and tax guidance, that strengthens the ROI even further.
+    </p>
+
+    <div class="mt-8 rounded-3xl bg-ink px-6 py-7 text-white md:px-8">
+      <h2 class="text-2xl font-extrabold">Find out what your current ACT score may be worth</h2>
+      <p class="mt-3 max-w-2xl text-sm leading-6 text-slate-200">
+        Most families do not know what scholarship tier they already qualify for, how close they are to the next
+        level, or what a 1–3 point increase might mean over four years.
+      </p>
+      <div class="mt-5 flex flex-col gap-3 sm:flex-row">
+        <a
+          href="/scholarship-calculator"
+          class="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-bold text-ink transition hover:bg-slate-100"
+        >
+          See scholarship tiers
+        </a>
+        <a
+          href="/enroll"
+          class="inline-flex items-center justify-center rounded-full border border-white/30 px-6 py-3 text-sm font-bold text-white transition hover:bg-white/10"
+        >
+          View course dates
+        </a>
+      </div>
+    </div>
   </article>
-  <article class="rounded-2xl border border-slate-200 bg-white p-6">
-    <h2 class="text-xl font-extrabold text-ink">How we support records</h2>
-    <ul class="mt-4 space-y-2 text-sm text-slate-700">
-      <li>Detailed enrollment receipts</li>
-      <li>Program schedule confirmation</li>
-      <li>Named student class roster documentation</li>
-    </ul>
-  </article>
+
+  <aside class="space-y-6">
+    <article class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm shadow-slate-900/5">
+      <h2 class="text-xl font-extrabold text-ink">What to ask before enrolling</h2>
+      <ul class="mt-4 space-y-3 text-sm leading-6 text-slate-700">
+        {#each questionsToAsk as question}
+          <li class="flex gap-3">
+            <span class="mt-1 h-2.5 w-2.5 shrink-0 rounded-full bg-ink"></span>
+            <span>{question}</span>
+          </li>
+        {/each}
+      </ul>
+    </article>
+
+    <article class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm shadow-slate-900/5">
+      <h2 class="text-xl font-extrabold text-ink">How we support your records</h2>
+      <ul class="mt-4 space-y-3 text-sm leading-6 text-slate-700">
+        {#each recordSupport as item}
+          <li class="flex gap-3">
+            <span class="mt-1 h-2.5 w-2.5 shrink-0 rounded-full bg-ink"></span>
+            <span>{item}</span>
+          </li>
+        {/each}
+      </ul>
+    </article>
+
+    <article class="rounded-3xl border border-slate-200 bg-slate-50 p-6">
+      <h2 class="text-xl font-extrabold text-ink">Best next step</h2>
+      <p class="mt-3 text-sm leading-6 text-slate-700">
+        Start with the scholarship calculator. It gives families a clearer picture of whether a score increase could
+        create meaningful tuition savings before they decide how to pay for prep.
+      </p>
+      <a
+        href="/scholarship-calculator"
+        class="mt-5 inline-flex items-center justify-center rounded-full bg-ink px-5 py-3 text-sm font-bold text-white transition hover:opacity-90"
+      >
+        Open calculator
+      </a>
+    </article>
+  </aside>
 </section>

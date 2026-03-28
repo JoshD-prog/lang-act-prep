@@ -5,14 +5,13 @@ import { getClassOfferings } from '$lib/server/data';
 import type { Actions } from './$types';
 
 export async function load({ url }) {
-  const stripeReady = Boolean(env.STRIPE_SECRET_KEY);
-
   const classSlug = url.searchParams.get('class') ?? '';
   const email = url.searchParams.get('email') ?? '';
   const leadId = url.searchParams.get('lead') ?? '';
 
   const offerings = await getClassOfferings();
   const offering = offerings.find((c) => c.slug === classSlug);
+  const stripeReady = Boolean(env.STRIPE_SECRET_KEY && offering?.stripePriceId);
 
   return {
     classSlug,
@@ -48,7 +47,7 @@ export const actions: Actions = {
     if (!sessionUrl) {
       return fail(500, {
         message:
-          'Stripe is not configured yet, or this class is missing a Stripe price id.'
+          'Stripe is not configured yet. Add STRIPE_SECRET_KEY and a class-specific stripe_price_id.'
       });
     }
 

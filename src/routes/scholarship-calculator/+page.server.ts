@@ -8,9 +8,6 @@ export async function load({ url }) {
 
   const tiers = await getScholarshipTiers();
 
-  console.log('SCHOLARSHIP TIERS SAMPLE:');
-  console.log(JSON.stringify(tiers.slice(0, 3), null, 2));
-
   const projections =
     gpa > 0 && act > 0
       ? calculateScholarshipProjections({

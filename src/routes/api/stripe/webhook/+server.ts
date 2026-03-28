@@ -51,17 +51,20 @@ export const POST: RequestHandler = async ({ request }) => {
       if (supabase) {
         const { data: lead, error: leadLookupError } = await supabase
           .from('enrollment_leads')
-          .select('id, payment_status')
+          .select('id, payment_status, stripe_event_id')
           .eq('id', leadId)
           .single();
 
         if (leadLookupError) {
           console.error('Lead lookup failed:', leadLookupError);
-        } else if (lead && lead.payment_status !== 'paid') {
+        } else if (lead) {
+          const wasPaid = lead.payment_status === 'paid';
+
           const { error: updateLeadError } = await supabase
             .from('enrollment_leads')
             .update({
               payment_status: 'paid',
+              stripe_event_id: event.id,
               stripe_session_id: session.id,
               stripe_payment_intent_id:
                 typeof session.payment_intent === 'string'
@@ -73,7 +76,7 @@ export const POST: RequestHandler = async ({ request }) => {
 
           if (updateLeadError) {
             console.error('Lead update failed:', updateLeadError);
-          } else {
+          } else if (!wasPaid) {
             const { data: classRows, error: classLookupError } = await supabase
               .from('class_offerings')
               .select('id, seats_available')

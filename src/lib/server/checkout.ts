@@ -1,4 +1,5 @@
-import { env } from '$env/dynamic/private';
+import { env as publicEnv } from '$env/dynamic/public';
+import { env as privateEnv } from '$env/dynamic/private';
 import { createStripeClient } from '$lib/server/stripe';
 import { getClassOfferings } from '$lib/server/data';
 
@@ -25,10 +26,7 @@ export async function createCheckoutSession({
     return null;
   }
 
-  const baseUrl = env.PUBLIC_SITE_URL || env.SITE_URL || 'http://localhost:5173';
-
-    console.log('BASE URL:', baseUrl);
-    console.log('PROMO CODES ENABLED');
+  const baseUrl = publicEnv.PUBLIC_SITE_URL || privateEnv.SITE_URL || 'http://localhost:5173';
 
   const session = await stripe.checkout.sessions.create({
     mode: 'payment',

@@ -26,6 +26,22 @@
   <p class="mt-4 max-w-3xl text-lg text-slate-600">
     Select your class, confirm the schedule and location, and enter your student and parent information to continue to checkout.
   </p>
+
+  <div class="mt-6 rounded-2xl border border-slate-200 bg-slate-50 p-5 text-sm text-slate-700">
+    <p>
+      Want help thinking through value before you enroll?
+      <a href="/scholarship-calculator" class="font-semibold text-sky hover:underline">
+        Try the scholarship calculator
+      </a>.
+    </p>
+    <p class="mt-2">
+      Some families also review
+      <a href="/529" class="font-semibold text-sky hover:underline">
+        529 planning options
+      </a>
+      before registration.
+    </p>
+  </div>
 </section>
 
 {#if selectedClassOffering}
@@ -106,6 +122,15 @@
   {#if form?.message}
     <p class="md:col-span-2 rounded-xl bg-rose-50 p-3 text-sm text-rose-700">{form.message}</p>
   {/if}
+
+  <div class="md:col-span-2">
+    <p class="text-xs text-slate-500">
+      By continuing, you agree to the
+      <a href="/terms-and-conditions" class="underline hover:no-underline">
+        Terms &amp; Conditions
+      </a>.
+    </p>
+  </div>
 
   <div class="md:col-span-2 flex justify-end">
     <button class="rounded-full bg-ink px-6 py-3 text-sm font-bold text-white">

@@ -1,18 +1,21 @@
 import Stripe from 'stripe';
 import type { RequestHandler } from './$types';
-import { STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET } from '$env/static/private';
+import { STRIPE_WEBHOOK_SECRET } from '$env/static/private';
 import { createAdminSupabaseClient } from '$lib/server/supabase';
 import {
   sendAdminEnrollmentNotification,
   sendParentConfirmationEmail
 } from '$lib/server/email';
 import { getClassOfferings } from '$lib/server/data';
+import { createStripeClient } from '$lib/server/stripe';
 
-const stripe = new Stripe(STRIPE_SECRET_KEY, {
-  apiVersion: '2024-06-20'
-});
+const stripe = createStripeClient();
 
 export const POST: RequestHandler = async ({ request }) => {
+  if (!stripe) {
+    return new Response('Stripe is not configured', { status: 503 });
+  }
+
   const signature = request.headers.get('stripe-signature');
 
   if (!signature) {

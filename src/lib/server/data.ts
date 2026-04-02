@@ -6,6 +6,7 @@ import type {
   ScholarshipRequirementDetail
 } from '$lib/types';
 import { createAdminSupabaseClient } from '$lib/server/supabase';
+import { getStripeCheckoutConfig } from '$lib/server/stripe';
 
 type ScholarshipTierRow = {
   school_slug: string;
@@ -551,7 +552,15 @@ export function calculateScholarshipProjections({
 export async function getClassOfferings(): Promise<ClassOffering[]> {
   const supabase = createAdminSupabaseClient();
   if (!supabase) {
-    return classOfferings;
+    return classOfferings.map((offering) => {
+      const checkoutConfig = getStripeCheckoutConfig(offering);
+
+      return {
+        ...offering,
+        priceCents: checkoutConfig.priceCents ?? offering.priceCents,
+        stripePriceId: checkoutConfig.priceId
+      };
+    });
   }
 
   const { data, error } = await supabase
@@ -564,7 +573,8 @@ export async function getClassOfferings(): Promise<ClassOffering[]> {
     return classOfferings;
   }
 
-    return data.map((item) => ({
+  return data.map((item) => {
+    const offering = {
       id: item.id,
       slug: item.slug,
       title: item.title,
@@ -573,9 +583,17 @@ export async function getClassOfferings(): Promise<ClassOffering[]> {
       format: item.format,
       priceCents: item.price_cents,
       seatsAvailable: item.seats_available,
-            featured: item.featured,
+      featured: item.featured,
       stripePriceId: item.stripe_price_id
-}));
+    };
+    const checkoutConfig = getStripeCheckoutConfig(offering);
+
+    return {
+      ...offering,
+      priceCents: checkoutConfig.priceCents ?? offering.priceCents,
+      stripePriceId: checkoutConfig.priceId
+    };
+  });
 }
 
 export async function getSchools(): Promise<School[]> {

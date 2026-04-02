@@ -80,12 +80,19 @@
       <p class="rounded-xl bg-amber-50 p-3 text-sm text-amber-900">{form.message}</p>
     {/if}
 
-    <button
+        <button
       class={`rounded-full px-6 py-3 text-sm font-bold text-white ${data.stripeReady ? 'bg-sky' : 'cursor-not-allowed bg-slate-400'}`}
       disabled={!data.stripeReady}
     >
       Continue to Secure Checkout
     </button>
+
+    <p class="text-xs text-slate-500">
+      By continuing, you agree to the
+      <a href="/terms-and-conditions" class="underline hover:no-underline">
+        Terms &amp; Conditions
+      </a>.
+    </p>
 
     <p class="text-xs text-slate-500">
       You’ll review payment details on Stripe before the charge is completed.

@@ -1,6 +1,6 @@
 import { env as publicEnv } from '$env/dynamic/public';
 import { env as privateEnv } from '$env/dynamic/private';
-import { createStripeClient } from '$lib/server/stripe';
+import { createStripeClient, getStripeCheckoutConfig } from '$lib/server/stripe';
 import { getClassOfferings } from '$lib/server/data';
 
 interface CheckoutInput {
@@ -21,8 +21,9 @@ export async function createCheckoutSession({
 
   const offerings = await getClassOfferings();
   const offering = offerings.find((c) => c.slug === classSlug);
+  const checkoutConfig = getStripeCheckoutConfig(offering);
 
-  if (!offering?.stripePriceId) {
+  if (!checkoutConfig.priceId) {
     return null;
   }
 
@@ -31,7 +32,7 @@ export async function createCheckoutSession({
   const session = await stripe.checkout.sessions.create({
     mode: 'payment',
     customer_email: email,
-    line_items: [{ price: offering.stripePriceId, quantity: 1 }],
+    line_items: [{ price: checkoutConfig.priceId, quantity: 1 }],
     allow_promotion_codes: true,
     metadata: {
       class_slug: classSlug,

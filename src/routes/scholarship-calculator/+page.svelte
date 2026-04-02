@@ -53,10 +53,10 @@
     >
       <option value="KS" selected={data.residency === 'KS'}>Kansas</option>
       <option value="MO" selected={data.residency === 'MO'}>Missouri</option>
+      <option value="OTHER" selected={data.residency === 'OTHER'}>Out of state</option>
       <option value="NE" selected={data.residency === 'NE'}>Nebraska</option>
       <option value="AR" selected={data.residency === 'AR'}>Arkansas</option>
       <option value="OK" selected={data.residency === 'OK'}>Oklahoma</option>
-      <option value="OTHER" selected={data.residency === 'OTHER'}>Other / Out of state</option>
     </select>
   </label>
 
@@ -66,10 +66,10 @@
       name="filter"
       class="mt-1 w-full rounded-xl border-slate-300"
     >
-      <option value="all" selected={data.filter === 'all'}>All schools</option>
+      <option value="default" selected={data.filter === 'default'}>Closest scholarship gains</option>
+      <option value="all" selected={data.filter === 'all'}>Best current offers</option>
+      <option value="best" selected={data.filter === 'best'}>Biggest nearby upside</option>
       <option value="local" selected={data.filter === 'local'}>Local colleges</option>
-      <option value="best" selected={data.filter === 'best'}>Best scholarships</option>
-      <option value="default" selected={data.filter === 'default'}>Default</option>
     </select>
   </label>
 
@@ -81,7 +81,6 @@
 <div class="mt-8">
   <ScholarshipCalculator
     projections={data.projections}
-    gpa={data.gpa}
-    act={data.act}
+    hasSearched={data.hasSearched}
   />
 </div>

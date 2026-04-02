@@ -52,3 +52,33 @@ export interface ScholarshipProjection {
     additionalAnnualAwardUsd: number;
   }[];
 }
+
+export interface ScholarshipRequirementDetail {
+  label: string;
+  met: boolean;
+}
+
+export interface ScholarshipNextStep {
+  tier_name: string;
+  projected_total_usd: number;
+  annual_award_usd: number;
+  requires_separate_application: boolean;
+  application_note: string | null;
+  actGap: number;
+  gpaGap: number;
+  dimensionsNeeded: number;
+  requirementDetails: ScholarshipRequirementDetail[];
+}
+
+export interface ScholarshipProjectionResult {
+  schoolSlug: string;
+  schoolName: string;
+  shortName: string | null;
+  primary: {
+    tier_name: string;
+    annual_award_usd: number;
+    projected_total_usd: number;
+  };
+  nextSteps: ScholarshipNextStep[];
+  note: string | null;
+}

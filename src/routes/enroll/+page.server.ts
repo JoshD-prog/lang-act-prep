@@ -52,7 +52,11 @@ export const actions: Actions = {
           console.error('Enrollment lead insert failed:', insertError);
 
         return fail(500, {
-           message: 'We could not save your enrollment lead. Please try again.'
+           message: 'We could not save your enrollment lead. Please try again.',
+           studentName,
+           parentEmail,
+           classSlug,
+           notes
          });
         }
 

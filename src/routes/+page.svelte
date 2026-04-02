@@ -15,7 +15,7 @@
 <Hero
   eyebrow="ACT prep built for the week before your test"
   title="Raise your ACT score in the week before test day."
-  body="Four focused sessions to sharpen pacing, strengthen strategy, and improve performance—designed for busy students who need results fast."
+  body="Four focused sessions to sharpen pacing, strengthen strategy, and improve performance, designed for busy students who need results fast."
   primaryCtaLabel="Reserve your seat"
   primaryCtaHref="/classes"
   secondaryCtaLabel="How it works"

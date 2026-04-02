@@ -18,6 +18,7 @@ export async function load({ url }) {
     classTitle: offering?.title ?? classSlug,
     classSchedule: offering?.schedule ?? '',
     classLocation: offering?.location ?? '',
+    classFormat: offering?.format ?? '',
     email,
     leadId,
     stripeReady

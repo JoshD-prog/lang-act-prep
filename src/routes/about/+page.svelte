@@ -16,7 +16,7 @@
       </p>
 
       <p class="mt-4 text-lg text-slate-600">
-        This course is built to give students a clear, focused plan in the week before the test—improving pacing,
+        This course is built to give students a clear, focused plan in the week before the test: improving pacing,
         sharpening strategy, and reinforcing the highest-yield skills.
       </p>
     </div>

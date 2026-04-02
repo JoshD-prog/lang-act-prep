@@ -1,6 +1,7 @@
 import { calculateScholarshipProjections, getScholarshipTiers } from '$lib/server/data';
 
 export async function load({ url }) {
+  const hasSearched = url.searchParams.has('gpa') || url.searchParams.has('act');
   const gpa = Number(url.searchParams.get('gpa') ?? 0);
   const act = Number(url.searchParams.get('act') ?? 0);
   const residency = url.searchParams.get('residency') ?? 'OTHER';
@@ -24,6 +25,7 @@ export async function load({ url }) {
     act,
     residency,
     filter,
+    hasSearched,
     projections
   };
 }

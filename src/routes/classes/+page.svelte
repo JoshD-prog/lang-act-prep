@@ -80,3 +80,29 @@
     </article>
   {/each}
 </section>
+
+<section class="mt-8 rounded-3xl border border-sky-200 bg-sky-50 p-6 shadow-sm shadow-slate-900/5">
+  <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+    <div class="max-w-2xl">
+      <p class="text-xs font-bold uppercase tracking-[0.16em] text-sky-700">Compare value first</p>
+      <h2 class="mt-2 text-2xl font-black text-ink">Estimate the scholarship upside before you enroll.</h2>
+      <p class="mt-2 text-sm text-slate-700">
+        If you are still weighing whether the course is worth it, use the scholarship calculator to see how a score increase can
+        change potential merit aid.
+      </p>
+      <p class="mt-2 text-sm text-slate-600">
+        Have questions about paying for prep? Review the
+        <a href="/529-update" class="font-semibold text-sky-700 hover:underline"> 529 planning guide</a>.
+      </p>
+    </div>
+
+    <div class="shrink-0">
+      <a
+        href="/scholarship-calculator"
+        class="inline-flex rounded-full bg-ink px-5 py-2 text-sm font-bold text-white transition hover:bg-slate-700"
+      >
+        Try the scholarship calculator
+      </a>
+    </div>
+  </div>
+</section>

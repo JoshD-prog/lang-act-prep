@@ -1,5 +1,6 @@
 import { Resend } from 'resend';
 import { RESEND_API_KEY } from '$env/static/private';
+import { buildParentConfirmationEmailHtml } from '$lib/server/email-templates';
 
 export const resend = new Resend(RESEND_API_KEY);
 
@@ -18,27 +19,15 @@ export async function sendParentConfirmationEmail({
 }) {
   await resend.emails.send({
     from: 'KC Cram Course <noreply@kccramcourse.com>',
+    replyTo: 'director@kccramcourse.com',
     to: parentEmail,
-    subject: `Enrollment Confirmed — ${classTitle}`,
-    html: `
-      <p>Hello,</p>
-
-      <p>Your student <strong>${studentName}</strong> has been successfully enrolled in <strong>${classTitle}</strong>.</p>
-
-      <p><strong>Course Details</strong></p>
-
-      <p>
-        <strong>Class:</strong> ${classTitle}<br/>
-        <strong>Dates & Time:</strong> ${classSchedule ?? 'Details coming soon'}<br/>
-        <strong>Location:</strong> ${classLocation ?? 'Details coming soon'}
-      </p>
-
-      <p>Your seat is now reserved. Please keep this email for your records.</p>
-
-      <p>If you have any questions before the course begins, you can reply directly to this email.</p>
-
-      <p>Thank you for enrolling.</p>
-    `
+    subject: `Enrollment Confirmed - ${classTitle}`,
+    html: buildParentConfirmationEmailHtml({
+      studentName,
+      classTitle,
+      classSchedule,
+      classLocation
+    })
   });
 }
 
@@ -58,7 +47,7 @@ export async function sendAdminEnrollmentNotification({
   await resend.emails.send({
     from: 'KC Cram Course <noreply@kccramcourse.com>',
     to: 'director@kccramcourse.com',
-    subject: 'New Enrollment — KC Cram Course',
+    subject: 'New Enrollment - KC Cram Course',
     html: `
       <p>A new enrollment has been completed.</p>
 

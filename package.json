@@ -9,6 +9,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "email:test": "bun run ./scripts/send-test-email.ts",
     "db:init": "bunx supabase init",
     "db:login": "bunx supabase login",
     "db:link": "bunx supabase link --project-ref $SUPABASE_PROJECT_REF",

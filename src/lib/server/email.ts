@@ -62,3 +62,40 @@ export async function sendAdminEnrollmentNotification({
     `,
   });
 }
+
+export async function sendAdminContactInquiryNotification({
+  fullName,
+  email,
+  phone,
+  studentGrade,
+  studentSchool,
+  message,
+}: {
+  fullName: string;
+  email: string;
+  phone?: string | null;
+  studentGrade?: string | null;
+  studentSchool?: string | null;
+  message: string;
+}) {
+  await resend.emails.send({
+    from: "KC Cram Course <noreply@kccramcourse.com>",
+    to: "director@kccramcourse.com",
+    replyTo: email,
+    subject: `New Contact Inquiry - ${fullName}`,
+    html: `
+      <p>A new contact inquiry was submitted.</p>
+
+      <p>
+        <strong>Name:</strong> ${fullName}<br/>
+        <strong>Email:</strong> ${email}<br/>
+        <strong>Phone:</strong> ${phone || "Not provided"}<br/>
+        <strong>Student Grade:</strong> ${studentGrade || "Not provided"}<br/>
+        <strong>Student School:</strong> ${studentSchool || "Not provided"}
+      </p>
+
+      <p><strong>Message:</strong></p>
+      <p>${message.replace(/\n/g, "<br/>")}</p>
+    `,
+  });
+}

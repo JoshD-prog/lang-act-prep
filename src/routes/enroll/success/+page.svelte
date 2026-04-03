@@ -1,6 +1,12 @@
-<svelte:head>
-  <title>Enrollment complete | KC Cram Course</title>
-</svelte:head>
+<script lang="ts">
+  import Seo from '$lib/components/Seo.svelte';
+</script>
+
+<Seo
+  title="Enrollment Complete"
+  description="Enrollment has been completed and a confirmation email with next steps is on the way."
+  robots="noindex, nofollow"
+/>
 
 <section class="mx-auto max-w-3xl rounded-3xl border border-slate-200 bg-white p-8 shadow-lg shadow-slate-900/5">
   <p class="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">

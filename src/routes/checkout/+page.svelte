@@ -1,12 +1,15 @@
 <script lang="ts">
+  import Seo from '$lib/components/Seo.svelte';
   import type { ActionData, PageData } from './$types';
 
   let { data, form }: { data: PageData; form: ActionData } = $props();
 </script>
 
-<svelte:head>
-  <title>Checkout | KC Cram Course</title>
-</svelte:head>
+<Seo
+  title="Checkout"
+  description="Review your ACT course details and continue to secure Stripe checkout to finalize enrollment."
+  robots="noindex, nofollow"
+/>
 
 {#if !data.stripeReady}
   <section class="mx-auto mb-4 max-w-3xl rounded-2xl border border-amber-300 bg-amber-50 p-4">

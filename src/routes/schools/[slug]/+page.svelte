@@ -1,12 +1,65 @@
 <script lang="ts">
+  import Seo from '$lib/components/Seo.svelte';
+  import { getSiteUrl, toAbsoluteUrl } from '$lib/seo';
   import type { PageData } from './$types';
 
   let { data }: { data: PageData } = $props();
+  const siteUrl = getSiteUrl();
+
+  const description = $derived(
+    `${data.school.name} families can review class options, scholarship planning support, and school-specific messaging before starting enrollment.`
+  );
+  const structuredData = $derived([
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: siteUrl
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Schools',
+          item: toAbsoluteUrl('/schools', siteUrl)
+        },
+        {
+          '@type': 'ListItem',
+          position: 3,
+          name: data.school.name,
+          item: toAbsoluteUrl(`/schools/${data.school.slug}`, siteUrl)
+        }
+      ]
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      name: `${data.school.name} enrollment page`,
+      url: toAbsoluteUrl(`/schools/${data.school.slug}`, siteUrl),
+      description,
+      isPartOf: {
+        '@type': 'WebSite',
+        name: 'KC Cram Course',
+        url: siteUrl
+      },
+      about: {
+        '@type': 'Thing',
+        name: data.school.name,
+        description: data.school.shortPitch
+      }
+    }
+  ]);
 </script>
 
-<svelte:head>
-  <title>{data.school.name} | KC Cram Course</title>
-</svelte:head>
+<Seo
+  title={data.school.name}
+  description={description}
+  image={data.school.heroImageUrl}
+  structuredData={structuredData}
+/>
 
 <section class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-lg shadow-slate-900/5">
   <img src={data.school.heroImageUrl} alt={data.school.name} class="h-64 w-full object-cover" />

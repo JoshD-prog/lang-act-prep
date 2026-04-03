@@ -1,6 +1,11 @@
-<svelte:head>
-  <title>About | KC Cram Course</title>
-</svelte:head>
+<script lang="ts">
+  import Seo from '$lib/components/Seo.svelte';
+</script>
+
+<Seo
+  title="About"
+  description="Meet Adam Lang and learn how KC Cram Course approaches focused ACT prep, pacing strategy, and scholarship-minded score improvement."
+/>
 
 <section class="rounded-3xl border border-slate-200 bg-white p-8 shadow-lg shadow-slate-900/5">
   <div class="grid gap-8 md:grid-cols-2 md:items-center">

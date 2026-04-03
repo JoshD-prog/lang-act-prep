@@ -1,6 +1,11 @@
-<svelte:head>
-  <title>For Educators | KC Cram Course</title>
-</svelte:head>
+<script lang="ts">
+  import Seo from '$lib/components/Seo.svelte';
+</script>
+
+<Seo
+  title="For Educators"
+  description="Get referral-ready information for counselors and teachers, including student fit notes, scheduling support, and counselor packet details."
+/>
 
 <section class="rounded-3xl border border-slate-200 bg-white p-8">
   <p class="text-xs font-bold uppercase tracking-[0.16em] text-sky">For educators</p>

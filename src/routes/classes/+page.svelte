@@ -1,18 +1,69 @@
 <script lang="ts">
+  import Seo from '$lib/components/Seo.svelte';
+  import { getSiteUrl, toAbsoluteUrl } from '$lib/seo';
   import type { PageData } from './$types';
 
   let { data }: { data: PageData } = $props();
+  const siteUrl = getSiteUrl();
 
   const money = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
     maximumFractionDigits: 0
   });
+
+  const structuredData = $derived([
+    {
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      name: 'ACT Prep Classes | KC Cram Course',
+      url: toAbsoluteUrl('/classes', siteUrl),
+      description:
+        'Compare upcoming ACT cram course dates, pricing, locations, and seat availability for the week before your test.',
+      mainEntity: {
+        '@type': 'ItemList',
+        itemListElement: data.classes.map((classOffering, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          item: {
+            '@type': 'Course',
+            name: classOffering.title,
+            description:
+              'Four focused 90-minute ACT prep sessions in the week before the test, with pacing practice and high-yield review.',
+            provider: {
+              '@type': 'EducationalOrganization',
+              name: 'KC Cram Course',
+              url: siteUrl
+            },
+            courseMode: classOffering.format,
+            location: classOffering.location
+              ? {
+                  '@type': 'Place',
+                  name: classOffering.location
+                }
+              : undefined,
+            offers: {
+              '@type': 'Offer',
+              url: toAbsoluteUrl(`/enroll?class=${classOffering.slug}`, siteUrl),
+              price: (classOffering.priceCents / 100).toFixed(2),
+              priceCurrency: 'USD',
+              availability:
+                classOffering.seatsAvailable > 0
+                  ? 'https://schema.org/InStock'
+                  : 'https://schema.org/SoldOut'
+            }
+          }
+        }))
+      }
+    }
+  ]);
 </script>
 
-<svelte:head>
-  <title>Classes | KC Cram Course</title>
-</svelte:head>
+<Seo
+  title="ACT Prep Classes"
+  description="Compare upcoming ACT cram course dates, pricing, locations, and seat availability for the week before your test."
+  structuredData={structuredData}
+/>
 
 <section class="rounded-3xl border border-slate-200 bg-white p-8 shadow-lg shadow-slate-900/5">
   <p class="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">ACT Cram Course</p>

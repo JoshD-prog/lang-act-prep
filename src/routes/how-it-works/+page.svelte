@@ -1,11 +1,13 @@
 <script lang="ts">
+  import Seo from '$lib/components/Seo.svelte';
   import PageSection from '$lib/components/PageSection.svelte';
   import { enrollmentJourneySections } from '$lib/content/site';
 </script>
 
-<svelte:head>
-  <title>How It Works | KC Cram Course</title>
-</svelte:head>
+<Seo
+  title="How It Works"
+  description="See how the KC Cram Course enrollment process works, from choosing a class date to arriving on test day with a clear plan."
+/>
 
 <section class="rounded-3xl border border-slate-200 bg-white p-8 shadow-lg shadow-slate-900/5">
   <p class="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">How it works</p>

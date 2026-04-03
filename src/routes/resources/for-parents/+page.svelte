@@ -1,6 +1,11 @@
-<svelte:head>
-  <title>For Parents | KC Cram Course</title>
-</svelte:head>
+<script lang="ts">
+  import Seo from '$lib/components/Seo.svelte';
+</script>
+
+<Seo
+  title="For Parents"
+  description="Use a parent-friendly ACT prep timeline with monthly priorities, scholarship planning, and guidance on what to focus on before test day."
+/>
 
 <section class="rounded-3xl border border-slate-200 bg-white p-8">
   <p class="text-xs font-bold uppercase tracking-[0.16em] text-clay">For parents</p>

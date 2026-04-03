@@ -1,12 +1,15 @@
 <script lang="ts">
+  import Seo from '$lib/components/Seo.svelte';
   import type { PageData } from './$types';
 
   let { data }: { data: PageData } = $props();
 </script>
 
-<svelte:head>
-  <title>Enrollment complete | KC Cram Course</title>
-</svelte:head>
+<Seo
+  title="Enrollment Complete"
+  description="Enrollment status and payment confirmation for your recent KC Cram Course checkout."
+  robots="noindex, nofollow"
+/>
 
 <section class="mx-auto max-w-3xl rounded-3xl border border-slate-200 bg-white p-8 shadow-lg shadow-slate-900/5">
   <p class="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">

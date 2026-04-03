@@ -4,8 +4,8 @@ export async function load({ url }) {
   const hasSearched = url.searchParams.has('gpa') || url.searchParams.has('act');
   const gpa = Number(url.searchParams.get('gpa') ?? 0);
   const act = Number(url.searchParams.get('act') ?? 0);
-  const residency = url.searchParams.get('residency') ?? 'OTHER';
-  const filter = url.searchParams.get('filter') ?? 'all';
+  const residency = url.searchParams.get('residency') ?? 'KS';
+  const filter = url.searchParams.get('filter') ?? 'best';
 
   const tiers = await getScholarshipTiers();
 

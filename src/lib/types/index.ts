@@ -74,6 +74,9 @@ export interface ScholarshipProjectionResult {
   schoolSlug: string;
   schoolName: string;
   shortName: string | null;
+  sourceType: 'modeled' | 'published' | 'school-page' | 'mixed';
+  sourceLabel: string;
+  sourceUrl: string | null;
   primary: {
     tier_name: string;
     annual_award_usd: number;

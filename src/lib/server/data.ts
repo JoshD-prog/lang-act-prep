@@ -134,8 +134,6 @@ function matchesResidency(tier: ScholarshipTierRow, residency: string) {
 
 function matchesFilter(tier: ScholarshipTierRow, filter: string) {
   if (filter === 'local') return tier.bucket_local;
-  if (filter === 'best') return tier.bucket_best_value;
-  if (filter === 'default') return tier.bucket_default;
   return true;
 }
 
@@ -272,6 +270,28 @@ function getUpsideValue(result: ScholarshipProjectionResult) {
   }, 0);
 }
 
+function getNearbyUpsideProfile(result: ScholarshipProjectionResult) {
+  return result.nextSteps
+    .filter((step) => step.actGap > 0 && step.actGap <= 4)
+    .map((step) => ({
+      upside: step.projected_total_usd - result.primary.projected_total_usd,
+      actGap: step.actGap,
+      dimensionsNeeded: step.dimensionsNeeded,
+      actOnly: step.gpaGap === 0 ? 1 : 0
+    }))
+    .sort((a, b) => {
+      if (a.upside !== b.upside) return b.upside - a.upside;
+      if (a.actOnly !== b.actOnly) return b.actOnly - a.actOnly;
+      if (a.actGap !== b.actGap) return a.actGap - b.actGap;
+      return a.dimensionsNeeded - b.dimensionsNeeded;
+    })[0] ?? {
+      upside: 0,
+      actGap: Number.POSITIVE_INFINITY,
+      dimensionsNeeded: Number.POSITIVE_INFINITY,
+      actOnly: 0
+    };
+}
+
 function getClosestActGap(result: ScholarshipProjectionResult) {
   const actGaps = result.nextSteps
     .map((step) => step.actGap)
@@ -304,6 +324,15 @@ function getClosestSimpleStep(result: ScholarshipProjectionResult) {
   );
 }
 
+function getCurrentOfferProfile(result: ScholarshipProjectionResult) {
+  return {
+    currentValue: result.primary.projected_total_usd,
+    yearlyValue: result.primary.annual_award_usd,
+    nearbyUpside: getNearbyUpsideProfile(result).upside,
+    closestGap: getClosestActGap(result)
+  };
+}
+
 function getSchoolNote(
   schoolTiers: ScholarshipTierRow[],
   act: number
@@ -318,7 +347,12 @@ function getSchoolNote(
     schoolTiers.find((tier) => tier.source_note)?.source_note ??
     schoolTiers.find((tier) => tier.school_notes_short)?.school_notes_short;
 
-  if (sharedNote) {
+  if (
+    sharedNote &&
+    !/(automatic|official|freshman|in-state|out-of-state|nonresident|merit|scholarship|table|chart|grid)/i.test(
+      sharedNote.trim()
+    )
+  ) {
     return sharedNote;
   }
 
@@ -328,6 +362,56 @@ function getSchoolNote(
   }
 
   return null;
+}
+
+function getSourceMeta(schoolTiers: ScholarshipTierRow[]) {
+  const schoolName = schoolTiers[0]?.school_name ?? '';
+  const hasSourceUrl = schoolTiers.some((tier) => Boolean(tier.source_url));
+  const hasScholarshipPage = schoolTiers.some((tier) => Boolean(tier.scholarship_page_url));
+
+  if (schoolName === 'Missouri University of Science and Technology') {
+    return {
+      sourceType: 'modeled' as const,
+      sourceLabel: 'Modeled estimate',
+      sourceUrl:
+        schoolTiers.find((tier) => tier.scholarship_page_url)?.scholarship_page_url ??
+        schoolTiers.find((tier) => tier.source_url)?.source_url ??
+        null
+    };
+  }
+
+  if (hasSourceUrl && hasScholarshipPage) {
+    return {
+      sourceType: 'mixed' as const,
+      sourceLabel: 'Published scholarship data',
+      sourceUrl:
+        schoolTiers.find((tier) => tier.scholarship_page_url)?.scholarship_page_url ??
+        schoolTiers.find((tier) => tier.source_url)?.source_url ??
+        null
+    };
+  }
+
+  if (hasScholarshipPage) {
+    return {
+      sourceType: 'school-page' as const,
+      sourceLabel: 'Official scholarship page',
+      sourceUrl: schoolTiers.find((tier) => tier.scholarship_page_url)?.scholarship_page_url ?? null
+    };
+  }
+
+  if (hasSourceUrl) {
+    return {
+      sourceType: 'published' as const,
+      sourceLabel: 'Published scholarship table',
+      sourceUrl: schoolTiers.find((tier) => tier.source_url)?.source_url ?? null
+    };
+  }
+
+  return {
+    sourceType: 'mixed' as const,
+    sourceLabel: 'Scholarship data on file',
+    sourceUrl: null
+  };
 }
 
 function getMockScholarshipTierRows(): ScholarshipTierRow[] {
@@ -482,6 +566,7 @@ export function calculateScholarshipProjections({
       schoolSlug: primary.school_slug,
       schoolName: primary.school_name,
       shortName: primary.short_name,
+      ...getSourceMeta(ordered),
       primary,
       nextSteps: groupedNextTargets,
       note: getSchoolNote(ordered, act)
@@ -515,33 +600,72 @@ export function calculateScholarshipProjections({
       if (aClosest.upside !== bClosest.upside) {
         return bClosest.upside - aClosest.upside;
       }
+
+      const aNearby = getNearbyUpsideProfile(a);
+      const bNearby = getNearbyUpsideProfile(b);
+      if (aNearby.upside !== bNearby.upside) {
+        return bNearby.upside - aNearby.upside;
+      }
     }
 
     if (filter === 'all') {
-      const aCurrent = a.primary.projected_total_usd;
-      const bCurrent = b.primary.projected_total_usd;
-      if (aCurrent !== bCurrent) {
-        return bCurrent - aCurrent;
+      const aCurrent = getCurrentOfferProfile(a);
+      const bCurrent = getCurrentOfferProfile(b);
+
+      if (aCurrent.currentValue !== bCurrent.currentValue) {
+        return bCurrent.currentValue - aCurrent.currentValue;
       }
 
-      const aClosestGap = getClosestActGap(a);
-      const bClosestGap = getClosestActGap(b);
-      if (aClosestGap !== bClosestGap) {
-        return aClosestGap - bClosestGap;
+      if (aCurrent.yearlyValue !== bCurrent.yearlyValue) {
+        return bCurrent.yearlyValue - aCurrent.yearlyValue;
+      }
+
+      if (aCurrent.nearbyUpside !== bCurrent.nearbyUpside) {
+        return bCurrent.nearbyUpside - aCurrent.nearbyUpside;
+      }
+
+      if (aCurrent.closestGap !== bCurrent.closestGap) {
+        return aCurrent.closestGap - bCurrent.closestGap;
       }
     }
 
     if (filter === 'best') {
+      const aNearby = getNearbyUpsideProfile(a);
+      const bNearby = getNearbyUpsideProfile(b);
+
+      if (aNearby.upside !== bNearby.upside) {
+        return bNearby.upside - aNearby.upside;
+      }
+
+      if (aNearby.actOnly !== bNearby.actOnly) {
+        return bNearby.actOnly - aNearby.actOnly;
+      }
+
+      if (aNearby.actGap !== bNearby.actGap) {
+        return aNearby.actGap - bNearby.actGap;
+      }
+
+      if (aNearby.dimensionsNeeded !== bNearby.dimensionsNeeded) {
+        return aNearby.dimensionsNeeded - bNearby.dimensionsNeeded;
+      }
+
       const aUpside = getUpsideValue(a);
       const bUpside = getUpsideValue(b);
       if (aUpside !== bUpside) {
         return bUpside - aUpside;
       }
+    }
 
-      const aClosestGap = getClosestActGap(a);
-      const bClosestGap = getClosestActGap(b);
-      if (aClosestGap !== bClosestGap) {
-        return aClosestGap - bClosestGap;
+    if (filter === 'local') {
+      const aClosest = getClosestSimpleStep(a);
+      const bClosest = getClosestSimpleStep(b);
+
+      if (aClosest.dimensionsNeeded !== bClosest.dimensionsNeeded) {
+        return aClosest.dimensionsNeeded - bClosest.dimensionsNeeded;
+      }
+
+      if (aClosest.actGap !== bClosest.actGap) {
+        return aClosest.actGap - bClosest.actGap;
       }
     }
 

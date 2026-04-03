@@ -1,4 +1,5 @@
 import { createAdminSupabaseClient } from '$lib/server/supabase';
+import { sendAdminContactInquiryNotification } from '$lib/server/email';
 import { fail } from '@sveltejs/kit';
 import type { Actions } from './$types';
 
@@ -32,33 +33,52 @@ export const actions: Actions = {
     }
 
     const supabase = createAdminSupabaseClient();
-    if (!supabase) {
-      return fail(500, {
-        message: 'Contact form is not configured yet. Please email hello@actprepclasses.com.',
-        values
+    let inquirySaved = false;
+
+    if (supabase) {
+      const { error } = await supabase.from('contact_inquiries').insert({
+        full_name: fullName,
+        email,
+        phone: phone || null,
+        student_grade: studentGrade || null,
+        student_school: studentSchool || null,
+        interest: interest || null,
+        message
       });
+
+      inquirySaved = !error;
     }
 
-    const { error } = await supabase.from('contact_inquiries').insert({
-      full_name: fullName,
-      email,
-      phone: phone || null,
-      student_grade: studentGrade || null,
-      student_school: studentSchool || null,
-      interest: interest || null,
-      message
-    });
-
-    if (error) {
-      return fail(500, {
-        message: 'We could not save your message. Please try again.',
-        values
+    try {
+      await sendAdminContactInquiryNotification({
+        fullName,
+        email,
+        phone: phone || null,
+        studentGrade: studentGrade || null,
+        studentSchool: studentSchool || null,
+        message
       });
+    } catch {
+      if (!inquirySaved) {
+        return fail(500, {
+          message: 'We could not send your message. Please email hello@actprepclasses.com.',
+          values
+        });
+      }
     }
 
     return {
       success: true,
-      message: 'Thanks. We received your message and will follow up soon.'
+      message: 'Thanks. We received your message and will follow up soon.',
+      values: {
+        fullName: '',
+        email: '',
+        phone: '',
+        studentGrade: '',
+        studentSchool: '',
+        interest: '',
+        message: ''
+      }
     };
   }
 };

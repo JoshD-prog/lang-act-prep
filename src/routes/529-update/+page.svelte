@@ -1,12 +1,6 @@
-<svelte:head>
-  <title>Can You Use a 529 Plan for ACT Prep? | KC Cram Course</title>
-  <meta
-    name="description"
-    content="Learn how 529 plans may apply to ACT or SAT prep after recent federal changes, how merit scholarships work, and how to estimate the ROI of a higher ACT score."
-  />
-</svelte:head>
-
 <script lang="ts">
+  import Seo from '$lib/components/Seo.svelte';
+
   const scholarshipExamples = [
     {
       score: 'ACT 24',
@@ -27,7 +21,7 @@
   ];
 
   const questionsToAsk = [
-    'Does your 529 plan allow expanded K–12 educational expenses such as tutoring or educational classes outside the home?',
+    'Does your 529 plan allow expanded K-12 educational expenses such as tutoring or educational classes outside the home?',
     'What documentation is required for reimbursement or direct payment?',
     'Are there annual usage limits or state-specific rules that affect your strategy?',
     'Does your tax professional view ACT or SAT prep as qualifying under the current rules for your situation?'
@@ -63,6 +57,11 @@
     }
   ];
 </script>
+
+<Seo
+  title="Can You Use a 529 Plan for ACT Prep?"
+  description="Learn how 529 plans may apply to ACT or SAT prep after recent federal changes, how merit scholarships work, and how to estimate the ROI of a higher ACT score."
+/>
 
 <section class="rounded-3xl border border-slate-200 bg-white p-8 shadow-lg shadow-slate-900/5 md:p-10">
   <p class="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">529 plans and ACT prep</p>
@@ -157,10 +156,10 @@
           <p class="text-sm font-bold uppercase tracking-[0.12em] text-slate-500">Potential outcome</p>
           <ul class="mt-3 space-y-2 text-slate-700">
             <li>+2 ACT points</li>
-            <li>+$2,000–$6,000 per year in scholarships</li>
+            <li>+$2,000-$6,000 per year in scholarships</li>
             <li>
               Four-year value:
-              <span class="font-bold text-ink">$8,000–$24,000</span>
+              <span class="font-bold text-ink">$8,000-$24,000</span>
             </li>
           </ul>
         </div>
@@ -168,7 +167,7 @@
 
       <div class="mt-6 rounded-2xl bg-white p-5 text-center shadow-sm shadow-slate-900/5">
         <p class="text-sm font-semibold uppercase tracking-[0.12em] text-slate-500">Estimated return on a $300 investment</p>
-        <p class="mt-2 text-4xl font-black text-ink">26× – 80×</p>
+        <p class="mt-2 text-4xl font-black text-ink">26x-80x</p>
       </div>
 
       <p class="mt-4 text-xs leading-5 text-slate-500">
@@ -233,7 +232,7 @@
       <h2 class="text-2xl font-extrabold">Find out what your current ACT score may be worth</h2>
       <p class="mt-3 max-w-2xl text-sm leading-6 text-slate-200">
         Most families do not know what scholarship tier they already qualify for, how close they are to the next
-        level, or what a 1–3 point increase might mean over four years.
+        level, or what a 1-3 point increase might mean over four years.
       </p>
       <div class="mt-5 flex flex-col gap-3 sm:flex-row">
         <a

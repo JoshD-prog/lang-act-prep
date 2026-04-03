@@ -1,13 +1,15 @@
 <script lang="ts">
+  import Seo from '$lib/components/Seo.svelte';
   import SchoolGrid from '$lib/components/SchoolGrid.svelte';
   import type { PageData } from './$types';
 
   let { data }: { data: PageData } = $props();
 </script>
 
-<svelte:head>
-  <title>Schools | KC Cram Course</title>
-</svelte:head>
+<Seo
+  title="School-Specific ACT Prep Pages"
+  description="Find your school-specific ACT prep landing page and continue to the same core course with tailored messaging and enrollment links."
+/>
 
 <section class="rounded-3xl border border-slate-200 bg-white p-8 shadow-lg shadow-slate-900/5">
   <p class="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">School-specific enrollment</p>

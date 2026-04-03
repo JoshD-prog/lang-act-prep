@@ -1,4 +1,5 @@
 import { env as publicEnv } from '$env/dynamic/public';
+import { createAdminSupabaseClient } from '$lib/server/supabase';
 import { getSchools } from '$lib/server/data';
 import type { RequestHandler } from './$types';
 
@@ -43,18 +44,59 @@ function buildUrl(siteUrl: string, path: string) {
   return `${siteUrl}${path === '/' ? '' : path}`;
 }
 
+function normalizeDate(value?: string | null) {
+  return value ? value.split('T')[0] : undefined;
+}
+
 export const GET: RequestHandler = async () => {
   const siteUrl = getSiteUrl();
-  const today = new Date().toISOString().split('T')[0];
   const schools = await getSchools();
+  const supabase = createAdminSupabaseClient();
+
+  let classesLastmod: string | undefined;
+  let schoolsLastmod: string | undefined;
+  const schoolLastmods = new Map<string, string>();
+
+  if (supabase) {
+    const [classResult, schoolResult] = await Promise.all([
+      supabase
+        .from('class_offerings')
+        .select('updated_at')
+        .order('updated_at', { ascending: false })
+        .limit(1)
+        .maybeSingle(),
+      supabase
+        .from('schools')
+        .select('slug, updated_at')
+        .order('updated_at', { ascending: false })
+    ]);
+
+    classesLastmod = normalizeDate(classResult.data?.updated_at);
+
+    if (schoolResult.data?.length) {
+      schoolsLastmod = normalizeDate(schoolResult.data[0].updated_at);
+
+      for (const school of schoolResult.data) {
+        const lastmod = normalizeDate(school.updated_at);
+
+        if (lastmod) {
+          schoolLastmods.set(school.slug, lastmod);
+        }
+      }
+    }
+  }
 
   const entries: SitemapEntry[] = [
-    ...STATIC_ROUTES.map((route) => ({ ...route, lastmod: today })),
+    ...STATIC_ROUTES.map((route) => ({
+      ...route,
+      lastmod:
+        route.path === '/classes' ? classesLastmod : route.path === '/schools' ? schoolsLastmod : undefined
+    })),
     ...schools.map((school) => ({
       path: `/schools/${school.slug}`,
       changefreq: 'weekly' as const,
       priority: '0.7',
-      lastmod: today
+      lastmod: schoolLastmods.get(school.slug)
     }))
   ];
 
@@ -64,8 +106,7 @@ ${entries
   .map(
     (entry) => `  <url>
     <loc>${escapeXml(buildUrl(siteUrl, entry.path))}</loc>
-    <lastmod>${entry.lastmod}</lastmod>
-    <changefreq>${entry.changefreq}</changefreq>
+${entry.lastmod ? `    <lastmod>${entry.lastmod}</lastmod>\n` : ''}    <changefreq>${entry.changefreq}</changefreq>
     <priority>${entry.priority}</priority>
   </url>`
   )

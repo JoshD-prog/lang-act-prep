@@ -1,13 +1,15 @@
 <script lang="ts">
+  import Seo from '$lib/components/Seo.svelte';
   import ScholarshipCalculator from '$lib/components/ScholarshipCalculator.svelte';
   import type { PageData } from './$types';
 
   let { data }: { data: PageData } = $props();
 </script>
 
-<svelte:head>
-  <title>Scholarship Calculator | KC Cram Course</title>
-</svelte:head>
+<Seo
+  title="Scholarship Calculator"
+  description="Estimate current scholarship offers and the next merit tiers by GPA, ACT score, residency, and school filter."
+/>
 
 <section class="rounded-3xl border border-slate-200 bg-white p-8 shadow-lg shadow-slate-900/5">
   <p class="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">Scholarship calculator</p>

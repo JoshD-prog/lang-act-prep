@@ -1,12 +1,14 @@
 <script lang="ts">
+  import Seo from '$lib/components/Seo.svelte';
   import type { ActionData } from './$types';
 
   let { form }: { form: ActionData } = $props();
 </script>
 
-<svelte:head>
-  <title>Contact | KC Cram Course</title>
-</svelte:head>
+<Seo
+  title="Contact"
+  description="Ask questions about class fit, ACT test dates, pricing, scheduling, and what to expect from the week-before-test format."
+/>
 
 <section class="rounded-3xl border border-slate-200 bg-white p-8 shadow-lg shadow-slate-900/5">
   <p class="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">Contact</p>

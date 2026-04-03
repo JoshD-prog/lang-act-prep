@@ -1,16 +1,39 @@
 <script lang="ts">
+  import Seo from '$lib/components/Seo.svelte';
   import Hero from '$lib/components/Hero.svelte';
   import PageSection from '$lib/components/PageSection.svelte';
   import { homepageSections } from '$lib/content/site';
+  import { getSiteUrl, toAbsoluteUrl } from '$lib/seo';
+
+  const siteUrl = getSiteUrl();
+  const structuredData = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: 'KC Cram Course',
+      url: siteUrl,
+      description:
+        'Focused ACT prep classes, scholarship planning tools, and enrollment support designed for the week before test day.'
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'EducationalOrganization',
+      name: 'KC Cram Course',
+      url: siteUrl,
+      logo: toAbsoluteUrl('/branding/logo.png', siteUrl),
+      image: toAbsoluteUrl('/branding/logo.jpg', siteUrl),
+      description:
+        'Focused ACT prep classes, scholarship planning tools, and enrollment support designed for the week before test day.',
+      areaServed: 'Kansas City'
+    }
+  ];
 </script>
 
-<svelte:head>
-  <title>KC Cram Course – The Week Before the Test</title>
-  <meta
-    name="description"
-    content="Four focused 90-minute sessions designed to maximize your ACT score right before test day."
-  />
-</svelte:head>
+<Seo
+  title="ACT Prep The Week Before the Test"
+  description="Four focused 90-minute ACT prep sessions designed to maximize your score right before test day."
+  structuredData={structuredData}
+/>
 
 <Hero
   eyebrow="ACT prep built for the week before your test"
@@ -35,7 +58,7 @@
   </p>
 
   <div class="mt-5 flex flex-wrap justify-center gap-4">
-    {#each ["22 → 31", "29 → 35", "30 → 34", "21 → 33", "27 → 32", "26 → 32", "24 → 34", "28 → 34", "25 → 30"] as score}
+    {#each ['22 -> 31', '29 -> 35', '30 -> 34', '21 -> 33', '27 -> 32', '26 -> 32', '24 -> 34', '28 -> 34', '25 -> 30'] as score}
       <div class="rounded-full bg-slate-100 px-5 py-3 text-base font-black text-ink shadow-sm">
         {score}
       </div>
@@ -44,18 +67,18 @@
 
   <div class="mt-6 grid gap-5 md:grid-cols-3">
     <blockquote class="rounded-2xl border border-slate-200 bg-white p-5 text-sm text-slate-700">
-      “I saw a big improvement in my score and even got above my target.”
-      <div class="mt-2 text-xs font-semibold text-slate-500">— Ariel S.</div>
+      "I saw a big improvement in my score and even got above my target."
+      <div class="mt-2 text-xs font-semibold text-slate-500">- Ariel S.</div>
     </blockquote>
 
     <blockquote class="rounded-2xl border border-slate-200 bg-white p-5 text-sm text-slate-700">
-      “The strategies and pacing systems made a huge difference on test day.”
-      <div class="mt-2 text-xs font-semibold text-slate-500">— Maddox H.</div>
+      "The strategies and pacing systems made a huge difference on test day."
+      <div class="mt-2 text-xs font-semibold text-slate-500">- Maddox H.</div>
     </blockquote>
 
     <blockquote class="rounded-2xl border border-slate-200 bg-white p-5 text-sm text-slate-700">
-      “I walked into the ACT with a clear plan for every section.”
-      <div class="mt-2 text-xs font-semibold text-slate-500">— Jack R.</div>
+      "I walked into the ACT with a clear plan for every section."
+      <div class="mt-2 text-xs font-semibold text-slate-500">- Jack R.</div>
     </blockquote>
   </div>
 </section>

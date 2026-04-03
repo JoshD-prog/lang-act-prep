@@ -2,7 +2,7 @@ export function buildParentConfirmationEmailHtml({
   studentName,
   classTitle,
   classSchedule,
-  classLocation
+  classLocation,
 }: {
   studentName: string;
   classTitle: string;
@@ -18,8 +18,8 @@ export function buildParentConfirmationEmailHtml({
 
       <p>
         <strong>Class:</strong> ${classTitle}<br/>
-        <strong>Dates & Time:</strong> ${classSchedule ?? 'We will send your schedule soon.'}<br/>
-        <strong>Location:</strong> ${classLocation ?? 'We will send the location soon.'}
+        <strong>Dates & Time:</strong> ${classSchedule ?? "We will send your schedule soon."}<br/>
+        <strong>Location:</strong> ${classLocation ?? "We will send the location soon."}
       </p>
 
       <p>Your seat is reserved. Please keep this email for your records.</p>

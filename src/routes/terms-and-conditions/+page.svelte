@@ -1,12 +1,6 @@
-<svelte:head>
-  <title>Terms & Conditions | KC Cram Course</title>
-  <meta
-    name="description"
-    content="Read the Terms & Conditions for KC Cram Course, including enrollment, refunds, attendance, media release, seat transfer, and force majeure policies."
-  />
-</svelte:head>
-
 <script lang="ts">
+  import Seo from '$lib/components/Seo.svelte';
+
   const lastUpdated = 'March 31, 2026';
 
   const sections = [
@@ -176,6 +170,11 @@
     }
   ];
 </script>
+
+<Seo
+  title="Terms and Conditions"
+  description="Read the Terms & Conditions for KC Cram Course, including enrollment, refunds, attendance, media release, seat transfer, and force majeure policies."
+/>
 
 <div class="bg-white">
   <section class="border-b border-slate-200/80 bg-slate-50/80">

@@ -26,22 +26,6 @@
   <p class="mt-4 max-w-3xl text-lg text-slate-600">
     Select your class, confirm the schedule and location, and enter your student and parent information to continue to checkout.
   </p>
-
-  <div class="mt-6 rounded-2xl border border-slate-200 bg-slate-50 p-5 text-sm text-slate-700">
-    <p>
-      Want help thinking through value before you enroll?
-      <a href="/scholarship-calculator" class="font-semibold text-sky hover:underline">
-        Try the scholarship calculator
-      </a>.
-    </p>
-    <p class="mt-2">
-      Some families also review
-      <a href="/529" class="font-semibold text-sky hover:underline">
-        529 planning options
-      </a>
-      before registration.
-    </p>
-  </div>
 </section>
 
 {#if selectedClassOffering}

@@ -29,7 +29,9 @@
   const resolvedCanonicalPath = $derived(canonicalPath ?? page.url.pathname);
   const canonicalUrl = $derived(toAbsoluteUrl(resolvedCanonicalPath, siteUrl));
   const imageUrl = $derived(toAbsoluteUrl(image, siteUrl));
-  const structuredDataJson = $derived(structuredData ? JSON.stringify(structuredData) : '');
+  const structuredDataJson = $derived(
+    structuredData ? JSON.stringify(structuredData).replace(/</g, '\\u003c') : ''
+  );
 </script>
 
 <svelte:head>
@@ -52,7 +54,7 @@
 
   {#if structuredDataJson}
     <script type="application/ld+json">
-      {structuredDataJson}
+      {@html structuredDataJson}
     </script>
   {/if}
 </svelte:head>

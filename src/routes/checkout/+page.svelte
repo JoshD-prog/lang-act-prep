@@ -1,8 +1,10 @@
 <script lang="ts">
+  import { getEarlyBirdOffer } from '$lib/content/earlyBird';
   import Seo from '$lib/components/Seo.svelte';
   import type { ActionData, PageData } from './$types';
 
   let { data, form }: { data: PageData; form: ActionData } = $props();
+  const earlyBirdOffer = $derived(getEarlyBirdOffer(data.classSlug));
 </script>
 
 <Seo
@@ -66,6 +68,20 @@
       <p class="mt-4 text-sm text-slate-600">
         Your seat will be reserved once payment is completed. Full course details will be emailed immediately after checkout.
       </p>
+
+      {#if earlyBirdOffer}
+        <div class="mt-4 rounded-xl border border-emerald-200 bg-white p-4 text-sm text-emerald-900">
+          <p class="font-semibold">
+            {earlyBirdOffer.discountedPriceLabel} with code {earlyBirdOffer.code}
+          </p>
+          <p class="mt-1 text-emerald-800">
+            {earlyBirdOffer.deadlineLabel}
+          </p>
+          <p class="mt-1 font-medium text-emerald-900">
+            {earlyBirdOffer.urgencyLabel}
+          </p>
+        </div>
+      {/if}
     </div>
 
     <label>

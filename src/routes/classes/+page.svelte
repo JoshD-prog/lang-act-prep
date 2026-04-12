@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { getEarlyBirdOffer } from '$lib/content/earlyBird';
   import Seo from '$lib/components/Seo.svelte';
   import { getSiteUrl, toAbsoluteUrl } from '$lib/seo';
   import type { PageData } from './$types';
@@ -92,6 +93,7 @@
 
 <section class="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
   {#each data.classes as classOffering}
+    {@const earlyBirdOffer = getEarlyBirdOffer(classOffering.slug)}
     <article class="rounded-3xl border border-slate-200 bg-white p-6 shadow-lg shadow-slate-900/5">
       {#if classOffering.featured}
         <p class="inline-flex rounded-full bg-teal-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-teal-800">
@@ -116,6 +118,20 @@
         <p class="mt-1 text-xs uppercase tracking-wide text-slate-500">
           {classOffering.seatsAvailable} seats remaining
         </p>
+
+        {#if earlyBirdOffer}
+          <div class="mt-3 rounded-xl border border-emerald-200 bg-emerald-50 p-3 text-sm text-emerald-900">
+            <p class="font-semibold">
+              {earlyBirdOffer.discountedPriceLabel} with code {earlyBirdOffer.code}
+            </p>
+            <p class="mt-1 text-emerald-800">
+              {earlyBirdOffer.deadlineLabel}
+            </p>
+            <p class="mt-1 font-medium text-emerald-900">
+              {earlyBirdOffer.urgencyLabel}
+            </p>
+          </div>
+        {/if}
       </div>
 
       <p class="mt-4 text-sm text-slate-600">

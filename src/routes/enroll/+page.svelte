@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { getEarlyBirdOffer } from '$lib/content/earlyBird';
   import Seo from '$lib/components/Seo.svelte';
   import type { ActionData, PageData } from './$types';
 
@@ -14,6 +15,9 @@
 
   const selectedClassOffering = $derived(
     data.classes.find((classOffering) => classOffering.slug === selectedClass)
+  );
+  const earlyBirdOffer = $derived(
+    selectedClassOffering ? getEarlyBirdOffer(selectedClassOffering.slug) : null
   );
 </script>
 
@@ -53,6 +57,20 @@
       <p class="mt-3 text-center text-xs uppercase tracking-wide text-slate-500">
         {selectedClassOffering.seatsAvailable} seats remaining
       </p>
+
+      {#if earlyBirdOffer}
+        <div class="mt-4 rounded-xl border border-emerald-200 bg-white p-4 text-left text-sm text-emerald-900">
+          <p class="font-semibold">
+            {earlyBirdOffer.discountedPriceLabel} with code {earlyBirdOffer.code}
+          </p>
+          <p class="mt-1 text-emerald-800">
+            {earlyBirdOffer.deadlineLabel}
+          </p>
+          <p class="mt-1 font-medium text-emerald-900">
+            {earlyBirdOffer.urgencyLabel}
+          </p>
+        </div>
+      {/if}
     </div>
   </div>
 {/if}

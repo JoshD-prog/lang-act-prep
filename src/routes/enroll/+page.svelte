@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { getClassScheduleDetails } from '$lib/content/classSchedule';
   import { getEarlyBirdOffer } from '$lib/content/earlyBird';
   import Seo from '$lib/components/Seo.svelte';
   import type { ActionData, PageData } from './$types';
@@ -15,6 +16,9 @@
 
   const selectedClassOffering = $derived(
     data.classes.find((classOffering) => classOffering.slug === selectedClass)
+  );
+  const selectedScheduleDetails = $derived(
+    selectedClassOffering ? getClassScheduleDetails(selectedClassOffering) : null
   );
   const earlyBirdOffer = $derived(
     selectedClassOffering ? getEarlyBirdOffer(selectedClassOffering.slug) : null
@@ -45,7 +49,17 @@
       </p>
 
       <div class="mt-3 space-y-1 text-center">
-        <p class="text-slate-600">{selectedClassOffering.schedule}</p>
+        {#if selectedScheduleDetails?.dateLabel}
+          <p class="text-slate-600">{selectedScheduleDetails.dateLabel}</p>
+        {/if}
+
+        {#if selectedScheduleDetails?.hasTime}
+          <p class="font-semibold text-sky-800">Time: {selectedScheduleDetails.timeLabel}</p>
+        {/if}
+
+        {#if selectedScheduleDetails?.cadenceLabel}
+          <p class="text-slate-600">{selectedScheduleDetails.cadenceLabel}</p>
+        {/if}
 
         {#if selectedClassOffering.location}
           <p class="text-slate-600">{selectedClassOffering.location}</p>
@@ -107,8 +121,9 @@
     >
       <option value="" disabled>Select class</option>
       {#each data.classes as classOffering}
+        {@const scheduleDetails = getClassScheduleDetails(classOffering)}
         <option value={classOffering.slug}>
-          {classOffering.title} — {classOffering.schedule}
+          {classOffering.title} — {scheduleDetails.optionLabel}
         </option>
       {/each}
     </select>

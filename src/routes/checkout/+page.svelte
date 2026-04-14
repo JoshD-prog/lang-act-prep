@@ -1,10 +1,17 @@
 <script lang="ts">
+  import { getClassScheduleDetails } from '$lib/content/classSchedule';
   import { getEarlyBirdOffer } from '$lib/content/earlyBird';
   import Seo from '$lib/components/Seo.svelte';
   import type { ActionData, PageData } from './$types';
 
   let { data, form }: { data: PageData; form: ActionData } = $props();
   const earlyBirdOffer = $derived(getEarlyBirdOffer(data.classSlug));
+  const scheduleDetails = $derived(
+    getClassScheduleDetails({
+      slug: data.classSlug,
+      schedule: data.classSchedule
+    })
+  );
 </script>
 
 <Seo
@@ -43,10 +50,24 @@
       </p>
 
       <div class="mt-4 space-y-1 text-slate-700">
-        {#if data.classSchedule}
+        {#if scheduleDetails.dateLabel}
           <p>
-            <span class="font-semibold">Dates & Time:</span>
-            {data.classSchedule}
+            <span class="font-semibold">Dates:</span>
+            {scheduleDetails.dateLabel}
+          </p>
+        {/if}
+
+        {#if scheduleDetails.hasTime}
+          <p>
+            <span class="font-semibold">Time:</span>
+            {scheduleDetails.timeLabel}
+          </p>
+        {/if}
+
+        {#if scheduleDetails.cadenceLabel}
+          <p>
+            <span class="font-semibold">Schedule:</span>
+            {scheduleDetails.cadenceLabel}
           </p>
         {/if}
 

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { getClassScheduleDetails } from '$lib/content/classSchedule';
   import { getEarlyBirdOffer } from '$lib/content/earlyBird';
   import Seo from '$lib/components/Seo.svelte';
   import { getSiteUrl, toAbsoluteUrl } from '$lib/seo';
@@ -94,6 +95,7 @@
 <section class="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
   {#each data.classes as classOffering}
     {@const earlyBirdOffer = getEarlyBirdOffer(classOffering.slug)}
+    {@const scheduleDetails = getClassScheduleDetails(classOffering)}
     <article class="rounded-3xl border border-slate-200 bg-white p-6 shadow-lg shadow-slate-900/5">
       {#if classOffering.featured}
         <p class="inline-flex rounded-full bg-teal-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-teal-800">
@@ -103,7 +105,15 @@
 
       <h2 class="mt-3 text-2xl font-black text-ink">{classOffering.title}</h2>
 
-      <p class="mt-2 text-sm font-semibold text-slate-700">{classOffering.schedule}</p>
+      <div class="mt-3 space-y-1 text-sm">
+        <p class="font-semibold text-slate-700">{scheduleDetails.dateLabel}</p>
+        {#if scheduleDetails.hasTime}
+          <p class="font-semibold text-sky-800">Evening sessions: {scheduleDetails.timeLabel}</p>
+        {/if}
+        {#if scheduleDetails.cadenceLabel}
+          <p class="text-slate-600">{scheduleDetails.cadenceLabel}</p>
+        {/if}
+      </div>
 
       {#if classOffering.location}
         <p class="mt-1 text-sm text-slate-600">{classOffering.location}</p>

@@ -1,17 +1,18 @@
 // src/routes/enroll/+page.server.ts
 
 import { createAdminSupabaseClient } from '$lib/server/supabase';
+import { appendMarketingParams, getMarketingParams } from '$lib/analytics';
 import { getClassOfferings } from '$lib/server/data';
 import { fail, redirect } from '@sveltejs/kit';
 import type { Actions } from './$types';
 
 export async function load({ url }) {
   const selectedClass = url.searchParams.get('class') ?? '';
-  
-return {
-  classes: await getClassOfferings(),
-  selectedClass
-};
+  return {
+    classes: await getClassOfferings(),
+    selectedClass,
+    marketingParams: getMarketingParams(url)
+  };
 }
 
 export const actions: Actions = {
@@ -22,6 +23,7 @@ export const actions: Actions = {
     const parentEmail = String(form.get('parentEmail') ?? '').trim();
     const classSlug = String(form.get('classSlug') ?? '').trim();
     const notes = String(form.get('notes') ?? '').trim();
+    const marketingParams = getMarketingParams(form);
 
     if (!studentName || !parentEmail || !classSlug) {
       return fail(400, {
@@ -30,7 +32,7 @@ export const actions: Actions = {
         parentEmail,
         classSlug,
         notes
-});
+      });
     }
 
     let leadId: string | null = null;
@@ -72,6 +74,6 @@ export const actions: Actions = {
       params.set('lead', leadId);
     }
 
-    throw redirect(303, `/checkout?${params.toString()}`);
+    throw redirect(303, appendMarketingParams(`/checkout?${params.toString()}`, marketingParams));
   }
 };

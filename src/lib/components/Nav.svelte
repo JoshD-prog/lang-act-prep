@@ -1,5 +1,6 @@
 <script lang="ts">
   import { page } from '$app/stores';
+  import { preserveMarketingParams, trackEnrollCta } from '$lib/analytics';
   import { navItems } from '$lib/content/site';
 
   let mobileMenuOpen = false;
@@ -78,6 +79,8 @@
         {/each}
         <a
           href="/enroll"
+          use:preserveMarketingParams
+          use:trackEnrollCta={{ cta_location: 'mobile_nav', cta_label: 'Enroll' }}
           class="mt-2 inline-flex w-full items-center justify-center rounded-full bg-sky px-4 py-2 text-sm font-bold text-white shadow-glow transition hover:bg-teal-500"
           on:click={() => {
             mobileMenuOpen = false;

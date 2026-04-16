@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { preserveMarketingParams } from '$lib/analytics';
   import { getClassScheduleDetails } from '$lib/content/classSchedule';
   import { getEarlyBirdOffer } from '$lib/content/earlyBird';
   import Seo from '$lib/components/Seo.svelte';
@@ -89,7 +90,15 @@
   </div>
 {/if}
 
-<form method="POST" class="mt-8 grid gap-4 rounded-3xl border border-slate-200 bg-white p-6 md:grid-cols-2">
+<form
+  method="POST"
+  use:preserveMarketingParams={data.marketingParams}
+  class="mt-8 grid gap-4 rounded-3xl border border-slate-200 bg-white p-6 md:grid-cols-2"
+>
+  {#each Object.entries(data.marketingParams) as [key, value]}
+    <input type="hidden" name={key} value={value} />
+  {/each}
+
   <label class="block">
     <span class="text-sm font-semibold text-slate-700">Student name</span>
     <input

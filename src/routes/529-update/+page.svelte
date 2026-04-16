@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { preserveMarketingParams, trackEnrollCta } from '$lib/analytics';
   import Seo from '$lib/components/Seo.svelte';
 
   const scholarshipExamples = [
@@ -83,6 +84,8 @@
     </a>
     <a
       href="/enroll"
+      use:preserveMarketingParams
+      use:trackEnrollCta={{ cta_location: '529_intro', cta_label: 'Explore the ACT cram course' }}
       class="inline-flex items-center justify-center rounded-full border border-slate-300 px-6 py-3 text-sm font-bold text-ink transition hover:bg-slate-50"
     >
       Explore the ACT cram course
@@ -243,6 +246,8 @@
         </a>
         <a
           href="/enroll"
+          use:preserveMarketingParams
+          use:trackEnrollCta={{ cta_location: '529_footer', cta_label: 'View course dates' }}
           class="inline-flex items-center justify-center rounded-full border border-white/30 px-6 py-3 text-sm font-bold text-white transition hover:bg-white/10"
         >
           View course dates

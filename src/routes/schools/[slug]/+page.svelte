@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { preserveMarketingParams, trackEnrollCta } from '$lib/analytics';
   import { earlyBirdOffers } from '$lib/content/earlyBird';
   import Seo from '$lib/components/Seo.svelte';
   import { getSiteUrl, toAbsoluteUrl } from '$lib/seo';
@@ -69,7 +70,14 @@
     <h1 class="mt-2 text-4xl font-black text-ink">{data.school.name} enrollment page</h1>
     <p class="mt-4 text-lg text-slate-600">{data.school.shortPitch}</p>
     <div class="mt-6 flex flex-wrap gap-3">
-      <a href={`/enroll?school=${data.school.slug}`} class="rounded-full bg-sky px-6 py-3 text-sm font-bold text-white">Start enrollment</a>
+      <a
+        href={`/enroll?school=${data.school.slug}`}
+        use:preserveMarketingParams
+        use:trackEnrollCta={{ cta_location: 'school_page', cta_label: 'Start enrollment', school_slug: data.school.slug }}
+        class="rounded-full bg-sky px-6 py-3 text-sm font-bold text-white"
+      >
+        Start enrollment
+      </a>
       <a href="/classes" class="rounded-full border border-slate-300 px-6 py-3 text-sm font-bold text-slate-700">View class options</a>
     </div>
   </div>

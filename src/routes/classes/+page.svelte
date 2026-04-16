@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { preserveMarketingParams, trackEnrollCta } from '$lib/analytics';
   import { getClassScheduleDetails } from '$lib/content/classSchedule';
   import { getEarlyBirdOffer } from '$lib/content/earlyBird';
   import Seo from '$lib/components/Seo.svelte';
@@ -150,6 +151,8 @@
 
       <a
         href={`/enroll?class=${classOffering.slug}`}
+        use:preserveMarketingParams
+        use:trackEnrollCta={{ cta_location: 'classes_card', cta_label: 'Reserve your seat', class_slug: classOffering.slug }}
         class="mt-5 inline-flex rounded-full bg-ink px-5 py-2 text-sm font-bold text-white transition hover:bg-slate-700"
       >
         Reserve your seat

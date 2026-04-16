@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
+  import { preserveMarketingParams, trackEvent } from '$lib/analytics';
   import { getClassScheduleDetails } from '$lib/content/classSchedule';
   import { getEarlyBirdOffer } from '$lib/content/earlyBird';
   import Seo from '$lib/components/Seo.svelte';
@@ -12,6 +14,13 @@
       schedule: data.classSchedule
     })
   );
+
+  onMount(() => {
+    trackEvent('checkout_visit', {
+      class_slug: data.classSlug,
+      lead_id: data.leadId || undefined
+    });
+  });
 </script>
 
 <Seo
@@ -35,9 +44,12 @@
     Review your course details and continue to secure checkout through Stripe.
   </p>
 
-  <form method="POST" class="mt-6 grid gap-5">
+  <form method="POST" use:preserveMarketingParams={data.marketingParams} class="mt-6 grid gap-5">
     <input type="hidden" name="classSlug" value={data.classSlug} />
     <input type="hidden" name="leadId" value={data.leadId} />
+    {#each Object.entries(data.marketingParams) as [key, value]}
+      <input type="hidden" name={key} value={value} />
+    {/each}
 
     <!-- UPDATED SUMMARY BLOCK -->
     <div class="rounded-2xl bg-slate-50 p-6 text-sm text-slate-700">

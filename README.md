@@ -21,6 +21,7 @@ source ~/.zshrc
    ```
 2. Configure environment variables in `.env`:
    - `PUBLIC_SITE_URL`
+   - `PUBLIC_GA_MEASUREMENT_ID`
    - `PUBLIC_SUPABASE_URL`
    - `PUBLIC_SUPABASE_ANON_KEY`
    - `SUPABASE_SERVICE_ROLE_KEY`
@@ -76,6 +77,10 @@ Notes:
 ## Stripe Flow
 - `POST /api/checkout` creates a Stripe checkout session.
 - `/checkout` server action and page provide fallback UI if Stripe keys are missing.
+
+## Analytics
+- GA4 is implemented with a direct `gtag.js` integration.
+- Setup and event details are documented in [docs/analytics.md](./docs/analytics.md).
 
 ## CMS Readiness
 The page structures use reusable section patterns and route-level content descriptors from `src/lib/content/site.ts` and shared components.

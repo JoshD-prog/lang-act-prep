@@ -1,3 +1,4 @@
+import { appendMarketingParams, type MarketingParams } from '$lib/analytics';
 import { env as publicEnv } from '$env/dynamic/public';
 import { env as privateEnv } from '$env/dynamic/private';
 import { createStripeClient, getStripeCheckoutConfig } from '$lib/server/stripe';
@@ -7,12 +8,14 @@ interface CheckoutInput {
   classSlug: string;
   email: string;
   leadId?: string;
+  marketingParams?: MarketingParams;
 }
 
 export async function createCheckoutSession({
   classSlug,
   email,
-  leadId
+  leadId,
+  marketingParams = {}
 }: CheckoutInput) {
   const stripe = createStripeClient();
   if (!stripe) {
@@ -29,6 +32,12 @@ export async function createCheckoutSession({
 
   const baseUrl = publicEnv.PUBLIC_SITE_URL || privateEnv.SITE_URL || 'http://localhost:5173';
 
+  const successUrl = appendMarketingParams(
+    `${baseUrl}/success?session_id={CHECKOUT_SESSION_ID}`,
+    marketingParams
+  );
+  const cancelUrl = appendMarketingParams(`${baseUrl}/cancel`, marketingParams);
+
   const session = await stripe.checkout.sessions.create({
     mode: 'payment',
     customer_email: email,
@@ -38,8 +47,8 @@ export async function createCheckoutSession({
       class_slug: classSlug,
       lead_id: leadId ?? ''
     },
-    success_url: `${baseUrl}/success?session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${baseUrl}/cancel`
+    success_url: successUrl,
+    cancel_url: cancelUrl
   });
 
   return session.url ?? null;

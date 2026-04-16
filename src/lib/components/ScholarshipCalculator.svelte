@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { preserveMarketingParams, trackEnrollCta } from '$lib/analytics';
   import type { ScholarshipNextStep, ScholarshipProjectionResult } from '$lib/types';
 
   export let projections: ScholarshipProjectionResult[] = [];
@@ -301,6 +302,8 @@
                 </p>
                 <a
                   href="/enroll"
+                  use:preserveMarketingParams
+                  use:trackEnrollCta={{ cta_location: 'scholarship_calculator_strong', cta_label: 'Enroll now' }}
                   class="mt-5 inline-flex rounded-full bg-white px-5 py-3 text-sm font-bold text-slate-900 transition hover:bg-slate-100"
                 >
                   Enroll now
@@ -324,6 +327,8 @@
                 </p>
                 <a
                   href="/enroll"
+                  use:preserveMarketingParams
+                  use:trackEnrollCta={{ cta_location: 'scholarship_calculator_soft', cta_label: 'See class options' }}
                   class="mt-5 inline-flex rounded-full border border-amber-300 px-5 py-3 text-sm font-bold text-ink transition hover:bg-amber-100"
                 >
                   See class options

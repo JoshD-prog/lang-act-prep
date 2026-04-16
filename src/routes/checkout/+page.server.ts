@@ -1,3 +1,4 @@
+import { appendMarketingParams, getMarketingParams } from '$lib/analytics';
 import { createCheckoutSession } from '$lib/server/checkout';
 import { env } from '$env/dynamic/private';
 import { fail, redirect } from '@sveltejs/kit';
@@ -21,7 +22,8 @@ export async function load({ url }) {
     classFormat: offering?.format ?? '',
     email,
     leadId,
-    stripeReady
+    stripeReady,
+    marketingParams: getMarketingParams(url)
   };
 }
 
@@ -32,6 +34,7 @@ export const actions: Actions = {
     const classSlug = String(form.get('classSlug') ?? '').trim();
     const email = String(form.get('email') ?? '').trim();
     const leadId = String(form.get('leadId') ?? '').trim();
+    const marketingParams = getMarketingParams(form);
 
     if (!classSlug || !email) {
       return fail(400, {
@@ -42,8 +45,9 @@ export const actions: Actions = {
     const sessionUrl = await createCheckoutSession({
       classSlug,
       email,
-      leadId
-        });
+      leadId,
+      marketingParams
+    });
 
     if (!sessionUrl) {
       return fail(500, {
@@ -52,6 +56,6 @@ export const actions: Actions = {
       });
     }
 
-    throw redirect(303, sessionUrl);
+    throw redirect(303, appendMarketingParams(sessionUrl, marketingParams));
   }
 };

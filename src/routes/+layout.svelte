@@ -1,13 +1,14 @@
 <script lang="ts">
-  import { injectAnalytics } from '@vercel/analytics/sveltekit';
   import { injectSpeedInsights } from '@vercel/speed-insights/sveltekit';
   import '../app.css';
+  import Analytics from '$lib/components/Analytics.svelte';
   import Footer from '$lib/components/Footer.svelte';
   import Nav from '$lib/components/Nav.svelte';
 
-  injectAnalytics();
   injectSpeedInsights();
 </script>
+
+<Analytics />
 
 <div class="flex min-h-screen flex-col">
   <Nav />

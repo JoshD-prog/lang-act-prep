@@ -1,8 +1,25 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
+  import { markEventOnce, trackEvent } from '$lib/analytics';
   import Seo from '$lib/components/Seo.svelte';
   import type { PageData } from './$types';
 
   let { data }: { data: PageData } = $props();
+
+  onMount(() => {
+    if (!data.paymentReceived || !data.sessionId) {
+      return;
+    }
+
+    if (!markEventOnce(`purchase_complete:${data.sessionId}`)) {
+      return;
+    }
+
+    trackEvent('purchase_complete', {
+      session_id: data.sessionId,
+      class_title: data.classTitle || undefined
+    });
+  });
 </script>
 
 <Seo

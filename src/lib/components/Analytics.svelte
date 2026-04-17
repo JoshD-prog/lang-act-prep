@@ -7,6 +7,7 @@
   onMount(() => {
     initAnalytics();
     rememberMarketingParams(window.location);
+    trackPageView(window.location);
   });
 
   if (browser) {

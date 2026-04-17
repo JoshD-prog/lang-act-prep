@@ -49,8 +49,8 @@ function ensureGtag() {
   window.dataLayer = window.dataLayer || [];
 
   if (!window.gtag) {
-    window.gtag = (...args: unknown[]) => {
-      window.dataLayer.push(args);
+    window.gtag = function gtag(..._args: unknown[]) {
+      window.dataLayer.push(arguments);
     };
   }
 

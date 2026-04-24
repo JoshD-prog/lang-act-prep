@@ -26,7 +26,7 @@ declare global {
 let initialized = false;
 
 export function analyticsEnabled() {
-  return browser && Boolean(publicEnv.PUBLIC_GA_MEASUREMENT_ID);
+  return browser && getGoogleTagIds().length > 0;
 }
 
 function toUrl(input: URL | Location | string) {
@@ -39,6 +39,22 @@ function toUrl(input: URL | Location | string) {
   }
 
   return new URL(input.href);
+}
+
+function getGoogleTagIds() {
+  const ids = [publicEnv.PUBLIC_GA_MEASUREMENT_ID, publicEnv.PUBLIC_GOOGLE_ADS_ID].filter(
+    (value): value is string => Boolean(value?.trim())
+  );
+
+  return [...new Set(ids)];
+}
+
+function getPrimaryGoogleTagId() {
+  return publicEnv.PUBLIC_GA_MEASUREMENT_ID || publicEnv.PUBLIC_GOOGLE_ADS_ID || '';
+}
+
+function cleanEventParams(params: AnalyticsEventParams) {
+  return Object.fromEntries(Object.entries(params).filter(([, value]) => value !== undefined));
 }
 
 function ensureGtag() {
@@ -66,7 +82,7 @@ export function initAnalytics() {
     const script = document.createElement('script');
     script.id = GTAG_SCRIPT_ID;
     script.async = true;
-    script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(publicEnv.PUBLIC_GA_MEASUREMENT_ID ?? '')}`;
+    script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(getPrimaryGoogleTagId())}`;
     document.head.appendChild(script);
   }
 
@@ -76,9 +92,16 @@ export function initAnalytics() {
 
   initialized = true;
   window.gtag?.('js', new Date());
-  window.gtag?.('config', publicEnv.PUBLIC_GA_MEASUREMENT_ID, {
-    send_page_view: false
-  });
+
+  if (publicEnv.PUBLIC_GA_MEASUREMENT_ID) {
+    window.gtag?.('config', publicEnv.PUBLIC_GA_MEASUREMENT_ID, {
+      send_page_view: false
+    });
+  }
+
+  if (publicEnv.PUBLIC_GOOGLE_ADS_ID) {
+    window.gtag?.('config', publicEnv.PUBLIC_GOOGLE_ADS_ID);
+  }
 
   return true;
 }
@@ -103,7 +126,32 @@ export function trackEvent(name: string, params: AnalyticsEventParams = {}) {
     return;
   }
 
-  window.gtag?.('event', name, params);
+  window.gtag?.('event', name, cleanEventParams(params));
+}
+
+export function trackGoogleAdsConversion(params: {
+  value?: number;
+  currency?: string;
+  transactionId?: string;
+}) {
+  if (!initAnalytics()) {
+    return;
+  }
+
+  if (!publicEnv.PUBLIC_GOOGLE_ADS_ID || !publicEnv.PUBLIC_GOOGLE_ADS_CONVERSION_LABEL) {
+    return;
+  }
+
+  window.gtag?.(
+    'event',
+    'conversion',
+    cleanEventParams({
+      send_to: `${publicEnv.PUBLIC_GOOGLE_ADS_ID}/${publicEnv.PUBLIC_GOOGLE_ADS_CONVERSION_LABEL}`,
+      value: params.value,
+      currency: params.currency,
+      transaction_id: params.transactionId
+    })
+  );
 }
 
 export function getMarketingParams(source: URL | URLSearchParams | FormData) {

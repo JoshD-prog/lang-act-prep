@@ -7,6 +7,8 @@ export async function load({ url }) {
 
   if (!sessionId) {
     return {
+      currency: '',
+      paymentAmount: undefined,
       sessionFound: false,
       paymentReceived: false,
       webhookRecorded: false,
@@ -19,6 +21,8 @@ export async function load({ url }) {
 
   if (!stripe) {
     return {
+      currency: '',
+      paymentAmount: undefined,
       sessionFound: false,
       paymentReceived: false,
       webhookRecorded: false,
@@ -64,6 +68,8 @@ export async function load({ url }) {
     }
 
     return {
+      currency: session.currency?.toUpperCase() ?? '',
+      paymentAmount: typeof session.amount_total === 'number' ? session.amount_total / 100 : undefined,
       sessionFound: true,
       sessionId,
       paymentReceived: session.payment_status === 'paid',
@@ -75,6 +81,8 @@ export async function load({ url }) {
     console.error('Stripe session retrieval failed:', error);
 
     return {
+      currency: '',
+      paymentAmount: undefined,
       sessionFound: false,
       sessionId,
       paymentReceived: false,

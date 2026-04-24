@@ -115,7 +115,7 @@ export const POST: RequestHandler = async ({ request }) => {
 
             const { data: fullLead, error: fullLeadError } = await supabase
               .from('enrollment_leads')
-              .select('student_name, parent_email')
+              .select('student_name, parent_email, heard_about_us')
               .eq('id', leadId)
               .single();
 
@@ -128,6 +128,7 @@ export const POST: RequestHandler = async ({ request }) => {
 
             const studentName = fullLead?.student_name ?? 'Student';
             const parentEmail = fullLead?.parent_email ?? '';
+            const heardAboutUs = fullLead?.heard_about_us ?? null;
             const classTitle = offering?.title ?? classSlug;
             const classSchedule = offering?.schedule ?? '';
             const classLocation = offering?.location ?? '';
@@ -149,6 +150,7 @@ export const POST: RequestHandler = async ({ request }) => {
                 await sendAdminEnrollmentNotification({
                   studentName,
                   parentEmail,
+                  heardAboutUs,
                   classTitle,
                   classSchedule,
                   leadId

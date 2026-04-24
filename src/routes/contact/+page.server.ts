@@ -12,6 +12,7 @@ export const actions: Actions = {
     const phone = String(form.get('phone') ?? '').trim();
     const studentGrade = String(form.get('studentGrade') ?? '').trim();
     const studentSchool = String(form.get('studentSchool') ?? '').trim();
+    const heardAboutUs = String(form.get('heardAboutUs') ?? '').trim();
     const interest = String(form.get('interest') ?? '').trim();
     const message = String(form.get('message') ?? '').trim();
 
@@ -21,6 +22,7 @@ export const actions: Actions = {
       phone,
       studentGrade,
       studentSchool,
+      heardAboutUs,
       interest,
       message
     };
@@ -42,6 +44,7 @@ export const actions: Actions = {
         phone: phone || null,
         student_grade: studentGrade || null,
         student_school: studentSchool || null,
+        heard_about_us: heardAboutUs || null,
         interest: interest || null,
         message
       });
@@ -56,6 +59,7 @@ export const actions: Actions = {
         phone: phone || null,
         studentGrade: studentGrade || null,
         studentSchool: studentSchool || null,
+        heardAboutUs: heardAboutUs || null,
         message
       });
     } catch {
@@ -76,6 +80,7 @@ export const actions: Actions = {
         phone: '',
         studentGrade: '',
         studentSchool: '',
+        heardAboutUs: '',
         interest: '',
         message: ''
       }

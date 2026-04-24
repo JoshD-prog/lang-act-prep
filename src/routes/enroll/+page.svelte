@@ -2,6 +2,7 @@
   import { preserveMarketingParams } from '$lib/analytics';
   import { getClassScheduleDetails } from '$lib/content/classSchedule';
   import { getEarlyBirdOffer } from '$lib/content/earlyBird';
+  import { HEAR_ABOUT_US_OPTIONS } from '$lib/content/hearAboutUsOptions';
   import Seo from '$lib/components/Seo.svelte';
   import type { ActionData, PageData } from './$types';
 
@@ -118,6 +119,16 @@
       class="mt-1 w-full rounded-xl border-slate-300"
       required
     />
+  </label>
+
+  <label class="block">
+    <span class="text-sm font-semibold text-slate-700">How did you hear about us? (optional)</span>
+    <select name="heardAboutUs" class="mt-1 w-full rounded-xl border-slate-300">
+      <option value="">Select one</option>
+      {#each HEAR_ABOUT_US_OPTIONS as option}
+        <option value={option} selected={form?.heardAboutUs === option}>{option}</option>
+      {/each}
+    </select>
   </label>
 
   <label class="block">

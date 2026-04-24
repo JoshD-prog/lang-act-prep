@@ -34,12 +34,14 @@ export async function sendParentConfirmationEmail({
 export async function sendAdminEnrollmentNotification({
   studentName,
   parentEmail,
+  heardAboutUs,
   classTitle,
   classSchedule,
   leadId,
 }: {
   studentName: string;
   parentEmail: string;
+  heardAboutUs?: string | null;
   classTitle: string;
   classSchedule?: string;
   leadId: string;
@@ -54,6 +56,7 @@ export async function sendAdminEnrollmentNotification({
       <p>
         <strong>Student:</strong> ${studentName}<br/>
         <strong>Parent Email:</strong> ${parentEmail}<br/>
+        <strong>How They Heard About Us:</strong> ${heardAboutUs || "Not provided"}<br/>
         <strong>Class:</strong> ${classTitle}<br/>
         <strong>Schedule:</strong> ${classSchedule ?? ""}
       </p>
@@ -69,6 +72,7 @@ export async function sendAdminContactInquiryNotification({
   phone,
   studentGrade,
   studentSchool,
+  heardAboutUs,
   message,
 }: {
   fullName: string;
@@ -76,6 +80,7 @@ export async function sendAdminContactInquiryNotification({
   phone?: string | null;
   studentGrade?: string | null;
   studentSchool?: string | null;
+  heardAboutUs?: string | null;
   message: string;
 }) {
   await resend.emails.send({
@@ -91,7 +96,8 @@ export async function sendAdminContactInquiryNotification({
         <strong>Email:</strong> ${email}<br/>
         <strong>Phone:</strong> ${phone || "Not provided"}<br/>
         <strong>Student Grade:</strong> ${studentGrade || "Not provided"}<br/>
-        <strong>Student School:</strong> ${studentSchool || "Not provided"}
+        <strong>Student School:</strong> ${studentSchool || "Not provided"}<br/>
+        <strong>How They Heard About Us:</strong> ${heardAboutUs || "Not provided"}
       </p>
 
       <p><strong>Message:</strong></p>

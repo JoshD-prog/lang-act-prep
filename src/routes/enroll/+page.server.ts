@@ -21,6 +21,7 @@ export const actions: Actions = {
 
     const studentName = String(form.get('studentName') ?? '').trim();
     const parentEmail = String(form.get('parentEmail') ?? '').trim();
+    const heardAboutUs = String(form.get('heardAboutUs') ?? '').trim();
     const classSlug = String(form.get('classSlug') ?? '').trim();
     const notes = String(form.get('notes') ?? '').trim();
     const marketingParams = getMarketingParams(form);
@@ -30,6 +31,7 @@ export const actions: Actions = {
         message: 'Student name, parent email, and class selection are required.',
         studentName,
         parentEmail,
+        heardAboutUs,
         classSlug,
         notes
       });
@@ -42,25 +44,27 @@ export const actions: Actions = {
       const { data: insertedLead, error: insertError } = await supabase
         .from('enrollment_leads')
         .insert({
-            student_name: studentName,
-            parent_email: parentEmail,
-            class_slug: classSlug,
-            notes: notes || null
-          })
+          student_name: studentName,
+          parent_email: parentEmail,
+          heard_about_us: heardAboutUs || null,
+          class_slug: classSlug,
+          notes: notes || null
+        })
         .select('id')
         .single();
 
       if (insertError) {
-          console.error('Enrollment lead insert failed:', insertError);
+        console.error('Enrollment lead insert failed:', insertError);
 
         return fail(500, {
-           message: 'We could not save your enrollment lead. Please try again.',
-           studentName,
-           parentEmail,
-           classSlug,
-           notes
-         });
-        }
+          message: 'We could not save your enrollment lead. Please try again.',
+          studentName,
+          parentEmail,
+          heardAboutUs,
+          classSlug,
+          notes
+        });
+      }
 
       leadId = insertedLead?.id ?? null;
     }

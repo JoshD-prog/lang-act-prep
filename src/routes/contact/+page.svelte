@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { HEAR_ABOUT_US_OPTIONS } from '$lib/content/hearAboutUsOptions';
   import Seo from '$lib/components/Seo.svelte';
   import type { ActionData } from './$types';
 
@@ -44,6 +45,16 @@
   <label class="block">
     <span class="text-sm font-semibold text-slate-700">Student school (optional)</span>
     <input name="studentSchool" class="mt-1 w-full rounded-xl border-slate-300" value={form?.values?.studentSchool ?? ''} />
+  </label>
+
+  <label class="block">
+    <span class="text-sm font-semibold text-slate-700">How did you hear about us? (optional)</span>
+    <select name="heardAboutUs" class="mt-1 w-full rounded-xl border-slate-300">
+      <option value="">Select one</option>
+      {#each HEAR_ABOUT_US_OPTIONS as option}
+        <option value={option} selected={form?.values?.heardAboutUs === option}>{option}</option>
+      {/each}
+    </select>
   </label>
 
   <p class="md:col-span-2 text-sm text-slate-500">

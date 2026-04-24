@@ -49,6 +49,10 @@ export const actions: Actions = {
         message
       });
 
+      if (error) {
+        console.error('Contact inquiry insert failed:', error);
+      }
+
       inquirySaved = !error;
     }
 

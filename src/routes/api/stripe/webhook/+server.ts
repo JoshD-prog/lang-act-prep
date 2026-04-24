@@ -47,6 +47,7 @@ export const POST: RequestHandler = async ({ request }) => {
 
     const leadId = session.metadata?.lead_id ?? '';
     const classSlug = session.metadata?.class_slug ?? '';
+    const heardAboutUsFromMetadata = session.metadata?.heard_about_us?.trim() ?? '';
 
     if (leadId && classSlug) {
       const supabase = createAdminSupabaseClient();
@@ -73,7 +74,12 @@ export const POST: RequestHandler = async ({ request }) => {
                 typeof session.payment_intent === 'string'
                   ? session.payment_intent
                   : null,
-              paid_at: new Date().toISOString()
+              paid_at: new Date().toISOString(),
+              ...(heardAboutUsFromMetadata
+                ? {
+                    heard_about_us: heardAboutUsFromMetadata
+                  }
+                : {})
             })
             .eq('id', leadId);
 

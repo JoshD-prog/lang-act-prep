@@ -47,6 +47,7 @@
   <form method="POST" use:preserveMarketingParams={data.marketingParams} class="mt-6 grid gap-5">
     <input type="hidden" name="classSlug" value={data.classSlug} />
     <input type="hidden" name="leadId" value={data.leadId} />
+    <input type="hidden" name="heardAboutUs" value={data.heardAboutUs} />
     {#each Object.entries(data.marketingParams) as [key, value]}
       <input type="hidden" name={key} value={value} />
     {/each}

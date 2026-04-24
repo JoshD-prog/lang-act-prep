@@ -37,6 +37,6 @@
   </div>
 
   <div class="border-t border-slate-200 py-4 text-center text-xs text-slate-500">
-    © {new Date().getFullYear()} KC Cram Course. All rights reserved.
+    &copy; {new Date().getFullYear()} Kansas City Cram Course LLC. All rights reserved.
   </div>
 </footer>

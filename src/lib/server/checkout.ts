@@ -8,6 +8,7 @@ interface CheckoutInput {
   classSlug: string;
   email: string;
   leadId?: string;
+  heardAboutUs?: string;
   marketingParams?: MarketingParams;
 }
 
@@ -15,6 +16,7 @@ export async function createCheckoutSession({
   classSlug,
   email,
   leadId,
+  heardAboutUs,
   marketingParams = {}
 }: CheckoutInput) {
   const stripe = createStripeClient();
@@ -45,7 +47,8 @@ export async function createCheckoutSession({
     allow_promotion_codes: true,
     metadata: {
       class_slug: classSlug,
-      lead_id: leadId ?? ''
+      lead_id: leadId ?? '',
+      heard_about_us: heardAboutUs ?? ''
     },
     success_url: successUrl,
     cancel_url: cancelUrl

@@ -1,14 +1,16 @@
 import { appendMarketingParams, getMarketingParams } from '$lib/analytics';
 import { createCheckoutSession } from '$lib/server/checkout';
+import { createAdminSupabaseClient } from '$lib/server/supabase';
 import { env } from '$env/dynamic/private';
 import { fail, redirect } from '@sveltejs/kit';
 import { getClassOfferings } from '$lib/server/data';
 import type { Actions } from './$types';
 
-export async function load({ url }) {
+export async function load({ url, cookies }) {
   const classSlug = url.searchParams.get('class') ?? '';
   const email = url.searchParams.get('email') ?? '';
   const leadId = url.searchParams.get('lead') ?? '';
+  const heardAboutUs = cookies.get('enrollment_heard_about_us') ?? '';
 
   const offerings = await getClassOfferings();
   const offering = offerings.find((c) => c.slug === classSlug);
@@ -22,18 +24,22 @@ export async function load({ url }) {
     classFormat: offering?.format ?? '',
     email,
     leadId,
+    heardAboutUs,
     stripeReady,
     marketingParams: getMarketingParams(url)
   };
 }
 
 export const actions: Actions = {
-  default: async ({ request }) => {
+  default: async ({ request, cookies }) => {
     const form = await request.formData();
 
     const classSlug = String(form.get('classSlug') ?? '').trim();
     const email = String(form.get('email') ?? '').trim();
     const leadId = String(form.get('leadId') ?? '').trim();
+    const heardAboutUs = String(
+      form.get('heardAboutUs') ?? cookies.get('enrollment_heard_about_us') ?? ''
+    ).trim();
     const marketingParams = getMarketingParams(form);
 
     if (!classSlug || !email) {
@@ -42,10 +48,28 @@ export const actions: Actions = {
       });
     }
 
+    if (leadId && heardAboutUs) {
+      const supabase = createAdminSupabaseClient();
+
+      if (supabase) {
+        const { error: updateError } = await supabase
+          .from('enrollment_leads')
+          .update({
+            heard_about_us: heardAboutUs
+          })
+          .eq('id', leadId);
+
+        if (updateError) {
+          console.error('Enrollment lead heard_about_us update failed:', updateError);
+        }
+      }
+    }
+
     const sessionUrl = await createCheckoutSession({
       classSlug,
       email,
       leadId,
+      heardAboutUs,
       marketingParams
     });
 
@@ -55,6 +79,10 @@ export const actions: Actions = {
           'Stripe is not configured yet. Add STRIPE_SECRET_KEY and a class-specific stripe_price_id.'
       });
     }
+
+    cookies.delete('enrollment_heard_about_us', {
+      path: '/'
+    });
 
     throw redirect(303, appendMarketingParams(sessionUrl, marketingParams));
   }

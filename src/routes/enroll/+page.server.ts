@@ -16,7 +16,7 @@ export async function load({ url }) {
 }
 
 export const actions: Actions = {
-  default: async ({ request }) => {
+  default: async ({ request, cookies }) => {
     const form = await request.formData();
 
     const studentName = String(form.get('studentName') ?? '').trim();
@@ -76,6 +76,19 @@ export const actions: Actions = {
 
     if (leadId) {
       params.set('lead', leadId);
+    }
+
+    if (heardAboutUs) {
+      cookies.set('enrollment_heard_about_us', heardAboutUs, {
+        path: '/',
+        httpOnly: true,
+        sameSite: 'lax',
+        maxAge: 60 * 60
+      });
+    } else {
+      cookies.delete('enrollment_heard_about_us', {
+        path: '/'
+      });
     }
 
     throw redirect(303, appendMarketingParams(`/checkout?${params.toString()}`, marketingParams));

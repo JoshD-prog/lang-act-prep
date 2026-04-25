@@ -64,7 +64,16 @@
 />
 
 <section class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-lg shadow-slate-900/5">
-  <img src={data.school.heroImageUrl} alt={data.school.name} class="h-64 w-full object-cover" />
+  <img
+    src={data.school.heroImageUrl}
+    alt={data.school.name}
+    class="h-64 w-full object-cover"
+    loading="eager"
+    fetchpriority="high"
+    decoding="async"
+    width="1600"
+    height="900"
+  />
   <div class="p-8">
     <p class="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">{data.school.district ?? 'School partner'}</p>
     <h1 class="mt-2 text-4xl font-black text-ink">{data.school.name} enrollment page</h1>
@@ -74,7 +83,7 @@
         href={`/enroll?school=${data.school.slug}`}
         use:preserveMarketingParams
         use:trackEnrollCta={{ cta_location: 'school_page', cta_label: 'Start enrollment', school_slug: data.school.slug }}
-        class="rounded-full bg-sky px-6 py-3 text-sm font-bold text-white"
+        class="rounded-full bg-ink px-6 py-3 text-sm font-bold text-white transition hover:bg-slate-800"
       >
         Start enrollment
       </a>

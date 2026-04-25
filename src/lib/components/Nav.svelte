@@ -12,14 +12,18 @@
       <img
         src="/branding/logo.png"
         alt="KC Cram Course"
+        width="1024"
+        height="1024"
+        decoding="async"
+        fetchpriority="high"
         class="h-24 w-auto object-contain"
       />
     </a>
-    <nav class="hidden gap-5 text-sm font-semibold text-slate-700 md:flex">
+    <nav class="hidden items-center gap-1 text-sm font-semibold text-slate-700 md:flex">
       {#each navItems as item}
         <a
           href={item.href}
-          class={`transition-colors hover:text-sky ${$page.url.pathname === item.href ? 'text-sky' : ''}`}
+          class={`rounded-full px-3 py-2 transition-colors hover:bg-slate-50 hover:text-sky ${$page.url.pathname === item.href ? 'bg-slate-50 text-sky' : ''}`}
         >
           {item.label}
         </a>
@@ -28,7 +32,7 @@
     <div class="flex items-center gap-2">
       <a
         href="/classes"
-        class="hidden rounded-full bg-sky px-5 py-2.5 text-sm font-bold text-white shadow-glow transition hover:bg-teal-500 md:inline-flex"
+        class="hidden rounded-full bg-ink px-5 py-3 text-sm font-bold text-white shadow-xl shadow-slate-900/20 transition hover:bg-slate-800 md:inline-flex"
       >
         View Dates
       </a>
@@ -81,7 +85,7 @@
           href="/enroll"
           use:preserveMarketingParams
           use:trackEnrollCta={{ cta_location: 'mobile_nav', cta_label: 'Enroll' }}
-          class="mt-2 inline-flex w-full items-center justify-center rounded-full bg-sky px-4 py-2 text-sm font-bold text-white shadow-glow transition hover:bg-teal-500"
+          class="mt-2 inline-flex w-full items-center justify-center rounded-full bg-ink px-4 py-3 text-sm font-bold text-white shadow-xl shadow-slate-900/20 transition hover:bg-slate-800"
           on:click={() => {
             mobileMenuOpen = false;
           }}

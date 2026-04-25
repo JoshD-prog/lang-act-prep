@@ -82,7 +82,7 @@
 
   <a
     href="/classes"
-    class="mt-6 inline-flex rounded-full bg-sky px-6 py-3 text-sm font-bold text-white"
+    class="mt-6 inline-flex rounded-full bg-ink px-6 py-3 text-sm font-bold text-white transition hover:bg-slate-800"
   >
     Back to classes
   </a>

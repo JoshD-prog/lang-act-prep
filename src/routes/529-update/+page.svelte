@@ -1,6 +1,43 @@
 <script lang="ts">
   import { preserveMarketingParams, trackEnrollCta } from '$lib/analytics';
   import Seo from '$lib/components/Seo.svelte';
+  import { getSiteUrl, toAbsoluteUrl } from '$lib/seo';
+
+  const siteUrl = getSiteUrl();
+  const structuredData = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      name: 'Can You Use a 529 Plan for ACT Prep?',
+      url: toAbsoluteUrl('/529-update', siteUrl),
+      description:
+        'Learn how 529 plans may apply to ACT or SAT prep after recent federal changes, how merit scholarships work, and how to estimate the ROI of a higher ACT score.'
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: [
+        {
+          '@type': 'Question',
+          name: 'Can a 529 plan cover ACT or SAT prep?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text:
+              'Recent federal changes may allow certain tutoring and educational classes outside the home, but ACT and SAT prep are not explicitly named. Families should confirm eligibility with their tax professional and plan administrator before using 529 funds this way.'
+          }
+        },
+        {
+          '@type': 'Question',
+          name: 'Why does scholarship strategy usually matter more than the payment method?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text:
+              'A 529 plan helps pay for college costs that already exist, while a stronger ACT score can reduce those costs by moving a student into a higher merit scholarship tier.'
+          }
+        }
+      ]
+    }
+  ];
 
   const scholarshipExamples = [
     {
@@ -62,6 +99,7 @@
 <Seo
   title="Can You Use a 529 Plan for ACT Prep?"
   description="Learn how 529 plans may apply to ACT or SAT prep after recent federal changes, how merit scholarships work, and how to estimate the ROI of a higher ACT score."
+  structuredData={structuredData}
 />
 
 <section class="rounded-3xl border border-slate-200 bg-white p-8 shadow-lg shadow-slate-900/5 md:p-10">

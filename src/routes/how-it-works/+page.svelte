@@ -29,7 +29,10 @@
   <p class="mt-3 text-slate-600">
     Seats are limited. Choose your ACT date and enroll in the course scheduled for the week before your exam.
   </p>
-  <a href="/classes" class="mt-5 inline-flex rounded-full bg-sky px-6 py-3 text-sm font-bold text-white">
+  <a
+    href="/classes"
+    class="mt-5 inline-flex rounded-full bg-ink px-6 py-3 text-sm font-bold text-white transition hover:bg-slate-800"
+  >
     View upcoming classes
   </a>
 </section>

@@ -76,7 +76,7 @@
   </label>
 
   <div class="md:col-span-4 flex items-end">
-    <button class="w-full rounded-full bg-sky px-5 py-3 text-sm font-bold text-white">Calculate</button>
+    <button class="w-full rounded-full bg-ink px-5 py-3 text-sm font-bold text-white transition hover:bg-slate-800">Calculate</button>
   </div>
 </form>
 

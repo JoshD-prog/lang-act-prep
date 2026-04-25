@@ -15,5 +15,10 @@
     <li class="rounded-xl bg-slate-50 p-4"><strong>45 days out:</strong> run one full timed practice each week.</li>
     <li class="rounded-xl bg-slate-50 p-4"><strong>15 days out:</strong> focus on pacing and error categories, not new content volume.</li>
   </ul>
-  <a href="/scholarship-calculator" class="mt-6 inline-flex rounded-full bg-sky px-5 py-2 text-sm font-bold text-white">Open scholarship calculator</a>
+  <a
+    href="/scholarship-calculator"
+    class="mt-6 inline-flex rounded-full bg-ink px-5 py-2 text-sm font-bold text-white transition hover:bg-slate-800"
+  >
+    Open scholarship calculator
+  </a>
 </section>

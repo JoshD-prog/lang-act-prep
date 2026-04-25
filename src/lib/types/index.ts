@@ -7,6 +7,7 @@ export interface CmsSection {
   body: string;
   ctaLabel?: string;
   ctaHref?: string;
+  tone?: 'default' | 'sky' | 'sun' | 'ink';
 }
 
 export interface ClassOffering {

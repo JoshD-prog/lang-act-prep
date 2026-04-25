@@ -14,6 +14,7 @@ export const homepageSections: CmsSection[] = [
     eyebrow: 'What it is',
     title: 'A four-session ACT cram course built for the week before your test.',
     body: 'Students get focused instruction in strategy, pacing, and high-yield review across the most important ACT question types in four 90-minute sessions.',
+    tone: 'sky',
     ctaLabel: 'See upcoming dates',
     ctaHref: '/classes'
   },
@@ -22,6 +23,7 @@ export const homepageSections: CmsSection[] = [
     eyebrow: 'Who it is for',
     title: 'Best for students who want structure, accountability, and a stronger test-day plan.',
     body: 'This course is designed for students who already know some of the material but need sharper timing, better decision-making, and targeted review before the ACT.',
+    tone: 'sun',
     ctaLabel: 'How it works',
     ctaHref: '/how-it-works'
   },
@@ -30,6 +32,7 @@ export const homepageSections: CmsSection[] = [
     eyebrow: 'Why it works',
     title: 'Built around real strategy, timed practice, and the most-tested skills.',
     body: 'Instead of dragging students through a long prep program, this course focuses on the highest-yield ideas, common mistake patterns, and practical systems they can use immediately on test day.',
+    tone: 'ink',
     ctaLabel: 'Meet the instructor',
     ctaHref: '/about'
   },

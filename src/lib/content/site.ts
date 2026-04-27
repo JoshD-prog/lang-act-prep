@@ -4,7 +4,7 @@ export const navItems = [
   { href: '/classes', label: 'Classes' },
   { href: '/how-it-works', label: 'How It Works' },
   { href: '/scholarship-calculator', label: 'Scholarship Calculator' },
-  { href: '/529-update', label: '529 Plan' },
+  { href: '/529-update', label: 'ACT Prep ROI' },
   { href: '/about', label: 'About' }
 ];
 

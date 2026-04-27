@@ -12,7 +12,7 @@
       <h3 class="text-sm font-semibold uppercase tracking-wide text-slate-500">Resources</h3>
       <ul class="mt-3 space-y-2 text-sm text-slate-700">
         <li><a class="hover:text-sky" href="/scholarship-calculator">Scholarship calculator</a></li>
-        <li><a class="hover:text-sky" href="/529">529 planning</a></li>
+        <li><a class="hover:text-sky" href="/529-update">Turn scores into scholarships</a></li>
       </ul>
     </section>
 

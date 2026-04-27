@@ -10,23 +10,32 @@ export async function sendParentConfirmationEmail({
   classTitle,
   classSchedule,
   classLocation,
+  stripeSessionId,
+  paymentAmount,
+  paymentCurrency,
 }: {
   parentEmail: string;
   studentName: string;
   classTitle: string;
   classSchedule?: string;
   classLocation?: string;
+  stripeSessionId?: string;
+  paymentAmount?: number | null;
+  paymentCurrency?: string | null;
 }) {
   await resend.emails.send({
     from: "KC Cram Course <noreply@kccramcourse.com>",
     replyTo: "director@kccramcourse.com",
     to: parentEmail,
-    subject: `Enrollment Confirmed - ${classTitle}`,
+    subject: `Enrollment Records - ${classTitle}`,
     html: buildParentConfirmationEmailHtml({
       studentName,
       classTitle,
       classSchedule,
       classLocation,
+      stripeSessionId,
+      paymentAmount,
+      paymentCurrency,
     }),
   });
 }

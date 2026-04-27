@@ -53,12 +53,15 @@ const result = await resend.emails.send({
   from: "KC Cram Course <noreply@kccramcourse.com>",
   replyTo: "director@kccramcourse.com",
   to,
-  subject: `Enrollment Confirmed - ${preset.classTitle}`,
+  subject: `Enrollment Records - ${preset.classTitle}`,
   html: buildParentConfirmationEmailHtml({
     studentName,
     classTitle: preset.classTitle,
     classSchedule: preset.classSchedule,
     classLocation: preset.classLocation,
+    stripeSessionId: "cs_test_records_preview_123",
+    paymentAmount: 29900,
+    paymentCurrency: "usd",
   }),
 });
 

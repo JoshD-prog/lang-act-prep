@@ -50,12 +50,12 @@
 
 <section class="mt-10 grid gap-6 lg:grid-cols-[1.5fr_0.9fr]">
   <article class="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm shadow-slate-900/5">
-    <h2 class="text-2xl font-extrabold text-ink">What a $300 ACT prep course can realistically return</h2>
+    <h2 class="text-2xl font-extrabold text-ink">What a $299 ACT prep course can realistically return</h2>
     <div class="mt-5 rounded-2xl border border-slate-200 bg-slate-50 p-6">
       <div class="grid gap-6 md:grid-cols-2">
         <div>
           <p class="text-sm font-bold uppercase tracking-[0.12em] text-slate-500">Investment</p>
-          <p class="mt-2 text-3xl font-black text-ink">$300 ACT prep course</p>
+          <p class="mt-2 text-3xl font-black text-ink">$299 ACT prep course</p>
           <p class="mt-4 text-sm leading-6 text-slate-600">
             In some situations, families may also be able to use 529 funds for this type of course, which can further
             improve the effective return.
@@ -78,7 +78,7 @@
         <p class="text-sm font-semibold uppercase tracking-[0.12em] text-slate-500">Estimated four-year scholarship value</p>
         <p class="mt-2 text-4xl font-black text-ink md:text-5xl">$8,000-$24,000</p>
         <p class="mt-4 text-sm font-semibold uppercase tracking-[0.12em] text-slate-500">
-          Estimated return on a $300 investment
+          Estimated return on a $299 investment
         </p>
         <p class="mt-1 text-3xl font-black text-ink md:text-4xl">26x-80x</p>
       </div>

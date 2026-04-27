@@ -146,7 +146,10 @@ export const POST: RequestHandler = async ({ request }) => {
                   studentName,
                   classTitle,
                   classSchedule,
-                  classLocation
+                  classLocation,
+                  stripeSessionId: session.id,
+                  paymentAmount: session.amount_total,
+                  paymentCurrency: session.currency
                 });
               } catch (err) {
                 console.error('Parent confirmation email failed:', err);

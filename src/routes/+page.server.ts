@@ -211,7 +211,7 @@ function getMarkTwainExample(tiers: ScholarshipTierLike[]): HomepageScholarshipE
 
   return {
     schoolName: level1.school_name,
-    detailLabel: 'Mark Twain tiers for out-of-state students',
+    detailLabel: 'Out-of-state students',
     fromAct: level2.min_act ?? 0,
     toAct: level1.min_act ?? 0,
     fromAwardUsd: level2.annual_award_usd,
@@ -222,35 +222,75 @@ function getMarkTwainExample(tiers: ScholarshipTierLike[]): HomepageScholarshipE
   };
 }
 
-function getMizzouTierJumpExample(tiers: ScholarshipTierLike[]): HomepageScholarshipExample | null {
-  const provost = tiers.find((tier) => {
+function getKansasStateExample(tiers: ScholarshipTierLike[]): HomepageScholarshipExample | null {
+  const traditions = tiers.find((tier) => {
     return (
-      tier.school_name === 'University of Missouri' &&
-      tier.tier_name === 'Provost Award' &&
+      tier.school_name === 'Kansas State University' &&
+      tier.tier_name === 'Wildcat Traditions Scholarship' &&
+      tier.min_unweighted_gpa === 3.7 &&
+      tier.min_act === 22 &&
       tier.residency_rule_type === 'specific_states'
     );
   });
 
-  const curators = tiers.find((tier) => {
+  const royalPurple = tiers.find((tier) => {
     return (
-      tier.school_name === 'University of Missouri' &&
-      tier.tier_name === 'Curators Scholars Award' &&
+      tier.school_name === 'Kansas State University' &&
+      tier.tier_name === 'Royal Purple Scholarship' &&
+      tier.min_unweighted_gpa === 3.7 &&
+      tier.min_act === 25 &&
       tier.residency_rule_type === 'specific_states'
     );
   });
 
-  if (!provost || !curators) return null;
+  if (!traditions || !royalPurple) return null;
 
   return {
-    schoolName: curators.school_name,
-    detailLabel: 'Missouri students',
-    fromAct: provost.min_act ?? 0,
-    toAct: curators.min_act ?? 0,
-    fromAwardUsd: provost.annual_award_usd,
-    toAwardUsd: curators.annual_award_usd,
-    deltaAnnualUsd: curators.annual_award_usd - provost.annual_award_usd,
-    deltaTotalUsd: curators.projected_total_usd - provost.projected_total_usd,
-    sourceUrl: curators.scholarship_page_url ?? curators.source_url ?? ''
+    schoolName: royalPurple.school_name,
+    detailLabel: 'Kansas students',
+    fromAct: traditions.min_act ?? 0,
+    toAct: royalPurple.min_act ?? 0,
+    fromAwardUsd: traditions.annual_award_usd,
+    toAwardUsd: royalPurple.annual_award_usd,
+    deltaAnnualUsd: royalPurple.annual_award_usd - traditions.annual_award_usd,
+    deltaTotalUsd: royalPurple.projected_total_usd - traditions.projected_total_usd,
+    sourceUrl: royalPurple.scholarship_page_url ?? royalPurple.source_url ?? ''
+  };
+}
+
+function getUmkcExample(tiers: ScholarshipTierLike[]): HomepageScholarshipExample | null {
+  const chancellor = tiers.find((tier) => {
+    return (
+      tier.school_name === 'University of Missouri-Kansas City' &&
+      tier.tier_name === "Chancellor's Award" &&
+      tier.min_unweighted_gpa === 3.5 &&
+      tier.min_act === 25 &&
+      tier.residency_rule_type === 'specific_states'
+    );
+  });
+
+  const blueAndGold = tiers.find((tier) => {
+    return (
+      tier.school_name === 'University of Missouri-Kansas City' &&
+      tier.tier_name === 'Blue and Gold Distinguished Award' &&
+      tier.min_unweighted_gpa === 3.65 &&
+      tier.min_act === 30 &&
+      tier.residency_rule_type === 'all_students'
+    );
+  });
+
+  if (!chancellor || !blueAndGold) return null;
+
+  return {
+    schoolName: blueAndGold.school_name,
+    detailLabel: 'Kansas and Missouri students',
+    fromAct: chancellor.min_act ?? 0,
+    toAct: blueAndGold.min_act ?? 0,
+    fromAwardUsd: chancellor.annual_award_usd,
+    toAwardUsd: blueAndGold.annual_award_usd,
+    deltaAnnualUsd: blueAndGold.annual_award_usd - chancellor.annual_award_usd,
+    deltaTotalUsd: blueAndGold.projected_total_usd - chancellor.projected_total_usd,
+    sourceUrl: blueAndGold.scholarship_page_url ?? blueAndGold.source_url ?? ''
   };
 }
 
@@ -258,8 +298,8 @@ export async function load() {
   const tiers = await getScholarshipTiers();
   const scholarshipExamples = getPublishedScholarshipExamples(tiers);
   const markTwainExample = getMarkTwainExample(tiers);
-  const shortJumpExample = getBestExampleInActRange(tiers, 1, 3);
-  const midJumpExample = getMizzouTierJumpExample(tiers) ?? getBestExampleInActRange(tiers, 4, 6);
+  const shortJumpExample = getKansasStateExample(tiers);
+  const midJumpExample = getUmkcExample(tiers);
 
   const orderedExamples = [
     shortJumpExample,

@@ -96,6 +96,16 @@
       showSoftMessage: !isActOnly && roiTarget.dimensionsNeeded === 2 && isModerateValueJump
     };
   }
+
+  function getSourceHref(sourceUrl: string | null) {
+    if (!sourceUrl) return null;
+
+    if (/^https?:\/\//i.test(sourceUrl)) {
+      return sourceUrl;
+    }
+
+    return `https://${sourceUrl}`;
+  }
 </script>
 
 {#if projections.length === 0}
@@ -137,6 +147,7 @@
         : 0}
       {@const roiTarget = getRoiTarget(school.nextSteps, currentFourYearValue)}
       {@const roiOpportunity = getRoiOpportunity(roiTarget)}
+      {@const sourceHref = getSourceHref(school.sourceUrl)}
 
       <article class="overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-xl shadow-slate-900/5">
         <div class="border-b border-slate-200 bg-[radial-gradient(circle_at_top_left,_rgba(14,165,233,0.18),_transparent_32%),linear-gradient(135deg,_#ffffff,_#f8fafc)] px-6 py-6">
@@ -151,9 +162,9 @@
                 <span class={`inline-flex rounded-full border px-3 py-1 text-xs font-bold uppercase tracking-[0.14em] ${getSourceBadgeClasses(school.sourceType)}`}>
                   {school.sourceLabel}
                 </span>
-                {#if school.sourceUrl}
+                {#if sourceHref}
                   <a
-                    href={school.sourceUrl}
+                    href={sourceHref}
                     target="_blank"
                     rel="noreferrer"
                     class="inline-flex rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-bold uppercase tracking-[0.14em] text-slate-700 transition hover:border-sky-200 hover:text-sky-700"
@@ -239,6 +250,44 @@
                   </div>
                 {/if}
               </section>
+            {:else}
+              <section class="rounded-[1.75rem] border border-emerald-200 bg-gradient-to-br from-emerald-50 via-white to-slate-50 p-5 shadow-sm">
+                <div class="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+                  <div>
+                    <p class="text-xs font-bold uppercase tracking-[0.18em] text-emerald-700">Top Tier</p>
+                    <h4 class="mt-2 text-2xl font-black text-ink">
+                      Your student already appears to be at the highest automatic scholarship tier, but competitive scholarships can provide even more value.
+                    </h4>
+                    <p class="mt-3 text-sm leading-6 text-slate-600">
+                      A higher ACT score may not unlock another automatic award in this calculator, but
+                      <strong class="font-bold text-ink">students can still do even better.</strong>
+                      Stronger scores can make them more competitive for selective scholarships,
+                      departmental awards, honors college funding, and other application-based aid.
+                    </p>
+                  </div>
+
+                  <div class="rounded-2xl border border-emerald-200 bg-white px-4 py-3">
+                    <p class="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">Current value</p>
+                    <p class="mt-2 text-lg font-black text-ink">{formatCurrency(currentFourYearValue)}</p>
+                    <p class="text-xs text-slate-500">over 4 years</p>
+                  </div>
+                </div>
+
+                <div class="mt-5 grid gap-3 md:grid-cols-2">
+                  <div class="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-600">
+                    <p class="font-semibold text-ink">Next practical move</p>
+                    <p class="mt-1">
+                      Check the school source for competitive awards and separate applications.
+                    </p>
+                  </div>
+                  <div class="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-600">
+                    <p class="font-semibold text-ink">Why scores still matter</p>
+                    <p class="mt-1">
+                      Stronger scores can help when awards are reviewed holistically or when funding is limited.
+                    </p>
+                  </div>
+                </div>
+              </section>
             {/if}
 
             {#if school.nextSteps.length > 1}
@@ -292,7 +341,10 @@
 
           <div class="space-y-6">
             {#if roiOpportunity.target && roiOpportunity.showStrongCta}
-              <section class="rounded-[1.75rem] border border-sky-200 bg-gradient-to-br from-sky-600 via-sky-700 to-slate-900 p-5 text-white shadow-lg shadow-sky-900/20">
+              <section
+                class="rounded-[1.75rem] border border-sky-700 p-5 text-white shadow-lg shadow-sky-900/20"
+                style="background: linear-gradient(135deg, #0284c7 0%, #0369a1 45%, #0f172a 100%);"
+              >
                 <p class="text-xs font-bold uppercase tracking-[0.18em] text-sky-100">Big upside</p>
                 <h4 class="mt-3 text-2xl font-black">
                   +{roiOpportunity.target.actGap} ACT point{roiOpportunity.target.actGap === 1 ? '' : 's'} could mean +{formatCurrency(roiOpportunity.target.additionalFourYearValue)}
@@ -336,14 +388,25 @@
               </section>
             {:else}
               <section class="rounded-[1.75rem] border border-slate-200 bg-gradient-to-br from-slate-50 to-white p-5 shadow-sm">
-                <p class="text-xs font-bold uppercase tracking-[0.18em] text-slate-500">Big upside</p>
-                <h4 class="mt-3 text-2xl font-black text-ink">Scholarship value can move quickly from here.</h4>
-                <p class="mt-3 text-sm text-slate-600">
-                  Even if this school does not show the biggest nearby automatic jump, stronger scores can still help your student compete for more scholarship value here or make outside scholarships more worth pursuing.
-                </p>
-                <p class="mt-2 text-sm text-slate-600">
-                  This is often where families start looking beyond the basic merit ladder to competitive awards, departmental aid, and outside scholarships.
-                </p>
+                {#if school.nextSteps.length === 0}
+                  <p class="text-xs font-bold uppercase tracking-[0.18em] text-slate-500">Competitive upside</p>
+                  <h4 class="mt-3 text-2xl font-black text-ink">The automatic ladder may be maxed, but the scholarship search is not.</h4>
+                  <p class="mt-3 text-sm text-slate-600">
+                    Once a student reaches the highest automatic tier, stronger scores can still matter for competitive scholarships, honors programs, departmental awards, and other funding that may require a separate application.
+                  </p>
+                  <p class="mt-2 text-sm text-slate-600">
+                    This is the point where families should use the school source to look beyond automatic merit and identify awards where a stronger academic profile can still help.
+                  </p>
+                {:else}
+                  <p class="text-xs font-bold uppercase tracking-[0.18em] text-slate-500">Big upside</p>
+                  <h4 class="mt-3 text-2xl font-black text-ink">Scholarship value can move quickly from here.</h4>
+                  <p class="mt-3 text-sm text-slate-600">
+                    Even if this school does not show the biggest nearby automatic jump, stronger scores can still help your student compete for more scholarship value here or make outside scholarships more worth pursuing.
+                  </p>
+                  <p class="mt-2 text-sm text-slate-600">
+                    This is often where families start looking beyond the basic merit ladder to competitive awards, departmental aid, and outside scholarships.
+                  </p>
+                {/if}
               </section>
             {/if}
 

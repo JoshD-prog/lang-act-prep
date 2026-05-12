@@ -1,7 +1,8 @@
 export const HEAR_ABOUT_US_OPTIONS = [
   'School counselor or teacher',
   'Friend or family',
-  'Social media',
+  'Instagram',
+  'Facebook',
   'Google or web search',
   'School email or newsletter',
   'Flyer or event',

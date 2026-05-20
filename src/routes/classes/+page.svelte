@@ -14,6 +14,7 @@
     currency: 'USD',
     maximumFractionDigits: 0
   });
+  const pottersSchoolCatalogUrl = 'https://www.pottersschool.org/course/list/';
 
   const structuredData = $derived([
     {
@@ -159,6 +160,40 @@
       </a>
     </article>
   {/each}
+</section>
+
+<section class="mt-8 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm shadow-slate-900/5 md:p-8">
+  <div class="grid gap-5 lg:grid-cols-[1fr_auto] lg:items-center">
+    <div class="max-w-3xl">
+      <p class="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">Need a different format?</p>
+      <h2 class="mt-2 text-2xl font-black text-ink">Longer online ACT, SAT, and CLT options are also available.</h2>
+      <p class="mt-3 text-sm leading-relaxed text-slate-700">
+        The in-person ACT Cram Course is built for focused prep close to test day. If you need a broader online course,
+        The Potter's School offers two sister courses: one focused on math and science, and one focused on reading,
+        English, and writing. I teach one of these courses, and a colleague teaches the other. Students can enroll in
+        either course or both, depending on need.
+      </p>
+      <p class="mt-3 text-sm leading-relaxed text-slate-700">
+        Both courses cover ACT, SAT, and CLT prep with general strategies, scheduled practice assignments, and live online
+        classes. Students who need more flexibility can watch recordings or complete assignments according to their own
+        goals and timetable.
+      </p>
+    </div>
+
+    <div class="lg:text-right">
+      <a
+        href={pottersSchoolCatalogUrl}
+        target="_blank"
+        rel="noreferrer"
+        class="inline-flex rounded-full border border-slate-300 bg-white px-5 py-2 text-sm font-bold text-slate-700 transition hover:border-slate-900 hover:text-slate-900"
+      >
+        View online course catalog
+      </a>
+      <p class="mt-2 max-w-xs text-xs leading-relaxed text-slate-500 lg:ml-auto">
+        The catalog includes many courses, so look for ACT, SAT, or CLT prep options.
+      </p>
+    </div>
+  </div>
 </section>
 
 <section class="mt-8 rounded-3xl border border-sky-200 bg-sky-50 p-6 shadow-sm shadow-slate-900/5">

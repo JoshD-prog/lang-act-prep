@@ -3,6 +3,7 @@ import { env as publicEnv } from '$env/dynamic/public';
 import { env as privateEnv } from '$env/dynamic/private';
 import { createStripeClient, getStripeCheckoutConfig } from '$lib/server/stripe';
 import { getClassOfferings } from '$lib/server/data';
+import { getEarlyBirdOffer } from '$lib/content/earlyBird';
 
 interface CheckoutInput {
   classSlug: string;
@@ -44,7 +45,7 @@ export async function createCheckoutSession({
     mode: 'payment',
     customer_email: email,
     line_items: [{ price: checkoutConfig.priceId, quantity: 1 }],
-    allow_promotion_codes: true,
+    allow_promotion_codes: Boolean(getEarlyBirdOffer(classSlug)),
     metadata: {
       class_slug: classSlug,
       lead_id: leadId ?? '',

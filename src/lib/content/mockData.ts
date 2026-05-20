@@ -5,9 +5,9 @@ export const classOfferings: ClassOffering[] = [
     id: 'cls-june-2026',
     slug: 'act-cram-june-2026',
     title: 'June ACT Cram Course',
-    schedule: 'Mon–Thu, June 8–11, 6:30–8:00 PM',
-    location: 'Shawnee Civic Center — final room details sent after enrollment',
-    format: '4 sessions · 90 minutes each',
+    schedule: 'Mon-Thu, June 8-11, 6:30-8:00 PM',
+    location: 'Shawnee Civic Center - final room details sent after enrollment',
+    format: '4 sessions - 90 minutes each',
     priceCents: 29900,
     seatsAvailable: 30,
     featured: true
@@ -16,9 +16,9 @@ export const classOfferings: ClassOffering[] = [
     id: 'cls-july-2026',
     slug: 'act-cram-july-2026',
     title: 'July ACT Cram Course',
-    schedule: 'Mon–Thu, July 6–9, 6:30–8:00 PM',
-    location: 'Shawnee Civic Center — final room details sent after enrollment',
-    format: '4 sessions · 90 minutes each',
+    schedule: 'Mon-Thu, July 6-9, 6:30-8:00 PM',
+    location: 'Shawnee Civic Center - final room details sent after enrollment',
+    format: '4 sessions - 90 minutes each',
     priceCents: 29900,
     seatsAvailable: 30
   },
@@ -26,9 +26,9 @@ export const classOfferings: ClassOffering[] = [
     id: 'cls-september-2026',
     slug: 'act-cram-september-2026',
     title: 'September ACT Cram Course',
-    schedule: 'Mon–Thu, September 14–17, 6:30–8:00 PM',
-    location: 'Piper Location — final room details sent after enrollment',
-    format: '4 sessions · 90 minutes each',
+    schedule: 'Mon-Thu, September 14-17, 6:30-8:00 PM',
+    location: 'Piper Location - final room details sent after enrollment',
+    format: '4 sessions - 90 minutes each',
     priceCents: 29900,
     seatsAvailable: 30
   }

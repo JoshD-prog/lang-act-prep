@@ -4,9 +4,6 @@
   import PageSection from '$lib/components/PageSection.svelte';
   import { homepageSections } from '$lib/content/site';
   import { getSiteUrl, toAbsoluteUrl } from '$lib/seo';
-  import type { PageData } from './$types';
-
-  let { data }: { data: PageData } = $props();
 
   const siteUrl = getSiteUrl();
   const money = new Intl.NumberFormat('en-US', {
@@ -14,6 +11,38 @@
     currency: 'USD',
     maximumFractionDigits: 0
   });
+  const scholarshipExamples = [
+    {
+      schoolName: 'Kansas State University',
+      detailLabel: 'Kansas students - 3.70 GPA',
+      fromAct: 22,
+      toAct: 25,
+      fromAwardUsd: 2500,
+      toAwardUsd: 4000,
+      deltaTotalUsd: 6000,
+      sourceUrl: 'https://www.k-state.edu/sfa/scholarships/'
+    },
+    {
+      schoolName: 'University of Missouri-Kansas City',
+      detailLabel: 'Kansas and Missouri students',
+      fromAct: 25,
+      toAct: 30,
+      fromAwardUsd: 3500,
+      toAwardUsd: 7500,
+      deltaTotalUsd: 16000,
+      sourceUrl: 'https://finaid.umkc.edu/financial-aid/scholarships/first-time-college-student.html'
+    },
+    {
+      schoolName: 'University of Missouri',
+      detailLabel: 'Out-of-state students',
+      fromAct: 23,
+      toAct: 30,
+      fromAwardUsd: 8500,
+      toAwardUsd: 21500,
+      deltaTotalUsd: 52000,
+      sourceUrl: 'https://financialaid.missouri.edu/scholarships/freshmen-ftc/'
+    }
+  ];
   const structuredData = [
     {
       '@context': 'https://schema.org',
@@ -51,7 +80,7 @@
   primaryCtaHref="/classes"
   secondaryCtaLabel="How it works"
   secondaryCtaHref="/how-it-works"
-  imageSrc="https://images.pexels.com/photos/8199134/pexels-photo-8199134.jpeg?cs=srgb&dl=pexels-yankrukov-8199134.jpg&fm=jpg"
+  imageSrc="/images/homepage-hero.jpg"
   imageAlt="Students in a classroom discussion with an instructor"
   stats={[
     { value: '4', label: 'focused sessions' },
@@ -96,41 +125,31 @@
 
       <div class="mt-6 rounded-3xl border border-white/10 bg-white/10 p-5 backdrop-blur">
         <p class="text-xs font-bold uppercase tracking-[0.16em] text-sky-100/80">What that can mean in dollars</p>
-        {#if data.scholarshipExamples.length}
-          <p class="mt-2 max-w-2xl text-sm leading-relaxed text-sky-50/85">
-            These examples are derived from the current published scholarship pages feeding our
-            <a href="/scholarship-calculator" class="font-semibold text-white underline decoration-white/40 underline-offset-4 hover:decoration-white">
-              scholarship calculator
-            </a>.
-            Most clean 1 to 3 point ACT jumps are worth about {money.format(4000)} to {money.format(6000)} over four
-            years, while larger jumps can lead to much larger returns.
-          </p>
+        <p class="mt-2 max-w-2xl text-sm leading-relaxed text-sky-50/85">
+          These examples are based on published scholarship pages and can be updated manually as schools change their
+          award tables. Most clean 1 to 3 point ACT jumps are worth about {money.format(4000)} to {money.format(6000)}
+          over four years, while larger jumps can lead to much larger returns.
+        </p>
 
-          <div class="mt-4 grid gap-3 md:grid-cols-3">
-            {#each data.scholarshipExamples as example}
-              <article class="rounded-2xl bg-white/10 p-4">
-                <p class="text-2xl font-black text-white">+{money.format(example.deltaTotalUsd)}</p>
-                <p class="mt-2 text-sm font-semibold text-sky-50">
-                  <a href={example.sourceUrl} class="hover:underline" target="_blank" rel="noreferrer">
-                    {example.schoolName}
-                  </a>
-                </p>
-                <p class="mt-1 text-xs font-semibold uppercase tracking-[0.14em] text-sky-100/80">
-                  {example.detailLabel}
-                </p>
-                <p class="mt-2 text-sm text-sky-100/80">
-                  ACT {example.fromAct} to {example.toAct} moves from {money.format(example.fromAwardUsd)}/year to
-                  {money.format(example.toAwardUsd)}/year.
-                </p>
-              </article>
-            {/each}
-          </div>
-        {:else}
-          <p class="mt-2 max-w-2xl text-sm leading-relaxed text-sky-50/85">
-            Scholarship upside can be real, but it varies by GPA, residency, and each school's published rules. Use
-            the calculator to compare current school-by-school examples.
-          </p>
-        {/if}
+        <div class="mt-4 grid gap-3 md:grid-cols-3">
+          {#each scholarshipExamples as example}
+            <article class="rounded-2xl bg-white/10 p-4">
+              <p class="text-2xl font-black text-white">+{money.format(example.deltaTotalUsd)}</p>
+              <p class="mt-2 text-sm font-semibold text-sky-50">
+                <a href={example.sourceUrl} class="hover:underline" target="_blank" rel="noreferrer">
+                  {example.schoolName}
+                </a>
+              </p>
+              <p class="mt-1 text-xs font-semibold uppercase tracking-[0.14em] text-sky-100/80">
+                {example.detailLabel}
+              </p>
+              <p class="mt-2 text-sm text-sky-100/80">
+                ACT {example.fromAct} to {example.toAct} moves from {money.format(example.fromAwardUsd)}/year to
+                {money.format(example.toAwardUsd)}/year.
+              </p>
+            </article>
+          {/each}
+        </div>
 
         <div class="mt-4 flex flex-wrap gap-3">
           <a

@@ -143,7 +143,7 @@
       {#each data.classes as classOffering}
         {@const scheduleDetails = getClassScheduleDetails(classOffering)}
         <option value={classOffering.slug}>
-          {classOffering.title} — {scheduleDetails.optionLabel}
+          {classOffering.title} - {scheduleDetails.optionLabel}
         </option>
       {/each}
     </select>
@@ -164,12 +164,20 @@
   {/if}
 
   <div class="md:col-span-2">
-    <p class="text-xs text-slate-500">
-      By continuing, you agree to the
-      <a href="/terms-and-conditions" class="underline hover:no-underline">
-        Terms &amp; Conditions
-      </a>.
-    </p>
+    <div class="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+      <p class="text-sm font-semibold text-slate-800">
+        Checkout is handled securely through Stripe.
+      </p>
+      <p class="mt-1 text-sm text-slate-600">
+        Your seat is reserved after payment is complete, and confirmation details are sent by email.
+      </p>
+      <p class="mt-2 text-xs text-slate-500">
+        By continuing, you agree to the
+        <a href="/terms-and-conditions" class="underline hover:no-underline">
+          Terms &amp; Conditions
+        </a>.
+      </p>
+    </div>
   </div>
 
   <div class="md:col-span-2 flex justify-end">

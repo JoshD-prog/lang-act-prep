@@ -52,7 +52,14 @@
       {#if imageSrc}
         <div class="relative mx-auto max-w-md">
           <div class="overflow-hidden rounded-[2rem] border border-white/80 bg-white/75 p-3 shadow-2xl shadow-slate-900/15 backdrop-blur">
-            <img src={imageSrc} alt={imageAlt} class="aspect-[4/3] w-full rounded-[1.5rem] object-cover object-center" />
+            <img
+              src={imageSrc}
+              alt={imageAlt}
+              class="aspect-[4/3] w-full rounded-[1.5rem] object-cover object-center"
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
+            />
           </div>
 
           <div class="mt-5 grid gap-3 sm:grid-cols-2">

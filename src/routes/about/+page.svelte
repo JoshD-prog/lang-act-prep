@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { preserveMarketingParams, trackEnrollCta } from '$lib/analytics';
   import Seo from '$lib/components/Seo.svelte';
 </script>
 
@@ -106,4 +107,26 @@
       working toward. Even modest score gains can affect college options and scholarship opportunities.
     </p>
   </article>
+</section>
+
+<section class="mt-8 rounded-3xl border border-sky-200 bg-sky-50 p-6 shadow-sm shadow-slate-900/5 md:p-8">
+  <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+    <div class="max-w-2xl">
+      <p class="text-xs font-bold uppercase tracking-[0.16em] text-sky-700">Ready to choose a date?</p>
+      <h2 class="mt-2 text-2xl font-black text-ink">Reserve a seat in the week-before-test ACT course.</h2>
+      <p class="mt-2 text-sm leading-relaxed text-slate-700">
+        Compare upcoming class dates, see current seat availability, and start enrollment for the cohort that matches
+        your ACT test date.
+      </p>
+    </div>
+
+    <a
+      href="/classes"
+      use:preserveMarketingParams
+      use:trackEnrollCta={{ cta_location: 'about_footer', cta_label: 'View class dates' }}
+      class="inline-flex shrink-0 rounded-full bg-ink px-5 py-3 text-sm font-bold text-white transition hover:bg-slate-700"
+    >
+      View class dates
+    </a>
+  </div>
 </section>

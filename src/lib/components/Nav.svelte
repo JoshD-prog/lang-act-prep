@@ -10,9 +10,12 @@
   <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 md:px-6">
     <a href="/" class="inline-flex items-center">
       <img
-        src="/branding/logo.png"
+        src="/branding/logo-nav.png"
         alt="KC Cram Course"
         class="h-24 w-auto object-contain"
+        width="192"
+        height="192"
+        decoding="async"
       />
     </a>
     <nav class="hidden gap-5 text-sm font-semibold text-slate-700 md:flex">
@@ -28,9 +31,11 @@
     <div class="flex items-center gap-2">
       <a
         href="/classes"
+        use:preserveMarketingParams
+        use:trackEnrollCta={{ cta_location: 'desktop_nav', cta_label: 'Reserve Your Seat' }}
         class="hidden rounded-full bg-sky px-5 py-2.5 text-sm font-bold text-white shadow-glow transition hover:bg-teal-500 md:inline-flex"
       >
-        View Dates
+        Reserve Your Seat
       </a>
       <button
         type="button"
@@ -78,15 +83,15 @@
           </a>
         {/each}
         <a
-          href="/enroll"
+          href="/classes"
           use:preserveMarketingParams
-          use:trackEnrollCta={{ cta_location: 'mobile_nav', cta_label: 'Enroll' }}
+          use:trackEnrollCta={{ cta_location: 'mobile_nav', cta_label: 'Reserve Your Seat' }}
           class="mt-2 inline-flex w-full items-center justify-center rounded-full bg-sky px-4 py-2 text-sm font-bold text-white shadow-glow transition hover:bg-teal-500"
           on:click={() => {
             mobileMenuOpen = false;
           }}
         >
-          Enroll
+          Reserve Your Seat
         </a>
       </nav>
     </div>

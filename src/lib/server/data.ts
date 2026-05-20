@@ -1,3 +1,4 @@
+import { dev } from '$app/environment';
 import { classOfferings, scholarshipTiers, schools } from '$lib/content/mockData';
 import type {
   ClassOffering,
@@ -7,6 +8,9 @@ import type {
 } from '$lib/types';
 import { createAdminSupabaseClient } from '$lib/server/supabase';
 import { getStripeCheckoutConfig } from '$lib/server/stripe';
+
+const loggedFallbacks = new Set<string>();
+const SUPABASE_READ_TIMEOUT_MS = 1500;
 
 type ScholarshipTierRow = {
   school_slug: string;
@@ -65,6 +69,48 @@ type EvaluatedTier = ScholarshipTierRow & {
   improvementScore: number;
   requirementDetails: ScholarshipRequirementDetail[];
 };
+
+function getErrorText(error: unknown) {
+  if (!error) return 'Unknown error';
+
+  if (error instanceof Error) {
+    return error.message;
+  }
+
+  if (typeof error === 'object') {
+    const parts = Object.entries(error as Record<string, unknown>)
+      .filter(([, value]) => typeof value === 'string' && value.trim())
+      .map(([key, value]) => `${key}: ${value}`);
+
+    return parts.join(' | ') || 'Unknown error';
+  }
+
+  return String(error);
+}
+
+function logFallbackOnce(source: string, error: unknown) {
+  if (loggedFallbacks.has(source)) {
+    return;
+  }
+
+  loggedFallbacks.add(source);
+
+  if (dev) {
+    const errorText = getErrorText(error);
+    const reason = /UNABLE_TO_VERIFY_LEAF_SIGNATURE|unable to verify the first certificate/i.test(errorText)
+      ? 'local TLS certificate verification failed'
+      : errorText;
+
+    console.warn(`${source} unavailable; using local fallback data. Reason: ${reason}`);
+    return;
+  }
+
+  console.error(`${source} unavailable; using local fallback data.`, error);
+}
+
+function getSupabaseReadSignal() {
+  return AbortSignal.timeout(SUPABASE_READ_TIMEOUT_MS);
+}
 
 function normalizeEligibleStates(value: string[] | string | null | undefined): string[] {
   if (!value) return [];
@@ -687,14 +733,35 @@ export async function getClassOfferings(): Promise<ClassOffering[]> {
     });
   }
 
-  const { data, error } = await supabase
-    .from('class_offerings')
-    .select('id, slug, title, schedule, location, format, price_cents, seats_available, featured, stripe_price_id')
-    .order('featured', { ascending: false })
-    .order('start_date', { ascending: true });
+  const fallback = () => classOfferings.map((offering) => {
+    const checkoutConfig = getStripeCheckoutConfig(offering);
+
+    return {
+      ...offering,
+      priceCents: checkoutConfig.priceCents ?? offering.priceCents,
+      stripePriceId: checkoutConfig.priceId
+    };
+  });
+
+  const { data, error } = await (async () => {
+    try {
+      return await supabase
+        .from('class_offerings')
+        .select('id, slug, title, schedule, location, format, price_cents, seats_available, featured, stripe_price_id')
+        .order('featured', { ascending: false })
+        .order('start_date', { ascending: true })
+        .abortSignal(getSupabaseReadSignal());
+    } catch (error) {
+      logFallbackOnce('Class offerings', error);
+      return { data: null, error };
+    }
+  })();
 
   if (error || !data) {
-    return classOfferings;
+    if (error) {
+      logFallbackOnce('Class offerings', error);
+    }
+    return fallback();
   }
 
   return data.map((item) => {
@@ -726,12 +793,23 @@ export async function getSchools(): Promise<School[]> {
     return schools;
   }
 
-  const { data, error } = await supabase
-    .from('schools')
-    .select('id, slug, name, district, hero_image_url, short_pitch')
-    .order('name', { ascending: true });
+  const { data, error } = await (async () => {
+    try {
+      return await supabase
+        .from('schools')
+        .select('id, slug, name, district, hero_image_url, short_pitch')
+        .order('name', { ascending: true })
+        .abortSignal(getSupabaseReadSignal());
+    } catch (error) {
+      logFallbackOnce('Schools', error);
+      return { data: null, error };
+    }
+  })();
 
   if (error || !data) {
+    if (error) {
+      logFallbackOnce('Schools', error);
+    }
     return schools;
   }
 
@@ -756,9 +834,11 @@ export async function getScholarshipTiers() {
     return getMockScholarshipTierRows();
   }
 
-  const { data, error } = await supabase
-    .from('scholarship_tiers_with_school')
-    .select(`
+  const { data, error } = await (async () => {
+    try {
+      return await supabase
+        .from('scholarship_tiers_with_school')
+        .select(`
       scholarship_tier_id,
       school_id,
       school_slug,
@@ -801,14 +881,20 @@ export async function getScholarshipTiers() {
       source_note,
       tier_last_updated
     `)
-    .eq('school_is_active', true)
-    .eq('tier_is_active', true)
-    .order('sort_priority_default', { ascending: true })
-    .order('school_name', { ascending: true })
-    .order('tier_rank', { ascending: true });
+        .eq('school_is_active', true)
+        .eq('tier_is_active', true)
+        .order('sort_priority_default', { ascending: true })
+        .order('school_name', { ascending: true })
+        .order('tier_rank', { ascending: true })
+        .abortSignal(getSupabaseReadSignal());
+    } catch (error) {
+      logFallbackOnce('Scholarship tiers', error);
+      return { data: null, error };
+    }
+  })();
 
   if (error || !data) {
-    console.error('Error loading scholarship tiers:', error);
+    logFallbackOnce('Scholarship tiers', error);
     return getMockScholarshipTierRows();
   }
 

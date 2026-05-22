@@ -9,6 +9,7 @@ interface CheckoutInput {
   classSlug: string;
   email: string;
   leadId?: string;
+  highSchoolSlug?: string;
   heardAboutUs?: string;
   marketingParams?: MarketingParams;
 }
@@ -17,6 +18,7 @@ export async function createCheckoutSession({
   classSlug,
   email,
   leadId,
+  highSchoolSlug,
   heardAboutUs,
   marketingParams = {}
 }: CheckoutInput) {
@@ -49,6 +51,7 @@ export async function createCheckoutSession({
     metadata: {
       class_slug: classSlug,
       lead_id: leadId ?? '',
+      high_school_slug: highSchoolSlug ?? '',
       heard_about_us: heardAboutUs ?? ''
     },
     success_url: successUrl,

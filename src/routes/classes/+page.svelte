@@ -15,6 +15,15 @@
     maximumFractionDigits: 0
   });
   const pottersSchoolCatalogUrl = 'https://www.pottersschool.org/course/list/';
+  const getEnrollHref = (classSlug: string) => {
+    const params = new URLSearchParams({ class: classSlug });
+
+    if (data.selectedSchool) {
+      params.set('school', data.selectedSchool);
+    }
+
+    return `/enroll?${params.toString()}`;
+  };
 
   const structuredData = $derived([
     {
@@ -48,7 +57,7 @@
               : undefined,
             offers: {
               '@type': 'Offer',
-              url: toAbsoluteUrl(`/enroll?class=${classOffering.slug}`, siteUrl),
+              url: toAbsoluteUrl(getEnrollHref(classOffering.slug), siteUrl),
               price: (classOffering.priceCents / 100).toFixed(2),
               priceCurrency: 'USD',
               availability:
@@ -151,7 +160,7 @@
       </p>
 
       <a
-        href={`/enroll?class=${classOffering.slug}`}
+        href={getEnrollHref(classOffering.slug)}
         use:preserveMarketingParams
         use:trackEnrollCta={{ cta_location: 'classes_card', cta_label: 'Reserve your seat', class_slug: classOffering.slug }}
         class="mt-5 inline-flex rounded-full bg-ink px-5 py-2 text-sm font-bold text-white transition hover:bg-slate-700"

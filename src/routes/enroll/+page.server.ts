@@ -2,15 +2,24 @@
 
 import { createAdminSupabaseClient } from '$lib/server/supabase';
 import { appendMarketingParams, getMarketingParams } from '$lib/analytics';
-import { getClassOfferings } from '$lib/server/data';
+import { getClassOfferings, getSchools } from '$lib/server/data';
 import { fail, redirect } from '@sveltejs/kit';
 import type { Actions } from './$types';
 
+function isMissingHighSchoolColumn(error: unknown) {
+  return /high_school_(slug|name)/i.test(JSON.stringify(error));
+}
+
 export async function load({ url }) {
   const selectedClass = url.searchParams.get('class') ?? '';
+  const selectedSchool = url.searchParams.get('school') ?? '';
+  const [classes, schools] = await Promise.all([getClassOfferings(), getSchools()]);
+
   return {
-    classes: await getClassOfferings(),
+    classes,
+    schools,
     selectedClass,
+    selectedSchool,
     marketingParams: getMarketingParams(url)
   };
 }
@@ -23,6 +32,8 @@ export const actions: Actions = {
     const parentEmail = String(form.get('parentEmail') ?? '').trim();
     const heardAboutUs = String(form.get('heardAboutUs') ?? '').trim();
     const classSlug = String(form.get('classSlug') ?? '').trim();
+    const schoolName = String(form.get('schoolName') ?? '').trim();
+    const schoolSlug = String(form.get('highSchoolSlug') ?? form.get('schoolSlug') ?? '').trim();
     const notes = String(form.get('notes') ?? '').trim();
     const marketingParams = getMarketingParams(form);
 
@@ -33,6 +44,8 @@ export const actions: Actions = {
         parentEmail,
         heardAboutUs,
         classSlug,
+        schoolName,
+        schoolSlug,
         notes
       });
     }
@@ -41,17 +54,41 @@ export const actions: Actions = {
 
     const supabase = createAdminSupabaseClient();
     if (supabase) {
-      const { data: insertedLead, error: insertError } = await supabase
+      const leadInsert = {
+        student_name: studentName,
+        parent_email: parentEmail,
+        heard_about_us: heardAboutUs || null,
+        class_slug: classSlug,
+        high_school_name: schoolName || null,
+        high_school_slug: schoolSlug || null,
+        notes: notes || null
+      };
+
+      let { data: insertedLead, error: insertError } = await supabase
         .from('enrollment_leads')
-        .insert({
+        .insert(leadInsert)
+        .select('id')
+        .single();
+
+      if (insertError && isMissingHighSchoolColumn(insertError)) {
+        const fallbackInsert = {
           student_name: studentName,
           parent_email: parentEmail,
           heard_about_us: heardAboutUs || null,
           class_slug: classSlug,
+          school_slug: schoolSlug || null,
           notes: notes || null
-        })
-        .select('id')
-        .single();
+        };
+
+        const fallbackResult = await supabase
+          .from('enrollment_leads')
+          .insert(fallbackInsert)
+          .select('id')
+          .single();
+
+        insertedLead = fallbackResult.data;
+        insertError = fallbackResult.error;
+      }
 
       if (insertError) {
         console.error('Enrollment lead insert failed:', insertError);
@@ -62,6 +99,8 @@ export const actions: Actions = {
           parentEmail,
           heardAboutUs,
           classSlug,
+          schoolName,
+          schoolSlug,
           notes
         });
       }
@@ -76,6 +115,10 @@ export const actions: Actions = {
 
     if (leadId) {
       params.set('lead', leadId);
+    }
+
+    if (schoolSlug) {
+      params.set('school', schoolSlug);
     }
 
     if (heardAboutUs) {

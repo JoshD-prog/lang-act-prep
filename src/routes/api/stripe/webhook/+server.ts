@@ -2,14 +2,15 @@ import Stripe from 'stripe';
 import type { RequestHandler } from './$types';
 import { STRIPE_WEBHOOK_SECRET } from '$env/static/private';
 import { createAdminSupabaseClient } from '$lib/server/supabase';
-import {
-  sendAdminEnrollmentNotification,
-  sendParentConfirmationEmail
-} from '$lib/server/email';
+import { sendAdminEnrollmentNotification, sendParentConfirmationEmail } from '$lib/server/email';
 import { getClassOfferings } from '$lib/server/data';
 import { createStripeClient } from '$lib/server/stripe';
 
 const stripe = createStripeClient();
+
+function isMissingHighSchoolColumn(error: unknown) {
+  return /high_school_slug/i.test(JSON.stringify(error));
+}
 
 export const POST: RequestHandler = async ({ request }) => {
   if (!stripe) {
@@ -27,14 +28,9 @@ export const POST: RequestHandler = async ({ request }) => {
   let event: Stripe.Event;
 
   try {
-    event = stripe.webhooks.constructEvent(
-      rawBody,
-      signature,
-      STRIPE_WEBHOOK_SECRET
-    );
+    event = stripe.webhooks.constructEvent(rawBody, signature, STRIPE_WEBHOOK_SECRET);
   } catch (err) {
-    const message =
-      err instanceof Error ? err.message : 'Webhook signature verification failed';
+    const message = err instanceof Error ? err.message : 'Webhook signature verification failed';
     console.error('Stripe webhook signature verification failed:', message);
     return new Response(message, { status: 400 });
   }
@@ -47,6 +43,8 @@ export const POST: RequestHandler = async ({ request }) => {
 
     const leadId = session.metadata?.lead_id ?? '';
     const classSlug = session.metadata?.class_slug ?? '';
+    const highSchoolSlug =
+      session.metadata?.high_school_slug?.trim() ?? session.metadata?.school_slug?.trim() ?? '';
     const heardAboutUsFromMetadata = session.metadata?.heard_about_us?.trim() ?? '';
 
     if (leadId && classSlug) {
@@ -64,24 +62,57 @@ export const POST: RequestHandler = async ({ request }) => {
         } else if (lead) {
           const wasPaid = lead.payment_status === 'paid';
 
-          const { error: updateLeadError } = await supabase
+          const leadUpdate = {
+            payment_status: 'paid',
+            stripe_event_id: event.id,
+            stripe_session_id: session.id,
+            stripe_payment_intent_id:
+              typeof session.payment_intent === 'string' ? session.payment_intent : null,
+            paid_at: new Date().toISOString(),
+            ...(heardAboutUsFromMetadata
+              ? {
+                  heard_about_us: heardAboutUsFromMetadata
+                }
+              : {}),
+            ...(highSchoolSlug
+              ? {
+                  high_school_slug: highSchoolSlug
+                }
+              : {})
+          };
+
+          let { error: updateLeadError } = await supabase
             .from('enrollment_leads')
-            .update({
+            .update(leadUpdate)
+            .eq('id', leadId);
+
+          if (updateLeadError && isMissingHighSchoolColumn(updateLeadError)) {
+            const fallbackLeadUpdate = {
               payment_status: 'paid',
               stripe_event_id: event.id,
               stripe_session_id: session.id,
               stripe_payment_intent_id:
-                typeof session.payment_intent === 'string'
-                  ? session.payment_intent
-                  : null,
+                typeof session.payment_intent === 'string' ? session.payment_intent : null,
               paid_at: new Date().toISOString(),
               ...(heardAboutUsFromMetadata
                 ? {
                     heard_about_us: heardAboutUsFromMetadata
                   }
+                : {}),
+              ...(highSchoolSlug
+                ? {
+                    school_slug: highSchoolSlug
+                  }
                 : {})
-            })
-            .eq('id', leadId);
+            };
+
+            const fallbackResult = await supabase
+              .from('enrollment_leads')
+              .update(fallbackLeadUpdate)
+              .eq('id', leadId);
+
+            updateLeadError = fallbackResult.error;
+          }
 
           if (updateLeadError) {
             console.error('Lead update failed:', updateLeadError);

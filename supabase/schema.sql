@@ -61,6 +61,8 @@ create table if not exists enrollment_leads (
   heard_about_us text,
   class_slug text not null,
   school_slug text,
+  high_school_slug text,
+  high_school_name text,
   notes text,
   created_at timestamptz not null default now(),
   payment_status text,
@@ -68,6 +70,18 @@ create table if not exists enrollment_leads (
   stripe_payment_intent_id text,
   paid_at timestamptz,
   stripe_event_id text
+);
+
+create table if not exists high_schools (
+  id uuid primary key default gen_random_uuid(),
+  slug text not null unique,
+  name text not null,
+  district text,
+  hero_image_url text not null,
+  short_pitch text not null,
+  is_active boolean not null default true,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
 );
 
 create table if not exists cms_pages (
@@ -177,11 +191,13 @@ create index if not exists idx_scholarship_college_slug on college_scholarship_t
 create index if not exists idx_class_offerings_start_date on class_offerings (start_date);
 create index if not exists idx_enrollment_class_slug on enrollment_leads (class_slug);
 create index if not exists idx_enrollment_school_slug on enrollment_leads (school_slug);
+create index if not exists idx_enrollment_high_school_slug on enrollment_leads (high_school_slug);
 create index if not exists idx_enrollment_leads_payment_status on enrollment_leads (payment_status);
 create index if not exists idx_enrollment_leads_stripe_session_id on enrollment_leads (stripe_session_id);
 create index if not exists idx_contact_inquiries_email on contact_inquiries (email);
 create index if not exists idx_contact_inquiries_created_at on contact_inquiries (created_at desc);
 create index if not exists idx_schools_slug on schools (slug);
+create index if not exists idx_high_schools_slug on high_schools (slug);
 create unique index if not exists scholarship_tiers_unique_tier
   on scholarship_tiers (school_id, tier_name, min_unweighted_gpa, max_unweighted_gpa, min_act, max_act);
 create index if not exists idx_scholarship_tiers_school_id on scholarship_tiers (school_id);
@@ -241,6 +257,7 @@ alter table cms_sections enable row level security;
 alter table college_scholarship_tiers enable row level security;
 alter table contact_inquiries enable row level security;
 alter table enrollment_leads enable row level security;
+alter table high_schools enable row level security;
 alter table scholarship_tiers disable row level security;
 alter table scholarship_tiers_import disable row level security;
 alter table schools disable row level security;
@@ -258,6 +275,11 @@ using (true);
 drop policy if exists "public read cms sections" on cms_sections;
 create policy "public read cms sections"
 on cms_sections for select
+using (true);
+
+drop policy if exists "public read high schools" on high_schools;
+create policy "public read high schools"
+on high_schools for select
 using (true);
 
 drop policy if exists "public read scholarship tiers" on college_scholarship_tiers;

@@ -18,11 +18,11 @@
         decoding="async"
       />
     </a>
-    <nav class="hidden gap-5 text-sm font-semibold text-slate-700 md:flex">
+    <nav class="hidden items-center gap-1 rounded-full border border-slate-200 bg-slate-50/80 p-1 text-xs font-semibold text-slate-700 shadow-sm lg:text-sm xl:gap-1.5 md:flex">
       {#each navItems as item}
         <a
           href={item.href}
-          class={`transition-colors hover:text-sky ${$page.url.pathname === item.href ? 'text-sky' : ''}`}
+          class={`rounded-full px-2.5 py-2 transition hover:bg-white hover:text-sky hover:shadow-sm xl:px-3 ${$page.url.pathname === item.href ? 'bg-white text-sky shadow-sm' : ''}`}
         >
           {item.label}
         </a>

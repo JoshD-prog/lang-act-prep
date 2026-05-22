@@ -97,7 +97,9 @@ function logFallbackOnce(source: string, error: unknown) {
 
   if (dev) {
     const errorText = getErrorText(error);
-    const reason = /UNABLE_TO_VERIFY_LEAF_SIGNATURE|unable to verify the first certificate/i.test(errorText)
+    const reason = /UNABLE_TO_VERIFY_LEAF_SIGNATURE|unable to verify the first certificate/i.test(
+      errorText
+    )
       ? 'local TLS certificate verification failed'
       : errorText;
 
@@ -117,11 +119,7 @@ function normalizeEligibleStates(value: string[] | string | null | undefined): s
 
   if (Array.isArray(value)) {
     return value
-      .flatMap((item) =>
-        String(item)
-          .replace(/[{}]/g, '')
-          .split(',')
-      )
+      .flatMap((item) => String(item).replace(/[{}]/g, '').split(','))
       .map((item) => item.trim().toUpperCase())
       .filter(Boolean);
   }
@@ -250,10 +248,7 @@ function evaluateTier(tier: ScholarshipTierRow, gpa: number, act: number): Evalu
     gpaState === 'below_band' && tier.min_unweighted_gpa != null
       ? Number((tier.min_unweighted_gpa - gpa).toFixed(2))
       : 0;
-  const actGap =
-    actState === 'below_band' && tier.min_act != null
-      ? tier.min_act - act
-      : 0;
+  const actGap = actState === 'below_band' && tier.min_act != null ? tier.min_act - act : 0;
   const isQualified = gpaState === 'within_band' && actState === 'within_band';
   const isReachable = gpaState !== 'above_band' && actState !== 'above_band';
   const dimensionsNeeded = (actGap > 0 ? 1 : 0) + (gpaGap > 0 ? 1 : 0);
@@ -317,31 +312,31 @@ function getUpsideValue(result: ScholarshipProjectionResult) {
 }
 
 function getNearbyUpsideProfile(result: ScholarshipProjectionResult) {
-  return result.nextSteps
-    .filter((step) => step.actGap > 0 && step.actGap <= 4)
-    .map((step) => ({
-      upside: step.projected_total_usd - result.primary.projected_total_usd,
-      actGap: step.actGap,
-      dimensionsNeeded: step.dimensionsNeeded,
-      actOnly: step.gpaGap === 0 ? 1 : 0
-    }))
-    .sort((a, b) => {
-      if (a.upside !== b.upside) return b.upside - a.upside;
-      if (a.actOnly !== b.actOnly) return b.actOnly - a.actOnly;
-      if (a.actGap !== b.actGap) return a.actGap - b.actGap;
-      return a.dimensionsNeeded - b.dimensionsNeeded;
-    })[0] ?? {
+  return (
+    result.nextSteps
+      .filter((step) => step.actGap > 0 && step.actGap <= 4)
+      .map((step) => ({
+        upside: step.projected_total_usd - result.primary.projected_total_usd,
+        actGap: step.actGap,
+        dimensionsNeeded: step.dimensionsNeeded,
+        actOnly: step.gpaGap === 0 ? 1 : 0
+      }))
+      .sort((a, b) => {
+        if (a.upside !== b.upside) return b.upside - a.upside;
+        if (a.actOnly !== b.actOnly) return b.actOnly - a.actOnly;
+        if (a.actGap !== b.actGap) return a.actGap - b.actGap;
+        return a.dimensionsNeeded - b.dimensionsNeeded;
+      })[0] ?? {
       upside: 0,
       actGap: Number.POSITIVE_INFINITY,
       dimensionsNeeded: Number.POSITIVE_INFINITY,
       actOnly: 0
-    };
+    }
+  );
 }
 
 function getClosestActGap(result: ScholarshipProjectionResult) {
-  const actGaps = result.nextSteps
-    .map((step) => step.actGap)
-    .filter((gap) => gap > 0);
+  const actGaps = result.nextSteps.map((step) => step.actGap).filter((gap) => gap > 0);
 
   return actGaps.length ? Math.min(...actGaps) : Number.POSITIVE_INFINITY;
 }
@@ -379,10 +374,7 @@ function getCurrentOfferProfile(result: ScholarshipProjectionResult) {
   };
 }
 
-function getSchoolNote(
-  schoolTiers: ScholarshipTierRow[],
-  act: number
-) {
+function getSchoolNote(schoolTiers: ScholarshipTierRow[], act: number) {
   const schoolName = schoolTiers[0]?.school_name ?? '';
 
   if (schoolName === 'Missouri University of Science and Technology') {
@@ -524,99 +516,100 @@ export function calculateScholarshipProjections({
 
   const results = Object.values(grouped)
     .map((schoolTiers): ScholarshipProjectionResult | null => {
-    const ordered = [...schoolTiers].sort((a, b) => a.tier_rank - b.tier_rank);
+      const ordered = [...schoolTiers].sort((a, b) => a.tier_rank - b.tier_rank);
 
-    const evaluated = ordered.map((tier) => evaluateTier(tier, gpa, act));
+      const evaluated = ordered.map((tier) => evaluateTier(tier, gpa, act));
 
-    const qualified = evaluated.filter((tier) => tier.isQualified);
-    const hasQualified = qualified.length > 0;
-    const reachable = evaluated.filter((tier) => tier.isReachable);
+      const qualified = evaluated.filter((tier) => tier.isQualified);
+      const hasQualified = qualified.length > 0;
+      const reachable = evaluated.filter((tier) => tier.isReachable);
 
-    if (!reachable.length && !qualified.length) {
-      return null;
-    }
-
-    const primary = hasQualified
-      ? [...qualified].sort((a, b) => {
-          if (a.projected_total_usd !== b.projected_total_usd) {
-            return b.projected_total_usd - a.projected_total_usd;
-          }
-          return a.tier_rank - b.tier_rank;
-        })[0]
-      : [...evaluated].sort((a, b) => {
-          const aReachable = a.isReachable ? 0 : 1;
-          const bReachable = b.isReachable ? 0 : 1;
-          if (aReachable !== bReachable) return aReachable - bReachable;
-          if (a.improvementScore !== b.improvementScore) return a.improvementScore - b.improvementScore;
-          if (a.projected_total_usd !== b.projected_total_usd) {
-            return b.projected_total_usd - a.projected_total_usd;
-          }
-          return a.tier_rank - b.tier_rank;
-        })[0];
-
-    const candidateNextTiers = evaluated.filter((tier) => {
-      if (!tier.isReachable || tier.isQualified) return false;
-
-      if (hasQualified) {
-        return (
-          tier.projected_total_usd > primary.projected_total_usd &&
-          tier.tier_name !== primary.tier_name
-        );
+      if (!reachable.length && !qualified.length) {
+        return null;
       }
 
-      return (
-        tier.projected_total_usd > primary.projected_total_usd ||
-        (tier.projected_total_usd === primary.projected_total_usd &&
-          tier.tier_name !== primary.tier_name)
-      );
-    });
+      const primary = hasQualified
+        ? [...qualified].sort((a, b) => {
+            if (a.projected_total_usd !== b.projected_total_usd) {
+              return b.projected_total_usd - a.projected_total_usd;
+            }
+            return a.tier_rank - b.tier_rank;
+          })[0]
+        : [...evaluated].sort((a, b) => {
+            const aReachable = a.isReachable ? 0 : 1;
+            const bReachable = b.isReachable ? 0 : 1;
+            if (aReachable !== bReachable) return aReachable - bReachable;
+            if (a.improvementScore !== b.improvementScore)
+              return a.improvementScore - b.improvementScore;
+            if (a.projected_total_usd !== b.projected_total_usd) {
+              return b.projected_total_usd - a.projected_total_usd;
+            }
+            return a.tier_rank - b.tier_rank;
+          })[0];
 
-    const groupedNextTargets = Object.values(
-      candidateNextTiers.reduce<Record<string, typeof candidateNextTiers>>((acc, tier) => {
-        const key = `${tier.tier_name}__${tier.projected_total_usd}`;
+      const candidateNextTiers = evaluated.filter((tier) => {
+        if (!tier.isReachable || tier.isQualified) return false;
 
-        if (!acc[key]) acc[key] = [];
-        acc[key].push(tier);
-        return acc;
-      }, {})
-    )
-      .map((group) => {
-        const sortedPaths = [...group].sort(comparePreferredPaths);
+        if (hasQualified) {
+          return (
+            tier.projected_total_usd > primary.projected_total_usd &&
+            tier.tier_name !== primary.tier_name
+          );
+        }
 
-        const nonDominatedPaths = sortedPaths
-          .filter((tier, index, arr) => {
+        return (
+          tier.projected_total_usd > primary.projected_total_usd ||
+          (tier.projected_total_usd === primary.projected_total_usd &&
+            tier.tier_name !== primary.tier_name)
+        );
+      });
+
+      const groupedNextTargets = Object.values(
+        candidateNextTiers.reduce<Record<string, typeof candidateNextTiers>>((acc, tier) => {
+          const key = `${tier.tier_name}__${tier.projected_total_usd}`;
+
+          if (!acc[key]) acc[key] = [];
+          acc[key].push(tier);
+          return acc;
+        }, {})
+      )
+        .map((group) => {
+          const sortedPaths = [...group].sort(comparePreferredPaths);
+
+          const nonDominatedPaths = sortedPaths.filter((tier, index, arr) => {
             return !arr.some((other, otherIndex) => {
               if (index === otherIndex) return false;
               return isDominatedPath(tier, other);
             });
           });
 
-        const representative = [...nonDominatedPaths].sort(comparePreferredPaths)[0] ?? sortedPaths[0];
+          const representative =
+            [...nonDominatedPaths].sort(comparePreferredPaths)[0] ?? sortedPaths[0];
 
-        return {
-          tier_name: representative.tier_name,
-          projected_total_usd: representative.projected_total_usd,
-          annual_award_usd: representative.annual_award_usd,
-          requires_separate_application: representative.requires_separate_application,
-          application_note: representative.application_note,
-          actGap: representative.actGap,
-          gpaGap: representative.gpaGap,
-          dimensionsNeeded: representative.dimensionsNeeded,
-          requirementDetails: representative.requirementDetails
-        };
-      })
-      .sort((a, b) => a.projected_total_usd - b.projected_total_usd)
-      .slice(0, hasQualified ? 3 : 2);
+          return {
+            tier_name: representative.tier_name,
+            projected_total_usd: representative.projected_total_usd,
+            annual_award_usd: representative.annual_award_usd,
+            requires_separate_application: representative.requires_separate_application,
+            application_note: representative.application_note,
+            actGap: representative.actGap,
+            gpaGap: representative.gpaGap,
+            dimensionsNeeded: representative.dimensionsNeeded,
+            requirementDetails: representative.requirementDetails
+          };
+        })
+        .sort((a, b) => a.projected_total_usd - b.projected_total_usd)
+        .slice(0, hasQualified ? 3 : 2);
 
-    return {
-      schoolSlug: primary.school_slug,
-      schoolName: primary.school_name,
-      shortName: primary.short_name,
-      ...getSourceMeta(ordered),
-      primary,
-      nextSteps: groupedNextTargets,
-      note: getSchoolNote(ordered, act)
-    };
+      return {
+        schoolSlug: primary.school_slug,
+        schoolName: primary.school_name,
+        shortName: primary.short_name,
+        ...getSourceMeta(ordered),
+        primary,
+        nextSteps: groupedNextTargets,
+        note: getSchoolNote(ordered, act)
+      };
     })
     .filter((result): result is ScholarshipProjectionResult => result != null);
 
@@ -733,21 +726,24 @@ export async function getClassOfferings(): Promise<ClassOffering[]> {
     });
   }
 
-  const fallback = () => classOfferings.map((offering) => {
-    const checkoutConfig = getStripeCheckoutConfig(offering);
+  const fallback = () =>
+    classOfferings.map((offering) => {
+      const checkoutConfig = getStripeCheckoutConfig(offering);
 
-    return {
-      ...offering,
-      priceCents: checkoutConfig.priceCents ?? offering.priceCents,
-      stripePriceId: checkoutConfig.priceId
-    };
-  });
+      return {
+        ...offering,
+        priceCents: checkoutConfig.priceCents ?? offering.priceCents,
+        stripePriceId: checkoutConfig.priceId
+      };
+    });
 
   const { data, error } = await (async () => {
     try {
       return await supabase
         .from('class_offerings')
-        .select('id, slug, title, schedule, location, format, price_cents, seats_available, featured, stripe_price_id')
+        .select(
+          'id, slug, title, schedule, location, format, price_cents, seats_available, featured, stripe_price_id'
+        )
         .order('featured', { ascending: false })
         .order('start_date', { ascending: true })
         .abortSignal(getSupabaseReadSignal());
@@ -796,19 +792,20 @@ export async function getSchools(): Promise<School[]> {
   const { data, error } = await (async () => {
     try {
       return await supabase
-        .from('schools')
+        .from('high_schools')
         .select('id, slug, name, district, hero_image_url, short_pitch')
+        .eq('is_active', true)
         .order('name', { ascending: true })
         .abortSignal(getSupabaseReadSignal());
     } catch (error) {
-      logFallbackOnce('Schools', error);
+      logFallbackOnce('High schools', error);
       return { data: null, error };
     }
   })();
 
   if (error || !data) {
     if (error) {
-      logFallbackOnce('Schools', error);
+      logFallbackOnce('High schools', error);
     }
     return schools;
   }
@@ -838,7 +835,8 @@ export async function getScholarshipTiers() {
     try {
       return await supabase
         .from('scholarship_tiers_with_school')
-        .select(`
+        .select(
+          `
       scholarship_tier_id,
       school_id,
       school_slug,
@@ -880,7 +878,8 @@ export async function getScholarshipTiers() {
       source_url,
       source_note,
       tier_last_updated
-    `)
+    `
+        )
         .eq('school_is_active', true)
         .eq('tier_is_active', true)
         .order('sort_priority_default', { ascending: true })

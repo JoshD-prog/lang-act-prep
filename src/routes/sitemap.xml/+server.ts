@@ -66,7 +66,7 @@ export const GET: RequestHandler = async () => {
         .limit(1)
         .maybeSingle(),
       supabase
-        .from('schools')
+        .from('high_schools')
         .select('slug, updated_at')
         .order('updated_at', { ascending: false })
     ]);

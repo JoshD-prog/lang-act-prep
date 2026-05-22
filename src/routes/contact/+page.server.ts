@@ -1,7 +1,14 @@
 import { createAdminSupabaseClient } from '$lib/server/supabase';
 import { sendAdminContactInquiryNotification } from '$lib/server/email';
+import { getSchools } from '$lib/server/data';
 import { fail } from '@sveltejs/kit';
 import type { Actions } from './$types';
+
+export async function load() {
+  return {
+    schools: await getSchools()
+  };
+}
 
 export const actions: Actions = {
   default: async ({ request }) => {

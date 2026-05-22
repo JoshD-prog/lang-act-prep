@@ -1,9 +1,9 @@
 <script lang="ts">
   import { HEAR_ABOUT_US_OPTIONS } from '$lib/content/hearAboutUsOptions';
   import Seo from '$lib/components/Seo.svelte';
-  import type { ActionData } from './$types';
+  import type { ActionData, PageData } from './$types';
 
-  let { form }: { form: ActionData } = $props();
+  let { data, form }: { data: PageData; form: ActionData } = $props();
 </script>
 
 <Seo
@@ -38,17 +38,29 @@
     <input name="phone" class="mt-1 w-full rounded-xl border-slate-300" value={form?.values?.phone ?? ''} />
   </label>
   <label class="block">
-    <span class="text-sm font-semibold text-slate-700">Student grade (optional)</span>
+    <span class="text-sm font-semibold text-slate-700">Student grade</span>
     <input name="studentGrade" placeholder="9, 10, 11, 12" class="mt-1 w-full rounded-xl border-slate-300" value={form?.values?.studentGrade ?? ''} />
   </label>
 
   <label class="block">
-    <span class="text-sm font-semibold text-slate-700">Student school (optional)</span>
-    <input name="studentSchool" class="mt-1 w-full rounded-xl border-slate-300" value={form?.values?.studentSchool ?? ''} />
+    <span class="text-sm font-semibold text-slate-700">Student school</span>
+    <input
+      name="studentSchool"
+      list="contact-school-options"
+      class="mt-1 w-full rounded-xl border-slate-300"
+      value={form?.values?.studentSchool ?? ''}
+    />
+    <datalist id="contact-school-options">
+      {#each data.schools as school}
+        <option value={school.name}>
+          {school.district ? `${school.name} - ${school.district}` : school.name}
+        </option>
+      {/each}
+    </datalist>
   </label>
 
   <label class="block">
-    <span class="text-sm font-semibold text-slate-700">How did you hear about us? (optional)</span>
+    <span class="text-sm font-semibold text-slate-700">How did you hear about us?</span>
     <select name="heardAboutUs" class="mt-1 w-full rounded-xl border-slate-300">
       <option value="">Select one</option>
       {#each HEAR_ABOUT_US_OPTIONS as option}

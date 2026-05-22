@@ -9,12 +9,38 @@
   let { data, form }: { data: PageData; form: ActionData } = $props();
 
   let selectedClass = $state('');
+  let schoolName = $state('');
+  let selectedSchoolSlug = $state('');
+  let schoolInitialized = $state(false);
 
   $effect(() => {
     if (!selectedClass) {
       selectedClass = form?.classSlug ?? data.selectedClass ?? '';
     }
   });
+
+  const selectedSchool = $derived(
+    data.schools.find((school) => school.slug === (form?.schoolSlug ?? data.selectedSchool))
+  );
+
+  $effect(() => {
+    if (!schoolInitialized) {
+      schoolName = form?.schoolName ?? selectedSchool?.name ?? '';
+      selectedSchoolSlug = form?.schoolSlug ?? data.selectedSchool ?? '';
+      schoolInitialized = true;
+    }
+  });
+
+  function syncSchoolSelection(event?: Event) {
+    const currentSchoolName =
+      event?.currentTarget instanceof HTMLInputElement ? event.currentTarget.value : schoolName;
+    const normalizedSchoolName = currentSchoolName.trim().toLowerCase();
+    const exactMatch = data.schools.find(
+      (school) => school.name.toLowerCase() === normalizedSchoolName
+    );
+
+    selectedSchoolSlug = exactMatch?.slug ?? '';
+  }
 
   const selectedClassOffering = $derived(
     data.classes.find((classOffering) => classOffering.slug === selectedClass)
@@ -99,6 +125,7 @@
   {#each Object.entries(data.marketingParams) as [key, value]}
     <input type="hidden" name={key} value={value} />
   {/each}
+  <input type="hidden" name="highSchoolSlug" value={selectedSchoolSlug} />
 
   <label class="block">
     <span class="text-sm font-semibold text-slate-700">Student name</span>
@@ -122,7 +149,30 @@
   </label>
 
   <label class="block">
-    <span class="text-sm font-semibold text-slate-700">How did you hear about us? (optional)</span>
+    <span class="text-sm font-semibold text-slate-700">Student school</span>
+    <input
+      name="schoolName"
+      list="school-options"
+      bind:value={schoolName}
+      oninput={syncSchoolSelection}
+      onchange={syncSchoolSelection}
+      placeholder="Start typing a school name"
+      class="mt-1 w-full rounded-xl border-slate-300"
+    />
+    <datalist id="school-options">
+      {#each data.schools as school}
+        <option value={school.name}>
+          {school.district ? `${school.name} - ${school.district}` : school.name}
+        </option>
+      {/each}
+    </datalist>
+    <p class="mt-1 text-xs text-slate-500">
+      Choose a matching school or type your school manually.
+    </p>
+  </label>
+
+  <label class="block">
+    <span class="text-sm font-semibold text-slate-700">How did you hear about us?</span>
     <select name="heardAboutUs" class="mt-1 w-full rounded-xl border-slate-300">
       <option value="">Select one</option>
       {#each HEAR_ABOUT_US_OPTIONS as option}

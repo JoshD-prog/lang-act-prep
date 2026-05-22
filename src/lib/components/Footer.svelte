@@ -4,6 +4,7 @@
       <h3 class="text-sm font-semibold uppercase tracking-wide text-slate-500">Program</h3>
       <ul class="mt-3 space-y-2 text-sm text-slate-700">
         <li><a class="hover:text-sky" href="/classes">Class offerings</a></li>
+        <li><a class="hover:text-sky" href="/schools">Find your school</a></li>
         <li><a class="hover:text-sky" href="/how-it-works">How enrollment works</a></li>
       </ul>
     </section>

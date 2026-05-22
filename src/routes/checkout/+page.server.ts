@@ -6,10 +6,15 @@ import { fail, redirect } from '@sveltejs/kit';
 import { getClassOfferings } from '$lib/server/data';
 import type { Actions } from './$types';
 
+function isMissingHighSchoolColumn(error: unknown) {
+  return /high_school_slug/i.test(JSON.stringify(error));
+}
+
 export async function load({ url, cookies }) {
   const classSlug = url.searchParams.get('class') ?? '';
   const email = url.searchParams.get('email') ?? '';
   const leadId = url.searchParams.get('lead') ?? '';
+  const highSchoolSlug = url.searchParams.get('school') ?? '';
   const heardAboutUs = cookies.get('enrollment_heard_about_us') ?? '';
 
   const offerings = await getClassOfferings();
@@ -24,6 +29,7 @@ export async function load({ url, cookies }) {
     classFormat: offering?.format ?? '',
     email,
     leadId,
+    highSchoolSlug,
     heardAboutUs,
     stripeReady,
     marketingParams: getMarketingParams(url)
@@ -37,6 +43,7 @@ export const actions: Actions = {
     const classSlug = String(form.get('classSlug') ?? '').trim();
     const email = String(form.get('email') ?? '').trim();
     const leadId = String(form.get('leadId') ?? '').trim();
+    const highSchoolSlug = String(form.get('highSchoolSlug') ?? form.get('schoolSlug') ?? '').trim();
     const heardAboutUs = String(
       form.get('heardAboutUs') ?? cookies.get('enrollment_heard_about_us') ?? ''
     ).trim();
@@ -48,19 +55,52 @@ export const actions: Actions = {
       });
     }
 
-    if (leadId && heardAboutUs) {
+    if (leadId && (heardAboutUs || highSchoolSlug)) {
       const supabase = createAdminSupabaseClient();
 
       if (supabase) {
+        const leadUpdates = {
+          ...(heardAboutUs
+            ? {
+                heard_about_us: heardAboutUs
+              }
+            : {}),
+          ...(highSchoolSlug
+            ? {
+                high_school_slug: highSchoolSlug
+              }
+            : {})
+        };
+
         const { error: updateError } = await supabase
           .from('enrollment_leads')
-          .update({
-            heard_about_us: heardAboutUs
-          })
+          .update(leadUpdates)
           .eq('id', leadId);
 
-        if (updateError) {
-          console.error('Enrollment lead heard_about_us update failed:', updateError);
+        if (updateError && isMissingHighSchoolColumn(updateError)) {
+          const fallbackUpdates = {
+            ...(heardAboutUs
+              ? {
+                  heard_about_us: heardAboutUs
+                }
+              : {}),
+            ...(highSchoolSlug
+              ? {
+                  school_slug: highSchoolSlug
+                }
+              : {})
+          };
+
+          const { error: fallbackUpdateError } = await supabase
+            .from('enrollment_leads')
+            .update(fallbackUpdates)
+            .eq('id', leadId);
+
+          if (fallbackUpdateError) {
+            console.error('Enrollment lead checkout update failed:', fallbackUpdateError);
+          }
+        } else if (updateError) {
+          console.error('Enrollment lead checkout update failed:', updateError);
         }
       }
     }
@@ -69,6 +109,7 @@ export const actions: Actions = {
       classSlug,
       email,
       leadId,
+      highSchoolSlug,
       heardAboutUs,
       marketingParams
     });

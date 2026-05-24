@@ -142,16 +142,16 @@
       <div class="mt-3 space-y-3">
         {#each nearbyScoreTargets as target}
           <div class="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3">
-            <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-              <div>
+            <div class="grid gap-2 sm:grid-cols-[minmax(0,1fr)_max-content] sm:items-center">
+              <div class="min-w-0">
                 <p class="text-sm font-bold text-ink">
                   +{target.actGap} ACT point{target.actGap === 1 ? '' : 's'}
                 </p>
-                <p class="mt-1 text-sm text-slate-600">
+                <p class="mt-1 max-w-[30rem] text-sm leading-5 text-slate-600">
                   Toward {getTierDisplayName(target, school.primary.tier_name)}
                 </p>
               </div>
-              <p class="text-sm font-black text-sky-800">
+              <p class="whitespace-nowrap text-left text-sm font-black text-sky-800 sm:text-right">
                 +{formatCurrency(target.additionalFourYearValue)}
               </p>
             </div>

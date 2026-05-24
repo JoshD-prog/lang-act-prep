@@ -63,8 +63,14 @@ export interface ScholarshipNextStep {
   tier_name: string;
   projected_total_usd: number;
   annual_award_usd: number;
+  classificationBadges: string[];
+  residencyBadge: string | null;
   requires_separate_application: boolean;
   application_note: string | null;
+  regional_rule_note: string | null;
+  renewable: boolean;
+  renewal_note: string | null;
+  is_competitive: boolean | null | undefined;
   actGap: number;
   gpaGap: number;
   dimensionsNeeded: number;
@@ -78,10 +84,12 @@ export interface ScholarshipProjectionResult {
   sourceType: 'modeled' | 'published' | 'school-page' | 'mixed';
   sourceLabel: string;
   sourceUrl: string | null;
+  lastUpdated: string | null;
   primary: {
     tier_name: string;
     annual_award_usd: number;
     projected_total_usd: number;
+    isQualified?: boolean;
   };
   nextSteps: ScholarshipNextStep[];
   note: string | null;

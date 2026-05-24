@@ -1,0 +1,31 @@
+[
+  {
+    "school_slug": "sample-state",
+    "school_name": "Sample State University",
+    "tier_name": "Founders Award",
+    "tier_rank": 1,
+    "min_unweighted_gpa": 3.2,
+    "max_unweighted_gpa": null,
+    "min_act": 24,
+    "max_act": null,
+    "annual_award_usd": 5000,
+    "years_assumed": 4,
+    "projected_total_usd": 20000,
+    "residency_rule_type": "all_students",
+    "eligible_states": null,
+    "regional_rule_note": null,
+    "requires_separate_application": false,
+    "application_note": null,
+    "renewable": true,
+    "renewal_note": null,
+    "is_competitive": false,
+    "source_url": "https://example.edu/scholarships",
+    "source_note": null,
+    "scholarship_page_url": null,
+    "school_notes_short": null,
+    "school_is_active": true,
+    "tier_is_active": true,
+    "tier_last_updated": "2026-05-01",
+    "school_last_updated": null
+  }
+]

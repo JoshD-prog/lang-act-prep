@@ -199,7 +199,7 @@
         View online course catalog
       </a>
       <p class="mt-2 max-w-xs text-xs leading-relaxed text-slate-500 lg:ml-auto">
-        The catalog includes many courses, so look for ACT, SAT, or CLT prep options.
+        The catalog includes many courses, look for the SAT/ACT/CLT Prep Courses.
       </p>
     </div>
   </div>

@@ -126,9 +126,9 @@
       <div class="mt-6 rounded-3xl border border-white/10 bg-white/10 p-5 backdrop-blur">
         <p class="text-xs font-bold uppercase tracking-[0.16em] text-sky-100/80">What that can mean in dollars</p>
         <p class="mt-2 max-w-2xl text-sm leading-relaxed text-sky-50/85">
-          These examples are based on published scholarship pages and can be updated manually as schools change their
-          award tables. Most clean 1 to 3 point ACT jumps are worth about {money.format(4000)} to {money.format(6000)}
-          over four years, while larger jumps can lead to much larger returns.
+          These examples use published scholarship tables to show how a stronger ACT score can affect merit aid. Even a
+          1 to 3 point improvement can be worth about {money.format(4000)} to {money.format(6000)} over four years, and
+          larger score gains can create much bigger opportunities.
         </p>
 
         <div class="mt-4 grid gap-3 md:grid-cols-3">

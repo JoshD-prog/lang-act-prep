@@ -32,7 +32,7 @@
 {#if !data.stripeReady}
   <section class="mx-auto mb-4 max-w-3xl rounded-2xl border border-amber-300 bg-amber-50 p-4">
     <p class="text-sm font-semibold text-amber-900">
-      Not ready yet: Checkout is temporarily unavailable while Stripe setup is being completed.
+      Checkout is temporarily unavailable. Please contact us and we can help finish your enrollment.
     </p>
   </section>
 {/if}

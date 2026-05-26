@@ -86,20 +86,20 @@
 
           <div class="relative">
             <div class="rounded-[1.5rem] bg-[linear-gradient(160deg,#0f172a,#1e3a8a,#0f766e)] p-6 text-white shadow-xl shadow-slate-900/20">
-              <p class="text-xs font-bold uppercase tracking-[0.16em] text-sky-200">Hero image placeholder</p>
-              <h2 class="mt-3 text-2xl font-extrabold">Swap in students learning together</h2>
+              <p class="text-xs font-bold uppercase tracking-[0.16em] text-sky-200">Focused ACT prep</p>
+              <h2 class="mt-3 text-2xl font-extrabold">A clear plan for the week before test day.</h2>
               <p class="mt-3 text-sm leading-relaxed text-slate-200">
-                A wide, candid classroom or small-group study photo will work better here than a personal headshot.
+                Students practice timing, section strategy, and the decisions that matter most when the clock is running.
               </p>
 
               <div class="mt-5 grid gap-3 sm:grid-cols-2">
                 <div class="rounded-2xl bg-white/10 px-4 py-3 backdrop-blur">
-                  <p class="text-xs font-bold uppercase tracking-[0.14em] text-sky-100/80">Best fit</p>
-                  <p class="mt-2 text-sm font-semibold">High-school students at desks or in discussion</p>
+                  <p class="text-xs font-bold uppercase tracking-[0.14em] text-sky-100/80">Class focus</p>
+                  <p class="mt-2 text-sm font-semibold">High-yield practice and pacing systems</p>
                 </div>
                 <div class="rounded-2xl bg-white/10 px-4 py-3 backdrop-blur">
-                  <p class="text-xs font-bold uppercase tracking-[0.14em] text-sky-100/80">Avoid</p>
-                  <p class="mt-2 text-sm font-semibold">Corporate-looking tutoring or young-child classroom shots</p>
+                  <p class="text-xs font-bold uppercase tracking-[0.14em] text-sky-100/80">Goal</p>
+                  <p class="mt-2 text-sm font-semibold">Walk in with a repeatable test-day plan</p>
                 </div>
               </div>
             </div>

@@ -116,8 +116,7 @@ export const actions: Actions = {
 
     if (!sessionUrl) {
       return fail(500, {
-        message:
-          'Stripe is not configured yet. Add STRIPE_SECRET_KEY and a class-specific stripe_price_id.'
+        message: 'Checkout is temporarily unavailable. Please contact us and we can help finish your enrollment.'
       });
     }
 

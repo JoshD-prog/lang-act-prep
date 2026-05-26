@@ -58,19 +58,19 @@
       {data.classTitle ? `${data.classTitle} is confirmed.` : 'Your enrollment is confirmed.'}
       You will receive an email with course details and next steps.
     {:else if data.paymentReceived}
-      Stripe shows the payment succeeded, but the site is still waiting for the webhook to finish recording the enrollment.
-      Refresh this page in a few seconds to confirm the full flow completed.
+      Your payment went through, and we are finishing your enrollment confirmation.
+      Refresh this page in a few seconds, or contact us if you do not receive your course email soon.
     {:else if data.sessionFound}
-      Stripe returned to the site, but this page does not show a paid checkout session yet.
+      We found your checkout, but payment has not been confirmed yet.
       If you just completed payment, wait a moment and refresh. Otherwise, return to classes and try again.
     {:else}
-      This page needs a valid Stripe session to confirm enrollment.
+      We could not find a checkout to confirm. Return to classes to restart enrollment, or contact us for help.
     {/if}
   </p>
 
   {#if data.sessionId}
     <p class="mt-3 text-sm text-slate-500">
-      Session ID: <span class="font-mono">{data.sessionId}</span>
+      Checkout reference: <span class="font-mono">{data.sessionId}</span>
     </p>
   {/if}
 

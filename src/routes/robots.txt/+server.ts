@@ -1,13 +1,14 @@
 import { env as publicEnv } from '$env/dynamic/public';
+import { getSiteUrl as getConfiguredSiteUrl } from '$lib/seo';
 import type { RequestHandler } from './$types';
 
-function getSiteUrl() {
+function getSiteUrl(fallbackOrigin?: string) {
   const siteUrl = publicEnv.PUBLIC_SITE_URL?.trim();
-  return (siteUrl && siteUrl.replace(/\/+$/, '')) || 'http://localhost:5173';
+  return (siteUrl && siteUrl.replace(/\/+$/, '')) || getConfiguredSiteUrl(fallbackOrigin);
 }
 
-export const GET: RequestHandler = async () => {
-  const siteUrl = getSiteUrl();
+export const GET: RequestHandler = async ({ url }) => {
+  const siteUrl = getSiteUrl(url.origin);
   const body = `User-agent: *
 Allow: /
 

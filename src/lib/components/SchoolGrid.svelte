@@ -9,7 +9,7 @@
     {@const needsDarkLogoBackdrop =
       school.heroImageUrl.includes('FFFFFF') || school.heroImageUrl.includes('christ-preparatory-academy')}
     <a
-      href={`/schools/${school.slug}`}
+      href={`/classes?school=${school.slug}`}
       class="group overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-lg shadow-slate-900/5 transition hover:-translate-y-1 hover:shadow-xl"
     >
       <img
@@ -24,7 +24,7 @@
           <span
             class="inline-flex items-center justify-center rounded-full bg-ink px-5 py-2.5 text-sm font-bold text-white shadow-sm shadow-slate-900/20 transition group-hover:bg-sky"
           >
-            See ACT options
+            See class options
           </span>
         </div>
       </div>

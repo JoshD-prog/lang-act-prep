@@ -1,14 +1,35 @@
 <script lang="ts">
   import Seo from '$lib/components/Seo.svelte';
   import SchoolGrid from '$lib/components/SchoolGrid.svelte';
+  import { getSiteUrl, toAbsoluteUrl } from '$lib/seo';
   import type { PageData } from './$types';
 
   let { data }: { data: PageData } = $props();
+  const siteUrl = getSiteUrl();
+  const structuredData = $derived([
+    {
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      name: 'Kansas City school-specific ACT prep pages',
+      url: toAbsoluteUrl('/schools', siteUrl),
+      description: 'Find Kansas City-area school pages for local ACT cram course options.',
+      mainEntity: {
+        '@type': 'ItemList',
+        itemListElement: data.schools.map((school, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          url: toAbsoluteUrl(`/schools/${school.slug}`, siteUrl),
+          name: `${school.name} ACT prep`
+        }))
+      }
+    }
+  ]);
 </script>
 
 <Seo
   title="School-Specific ACT Prep Pages"
   description="Find your Kansas City-area school page and see ACT cram course options for local families."
+  structuredData={structuredData}
 />
 
 <section class="rounded-3xl border border-slate-200 bg-white p-8 shadow-lg shadow-slate-900/5">

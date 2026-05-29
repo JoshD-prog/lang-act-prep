@@ -90,7 +90,7 @@
       body: [
         'KC Cram Course may collect limited personal information necessary for enrollment, communication, payment processing, scheduling, and course delivery.',
         'Payment information is processed by third-party payment providers and is not stored directly by KC Cram Course except as reflected in transaction records made available through those providers.',
-        'KC Cram Course does not sell or share personal information.'
+        'KC Cram Course does not sell personal information. Personal information may be used or provided to service providers only as needed to process enrollment, payment, communication, scheduling, or course delivery.'
       ]
     },
     {
@@ -138,7 +138,7 @@
         {
           title: 'Waitlist',
           list: [
-            'If a course reaches capacity, students may join a waitlist by contacting K3C.',
+            'If a course reaches capacity, students may join a waitlist by contacting KC Cram Course.',
             'If a seat becomes available, waitlisted families may be contacted in an order reasonably determined by KC Cram Course.',
             'A seat offer must be accepted and paid within the stated deadline or the seat may be offered to another student.'
           ]
@@ -158,7 +158,7 @@
       id: 'force-majeure',
       title: '16. Force Majeure',
       body: [
-        'KC Cram Course shall not be liable for any delay, disruption, or failure to perform caused by events beyond its reasonable control, including severe weather, natural disaster, fire, power outage, internet outage, facility closure, public health emergency, labor disruption, governmental action, or other emergency conditions. In such cases, K3C may:'
+        'KC Cram Course shall not be liable for any delay, disruption, or failure to perform caused by events beyond its reasonable control, including severe weather, natural disaster, fire, power outage, internet outage, facility closure, public health emergency, labor disruption, governmental action, or other emergency conditions. In such cases, KC Cram Course may:'
       ],
       list: [
         'Reschedule sessions;',
@@ -174,6 +174,7 @@
 <Seo
   title="Terms and Conditions"
   description="Read the Terms & Conditions for KC Cram Course, including enrollment, refunds, attendance, media release, seat transfer, and force majeure policies."
+  robots="noindex, follow"
 />
 
 <div class="bg-white">

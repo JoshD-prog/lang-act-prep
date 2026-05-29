@@ -6,7 +6,7 @@ export const navItems = [
   { href: '/schools', label: 'Find Your School' },
   { href: '/resources', label: 'Resources' },
   { href: '/scholarship-calculator', label: 'Scholarship Calculator' },
-  { href: '/529-update', label: 'ACT Prep ROI' },
+  { href: '/act-prep-roi', label: 'ACT Prep ROI' },
   { href: '/about', label: 'About' }
 ];
 

@@ -3,7 +3,7 @@
   import Hero from '$lib/components/Hero.svelte';
   import PageSection from '$lib/components/PageSection.svelte';
   import { homepageSections } from '$lib/content/site';
-  import { getSiteUrl, toAbsoluteUrl } from '$lib/seo';
+  import { getFaqSchema, getOrganizationSchema, getSiteUrl, getWebsiteSchema } from '$lib/seo';
 
   const siteUrl = getSiteUrl();
   const money = new Intl.NumberFormat('en-US', {
@@ -43,26 +43,32 @@
       sourceUrl: 'https://financialaid.missouri.edu/scholarships/freshmen-ftc/'
     }
   ];
-  const structuredData = [
+  const faqs = [
     {
-      '@context': 'https://schema.org',
-      '@type': 'WebSite',
-      name: 'KC Cram Course',
-      url: siteUrl,
-      description:
-        'Focused ACT prep classes, scholarship planning tools, and enrollment support designed for the week before test day.'
+      question: 'Is this ACT prep course a good fit for my student?',
+      answer:
+        'It is a good fit for students who want a focused plan before test day, especially if they need help with timing, strategy, and knowing what to practice first.'
     },
     {
-      '@context': 'https://schema.org',
-      '@type': 'EducationalOrganization',
-      name: 'KC Cram Course',
-      url: siteUrl,
-      logo: toAbsoluteUrl('/branding/logo.png', siteUrl),
-      image: toAbsoluteUrl('/branding/logo.jpg', siteUrl),
-      description:
-        'Focused ACT prep classes, scholarship planning tools, and enrollment support designed for the week before test day.',
-      areaServed: 'Kansas City'
+      question: 'Is ACT prep worth it?',
+      answer:
+        'For many families, yes. Even a small ACT score increase can open the door to higher scholarship tiers, which can be worth far more than the cost of the course. See the ACT Prep ROI page for examples.'
+    },
+    {
+      question: 'What will my student get out of the week-before-test format?',
+      answer:
+        'Students leave with a clearer plan for each ACT section, stronger pacing habits, and a short list of high-value skills to focus on before test day.'
+    },
+    {
+      question: 'Should we wait until my student has more time to study?',
+      answer:
+        'Not necessarily. The week before the ACT is a valuable time to sharpen decisions, timing, and confidence. A short, focused course can help students use that final stretch well.'
     }
+  ];
+  const structuredData = [
+    getWebsiteSchema(siteUrl),
+    getOrganizationSchema(siteUrl),
+    getFaqSchema(faqs)
   ];
 </script>
 
@@ -184,6 +190,24 @@
         <div class="mt-3 text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">Jack R.</div>
       </blockquote>
     </div>
+  </div>
+</section>
+
+<section class="mt-10 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm shadow-slate-900/5 md:p-8">
+  <p class="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">ACT prep questions</p>
+  <h2 class="mt-2 text-2xl font-black text-ink">Quick answers for Kansas City families.</h2>
+  <div class="mt-5 grid gap-4 md:grid-cols-2">
+    {#each faqs as faq}
+      <article class="rounded-2xl bg-slate-50 p-5">
+        <h3 class="text-base font-extrabold text-ink">{faq.question}</h3>
+        <p class="mt-2 text-sm leading-6 text-slate-700">{faq.answer}</p>
+        {#if faq.question === 'Is ACT prep worth it?'}
+          <a href="/act-prep-roi" class="mt-3 inline-flex text-sm font-bold text-sky hover:underline">
+            See ACT prep ROI examples
+          </a>
+        {/if}
+      </article>
+    {/each}
   </div>
 </section>
 

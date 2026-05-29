@@ -24,7 +24,9 @@
 </script>
 
 {#if projections.length === 0}
-  <ScholarshipEmptyState {hasSearched} />
+  {#if hasSearched}
+    <ScholarshipEmptyState {hasSearched} />
+  {/if}
 {:else}
   {@const topNearbyOpportunities = getTopNearbyOpportunities(projections)}
   <div class="mt-8 space-y-8">

@@ -1,14 +1,17 @@
 <script lang="ts">
   import { preserveMarketingParams, trackEnrollCta } from '$lib/analytics';
   import Seo from '$lib/components/Seo.svelte';
-  import { getSiteUrl, toAbsoluteUrl } from '$lib/seo';
+  import { getOrganizationSchema, getSiteUrl, toAbsoluteUrl } from '$lib/seo';
   import type { PageData } from './$types';
 
   let { data }: { data: PageData } = $props();
   const siteUrl = getSiteUrl();
 
   const description = $derived(
-    `${data.school.name} families can review ACT cram course options, pricing, and upcoming class dates.`
+    `${data.school.name} families can review Kansas City-area ACT prep options, pricing, upcoming class dates, and scholarship planning tools.`
+  );
+  const schoolPageName = $derived(
+    `ACT prep for ${data.school.name} students in the Kansas City area`
   );
   const structuredData = $derived([
     {
@@ -35,10 +38,11 @@
         }
       ]
     },
+    getOrganizationSchema(siteUrl),
     {
       '@context': 'https://schema.org',
       '@type': 'WebPage',
-      name: `${data.school.name} ACT prep`,
+      name: schoolPageName,
       url: toAbsoluteUrl(`/schools/${data.school.slug}`, siteUrl),
       description,
       isPartOf: {
@@ -47,8 +51,9 @@
         url: siteUrl
       },
       about: {
-        '@type': 'Thing',
+        '@type': 'School',
         name: data.school.name,
+        areaServed: data.school.district,
         description: data.school.shortPitch
       }
     }
@@ -56,7 +61,7 @@
 </script>
 
 <Seo
-  title={data.school.name}
+  title={`ACT Prep for ${data.school.name}`}
   description={description}
   image={data.school.heroImageUrl}
   structuredData={structuredData}
@@ -74,6 +79,10 @@
     <p class="mt-4 text-lg text-slate-600">{data.school.shortPitch}</p>
     <p class="mt-3 text-lg text-slate-600">
       Families who book early can pay $249 instead of $299.
+    </p>
+    <p class="mt-3 text-base leading-7 text-slate-600">
+      This page helps {data.school.name} families compare local ACT prep timing, class pricing, and scholarship planning
+      tools without starting from a generic test-prep search.
     </p>
     <div class="mt-6 flex justify-center">
       <a

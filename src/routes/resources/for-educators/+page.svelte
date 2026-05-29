@@ -15,5 +15,5 @@
     <li class="rounded-xl bg-slate-50 p-4"><strong>Student fit notes:</strong> ideal entry points by baseline score and timeline.</li>
     <li class="rounded-xl bg-slate-50 p-4"><strong>Scheduling packet:</strong> test-date alignment and school-specific enrollment link support.</li>
   </ul>
-  <a href="mailto:hello@actprepclasses.com" class="mt-6 inline-flex rounded-full bg-ink px-5 py-2 text-sm font-bold text-white">Request counselor packet</a>
+  <a href="/contact" class="mt-6 inline-flex rounded-full bg-ink px-5 py-2 text-sm font-bold text-white">Request counselor packet</a>
 </section>

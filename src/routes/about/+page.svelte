@@ -18,7 +18,7 @@
 
       <p class="mt-4 text-lg text-slate-600">
         I'm a high school teacher in Kansas City and have been
-        <strong>teaching ACT and SAT preparation since 2015</strong>. I've spent a decade helping high school students
+        <strong>teaching test prep since 2015</strong>. I've spent years helping high school students
         build confidence, prepare for high-stakes exams, and make complicated academic work feel manageable.
       </p>
 
@@ -61,7 +61,9 @@
   <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
     <article class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
       <p class="text-3xl font-black text-ink">+5-6</p>
-      <p class="mt-2 text-sm font-semibold text-slate-700">Composite ACT score improvement</p>
+      <p class="mt-2 text-sm font-semibold text-slate-700">
+        Running three-year average composite ACT score improvement for my ACT students
+      </p>
     </article>
 
     <article class="rounded-2xl border border-slate-200 bg-slate-50 p-5">

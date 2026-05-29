@@ -3,7 +3,7 @@
   import { getClassScheduleDetails } from '$lib/content/classSchedule';
   import { getEarlyBirdOffer } from '$lib/content/earlyBird';
   import Seo from '$lib/components/Seo.svelte';
-  import { getSiteUrl, toAbsoluteUrl } from '$lib/seo';
+  import { getFaqSchema, getSiteUrl, toAbsoluteUrl } from '$lib/seo';
   import type { PageData } from './$types';
 
   let { data }: { data: PageData } = $props();
@@ -15,6 +15,33 @@
     maximumFractionDigits: 0
   });
   const pottersSchoolCatalogUrl = 'https://www.pottersschool.org/course/list/';
+  const classDateRanges: Record<string, { startDate: string; endDate: string }> = {
+    'act-cram-june-2026': { startDate: '2026-06-08', endDate: '2026-06-11' },
+    'act-cram-july-2026': { startDate: '2026-07-06', endDate: '2026-07-09' },
+    'act-cram-september-2026': { startDate: '2026-09-14', endDate: '2026-09-17' }
+  };
+  const classFaqs = [
+    {
+      question: 'Is ACT prep worth it for my student?',
+      answer:
+        'For many families, it is. A stronger ACT score can improve admissions confidence and may move a student into higher scholarship tiers. The ACT Prep ROI page shows why even a modest score increase can matter.'
+    },
+    {
+      question: 'What does the course include?',
+      answer:
+        'Each course includes four 90-minute sessions during the week before the ACT, with practical work on timing, strategy, common question types, and test-day decisions.'
+    },
+    {
+      question: 'Will this help if my student has not studied much yet?',
+      answer:
+        'Yes. The course is built to give students structure quickly. They will not master every topic in a week, but they can make better decisions, avoid common traps, and use their remaining practice time more wisely.'
+    },
+    {
+      question: 'When should we enroll?',
+      answer:
+        'Enroll as soon as you know the test date your student is targeting. Seats are limited, and the course is scheduled to match the week before the ACT.'
+    }
+  ];
   const getEnrollHref = (classSlug: string) => {
     const params = new URLSearchParams({ class: classSlug });
 
@@ -49,10 +76,41 @@
               url: siteUrl
             },
             courseMode: classOffering.format,
+            hasCourseInstance: {
+              '@type': 'CourseInstance',
+              name: classOffering.title,
+              courseMode: classOffering.format,
+              startDate: classDateRanges[classOffering.slug]?.startDate,
+              endDate: classDateRanges[classOffering.slug]?.endDate,
+              courseSchedule: {
+                '@type': 'Schedule',
+                repeatFrequency: 'Daily',
+                repeatCount: 4,
+                byDay: ['https://schema.org/Monday', 'https://schema.org/Tuesday', 'https://schema.org/Wednesday', 'https://schema.org/Thursday']
+              },
+              location: classOffering.location
+                ? {
+                    '@type': 'Place',
+                    name: classOffering.location,
+                    address: {
+                      '@type': 'PostalAddress',
+                      addressLocality: classOffering.location.includes('Piper') ? 'Kansas City' : 'Shawnee',
+                      addressRegion: 'KS',
+                      addressCountry: 'US'
+                    }
+                  }
+                : undefined
+            },
             location: classOffering.location
               ? {
                   '@type': 'Place',
-                  name: classOffering.location
+                  name: classOffering.location,
+                  address: {
+                    '@type': 'PostalAddress',
+                    addressLocality: classOffering.location.includes('Piper') ? 'Kansas City' : 'Shawnee',
+                    addressRegion: 'KS',
+                    addressCountry: 'US'
+                  }
                 }
               : undefined,
             offers: {
@@ -68,7 +126,8 @@
           }
         }))
       }
-    }
+    },
+    getFaqSchema(classFaqs)
   ]);
 </script>
 
@@ -205,6 +264,24 @@
   </div>
 </section>
 
+<section class="mt-8 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm shadow-slate-900/5 md:p-8">
+  <p class="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">Class details</p>
+  <h2 class="mt-2 text-2xl font-black text-ink">Common questions before families enroll.</h2>
+  <div class="mt-5 grid gap-4 md:grid-cols-2">
+    {#each classFaqs as faq}
+      <article class="rounded-2xl bg-slate-50 p-5">
+        <h3 class="text-base font-extrabold text-ink">{faq.question}</h3>
+        <p class="mt-2 text-sm leading-6 text-slate-700">{faq.answer}</p>
+        {#if faq.question === 'Is ACT prep worth it for my student?'}
+          <a href="/act-prep-roi" class="mt-3 inline-flex text-sm font-bold text-sky hover:underline">
+            See ACT prep ROI examples
+          </a>
+        {/if}
+      </article>
+    {/each}
+  </div>
+</section>
+
 <section class="mt-8 rounded-3xl border border-sky-200 bg-sky-50 p-6 shadow-sm shadow-slate-900/5">
   <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
     <div class="max-w-2xl">
@@ -216,7 +293,7 @@
       </p>
       <p class="mt-2 text-sm text-slate-600">
         Have questions about paying for prep? Review the
-        <a href="/529-update" class="font-semibold text-sky-700 hover:underline"> 529 planning guide</a>.
+        <a href="/act-prep-roi" class="font-semibold text-sky-700 hover:underline"> ACT prep ROI guide</a>.
       </p>
     </div>
 

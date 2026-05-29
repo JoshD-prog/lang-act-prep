@@ -1,6 +1,7 @@
 import { env as publicEnv } from '$env/dynamic/public';
 import { createAdminSupabaseClient } from '$lib/server/supabase';
 import { getSchools } from '$lib/server/data';
+import { getSiteUrl as getConfiguredSiteUrl } from '$lib/seo';
 import type { RequestHandler } from './$types';
 
 type SitemapEntry = {
@@ -18,17 +19,16 @@ const STATIC_ROUTES: SitemapEntry[] = [
   { path: '/resources', changefreq: 'weekly', priority: '0.8' },
   { path: '/resources/for-parents', changefreq: 'monthly', priority: '0.7' },
   { path: '/resources/for-educators', changefreq: 'monthly', priority: '0.7' },
-  { path: '/529-update', changefreq: 'monthly', priority: '0.6' },
+  { path: '/act-prep-roi', changefreq: 'monthly', priority: '0.8' },
   { path: '/contact', changefreq: 'monthly', priority: '0.6' },
   { path: '/scholarship-calculator', changefreq: 'weekly', priority: '0.9' },
   { path: '/schools', changefreq: 'weekly', priority: '0.8' },
-  { path: '/enroll', changefreq: 'weekly', priority: '0.8' },
-  { path: '/terms-and-conditions', changefreq: 'monthly', priority: '0.3' }
+  { path: '/enroll', changefreq: 'weekly', priority: '0.8' }
 ];
 
-function getSiteUrl() {
+function getSiteUrl(fallbackOrigin?: string) {
   const siteUrl = publicEnv.PUBLIC_SITE_URL?.trim();
-  return (siteUrl && siteUrl.replace(/\/+$/, '')) || 'http://localhost:5173';
+  return (siteUrl && siteUrl.replace(/\/+$/, '')) || getConfiguredSiteUrl(fallbackOrigin);
 }
 
 function escapeXml(value: string) {
@@ -48,8 +48,8 @@ function normalizeDate(value?: string | null) {
   return value ? value.split('T')[0] : undefined;
 }
 
-export const GET: RequestHandler = async () => {
-  const siteUrl = getSiteUrl();
+export const GET: RequestHandler = async ({ url }) => {
+  const siteUrl = getSiteUrl(url.origin);
   const schools = await getSchools();
   const supabase = createAdminSupabaseClient();
 

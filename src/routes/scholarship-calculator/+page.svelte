@@ -3,16 +3,59 @@
   import ScholarshipCalculator from '$lib/components/ScholarshipCalculator.svelte';
   import ScholarshipResultsLeadCapture from '$lib/components/scholarships/ScholarshipResultsLeadCapture.svelte';
   import { getTopNearbyOpportunities } from '$lib/scholarships/display';
+  import { getFaqSchema, getSiteUrl, toAbsoluteUrl } from '$lib/seo';
   import type { ActionData, PageData } from './$types';
 
   let { data, form }: { data: PageData; form: ActionData } = $props();
 
   const topNearbyOpportunities = $derived(getTopNearbyOpportunities(data.projections));
+  const siteUrl = getSiteUrl();
+  const calculatorFaqs = [
+    {
+      question: 'How should I use these scholarship estimates?',
+      answer:
+        'Use the calculator to see which score increases may matter most. It can help your family decide whether one or two more ACT points could change the college cost conversation.'
+    },
+    {
+      question: 'Is ACT prep worth it if scholarships are not guaranteed?',
+      answer:
+        'Often, yes. Scholarships are not guaranteed, but many published merit tiers reward stronger scores. If a higher ACT score moves your student into a better tier, the return can be many times the cost of prep.'
+    },
+    {
+      question: 'Why do GPA and residency matter?',
+      answer:
+        'Colleges set their own award rules. Some awards depend on GPA, ACT score, residency, or a mix of all three, so the same ACT score can mean different scholarship opportunities at different schools.'
+    },
+    {
+      question: 'What should we do after we see the results?',
+      answer:
+        'Look for nearby score targets that create meaningful value, then choose the ACT date and prep option that gives your student the best chance to reach the next tier.'
+    }
+  ];
+  const structuredData = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'WebApplication',
+      name: 'ACT Scholarship Calculator',
+      url: toAbsoluteUrl('/scholarship-calculator', siteUrl),
+      applicationCategory: 'EducationalApplication',
+      operatingSystem: 'Any',
+      provider: {
+        '@type': 'EducationalOrganization',
+        name: 'KC Cram Course',
+        url: siteUrl
+      },
+      description:
+        'Estimate current scholarship offers and next merit tiers by GPA, ACT score, residency, and school filter.'
+    },
+    getFaqSchema(calculatorFaqs)
+  ];
 </script>
 
 <Seo
   title="Scholarship Calculator"
   description="Estimate current scholarship offers and the next merit tiers by GPA, ACT score, residency, and school filter."
+  structuredData={structuredData}
 />
 
 <section class="rounded-3xl border border-slate-200 bg-white p-8 shadow-lg shadow-slate-900/5">
@@ -90,6 +133,24 @@
     These estimates are based on scholarship information on file and are meant for planning, not a final aid decision.
     Confirm award rules, residency rules, renewal requirements, and application deadlines with each school before making financial decisions.
   </p>
+</section>
+
+<section class="mt-8 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm shadow-slate-900/5 md:p-8">
+  <p class="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">Scholarship calculator FAQ</p>
+  <h2 class="mt-2 text-2xl font-black text-ink">How to read the estimates.</h2>
+  <div class="mt-5 grid gap-4 md:grid-cols-2">
+    {#each calculatorFaqs as faq}
+      <article class="rounded-2xl bg-slate-50 p-5">
+        <h3 class="text-base font-extrabold text-ink">{faq.question}</h3>
+        <p class="mt-2 text-sm leading-6 text-slate-700">{faq.answer}</p>
+        {#if faq.question === 'Is ACT prep worth it if scholarships are not guaranteed?'}
+          <a href="/act-prep-roi" class="mt-3 inline-flex text-sm font-bold text-sky hover:underline">
+            See ACT prep ROI examples
+          </a>
+        {/if}
+      </article>
+    {/each}
+  </div>
 </section>
 
 <div class="mt-8">

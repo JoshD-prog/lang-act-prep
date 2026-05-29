@@ -1,6 +1,7 @@
 <script lang="ts">
   import { HEAR_ABOUT_US_OPTIONS } from '$lib/content/hearAboutUsOptions';
   import Seo from '$lib/components/Seo.svelte';
+  import { SERVICE_AREA } from '$lib/seo';
   import type { ActionData, PageData } from './$types';
 
   let { data, form }: { data: PageData; form: ActionData } = $props();
@@ -19,7 +20,7 @@
     or what to expect from the week-before-test format.
   </p>
   <p class="mt-3 max-w-3xl text-sm text-slate-500">
-    We respond with details on class fit, scheduling, and next steps.
+    We respond with details on class fit, scheduling, and next steps for families across the {SERVICE_AREA}.
   </p>
 </section>
 

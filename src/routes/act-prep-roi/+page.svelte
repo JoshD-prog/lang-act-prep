@@ -1,6 +1,12 @@
 <script lang="ts">
   import { preserveMarketingParams, trackEnrollCta } from '$lib/analytics';
   import Seo from '$lib/components/Seo.svelte';
+  import { getFaqSchema, getSiteUrl, toAbsoluteUrl } from '$lib/seo';
+
+  const siteUrl = getSiteUrl();
+  const lastReviewed = 'May 29, 2026';
+  const irsTopic313Url = 'https://www.irs.gov/taxtopics/tc313';
+  const irsPublication970Url = 'https://www.irs.gov/publications/p970';
 
   const questionsToAsk = [
     'Does your 529 plan allow expanded K-12 educational expenses such as tutoring or educational classes outside the home?',
@@ -15,22 +21,71 @@
     'Named student enrollment verification',
     'Course description showing structured academic instruction'
   ];
+  const roiFaqs = [
+    {
+      question: 'Is ACT prep worth it?',
+      answer:
+        'For many families, yes. If a stronger ACT score helps your student reach a higher scholarship tier, the value can be thousands of dollars per year, far more than the cost of the course.'
+    },
+    {
+      question: 'What if my student only improves a little?',
+      answer:
+        'Even a 1-3 point improvement can matter at schools with score-based scholarship tiers. The calculator can show where the next useful score target may be.'
+    },
+    {
+      question: 'Can we use 529 funds for ACT prep?',
+      answer:
+        'It may be possible in some situations. Current IRS guidance includes certain tutoring or educational classes outside the home and certain college admissions exam fees, but families should confirm their own plan, state rules, and tax situation before using funds.'
+    },
+    {
+      question: 'What should we do before enrolling?',
+      answer:
+        'Start with the scholarship calculator, look for a meaningful next score target, then choose the course that lines up with your student\'s ACT date.'
+    }
+  ];
+  const structuredData = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: 'Is ACT prep worth it? ACT prep ROI and 529 strategy',
+      url: toAbsoluteUrl('/act-prep-roi', siteUrl),
+      dateModified: '2026-05-29',
+      datePublished: '2026-05-29',
+      publisher: {
+        '@type': 'EducationalOrganization',
+        name: 'KC Cram Course',
+        url: siteUrl
+      },
+      about: ['ACT prep ROI', '529 plan education expenses', 'Merit scholarships'],
+      citation: [irsTopic313Url, irsPublication970Url],
+      description:
+        'See why ACT prep can be a strong return on investment through merit scholarships, and how some families may be able to use 529 funds to pay for prep.'
+    },
+    getFaqSchema(roiFaqs)
+  ];
 </script>
 
 <Seo
-  title="Can ACT Prep Help Lower Your College Bill?"
-  description="See how ACT prep may reduce college costs through merit scholarships, how 529 funds may apply to prep, and how to estimate the ROI of a higher ACT score."
+  title="Is ACT Prep Worth It?"
+  description="See why ACT prep can be a strong return on investment through merit scholarships, and how some families may be able to use 529 funds to pay for prep."
+  structuredData={structuredData}
 />
 
 <section class="rounded-3xl border border-slate-200 bg-white p-8 shadow-lg shadow-slate-900/5 md:p-10">
   <p class="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">ACT prep ROI and 529 strategy</p>
   <h1 class="mt-2 max-w-4xl text-4xl font-black leading-tight text-ink md:text-5xl">
-    Can ACT prep help lower your college bill?
+    Is ACT prep worth it?
   </h1>
   <p class="mt-5 max-w-3xl text-base leading-7 text-slate-600 md:text-lg">
-    A 529 plan can help families pay for college. A stronger ACT score may help reduce the price first through
-    merit scholarships, and some families may be able to use 529 funds for prep itself.
+    In many cases, ACT prep is one of the highest-upside education expenses a family can make. A stronger score can
+    improve admissions confidence, open scholarship options, and sometimes reduce college costs by thousands of dollars
+    per year.
   </p>
+  <p class="mt-4 max-w-3xl text-base leading-7 text-slate-600 md:text-lg">
+    The best sequence is simple: estimate the scholarship upside first, then decide how to pay for prep. For some
+    families, a 529 plan may be worth exploring as a way to cover the course cost.
+  </p>
+  <p class="mt-3 text-sm text-slate-500">Last reviewed: {lastReviewed}</p>
 
   <div class="mt-8 flex flex-col gap-3 sm:flex-row">
     <a
@@ -57,8 +112,8 @@
           <p class="text-sm font-bold uppercase tracking-[0.12em] text-slate-500">Investment</p>
           <p class="mt-2 text-3xl font-black text-ink">$299 ACT prep course</p>
           <p class="mt-4 text-sm leading-6 text-slate-600">
-            In some situations, families may also be able to use 529 funds for this type of course, which can further
-            improve the effective return.
+            A short prep course is a small expense compared with one semester of college tuition. If it helps unlock or
+            improve merit aid, the return can be unusually strong.
           </p>
         </div>
         <div>
@@ -90,8 +145,8 @@
     </div>
 
     <p class="mt-5 text-base leading-7 text-slate-700">
-      That is the key difference: a 529 helps families pay costs that already exist. A stronger ACT score may help
-      reduce the cost first through merit scholarships tied to GPA and score bands.
+      That is the key difference: most college-planning tools help families pay costs that already exist. A stronger ACT
+      score may help reduce the cost first through merit scholarships tied to GPA and score bands.
     </p>
 
     <h2 class="mt-10 text-2xl font-extrabold text-ink">A simple student example</h2>
@@ -119,15 +174,28 @@
 
     <h2 class="mt-10 text-2xl font-extrabold text-ink">Where the 529 plan fits</h2>
     <p class="mt-4 text-base leading-7 text-slate-700">
-      The strongest approach is usually using both in sequence: first, try to reduce the college price through a
-      score-based scholarship strategy; then use your 529 to help cover what remains.
+      After you have a sense of the scholarship upside, look at how to pay for the course. Some families may be able to
+      use 529 funds for certain tutoring or educational classes, which can make the out-of-pocket decision easier.
+      Because rules vary by plan and state, confirm before using funds.
     </p>
 
     <h2 class="mt-10 text-2xl font-extrabold text-ink">Can a 529 plan cover ACT or SAT prep?</h2>
     <p class="mt-4 text-base leading-7 text-slate-700">
-      Under recent federal changes, 529 plans may now cover certain tutoring and educational classes outside the
-      home. Because ACT and SAT prep are structured academic courses, many families and advisors now view prep as
-      potentially eligible under that expanded language.
+      Current IRS guidance includes certain tutoring or educational classes outside the home and certain college
+      admissions exam fees as K-12 qualified education expense categories. Because ACT and SAT prep are structured
+      academic courses, many families now ask whether prep can fit under that language.
+    </p>
+    <p class="mt-4 text-base leading-7 text-slate-700">
+      The IRS lists tuition for certain tutoring or educational classes outside the home and fees for college admissions
+      examinations among K-12 qualified education expense categories. Review
+      <a href={irsTopic313Url} target="_blank" rel="noreferrer" class="font-semibold text-sky hover:underline">
+        IRS Topic 313
+      </a>
+      and
+      <a href={irsPublication970Url} target="_blank" rel="noreferrer" class="font-semibold text-sky hover:underline">
+        IRS Publication 970
+      </a>
+      before relying on 529 funds for a specific expense.
     </p>
     <div class="mt-5 rounded-2xl border border-amber-200 bg-amber-50 p-5">
       <p class="text-sm font-semibold uppercase tracking-[0.14em] text-amber-800">Important note</p>
@@ -153,7 +221,7 @@
         <a
           href="/enroll"
           use:preserveMarketingParams
-          use:trackEnrollCta={{ cta_location: '529_footer', cta_label: 'View course dates' }}
+          use:trackEnrollCta={{ cta_location: 'roi_footer', cta_label: 'View course dates' }}
           class="inline-flex items-center justify-center rounded-full border border-white/30 px-6 py-3 text-sm font-bold text-white transition hover:bg-white/10"
         >
           View course dates
@@ -163,6 +231,22 @@
   </article>
 
   <aside class="space-y-6">
+    <article class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm shadow-slate-900/5">
+      <h2 class="text-xl font-extrabold text-ink">Sources to review</h2>
+      <ul class="mt-4 space-y-3 text-sm leading-6 text-slate-700">
+        <li>
+          <a href={irsTopic313Url} target="_blank" rel="noreferrer" class="font-semibold text-sky hover:underline">
+            IRS Topic 313: Qualified tuition programs
+          </a>
+        </li>
+        <li>
+          <a href={irsPublication970Url} target="_blank" rel="noreferrer" class="font-semibold text-sky hover:underline">
+            IRS Publication 970: Tax Benefits for Education
+          </a>
+        </li>
+      </ul>
+    </article>
+
     <article class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm shadow-slate-900/5">
       <h2 class="text-xl font-extrabold text-ink">What to confirm before using 529 funds</h2>
       <ul class="mt-4 space-y-3 text-sm leading-6 text-slate-700">
@@ -201,4 +285,22 @@
       </a>
     </article>
   </aside>
+</section>
+
+<section class="mt-8 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm shadow-slate-900/5 md:p-8">
+  <p class="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">ACT prep ROI FAQ</p>
+  <h2 class="mt-2 text-2xl font-black text-ink">Short answers before you decide.</h2>
+  <div class="mt-5 grid gap-4 md:grid-cols-2">
+    {#each roiFaqs as faq}
+      <article class="rounded-2xl bg-slate-50 p-5">
+        <h3 class="text-base font-extrabold text-ink">{faq.question}</h3>
+        <p class="mt-2 text-sm leading-6 text-slate-700">{faq.answer}</p>
+        {#if faq.question === 'Is ACT prep worth it?'}
+          <a href="/scholarship-calculator" class="mt-3 inline-flex text-sm font-bold text-sky hover:underline">
+            Estimate your scholarship upside
+          </a>
+        {/if}
+      </article>
+    {/each}
+  </div>
 </section>

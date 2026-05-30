@@ -21,6 +21,10 @@ export interface ClassOffering {
   seatsAvailable: number;
   featured?: boolean;
   stripePriceId?: string | null;
+  startDate?: string | null;
+  endDate?: string | null;
+  actTestDate?: string | null;
+  scoreReleaseDate?: string | null;
 }
 
 export interface School {

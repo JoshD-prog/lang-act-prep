@@ -10,7 +10,11 @@ export const classOfferings: ClassOffering[] = [
     format: '4 sessions - 90 minutes each',
     priceCents: 29900,
     seatsAvailable: 30,
-    featured: true
+    featured: true,
+    startDate: '2026-06-08',
+    endDate: '2026-06-11',
+    actTestDate: '2026-06-13',
+    scoreReleaseDate: '2026-06-23'
   },
   {
     id: 'cls-july-2026',
@@ -20,7 +24,11 @@ export const classOfferings: ClassOffering[] = [
     location: 'Shawnee Civic Center - final room details sent after enrollment',
     format: '4 sessions - 90 minutes each',
     priceCents: 29900,
-    seatsAvailable: 30
+    seatsAvailable: 30,
+    startDate: '2026-07-06',
+    endDate: '2026-07-09',
+    actTestDate: '2026-07-11',
+    scoreReleaseDate: '2026-07-21'
   },
   {
     id: 'cls-september-2026',
@@ -30,7 +38,11 @@ export const classOfferings: ClassOffering[] = [
     location: 'Piper Location - final room details sent after enrollment',
     format: '4 sessions - 90 minutes each',
     priceCents: 29900,
-    seatsAvailable: 30
+    seatsAvailable: 30,
+    startDate: '2026-09-14',
+    endDate: '2026-09-17',
+    actTestDate: '2026-09-19',
+    scoreReleaseDate: '2026-10-06'
   }
 ];
 

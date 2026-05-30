@@ -15,6 +15,8 @@
     "scholarships:validate": "node ./tools/validate-scholarship-scenarios.mjs",
     "scholarships:validate:strict": "node ./tools/validate-scholarship-scenarios.mjs --strict",
     "email:test": "bun run ./scripts/send-test-email.ts",
+    "email:preview": "bun run ./scripts/generate-email-previews.ts",
+    "email:dry-run": "bun run ./scripts/dry-run-enrollment-emails.ts",
     "db:init": "bunx supabase init",
     "db:login": "bunx supabase login",
     "db:link": "bunx supabase link --project-ref $SUPABASE_PROJECT_REF",

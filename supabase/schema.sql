@@ -17,7 +17,10 @@ create table if not exists class_offerings (
   stripe_price_id text,
   location text,
   "Schedule" text,
-  start_date date
+  start_date date,
+  end_date date,
+  act_test_date date,
+  score_release_date date
 );
 
 create table if not exists schools (
@@ -70,6 +73,34 @@ create table if not exists enrollment_leads (
   stripe_payment_intent_id text,
   paid_at timestamptz,
   stripe_event_id text
+);
+
+create table if not exists enrollment_email_events (
+  id uuid primary key default gen_random_uuid(),
+  lead_id uuid not null references enrollment_leads (id) on delete cascade,
+  class_slug text not null,
+  email_type text not null check (
+    email_type = any (
+      array[
+        'reminder_2_weeks_before_class'::text,
+        'reminder_1_week_before_class'::text,
+        'reminder_1_day_before_class'::text,
+        'followup_monday_after_test'::text,
+        'followup_after_score_release'::text
+      ]
+    )
+  ),
+  recipient_email text not null,
+  scheduled_for date not null,
+  status text not null default 'pending' check (
+    status = any (array['pending'::text, 'sent'::text, 'failed'::text, 'skipped'::text])
+  ),
+  resend_message_id text,
+  error_message text,
+  sent_at timestamptz,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now(),
+  unique (lead_id, email_type)
 );
 
 create table if not exists high_schools (
@@ -189,11 +220,15 @@ create table if not exists scholarship_tiers_import (
 
 create index if not exists idx_scholarship_college_slug on college_scholarship_tiers (college_slug);
 create index if not exists idx_class_offerings_start_date on class_offerings (start_date);
+create index if not exists idx_class_offerings_act_test_date on class_offerings (act_test_date);
+create index if not exists idx_class_offerings_score_release_date on class_offerings (score_release_date);
 create index if not exists idx_enrollment_class_slug on enrollment_leads (class_slug);
 create index if not exists idx_enrollment_school_slug on enrollment_leads (school_slug);
 create index if not exists idx_enrollment_high_school_slug on enrollment_leads (high_school_slug);
 create index if not exists idx_enrollment_leads_payment_status on enrollment_leads (payment_status);
 create index if not exists idx_enrollment_leads_stripe_session_id on enrollment_leads (stripe_session_id);
+create index if not exists idx_enrollment_email_events_scheduled_for on enrollment_email_events (scheduled_for, status);
+create index if not exists idx_enrollment_email_events_lead_id on enrollment_email_events (lead_id);
 create index if not exists idx_contact_inquiries_email on contact_inquiries (email);
 create index if not exists idx_contact_inquiries_created_at on contact_inquiries (created_at desc);
 create index if not exists idx_schools_slug on schools (slug);
@@ -257,6 +292,7 @@ alter table cms_sections enable row level security;
 alter table college_scholarship_tiers enable row level security;
 alter table contact_inquiries enable row level security;
 alter table enrollment_leads enable row level security;
+alter table enrollment_email_events enable row level security;
 alter table high_schools enable row level security;
 alter table scholarship_tiers disable row level security;
 alter table scholarship_tiers_import disable row level security;

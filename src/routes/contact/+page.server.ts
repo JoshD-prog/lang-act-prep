@@ -71,6 +71,7 @@ export const actions: Actions = {
         studentGrade: studentGrade || null,
         studentSchool: studentSchool || null,
         heardAboutUs: heardAboutUs || null,
+        interest: interest || null,
         message
       });
     } catch {

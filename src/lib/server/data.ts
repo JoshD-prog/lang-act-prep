@@ -952,7 +952,7 @@ export async function getClassOfferings(): Promise<ClassOffering[]> {
       return await supabase
         .from('class_offerings')
         .select(
-          'id, slug, title, schedule, location, format, price_cents, seats_available, featured, stripe_price_id'
+          'id, slug, title, schedule, location, format, price_cents, seats_available, featured, stripe_price_id, start_date, end_date, act_test_date, score_release_date'
         )
         .order('featured', { ascending: false })
         .order('start_date', { ascending: true })
@@ -981,7 +981,11 @@ export async function getClassOfferings(): Promise<ClassOffering[]> {
       priceCents: item.price_cents,
       seatsAvailable: item.seats_available,
       featured: item.featured,
-      stripePriceId: item.stripe_price_id
+      stripePriceId: item.stripe_price_id,
+      startDate: item.start_date,
+      endDate: item.end_date,
+      actTestDate: item.act_test_date,
+      scoreReleaseDate: item.score_release_date
     };
     const checkoutConfig = getStripeCheckoutConfig(offering);
 

@@ -177,10 +177,10 @@
   robots="noindex, follow"
 />
 
-<div class="bg-white">
-  <section class="border-b border-slate-200/80 bg-slate-50/80">
+<div>
+  <section class="page-hero">
     <div class="mx-auto max-w-4xl px-4 py-12 md:px-6 md:py-16">
-      <p class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Policies</p>
+      <p class="text-sm font-semibold uppercase tracking-[0.2em] text-sky-700">Policies</p>
       <h1 class="mt-3 max-w-3xl text-4xl font-bold tracking-tight text-slate-900 md:text-5xl">
         Terms &amp; Conditions
       </h1>
@@ -209,7 +209,7 @@
     </aside>
 
     <article class="min-w-0">
-      <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm md:p-10">
+      <div class="rounded-3xl border border-sky-100 bg-white p-6 shadow-sm md:p-10">
         <div class="prose prose-slate max-w-none prose-headings:scroll-mt-24 prose-headings:font-semibold prose-p:text-slate-700 prose-li:text-slate-700">
           {#each sections as section}
             <section id={section.id} class="not-prose border-b border-slate-200/80 py-8 first:pt-0 last:border-b-0 last:pb-0">

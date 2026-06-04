@@ -58,15 +58,15 @@
   structuredData={structuredData}
 />
 
-<section class="rounded-3xl border border-slate-200 bg-white p-8 shadow-lg shadow-slate-900/5">
-  <p class="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">Scholarship calculator</p>
-  <h1 class="mt-2 text-4xl font-black text-ink">Estimate likely offers and next target tiers.</h1>
+<section class="page-hero p-8 md:p-10">
+  <p class="text-xs font-bold uppercase tracking-[0.16em] text-sky-700">Scholarship calculator</p>
+  <h1 class="mt-2 max-w-4xl text-4xl font-black leading-tight text-ink md:text-5xl">Estimate likely offers and next target tiers.</h1>
   <p class="mt-4 max-w-3xl text-lg text-slate-600">
     Enter student GPA and ACT score to estimate current scholarship levels, next targets, and longer-range merit tiers for each school.
   </p>
 </section>
 
-<form class="mt-8 grid gap-4 rounded-3xl border border-slate-200 bg-white p-6 md:grid-cols-4" method="GET" action="/scholarship-calculator">
+<form class="color-card mt-8 grid gap-4 rounded-3xl border p-6 md:grid-cols-4" method="GET" action="/scholarship-calculator">
   <label class="block">
     <span class="text-sm font-semibold text-slate-700">GPA</span>
     <input
@@ -76,7 +76,7 @@
       max="4"
       step="0.01"
       value={data.gpa || ''}
-      class="mt-1 w-full rounded-xl border-slate-300"
+      class="mt-1 w-full rounded-xl border-sky-100 bg-white"
       required
     />
   </label>
@@ -89,7 +89,7 @@
       min="1"
       max="36"
       value={data.act || ''}
-      class="mt-1 w-full rounded-xl border-slate-300"
+      class="mt-1 w-full rounded-xl border-sky-100 bg-white"
       required
     />
   </label>
@@ -98,7 +98,7 @@
     <span class="text-sm font-semibold text-slate-700">Residency</span>
     <select
       name="residency"
-      class="mt-1 w-full rounded-xl border-slate-300"
+      class="mt-1 w-full rounded-xl border-sky-100 bg-white"
     >
       <option value="KS" selected={data.residency === 'KS'}>Kansas</option>
       <option value="MO" selected={data.residency === 'MO'}>Missouri</option>
@@ -113,7 +113,7 @@
     <span class="text-sm font-semibold text-slate-700">School filter</span>
     <select
       name="filter"
-      class="mt-1 w-full rounded-xl border-slate-300"
+      class="mt-1 w-full rounded-xl border-sky-100 bg-white"
     >
       <option value="default" selected={data.filter === 'default'}>Closest next targets</option>
       <option value="all" selected={data.filter === 'all'}>Best current offers</option>
@@ -123,7 +123,7 @@
   </label>
 
   <div class="md:col-span-4 flex items-end">
-    <button class="w-full rounded-full bg-sky px-5 py-3 text-sm font-bold text-white">Calculate</button>
+    <button class="w-full rounded-full bg-sky px-5 py-3 text-sm font-bold text-white shadow-lg shadow-sky-900/20 transition hover:bg-teal-500">Calculate</button>
   </div>
 </form>
 
@@ -135,12 +135,12 @@
   </p>
 </section>
 
-<section class="mt-8 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm shadow-slate-900/5 md:p-8">
-  <p class="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">Scholarship calculator FAQ</p>
+<section class="warm-card mt-8 rounded-3xl border p-6 md:p-8">
+  <p class="text-xs font-bold uppercase tracking-[0.16em] text-amber-700">Scholarship calculator FAQ</p>
   <h2 class="mt-2 text-2xl font-black text-ink">How to read the estimates.</h2>
   <div class="mt-5 grid gap-4 md:grid-cols-2">
     {#each calculatorFaqs as faq}
-      <article class="rounded-2xl bg-slate-50 p-5">
+      <article class="rounded-2xl border border-amber-100 bg-white p-5">
         <h3 class="text-base font-extrabold text-ink">{faq.question}</h3>
         <p class="mt-2 text-sm leading-6 text-slate-700">{faq.answer}</p>
         {#if faq.question === 'Is ACT prep worth it if scholarships are not guaranteed?'}

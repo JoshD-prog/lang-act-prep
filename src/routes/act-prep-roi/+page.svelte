@@ -71,8 +71,8 @@
   structuredData={structuredData}
 />
 
-<section class="rounded-3xl border border-slate-200 bg-white p-8 shadow-lg shadow-slate-900/5 md:p-10">
-  <p class="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">ACT prep ROI and 529 strategy</p>
+<section class="page-hero p-8 md:p-10">
+  <p class="text-xs font-bold uppercase tracking-[0.16em] text-sky-700">ACT prep ROI and 529 strategy</p>
   <h1 class="mt-2 max-w-4xl text-4xl font-black leading-tight text-ink md:text-5xl">
     Is ACT prep worth it?
   </h1>
@@ -90,13 +90,13 @@
   <div class="mt-8 flex flex-col gap-3 sm:flex-row">
     <a
       href="/classes"
-      class="inline-flex items-center justify-center rounded-full bg-ink px-6 py-3 text-sm font-bold text-white transition hover:opacity-90"
+      class="inline-flex items-center justify-center rounded-full bg-sky px-6 py-3 text-sm font-bold text-white shadow-lg shadow-sky-900/20 transition hover:bg-teal-500"
     >
       View ACT course dates
     </a>
     <a
       href="/scholarship-calculator"
-      class="inline-flex items-center justify-center rounded-full border border-slate-300 px-6 py-3 text-sm font-bold text-ink transition hover:bg-slate-50"
+      class="inline-flex items-center justify-center rounded-full border border-sky-200 bg-white/70 px-6 py-3 text-sm font-bold text-ink transition hover:border-sky hover:text-sky-800"
     >
       Estimate scholarship upside
     </a>
@@ -104,9 +104,9 @@
 </section>
 
 <section class="mt-10 grid gap-6 lg:grid-cols-[1.5fr_0.9fr]">
-  <article class="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm shadow-slate-900/5">
+  <article class="color-card rounded-3xl border p-8">
     <h2 class="text-2xl font-extrabold text-ink">What a $299 ACT prep course can realistically return</h2>
-    <div class="mt-5 rounded-2xl border border-slate-200 bg-slate-50 p-6">
+    <div class="mt-5 rounded-2xl border border-sky-100 bg-white/80 p-6">
       <div class="grid gap-6 md:grid-cols-2">
         <div>
           <p class="text-sm font-bold uppercase tracking-[0.12em] text-slate-500">Investment</p>
@@ -129,7 +129,7 @@
         </div>
       </div>
 
-      <div class="mt-6 rounded-2xl bg-white p-5 text-center shadow-sm shadow-slate-900/5">
+      <div class="mt-6 rounded-2xl border border-amber-100 bg-white p-5 text-center shadow-sm shadow-amber-900/10">
         <p class="text-sm font-semibold uppercase tracking-[0.12em] text-slate-500">Estimated four-year scholarship value</p>
         <p class="mt-2 text-4xl font-black text-ink md:text-5xl">$8,000-$24,000</p>
         <p class="mt-4 text-sm font-semibold uppercase tracking-[0.12em] text-slate-500">
@@ -150,7 +150,7 @@
     </p>
 
     <h2 class="mt-10 text-2xl font-extrabold text-ink">A simple student example</h2>
-    <div class="mt-5 rounded-2xl border border-slate-200 bg-white p-6">
+    <div class="mt-5 rounded-2xl border border-amber-100 bg-white p-6">
       <div class="grid gap-6 md:grid-cols-2">
         <div>
           <p class="text-sm font-bold uppercase tracking-[0.12em] text-slate-500">Student profile</p>
@@ -205,7 +205,7 @@
       </p>
     </div>
 
-    <div class="mt-8 rounded-3xl bg-ink px-6 py-7 text-white md:px-8">
+    <div class="ink-band mt-8 rounded-3xl border px-6 py-7 md:px-8">
       <h2 class="text-2xl font-extrabold">See what one more ACT point could be worth</h2>
       <p class="mt-3 max-w-2xl text-sm leading-6 text-slate-200">
         Most families do not know what scholarship tier they already qualify for, how close they are to the next
@@ -231,7 +231,7 @@
   </article>
 
   <aside class="space-y-6">
-    <article class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm shadow-slate-900/5">
+    <article class="warm-card rounded-3xl border p-6">
       <h2 class="text-xl font-extrabold text-ink">Sources to review</h2>
       <ul class="mt-4 space-y-3 text-sm leading-6 text-slate-700">
         <li>
@@ -247,39 +247,39 @@
       </ul>
     </article>
 
-    <article class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm shadow-slate-900/5">
+    <article class="color-card rounded-3xl border p-6">
       <h2 class="text-xl font-extrabold text-ink">What to confirm before using 529 funds</h2>
       <ul class="mt-4 space-y-3 text-sm leading-6 text-slate-700">
         {#each questionsToAsk as question}
           <li class="flex gap-3">
-            <span class="mt-1 h-2.5 w-2.5 shrink-0 rounded-full bg-ink"></span>
+            <span class="mt-1 h-2.5 w-2.5 shrink-0 rounded-full bg-sky"></span>
             <span>{question}</span>
           </li>
         {/each}
       </ul>
     </article>
 
-    <article class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm shadow-slate-900/5">
+    <article class="color-card rounded-3xl border p-6">
       <h2 class="text-xl font-extrabold text-ink">How we support your records</h2>
       <ul class="mt-4 space-y-3 text-sm leading-6 text-slate-700">
         {#each recordSupport as item}
           <li class="flex gap-3">
-            <span class="mt-1 h-2.5 w-2.5 shrink-0 rounded-full bg-ink"></span>
+            <span class="mt-1 h-2.5 w-2.5 shrink-0 rounded-full bg-amber-500"></span>
             <span>{item}</span>
           </li>
         {/each}
       </ul>
     </article>
 
-    <article class="rounded-3xl border border-slate-200 bg-slate-50 p-6">
-      <h2 class="text-xl font-extrabold text-ink">Best next step</h2>
-      <p class="mt-3 text-sm leading-6 text-slate-700">
+    <article class="ink-band rounded-3xl border p-6">
+      <h2 class="text-xl font-extrabold text-white">Best next step</h2>
+      <p class="mt-3 text-sm leading-6 text-sky-50/85">
         Start with the scholarship calculator. It gives families a clearer picture of whether a score increase could
         create meaningful tuition savings before they decide how to pay for prep.
       </p>
       <a
         href="/scholarship-calculator"
-        class="mt-5 inline-flex items-center justify-center rounded-full bg-ink px-5 py-3 text-sm font-bold text-white transition hover:opacity-90"
+        class="mt-5 inline-flex items-center justify-center rounded-full bg-white px-5 py-3 text-sm font-bold text-ink transition hover:bg-slate-100"
       >
         Open calculator
       </a>
@@ -287,12 +287,12 @@
   </aside>
 </section>
 
-<section class="mt-8 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm shadow-slate-900/5 md:p-8">
-  <p class="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">ACT prep ROI FAQ</p>
+<section class="warm-card mt-8 rounded-3xl border p-6 md:p-8">
+  <p class="text-xs font-bold uppercase tracking-[0.16em] text-amber-700">ACT prep ROI FAQ</p>
   <h2 class="mt-2 text-2xl font-black text-ink">Short answers before you decide.</h2>
   <div class="mt-5 grid gap-4 md:grid-cols-2">
     {#each roiFaqs as faq}
-      <article class="rounded-2xl bg-slate-50 p-5">
+      <article class="rounded-2xl border border-amber-100 bg-white p-5">
         <h3 class="text-base font-extrabold text-ink">{faq.question}</h3>
         <p class="mt-2 text-sm leading-6 text-slate-700">{faq.answer}</p>
         {#if faq.question === 'Is ACT prep worth it?'}

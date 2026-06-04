@@ -1,6 +1,7 @@
 import { env as publicEnv } from '$env/dynamic/public';
 import { env as privateEnv } from '$env/dynamic/private';
 import { createClient } from '@supabase/supabase-js';
+import { fetchSupabaseWithLocalTlsFallback } from './supabaseFetch';
 
 export function createAdminSupabaseClient() {
   const supabaseUrl = publicEnv.PUBLIC_SUPABASE_URL || privateEnv.SUPABASE_URL;
@@ -13,6 +14,9 @@ export function createAdminSupabaseClient() {
   return createClient(supabaseUrl, serviceRoleKey, {
     auth: {
       persistSession: false
+    },
+    global: {
+      fetch: fetchSupabaseWithLocalTlsFallback
     }
   });
 }

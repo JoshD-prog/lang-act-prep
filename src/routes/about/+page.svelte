@@ -8,13 +8,13 @@
   description="Meet Adam Lang and learn how KC Cram Course approaches focused ACT prep, pacing strategy, and scholarship-minded score improvement."
 />
 
-<section class="rounded-3xl border border-slate-200 bg-white p-8 shadow-lg shadow-slate-900/5">
+<section class="page-hero p-8 md:p-10">
   <div class="grid gap-8 md:grid-cols-2 md:items-center">
 
     <!-- TEXT -->
     <div>
-      <p class="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">About the instructor</p>
-      <h1 class="mt-2 text-4xl font-black text-ink">Hi, I'm Adam Lang.</h1>
+      <p class="text-xs font-bold uppercase tracking-[0.16em] text-sky-700">About the instructor</p>
+      <h1 class="mt-2 text-4xl font-black text-ink md:text-5xl">Hi, I'm Adam Lang.</h1>
 
       <p class="mt-4 text-lg text-slate-600">
         I'm a high school teacher in Kansas City and have been
@@ -47,37 +47,37 @@
       <img
         src="/images/adam-lang.jpg"
         alt="Adam Lang, ACT instructor"
-        class="w-full max-w-xs rounded-2xl object-cover shadow-md"
+        class="w-full max-w-xs rounded-[1.75rem] border-4 border-white object-cover shadow-2xl shadow-slate-900/20 md:max-w-md lg:max-w-lg"
       />
     </div>
 
   </div>
 </section>
 
-<section class="mt-8 rounded-3xl border border-slate-200 bg-white p-6 shadow-lg shadow-slate-900/5 md:p-8">
-  <p class="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">Instructor credentials</p>
+<section class="color-card mt-8 rounded-3xl border p-6 md:p-8">
+  <p class="text-xs font-bold uppercase tracking-[0.16em] text-sky-700">Instructor credentials</p>
   <h2 class="mt-2 text-2xl font-black text-ink">A teacher with real test-score and classroom credibility.</h2>
 
   <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-    <article class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
-      <p class="text-3xl font-black text-ink">+5-6</p>
+    <article class="rounded-2xl border border-sky-100 bg-white p-5">
+      <p class="text-3xl font-black text-sky-800">+5-6</p>
       <p class="mt-2 text-sm font-semibold text-slate-700">
         Running three-year average composite ACT score improvement for my ACT students
       </p>
     </article>
 
-    <article class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
-      <p class="text-3xl font-black text-ink">99th</p>
+    <article class="rounded-2xl border border-amber-100 bg-white p-5">
+      <p class="text-3xl font-black text-amber-700">99th</p>
       <p class="mt-2 text-sm font-semibold text-slate-700">Percentile ACT score as a high school student</p>
     </article>
 
-    <article class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
-      <p class="text-3xl font-black text-ink">Honors</p>
+    <article class="rounded-2xl border border-teal-100 bg-white p-5">
+      <p class="text-3xl font-black text-teal-700">Honors</p>
       <p class="mt-2 text-sm font-semibold text-slate-700">Graduated <em>summa cum laude</em> with honors</p>
     </article>
 
-    <article class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
-      <p class="text-3xl font-black text-ink">2021</p>
+    <article class="rounded-2xl border border-rose-100 bg-white p-5">
+      <p class="text-3xl font-black text-rose-700">2021</p>
       <p class="mt-2 text-sm font-semibold text-slate-700">
         Teacher of the Year at Augustine School, ranked in the top 5 highest achieving schools in the nation by the CLT
       </p>
@@ -86,7 +86,7 @@
 </section>
 
 <section class="mt-8 grid gap-5 md:grid-cols-3">
-  <article class="rounded-2xl border border-slate-200 bg-white p-6">
+  <article class="rounded-2xl border border-sky-100 bg-white/95 p-6 shadow-sm shadow-sky-900/5">
     <h2 class="text-xl font-extrabold text-ink">Focused preparation</h2>
     <p class="mt-3 text-sm text-slate-600">
       This is not a long tutoring program. It is a short, high-yield course built for the week before the ACT, when
@@ -94,7 +94,7 @@
     </p>
   </article>
 
-  <article class="rounded-2xl border border-slate-200 bg-white p-6">
+  <article class="rounded-2xl border border-amber-100 bg-white/95 p-6 shadow-sm shadow-amber-900/5">
     <h2 class="text-xl font-extrabold text-ink">Effective communication</h2>
     <p class="mt-3 text-sm text-slate-600">
       Students respond when strategy is clear, concrete, and easy to remember. My job is to make a complicated test
@@ -102,7 +102,7 @@
     </p>
   </article>
 
-  <article class="rounded-2xl border border-slate-200 bg-white p-6">
+  <article class="rounded-2xl border border-teal-100 bg-white/95 p-6 shadow-sm shadow-teal-900/5">
     <h2 class="text-xl font-extrabold text-ink">Local scholarship perspective</h2>
     <p class="mt-3 text-sm text-slate-600">
       I teach here, live here, and understand the schools, families, and college goals many Kansas City students are
@@ -111,12 +111,12 @@
   </article>
 </section>
 
-<section class="mt-8 rounded-3xl border border-sky-200 bg-sky-50 p-6 shadow-sm shadow-slate-900/5 md:p-8">
+<section class="ink-band mt-8 rounded-3xl border p-6 md:p-8">
   <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
     <div class="max-w-2xl">
-      <p class="text-xs font-bold uppercase tracking-[0.16em] text-sky-700">Ready to choose a date?</p>
-      <h2 class="mt-2 text-2xl font-black text-ink">Reserve a seat in the week-before-test ACT course.</h2>
-      <p class="mt-2 text-sm leading-relaxed text-slate-700">
+      <p class="text-xs font-bold uppercase tracking-[0.16em] text-sky-200">Ready to choose a date?</p>
+      <h2 class="mt-2 text-2xl font-black text-white">Reserve a seat in the week-before-test ACT course.</h2>
+      <p class="mt-2 text-sm leading-relaxed text-sky-50/85">
         Compare upcoming class dates, see current seat availability, and start enrollment for the cohort that matches
         your ACT test date.
       </p>
@@ -126,7 +126,7 @@
       href="/classes"
       use:preserveMarketingParams
       use:trackEnrollCta={{ cta_location: 'about_footer', cta_label: 'View class dates' }}
-      class="inline-flex shrink-0 rounded-full bg-ink px-5 py-3 text-sm font-bold text-white transition hover:bg-slate-700"
+      class="inline-flex shrink-0 rounded-full bg-white px-5 py-3 text-sm font-bold text-ink transition hover:bg-slate-100"
     >
       View class dates
     </a>

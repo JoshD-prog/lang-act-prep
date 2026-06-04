@@ -12,6 +12,7 @@ import { getStripeCheckoutConfig } from '$lib/server/stripe';
 
 const loggedFallbacks = new Set<string>();
 const SUPABASE_READ_TIMEOUT_MS = 1500;
+const DEV_SUPABASE_READ_TIMEOUT_MS = 5000;
 let loggedScholarshipTierWarningSignature = '';
 
 type ScholarshipTierRow = {
@@ -115,7 +116,7 @@ function logFallbackOnce(source: string, error: unknown) {
 }
 
 function getSupabaseReadSignal() {
-  return AbortSignal.timeout(SUPABASE_READ_TIMEOUT_MS);
+  return AbortSignal.timeout(dev ? DEV_SUPABASE_READ_TIMEOUT_MS : SUPABASE_READ_TIMEOUT_MS);
 }
 
 function normalizeEligibleStates(value: string[] | string | null | undefined): string[] {

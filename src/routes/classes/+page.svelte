@@ -137,25 +137,25 @@
   structuredData={structuredData}
 />
 
-<section class="rounded-3xl border border-slate-200 bg-white p-8 shadow-lg shadow-slate-900/5">
-  <p class="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">ACT Cram Course</p>
-  <h1 class="mt-2 text-4xl font-black text-ink">Choose your test date and reserve your seat.</h1>
+<section class="page-hero p-8 md:p-10">
+  <p class="text-xs font-bold uppercase tracking-[0.16em] text-sky-700">ACT Cram Course</p>
+  <h1 class="mt-2 max-w-4xl text-4xl font-black leading-tight text-ink md:text-5xl">Choose your test date and reserve your seat.</h1>
   <p class="mt-4 max-w-3xl text-lg text-slate-600">
     Each ACT Cram Course includes four focused 90-minute sessions in the week before the test. Students get structured strategy,
     pacing practice, and high-yield review designed to improve performance without months of prep.
   </p>
 
   <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-    <div class="rounded-2xl bg-slate-50 p-4">
-      <p class="text-sm font-bold text-ink">What it is</p>
+    <div class="rounded-2xl border border-sky-100 bg-white/85 p-4 shadow-sm">
+      <p class="text-sm font-bold text-sky-800">What it is</p>
       <p class="mt-1 text-sm text-slate-600">Four-session ACT cram course</p>
     </div>
-    <div class="rounded-2xl bg-slate-50 p-4">
-      <p class="text-sm font-bold text-ink">When it happens</p>
+    <div class="rounded-2xl border border-amber-100 bg-white/85 p-4 shadow-sm">
+      <p class="text-sm font-bold text-amber-700">When it happens</p>
       <p class="mt-1 text-sm text-slate-600">During the week before your ACT</p>
     </div>
-    <div class="rounded-2xl bg-slate-50 p-4">
-      <p class="text-sm font-bold text-ink">Who it is for</p>
+    <div class="rounded-2xl border border-teal-100 bg-white/85 p-4 shadow-sm">
+      <p class="text-sm font-bold text-teal-700">Who it is for</p>
       <p class="mt-1 text-sm text-slate-600">Students who want to improve their score and increase opportunities</p>
     </div>
 
@@ -166,7 +166,7 @@
   {#each data.classes as classOffering}
     {@const earlyBirdOffer = getEarlyBirdOffer(classOffering.slug)}
     {@const scheduleDetails = getClassScheduleDetails(classOffering)}
-    <article class="rounded-3xl border border-slate-200 bg-white p-6 shadow-lg shadow-slate-900/5">
+    <article class={`rounded-3xl border p-6 shadow-lg transition hover:-translate-y-1 ${classOffering.featured ? 'warm-card' : 'color-card'}`}>
       {#if classOffering.featured}
         <p class="inline-flex rounded-full bg-teal-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-teal-800">
           Ending Soonest
@@ -191,7 +191,7 @@
 
       <p class="mt-2 text-sm text-slate-600">{classOffering.format}</p>
 
-      <div class="mt-4 rounded-2xl bg-slate-50 p-4">
+      <div class="mt-4 rounded-2xl border border-sky-100 bg-white/85 p-4">
         <p class="text-3xl font-black text-sky">
           {money.format(classOffering.priceCents / 100)}
         </p>
@@ -222,7 +222,7 @@
         href={getEnrollHref(classOffering.slug)}
         use:preserveMarketingParams
         use:trackEnrollCta={{ cta_location: 'classes_card', cta_label: 'Reserve your seat', class_slug: classOffering.slug }}
-        class="mt-5 inline-flex rounded-full bg-ink px-5 py-2 text-sm font-bold text-white transition hover:bg-slate-700"
+        class="mt-5 inline-flex rounded-full bg-sky px-5 py-2 text-sm font-bold text-white shadow-lg shadow-sky-900/20 transition hover:bg-teal-500"
       >
         Reserve your seat
       </a>
@@ -230,7 +230,7 @@
   {/each}
 </section>
 
-<section class="mt-8 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm shadow-slate-900/5 md:p-8">
+<section class="warm-card mt-8 rounded-3xl border p-6 md:p-8">
   <div class="grid gap-5 lg:grid-cols-[1fr_auto] lg:items-center">
     <div class="max-w-3xl">
       <p class="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">Need a different format?</p>
@@ -264,12 +264,12 @@
   </div>
 </section>
 
-<section class="mt-8 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm shadow-slate-900/5 md:p-8">
-  <p class="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">Class details</p>
+<section class="color-card mt-8 rounded-3xl border p-6 md:p-8">
+  <p class="text-xs font-bold uppercase tracking-[0.16em] text-sky-700">Class details</p>
   <h2 class="mt-2 text-2xl font-black text-ink">Common questions before families enroll.</h2>
   <div class="mt-5 grid gap-4 md:grid-cols-2">
     {#each classFaqs as faq}
-      <article class="rounded-2xl bg-slate-50 p-5">
+      <article class="rounded-2xl border border-sky-100 bg-white p-5">
         <h3 class="text-base font-extrabold text-ink">{faq.question}</h3>
         <p class="mt-2 text-sm leading-6 text-slate-700">{faq.answer}</p>
         {#if faq.question === 'Is ACT prep worth it for my student?'}
@@ -282,25 +282,25 @@
   </div>
 </section>
 
-<section class="mt-8 rounded-3xl border border-sky-200 bg-sky-50 p-6 shadow-sm shadow-slate-900/5">
+<section class="ink-band mt-8 rounded-3xl border p-6">
   <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
     <div class="max-w-2xl">
-      <p class="text-xs font-bold uppercase tracking-[0.16em] text-sky-700">Compare value first</p>
-      <h2 class="mt-2 text-2xl font-black text-ink">Estimate the scholarship upside before you enroll.</h2>
-      <p class="mt-2 text-sm text-slate-700">
+      <p class="text-xs font-bold uppercase tracking-[0.16em] text-sky-200">Compare value first</p>
+      <h2 class="mt-2 text-2xl font-black text-white">Estimate the scholarship upside before you enroll.</h2>
+      <p class="mt-2 text-sm text-sky-50/85">
         If you are still weighing whether the course is worth it, use the scholarship calculator to see how a score increase can
         change potential merit aid.
       </p>
-      <p class="mt-2 text-sm text-slate-600">
+      <p class="mt-2 text-sm text-sky-100/75">
         Have questions about paying for prep? Review the
-        <a href="/act-prep-roi" class="font-semibold text-sky-700 hover:underline"> ACT prep ROI guide</a>.
+        <a href="/act-prep-roi" class="font-semibold text-white hover:underline"> ACT prep ROI guide</a>.
       </p>
     </div>
 
     <div class="shrink-0">
       <a
         href="/scholarship-calculator"
-        class="inline-flex rounded-full bg-ink px-5 py-2 text-sm font-bold text-white transition hover:bg-slate-700"
+        class="inline-flex rounded-full bg-white px-5 py-2 text-sm font-bold text-ink transition hover:bg-slate-100"
       >
         Try the scholarship calculator
       </a>

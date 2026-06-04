@@ -27,10 +27,10 @@
   description="Download a free official ACT practice test and learn how to use it for ACT pacing, review, and score improvement."
 />
 
-<section class="rounded-3xl border border-slate-200 bg-white p-8 shadow-lg shadow-slate-900/5 md:p-10">
+<section class="page-hero p-8 md:p-10">
   <div class="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
     <div>
-      <p class="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">Free ACT resource</p>
+      <p class="text-xs font-bold uppercase tracking-[0.16em] text-sky-700">Free ACT resource</p>
       <h1 class="mt-2 max-w-3xl text-4xl font-black leading-tight text-ink md:text-5xl">
         Download a free official ACT practice test.
       </h1>
@@ -43,7 +43,7 @@
           href={officialActPracticeTestUrl}
           target="_blank"
           rel="noreferrer"
-          class="inline-flex rounded-full bg-ink px-6 py-3 text-sm font-bold text-white shadow-xl shadow-slate-900/20 transition hover:bg-slate-800"
+          class="inline-flex rounded-full bg-sky px-6 py-3 text-sm font-bold text-white shadow-xl shadow-sky-900/20 transition hover:bg-teal-500"
         >
           Get the free practice test
         </a>
@@ -58,7 +58,7 @@
       </div>
     </div>
 
-    <aside class="rounded-2xl border border-sky-200 bg-sky-50 p-6">
+    <aside class="rounded-2xl border border-sky-200 bg-white/80 p-6 shadow-sm">
       <p class="text-xs font-bold uppercase tracking-[0.16em] text-sky-700">Inside the guide</p>
       <div class="mt-4 grid gap-3">
         <div class="rounded-2xl bg-white p-4">
@@ -145,19 +145,19 @@
   </article>
 </section>
 
-<section class="mt-8 rounded-3xl border border-slate-200 bg-white p-6 shadow-lg shadow-slate-900/5 md:p-8">
+<section class="ink-band mt-8 rounded-3xl border p-6 md:p-8">
   <div class="grid gap-6 md:grid-cols-[1fr_auto] md:items-center">
     <div>
-      <p class="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">Next step</p>
-      <h2 class="mt-2 text-2xl font-black text-ink">Want help turning practice into points?</h2>
-      <p class="mt-3 max-w-2xl text-base leading-relaxed text-slate-600">
+      <p class="text-xs font-bold uppercase tracking-[0.16em] text-sky-200">Next step</p>
+      <h2 class="mt-2 text-2xl font-black text-white">Want help turning practice into points?</h2>
+      <p class="mt-3 max-w-2xl text-base leading-relaxed text-sky-50/85">
         The KC Cram Course helps students turn missed questions into a test-day plan for pacing, strategy, and the most
         common ACT question types.
       </p>
     </div>
     <a
       href="/classes"
-      class="inline-flex rounded-full bg-sky px-6 py-3 text-sm font-bold text-white shadow-glow transition hover:bg-teal-500"
+      class="inline-flex rounded-full bg-white px-6 py-3 text-sm font-bold text-ink transition hover:bg-slate-100"
     >
       View upcoming classes
     </a>

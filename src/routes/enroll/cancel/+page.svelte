@@ -8,8 +8,8 @@
   robots="noindex, nofollow"
 />
 
-<section class="mx-auto max-w-3xl rounded-3xl border border-slate-200 bg-white p-8 shadow-lg shadow-slate-900/5">
-  <p class="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">
+<section class="page-hero mx-auto max-w-3xl p-8 md:p-10">
+  <p class="text-xs font-bold uppercase tracking-[0.16em] text-sky-700">
     Payment cancelled
   </p>
 
@@ -23,7 +23,7 @@
 
   <a
     href="/classes"
-    class="mt-6 inline-flex rounded-full bg-sky px-6 py-3 text-sm font-bold text-white"
+    class="mt-6 inline-flex rounded-full bg-sky px-6 py-3 text-sm font-bold text-white shadow-lg shadow-sky-900/20 transition hover:bg-teal-500"
   >
     Return to classes
   </a>

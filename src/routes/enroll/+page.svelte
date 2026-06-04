@@ -59,9 +59,9 @@
   robots="noindex, nofollow"
 />
 
-<section class="rounded-3xl border border-slate-200 bg-white p-8 shadow-lg shadow-slate-900/5">
-  <p class="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">Enrollment</p>
-  <h1 class="mt-2 text-4xl font-black text-ink">Secure your spot in the next cohort.</h1>
+<section class="page-hero p-8 md:p-10">
+  <p class="text-xs font-bold uppercase tracking-[0.16em] text-sky-700">Enrollment</p>
+  <h1 class="mt-2 max-w-4xl text-4xl font-black leading-tight text-ink md:text-5xl">Secure your spot in the next cohort.</h1>
   <p class="mt-4 max-w-3xl text-lg text-slate-600">
     Select your class, confirm the schedule and location, and enter your student and parent information to continue to checkout.
   </p>
@@ -69,8 +69,8 @@
 
 {#if selectedClassOffering}
   <div class="mt-6 flex justify-center">
-    <div class="w-full max-w-xl rounded-2xl border border-slate-200 bg-slate-50 p-6 text-sm text-slate-700 shadow-sm">
-      <p class="text-center text-xs font-bold uppercase tracking-[0.16em] text-slate-500">Selected Class</p>
+    <div class="warm-card w-full max-w-xl rounded-2xl border p-6 text-sm text-slate-700">
+      <p class="text-center text-xs font-bold uppercase tracking-[0.16em] text-amber-700">Selected Class</p>
 
       <p class="mt-2 text-center text-base font-semibold text-slate-900">
         {selectedClassOffering.title}
@@ -120,7 +120,7 @@
 <form
   method="POST"
   use:preserveMarketingParams={data.marketingParams}
-  class="mt-8 grid gap-4 rounded-3xl border border-slate-200 bg-white p-6 md:grid-cols-2"
+  class="color-card mt-8 grid gap-4 rounded-3xl border p-6 md:grid-cols-2"
 >
   {#each Object.entries(data.marketingParams) as [key, value]}
     <input type="hidden" name={key} value={value} />
@@ -132,7 +132,7 @@
     <input
       name="studentName"
       value={form?.studentName ?? ''}
-      class="mt-1 w-full rounded-xl border-slate-300"
+      class="mt-1 w-full rounded-xl border-sky-100 bg-white"
       required
     />
   </label>
@@ -143,7 +143,7 @@
       name="parentEmail"
       type="email"
       value={form?.parentEmail ?? ''}
-      class="mt-1 w-full rounded-xl border-slate-300"
+      class="mt-1 w-full rounded-xl border-sky-100 bg-white"
       required
     />
   </label>
@@ -157,7 +157,7 @@
       oninput={syncSchoolSelection}
       onchange={syncSchoolSelection}
       placeholder="Start typing a school name"
-      class="mt-1 w-full rounded-xl border-slate-300"
+      class="mt-1 w-full rounded-xl border-sky-100 bg-white"
     />
     <datalist id="school-options">
       {#each data.schools as school}
@@ -173,7 +173,7 @@
 
   <label class="block">
     <span class="text-sm font-semibold text-slate-700">How did you hear about us?</span>
-    <select name="heardAboutUs" class="mt-1 w-full rounded-xl border-slate-300">
+    <select name="heardAboutUs" class="mt-1 w-full rounded-xl border-sky-100 bg-white">
       <option value="">Select one</option>
       {#each HEAR_ABOUT_US_OPTIONS as option}
         <option value={option} selected={form?.heardAboutUs === option}>{option}</option>
@@ -186,7 +186,7 @@
     <select
       name="classSlug"
       bind:value={selectedClass}
-      class="mt-1 w-full rounded-xl border-slate-300"
+      class="mt-1 w-full rounded-xl border-sky-100 bg-white"
       required
     >
       <option value="" disabled>Select class</option>
@@ -205,7 +205,7 @@
       name="notes"
       rows="4"
       placeholder="Share timeline, target score, or scheduling constraints"
-      class="mt-1 w-full rounded-xl border-slate-300"
+      class="mt-1 w-full rounded-xl border-sky-100 bg-white"
     >{form?.notes ?? ''}</textarea>
   </label>
 
@@ -214,7 +214,7 @@
   {/if}
 
   <div class="md:col-span-2">
-    <div class="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+    <div class="rounded-2xl border border-sky-100 bg-white/85 p-4">
       <p class="text-sm font-semibold text-slate-800">
         Checkout is handled securely through Stripe.
       </p>
@@ -231,7 +231,7 @@
   </div>
 
   <div class="md:col-span-2 flex justify-end">
-    <button class="rounded-full bg-ink px-6 py-3 text-sm font-bold text-white">
+    <button class="rounded-full bg-sky px-6 py-3 text-sm font-bold text-white shadow-lg shadow-sky-900/20 transition hover:bg-teal-500">
       Continue to checkout
     </button>
   </div>

@@ -37,9 +37,9 @@
   </section>
 {/if}
 
-<section class="mx-auto max-w-3xl rounded-3xl border border-slate-200 bg-white p-8 shadow-lg shadow-slate-900/5">
-  <p class="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">Enrollment Checkout</p>
-  <h1 class="mt-2 text-4xl font-black text-ink">Complete your enrollment.</h1>
+<section class="page-hero mx-auto max-w-3xl p-8 md:p-10">
+  <p class="text-xs font-bold uppercase tracking-[0.16em] text-sky-700">Enrollment Checkout</p>
+  <h1 class="mt-2 text-4xl font-black text-ink md:text-5xl">Complete your enrollment.</h1>
   <p class="mt-4 text-slate-600">
     Review your course details and continue to secure checkout through Stripe.
   </p>
@@ -54,8 +54,8 @@
     {/each}
 
     <!-- UPDATED SUMMARY BLOCK -->
-    <div class="rounded-2xl bg-slate-50 p-6 text-sm text-slate-700">
-      <p class="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">
+    <div class="rounded-2xl border border-sky-100 bg-white/85 p-6 text-sm text-slate-700 shadow-sm">
+      <p class="text-xs font-bold uppercase tracking-[0.16em] text-sky-700">
         Enrollment Summary
       </p>
 
@@ -126,7 +126,7 @@
         type="email"
         required
         value={data.email}
-        class="mt-1 w-full rounded-xl border-slate-300"
+        class="mt-1 w-full rounded-xl border-sky-100 bg-white"
       />
     </label>
 
@@ -135,7 +135,7 @@
     {/if}
 
         <button
-      class={`rounded-full px-6 py-3 text-sm font-bold text-white ${data.stripeReady ? 'bg-sky' : 'cursor-not-allowed bg-slate-400'}`}
+      class={`rounded-full px-6 py-3 text-sm font-bold text-white shadow-lg transition ${data.stripeReady ? 'bg-sky shadow-sky-900/20 hover:bg-teal-500' : 'cursor-not-allowed bg-slate-400 shadow-slate-900/10'}`}
       disabled={!data.stripeReady}
     >
       Continue to Secure Checkout

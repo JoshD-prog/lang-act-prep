@@ -1,4 +1,5 @@
 <script lang="ts">
+  import SchoolLogo from '$lib/components/SchoolLogo.svelte';
   import type { School } from '$lib/types';
 
   export let schools: School[] = [];
@@ -6,23 +7,16 @@
 
 <section class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
   {#each schools as school}
-    {@const needsDarkLogoBackdrop =
-      school.heroImageUrl.includes('FFFFFF') || school.heroImageUrl.includes('christ-preparatory-academy')}
     <a
       href={`/classes?school=${school.slug}`}
-      class="group overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-lg shadow-slate-900/5 transition hover:-translate-y-1 hover:shadow-xl"
+      class="color-card group overflow-hidden rounded-3xl border transition hover:-translate-y-1 hover:shadow-xl"
     >
-      <img
-        src={school.heroImageUrl}
-        alt={school.name}
-        class={`h-44 w-full object-contain p-8 ${needsDarkLogoBackdrop ? 'bg-slate-900' : 'bg-slate-50'}`}
-        loading="lazy"
-      />
+      <SchoolLogo school={school} frameClass="h-44 w-full p-8" />
       <div class="p-5">
         <h3 class="text-center text-xl font-black text-ink transition group-hover:text-sky">{school.name}</h3>
         <div class="mt-5 flex justify-center">
           <span
-            class="inline-flex items-center justify-center rounded-full bg-ink px-5 py-2.5 text-sm font-bold text-white shadow-sm shadow-slate-900/20 transition group-hover:bg-sky"
+            class="inline-flex items-center justify-center rounded-full bg-sky px-5 py-2.5 text-sm font-bold text-white shadow-sm shadow-sky-900/20 transition group-hover:bg-teal-500"
           >
             See class options
           </span>
@@ -32,7 +26,7 @@
   {/each}
   <a
     href="/classes"
-    class="group flex min-h-[22rem] flex-col justify-between overflow-hidden rounded-3xl border border-dashed border-sky/40 bg-sky/5 p-6 shadow-lg shadow-slate-900/5 transition hover:-translate-y-1 hover:border-sky hover:bg-sky/10 hover:shadow-xl"
+    class="warm-card group flex min-h-[22rem] flex-col justify-between overflow-hidden rounded-3xl border border-dashed p-6 transition hover:-translate-y-1 hover:shadow-xl"
   >
     <div>
       <div class="flex h-44 items-center justify-center rounded-2xl bg-white">

@@ -1,5 +1,6 @@
 <script lang="ts">
   import { preserveMarketingParams, trackEnrollCta } from '$lib/analytics';
+  import SchoolLogo from '$lib/components/SchoolLogo.svelte';
   import Seo from '$lib/components/Seo.svelte';
   import { getOrganizationSchema, getSiteUrl, toAbsoluteUrl } from '$lib/seo';
   import type { PageData } from './$types';
@@ -67,15 +68,11 @@
   structuredData={structuredData}
 />
 
-<section class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-lg shadow-slate-900/5">
-<img
-    src={data.school.heroImageUrl}
-    alt={data.school.name}
-    class={`h-64 w-full object-contain p-10 ${data.school.heroImageUrl.includes('FFFFFF') || data.school.heroImageUrl.includes('christ-preparatory-academy') ? 'bg-slate-900' : 'bg-slate-50'}`}
-  />
-  <div class="p-8">
-    <p class="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">{data.school.district ?? 'School partner'}</p>
-    <h1 class="mt-2 text-4xl font-black text-ink">ACT prep for {data.school.name} families</h1>
+<section class="page-hero overflow-hidden">
+  <SchoolLogo school={data.school} frameClass="h-64 w-full p-10" />
+  <div class="p-8 md:p-10">
+    <p class="text-xs font-bold uppercase tracking-[0.16em] text-sky-700">{data.school.district ?? 'School partner'}</p>
+    <h1 class="mt-2 max-w-4xl text-4xl font-black leading-tight text-ink md:text-5xl">ACT prep for {data.school.name} families</h1>
     <p class="mt-4 text-lg text-slate-600">{data.school.shortPitch}</p>
     <p class="mt-3 text-lg text-slate-600">
       Families who book early can pay $249 instead of $299.
@@ -84,12 +81,12 @@
       This page helps {data.school.name} families compare local ACT prep timing, class pricing, and scholarship planning
       tools without starting from a generic test-prep search.
     </p>
-    <div class="mt-6 flex justify-center">
+    <div class="mt-6 flex justify-center md:justify-start">
       <a
         href={`/classes?school=${data.school.slug}`}
         use:preserveMarketingParams
         use:trackEnrollCta={{ cta_location: 'school_page', cta_label: 'View class options', school_slug: data.school.slug }}
-        class="rounded-full bg-sky px-6 py-3 text-sm font-bold text-white"
+        class="rounded-full bg-sky px-6 py-3 text-sm font-bold text-white shadow-lg shadow-sky-900/20 transition hover:bg-teal-500"
       >
         View class options
       </a>

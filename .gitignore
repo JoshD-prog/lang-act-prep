@@ -6,3 +6,6 @@ node_modules
 supabase/.temp
 build
 .DS_Store
+tmp/
+.codex/worktrees/
+.codex-*.log

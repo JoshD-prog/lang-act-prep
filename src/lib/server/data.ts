@@ -717,6 +717,77 @@ function getStaticScholarshipFallbackRows(): ScholarshipTierRow[] {
   return scholarshipFallbackRows.map((row) => ({ ...row }));
 }
 
+function getTodayDateString() {
+  const parts = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'America/Chicago',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit'
+  }).formatToParts(new Date());
+  const values = Object.fromEntries(parts.map((part) => [part.type, part.value]));
+
+  return `${values.year}-${values.month}-${values.day}`;
+}
+
+function getSellableClassOfferings(offerings: ClassOffering[]) {
+  const today = getTodayDateString();
+
+  return offerings.filter((offering) => {
+    if (!offering.startDate) return false;
+    return offering.startDate >= today;
+  });
+}
+
+function compareClassOfferings(
+  a: Pick<ClassOffering, 'featured' | 'startDate'>,
+  b: Pick<ClassOffering, 'featured' | 'startDate'>
+) {
+  if (Boolean(a.featured) !== Boolean(b.featured)) {
+    return a.featured ? -1 : 1;
+  }
+
+  return (a.startDate ?? '').localeCompare(b.startDate ?? '');
+}
+
+function applyCheckoutConfig(offering: ClassOffering): ClassOffering {
+  const checkoutConfig = getStripeCheckoutConfig(offering);
+
+  return {
+    ...offering,
+    priceCents: checkoutConfig.priceCents ?? offering.priceCents,
+    stripePriceId: checkoutConfig.priceId
+  };
+}
+
+function getFallbackClassOfferings() {
+  return getSellableClassOfferings(classOfferings).sort(compareClassOfferings);
+}
+
+function mergeWithFallbackClassOfferings(offerings: ClassOffering[]) {
+  const bySlug = new Map(offerings.map((offering) => [offering.slug, offering]));
+
+  for (const fallbackOffering of getFallbackClassOfferings()) {
+    const existingOffering = bySlug.get(fallbackOffering.slug);
+
+    if (!existingOffering) {
+      bySlug.set(fallbackOffering.slug, fallbackOffering);
+      continue;
+    }
+
+    bySlug.set(fallbackOffering.slug, {
+      ...fallbackOffering,
+      ...existingOffering,
+      stripePriceId: existingOffering.stripePriceId ?? fallbackOffering.stripePriceId ?? null,
+      startDate: existingOffering.startDate ?? fallbackOffering.startDate,
+      endDate: existingOffering.endDate ?? fallbackOffering.endDate,
+      actTestDate: existingOffering.actTestDate ?? fallbackOffering.actTestDate,
+      scoreReleaseDate: existingOffering.scoreReleaseDate ?? fallbackOffering.scoreReleaseDate
+    });
+  }
+
+  return [...bySlug.values()].sort(compareClassOfferings).slice(0, 3).map(applyCheckoutConfig);
+}
+
 export function calculateScholarshipProjections({
   gpa,
   act,
@@ -926,27 +997,10 @@ export function calculateScholarshipProjections({
 export async function getClassOfferings(): Promise<ClassOffering[]> {
   const supabase = createAdminSupabaseClient();
   if (!supabase) {
-    return classOfferings.map((offering) => {
-      const checkoutConfig = getStripeCheckoutConfig(offering);
-
-      return {
-        ...offering,
-        priceCents: checkoutConfig.priceCents ?? offering.priceCents,
-        stripePriceId: checkoutConfig.priceId
-      };
-    });
+    return mergeWithFallbackClassOfferings([]);
   }
 
-  const fallback = () =>
-    classOfferings.map((offering) => {
-      const checkoutConfig = getStripeCheckoutConfig(offering);
-
-      return {
-        ...offering,
-        priceCents: checkoutConfig.priceCents ?? offering.priceCents,
-        stripePriceId: checkoutConfig.priceId
-      };
-    });
+  const fallback = () => mergeWithFallbackClassOfferings([]);
 
   const { data, error } = await (async () => {
     try {
@@ -955,6 +1009,7 @@ export async function getClassOfferings(): Promise<ClassOffering[]> {
         .select(
           'id, slug, title, schedule, location, format, price_cents, seats_available, featured, stripe_price_id, start_date, end_date, act_test_date, score_release_date'
         )
+        .gte('start_date', getTodayDateString())
         .order('featured', { ascending: false })
         .order('start_date', { ascending: true })
         .abortSignal(getSupabaseReadSignal());
@@ -971,8 +1026,8 @@ export async function getClassOfferings(): Promise<ClassOffering[]> {
     return fallback();
   }
 
-  return data.map((item) => {
-    const offering = {
+  return mergeWithFallbackClassOfferings(
+    data.map((item) => ({
       id: item.id,
       slug: item.slug,
       title: item.title,
@@ -987,15 +1042,8 @@ export async function getClassOfferings(): Promise<ClassOffering[]> {
       endDate: item.end_date,
       actTestDate: item.act_test_date,
       scoreReleaseDate: item.score_release_date
-    };
-    const checkoutConfig = getStripeCheckoutConfig(offering);
-
-    return {
-      ...offering,
-      priceCents: checkoutConfig.priceCents ?? offering.priceCents,
-      stripePriceId: checkoutConfig.priceId
-    };
-  });
+    }))
+  );
 }
 
 export async function getSchools(): Promise<School[]> {

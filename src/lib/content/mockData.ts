@@ -9,8 +9,8 @@ export const classOfferings: ClassOffering[] = [
     location: 'Shawnee Civic Center - final room details sent after enrollment',
     format: '4 sessions - 90 minutes each',
     priceCents: 29900,
-    seatsAvailable: 30,
-    featured: true,
+    seatsAvailable: 0,
+    featured: false,
     startDate: '2026-06-08',
     endDate: '2026-06-11',
     actTestDate: '2026-06-13',
@@ -21,10 +21,11 @@ export const classOfferings: ClassOffering[] = [
     slug: 'act-cram-july-2026',
     title: 'July ACT Cram Course',
     schedule: 'Mon-Thu, July 6-9, 6:30-8:00 PM',
-    location: 'Shawnee Civic Center - final room details sent after enrollment',
+    location: 'Harvest Ridge',
     format: '4 sessions - 90 minutes each',
     priceCents: 29900,
     seatsAvailable: 30,
+    featured: true,
     startDate: '2026-07-06',
     endDate: '2026-07-09',
     actTestDate: '2026-07-11',
@@ -43,6 +44,22 @@ export const classOfferings: ClassOffering[] = [
     endDate: '2026-09-17',
     actTestDate: '2026-09-19',
     scoreReleaseDate: '2026-10-06'
+  },
+  {
+    id: 'cls-october-2026',
+    slug: 'act-cram-october-2026',
+    title: 'October ACT Cram Course',
+    schedule: 'Mon-Thu, October 12-15, 6:30-8:00 PM',
+    location: 'Harvest Ridge - final room details sent after enrollment',
+    format: '4 sessions - 90 minutes each',
+    priceCents: 29900,
+    seatsAvailable: 30,
+    featured: false,
+    stripePriceId: 'price_1TgQdORJisJe1D168XCYWiQD',
+    startDate: '2026-10-12',
+    endDate: '2026-10-15',
+    actTestDate: '2026-10-17',
+    scoreReleaseDate: '2026-10-27'
   }
 ];
 

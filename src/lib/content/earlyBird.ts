@@ -31,6 +31,14 @@ const EARLY_BIRD_OFFERS: Record<string, EarlyBirdOffer> = {
     deadlineLabel: 'Ends August 16 at 11:59 PM.',
     expiresAt: '2026-08-16T23:59:59-05:00',
     urgencyLabel: 'Book now and enter code EARLYBIRDSEPT before the cutoff.'
+  },
+  'act-cram-october-2026': {
+    code: 'EARLYBIRDOCT',
+    savingsLabel: 'Save $50',
+    discountedPriceLabel: '$249 early-bird price',
+    deadlineLabel: 'Ends September 13 at 11:59 PM.',
+    expiresAt: '2026-09-13T23:59:59-05:00',
+    urgencyLabel: 'Book now and enter code EARLYBIRDOCT before the cutoff.'
   }
 };
 

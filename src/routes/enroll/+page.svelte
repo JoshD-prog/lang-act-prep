@@ -8,10 +8,21 @@
 
   let { data, form }: { data: PageData; form: ActionData } = $props();
 
+  let studentName = $state('');
+  let parentEmail = $state('');
   let selectedClass = $state('');
   let schoolName = $state('');
   let selectedSchoolSlug = $state('');
   let schoolInitialized = $state(false);
+  let contactInitialized = $state(false);
+
+  $effect(() => {
+    if (!contactInitialized) {
+      studentName = form?.studentName ?? '';
+      parentEmail = form?.parentEmail ?? '';
+      contactInitialized = true;
+    }
+  });
 
   $effect(() => {
     if (!selectedClass) {
@@ -131,7 +142,7 @@
     <span class="text-sm font-semibold text-slate-700">Student name</span>
     <input
       name="studentName"
-      value={form?.studentName ?? ''}
+      bind:value={studentName}
       class="mt-1 w-full rounded-xl border-sky-100 bg-white"
       required
     />
@@ -142,7 +153,7 @@
     <input
       name="parentEmail"
       type="email"
-      value={form?.parentEmail ?? ''}
+      bind:value={parentEmail}
       class="mt-1 w-full rounded-xl border-sky-100 bg-white"
       required
     />

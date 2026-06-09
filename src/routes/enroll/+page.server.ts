@@ -50,6 +50,22 @@ export const actions: Actions = {
       });
     }
 
+    const classes = await getClassOfferings();
+    const classOffering = classes.find((offering) => offering.slug === classSlug);
+
+    if (!classOffering) {
+      return fail(400, {
+        message: 'That class is no longer available for enrollment. Please choose an upcoming class.',
+        studentName,
+        parentEmail,
+        heardAboutUs,
+        classSlug: '',
+        schoolName,
+        schoolSlug,
+        notes
+      });
+    }
+
     let leadId: string | null = null;
 
     const supabase = createAdminSupabaseClient();

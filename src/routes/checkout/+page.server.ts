@@ -4,6 +4,7 @@ import { createAdminSupabaseClient } from '$lib/server/supabase';
 import { env } from '$env/dynamic/private';
 import { fail, redirect } from '@sveltejs/kit';
 import { getClassOfferings } from '$lib/server/data';
+import { getStripeCheckoutConfig } from '$lib/server/stripe';
 import type { Actions } from './$types';
 
 function isMissingHighSchoolColumn(error: unknown) {
@@ -19,7 +20,8 @@ export async function load({ url, cookies }) {
 
   const offerings = await getClassOfferings();
   const offering = offerings.find((c) => c.slug === classSlug);
-  const stripeReady = Boolean(env.STRIPE_SECRET_KEY && offering?.stripePriceId);
+  const checkoutConfig = getStripeCheckoutConfig(offering);
+  const stripeReady = Boolean(env.STRIPE_SECRET_KEY && checkoutConfig.priceId);
 
   return {
     classSlug,

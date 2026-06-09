@@ -18,7 +18,8 @@
   const classDateRanges: Record<string, { startDate: string; endDate: string }> = {
     'act-cram-june-2026': { startDate: '2026-06-08', endDate: '2026-06-11' },
     'act-cram-july-2026': { startDate: '2026-07-06', endDate: '2026-07-09' },
-    'act-cram-september-2026': { startDate: '2026-09-14', endDate: '2026-09-17' }
+    'act-cram-september-2026': { startDate: '2026-09-14', endDate: '2026-09-17' },
+    'act-cram-october-2026': { startDate: '2026-10-12', endDate: '2026-10-15' }
   };
   const classFaqs = [
     {
@@ -169,7 +170,7 @@
     <article class={`rounded-3xl border p-6 shadow-lg transition hover:-translate-y-1 ${classOffering.featured ? 'warm-card' : 'color-card'}`}>
       {#if classOffering.featured}
         <p class="inline-flex rounded-full bg-teal-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-teal-800">
-          Ending Soonest
+          Featured
         </p>
       {/if}
 

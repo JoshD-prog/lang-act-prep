@@ -20,6 +20,10 @@ const scheduleOverrides: Record<string, ScheduleOverride> = {
   'act-cram-september-2026': {
     timeLabel: '6:30-8:00 PM',
     cadenceLabel: 'Mon-Thu, same time each day'
+  },
+  'act-cram-october-2026': {
+    timeLabel: '6:30-8:00 PM',
+    cadenceLabel: 'Mon-Thu, same time each day'
   }
 };
 

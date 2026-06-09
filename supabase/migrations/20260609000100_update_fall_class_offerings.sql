@@ -49,7 +49,7 @@ values
     'Harvest Ridge',
     '4 sessions - 90 minutes each',
     29900,
-    30,
+    15,
     false,
     'price_1TgQdORJisJe1D168XCYWiQD',
     '2026-10-12',

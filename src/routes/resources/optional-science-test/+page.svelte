@@ -14,29 +14,15 @@
 />
 
 <section class="page-hero p-8 md:p-10">
-  <div class="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
-    <div>
-      <p class="text-xs font-bold uppercase tracking-[0.16em] text-sky-700">Class resource</p>
-      <h1 class="mt-2 max-w-4xl text-4xl font-black leading-tight text-ink md:text-5xl">
-        Optional ACT Science Test Lecture
-      </h1>
-      <p class="mt-4 max-w-3xl text-lg leading-relaxed text-slate-600">
-        Use this lesson to prepare for the science section with a practical plan for reading data, handling experiments,
-        managing time, and avoiding common traps.
-      </p>
-    </div>
-
-    <aside class="rounded-3xl border border-sky-200 bg-white/85 p-6 shadow-lg shadow-sky-900/10">
-      <p class="text-xs font-bold uppercase tracking-[0.16em] text-sky-700">Before you watch</p>
-      <h2 class="mt-2 text-2xl font-black text-ink">
-        {youtubeVideoId ? 'Have a pencil and practice test nearby.' : 'This lesson will be available soon.'}
-      </h2>
-      <p class="mt-3 text-sm leading-6 text-slate-600">
-        {youtubeVideoId
-          ? 'Pause when needed to mark strategies, timing choices, and question types you want to practice.'
-          : 'Check back here for a focused walkthrough of the strategies students need for the ACT science test.'}
-      </p>
-    </aside>
+  <div>
+    <p class="text-xs font-bold uppercase tracking-[0.16em] text-sky-700">Class resource</p>
+    <h1 class="mt-2 max-w-4xl text-4xl font-black leading-tight text-ink md:text-5xl">
+      Optional ACT Science Test Lecture
+    </h1>
+    <p class="mt-4 max-w-3xl text-lg leading-relaxed text-slate-600">
+      Use this lesson to prepare for the science section with a practical plan for reading data, handling experiments,
+      managing time, and avoiding common traps.
+    </p>
   </div>
 </section>
 

@@ -158,7 +158,7 @@ export function buildEnrollmentFollowUpEmail(
         <p>Hello,</p>
         <p>Thank you for having <strong>${safeStudentName}</strong> join <strong>${safeClassTitle}</strong>. I enjoyed working with the students, and I hope the course helped make test day feel more focused and manageable.</p>
         <p>If you are willing, please reply to this email with a short, honest testimonial about your family's experience. A few candid sentences are very helpful as this program grows, especially for families who are trying to decide whether the course is a good fit.</p>
-        <p>As a thank-you, I will send a $10 Amazon e-gift card for a testimonial response. This is separate from the score-update thank-you email that will come later.</p>
+        <p>As a thank-you, I will send a $10 Amazon e-gift card for a testimonial response.</p>
         <p>Thank you,</p>
         <p>Adam Lang</p>
       `

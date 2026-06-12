@@ -86,7 +86,8 @@ create table if not exists enrollment_email_events (
         'reminder_1_week_before_class'::text,
         'reminder_1_day_before_class'::text,
         'followup_monday_after_test'::text,
-        'followup_after_score_release'::text
+        'followup_after_score_release'::text,
+        'science_lecture_available'::text
       ]
     )
   ),

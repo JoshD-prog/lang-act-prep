@@ -3,6 +3,7 @@ import { RESEND_API_KEY } from "$env/static/private";
 import {
   buildEnrollmentFollowUpEmail,
   buildEnrollmentReminderEmail,
+  buildScienceLectureAvailableEmail,
   buildParentConfirmationEmailHtml,
   escapeHtml,
   type EnrollmentEmailDetails,
@@ -183,6 +184,21 @@ export async function sendEnrollmentFollowUpEmail(
   details: EnrollmentEmailDetails
 ) {
   const { subject, html } = buildEnrollmentFollowUpEmail(emailType, details);
+
+  const result = await resend.emails.send({
+    from: "Adam Lang <director@kccramcourse.com>",
+    replyTo: "director@kccramcourse.com",
+    to: details.parentEmail,
+    subject,
+    html,
+  });
+
+  throwIfResendError(result);
+  return result;
+}
+
+export async function sendScienceLectureAvailableEmail(details: EnrollmentEmailDetails) {
+  const { subject, html } = buildScienceLectureAvailableEmail(details);
 
   const result = await resend.emails.send({
     from: "Adam Lang <director@kccramcourse.com>",

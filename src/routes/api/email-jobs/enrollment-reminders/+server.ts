@@ -4,6 +4,7 @@ import { createAdminSupabaseClient } from '$lib/server/supabase';
 import {
   sendEnrollmentFollowUpEmail,
   sendEnrollmentReminderEmail,
+  sendScienceLectureAvailableEmail,
   type EnrollmentEmailType
 } from '$lib/server/email';
 
@@ -37,6 +38,8 @@ interface DueEmail {
 }
 
 const timeZone = 'America/Chicago';
+const JUNE_2026_CLASS_SLUG = 'act-cram-june-2026';
+const SCIENCE_LECTURE_SEND_DATE = '2026-06-12';
 
 export const GET: RequestHandler = async ({ request }) => {
   if (!isAuthorized(request)) {
@@ -139,25 +142,21 @@ export const GET: RequestHandler = async ({ request }) => {
       }
 
       try {
+        const details = {
+          parentEmail: lead.parent_email,
+          studentName: lead.student_name,
+          classTitle: classRow.title,
+          classSchedule: classRow.schedule,
+          classLocation: classRow.location,
+          actTestDate: classRow.act_test_date,
+          scoreReleaseDate: classRow.score_release_date
+        };
+
         const result = isReminder(dueEmail.emailType)
-          ? await sendEnrollmentReminderEmail(dueEmail.emailType, {
-              parentEmail: lead.parent_email,
-              studentName: lead.student_name,
-              classTitle: classRow.title,
-              classSchedule: classRow.schedule,
-              classLocation: classRow.location,
-              actTestDate: classRow.act_test_date,
-              scoreReleaseDate: classRow.score_release_date
-            })
-          : await sendEnrollmentFollowUpEmail(dueEmail.emailType, {
-              parentEmail: lead.parent_email,
-              studentName: lead.student_name,
-              classTitle: classRow.title,
-              classSchedule: classRow.schedule,
-              classLocation: classRow.location,
-              actTestDate: classRow.act_test_date,
-              scoreReleaseDate: classRow.score_release_date
-            });
+          ? await sendEnrollmentReminderEmail(dueEmail.emailType, details)
+          : dueEmail.emailType === 'science_lecture_available'
+            ? await sendScienceLectureAvailableEmail(details)
+            : await sendEnrollmentFollowUpEmail(dueEmail.emailType, details);
 
         await updateEvent(eventId, 'sent', getResendMessageId(result));
         counts.sent += 1;
@@ -257,8 +256,24 @@ function getDueEmails(classRow: ClassEmailSchedule, today: string): DueEmail[] {
   addIfDue(dueEmails, 'reminder_1_day_before_class', classRow.start_date, -1, today);
   addIfDue(dueEmails, 'followup_monday_after_test', classRow.act_test_date, 2, today);
   addIfDue(dueEmails, 'followup_after_score_release', classRow.score_release_date, 7, today);
+  addJuneScienceLectureIfDue(dueEmails, classRow, today);
 
   return dueEmails;
+}
+
+function addJuneScienceLectureIfDue(
+  dueEmails: DueEmail[],
+  classRow: ClassEmailSchedule,
+  today: string
+) {
+  if (classRow.slug !== JUNE_2026_CLASS_SLUG || today !== SCIENCE_LECTURE_SEND_DATE) {
+    return;
+  }
+
+  dueEmails.push({
+    emailType: 'science_lecture_available',
+    scheduledFor: SCIENCE_LECTURE_SEND_DATE
+  });
 }
 
 function addIfDue(

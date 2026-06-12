@@ -4,6 +4,7 @@ import { buildParentConfirmationEmailHtml } from "../src/lib/server/email-templa
 import {
   buildEnrollmentFollowUpEmail,
   buildEnrollmentReminderEmail,
+  buildScienceLectureAvailableEmail,
 } from "../src/lib/server/email-templates";
 
 const outputDir = join(process.cwd(), "tmp", "email-previews");
@@ -51,6 +52,10 @@ const previews = [
   {
     fileName: "06-followup-score-release.html",
     ...buildEnrollmentFollowUpEmail("followup_after_score_release", sampleDetails),
+  },
+  {
+    fileName: "07-science-lecture.html",
+    ...buildScienceLectureAvailableEmail(sampleDetails),
   },
 ];
 

@@ -62,7 +62,8 @@ export type EnrollmentEmailType =
   | 'reminder_1_week_before_class'
   | 'reminder_1_day_before_class'
   | 'followup_monday_after_test'
-  | 'followup_after_score_release';
+  | 'followup_after_score_release'
+  | 'science_lecture_available';
 
 export interface EnrollmentEmailDetails {
   parentEmail: string;
@@ -171,6 +172,22 @@ export function buildEnrollmentFollowUpEmail(
       <p>ACT's initial score release date for this test was ${safeScoreReleaseDate}, and I would love to hear how <strong>${safeStudentName}</strong> did.</p>
       <p>If you are willing, just reply to this email with the score update and any notes about what improved, what felt different, or what would have helped more. Honest details are useful for me as I keep improving the course for future students.</p>
       <p>As a thank-you, I will send a $10 Amazon e-gift card for a score-update response. This is a separate thank-you from the testimonial email, so families may receive both.</p>
+      <p>Thank you,</p>
+      <p>Adam Lang</p>
+    `
+  };
+}
+
+export function buildScienceLectureAvailableEmail(details: EnrollmentEmailDetails) {
+  const lectureUrl = 'https://www.kccramcourse.com/resources/optional-science-test';
+
+  return {
+    subject: `Optional ACT science lecture is available`,
+    html: `
+      <p>Hello,</p>
+      <p>I recorded a short lecture for students who are taking the optional ACT science test this weekend. It is now available here:</p>
+      <p><a href="${lectureUrl}">${lectureUrl}</a></p>
+      <p>If your student is taking science, I recommend watching it before test day.</p>
       <p>Thank you,</p>
       <p>Adam Lang</p>
     `

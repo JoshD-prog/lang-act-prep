@@ -1,7 +1,7 @@
 <script lang="ts">
   import Seo from '$lib/components/Seo.svelte';
 
-  const youtubeVideoId = '';
+  const youtubeVideoId = 'g8imXj6-BVc';
   const youtubeEmbedUrl = youtubeVideoId
     ? `https://www.youtube-nocookie.com/embed/${youtubeVideoId}?rel=0`
     : '';

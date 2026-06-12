@@ -19,7 +19,12 @@
     'act-cram-june-2026': { startDate: '2026-06-08', endDate: '2026-06-11' },
     'act-cram-july-2026': { startDate: '2026-07-06', endDate: '2026-07-09' },
     'act-cram-september-2026': { startDate: '2026-09-14', endDate: '2026-09-17' },
-    'act-cram-october-2026': { startDate: '2026-10-12', endDate: '2026-10-15' }
+    'act-cram-october-2026': { startDate: '2026-10-12', endDate: '2026-10-15' },
+    'act-cram-december-2026': { startDate: '2026-12-07', endDate: '2026-12-10' },
+    'act-cram-february-2027': { startDate: '2027-02-22', endDate: '2027-02-25' },
+    'act-cram-april-2027': { startDate: '2027-04-05', endDate: '2027-04-08' },
+    'act-cram-june-2027': { startDate: '2027-06-07', endDate: '2027-06-10' },
+    'act-cram-july-2027': { startDate: '2027-07-05', endDate: '2027-07-08' }
   };
   const classFaqs = [
     {

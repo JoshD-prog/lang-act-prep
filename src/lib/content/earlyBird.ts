@@ -39,6 +39,46 @@ const EARLY_BIRD_OFFERS: Record<string, EarlyBirdOffer> = {
     deadlineLabel: 'Ends September 13 at 11:59 PM.',
     expiresAt: '2026-09-13T23:59:59-05:00',
     urgencyLabel: 'Book now and enter code EARLYBIRDOCT before the cutoff.'
+  },
+  'act-cram-december-2026': {
+    code: 'EARLYBIRDDEC',
+    savingsLabel: 'Save $50',
+    discountedPriceLabel: '$249 early-bird price',
+    deadlineLabel: 'Ends November 8 at 11:59 PM.',
+    expiresAt: '2026-11-08T23:59:59-06:00',
+    urgencyLabel: 'Book now and enter code EARLYBIRDDEC before the cutoff.'
+  },
+  'act-cram-february-2027': {
+    code: 'EARLYBIRDFEB',
+    savingsLabel: 'Save $50',
+    discountedPriceLabel: '$249 early-bird price',
+    deadlineLabel: 'Ends January 24 at 11:59 PM.',
+    expiresAt: '2027-01-24T23:59:59-06:00',
+    urgencyLabel: 'Book now and enter code EARLYBIRDFEB before the cutoff.'
+  },
+  'act-cram-april-2027': {
+    code: 'EARLYBIRDAPR',
+    savingsLabel: 'Save $50',
+    discountedPriceLabel: '$249 early-bird price',
+    deadlineLabel: 'Ends March 7 at 11:59 PM.',
+    expiresAt: '2027-03-07T23:59:59-06:00',
+    urgencyLabel: 'Book now and enter code EARLYBIRDAPR before the cutoff.'
+  },
+  'act-cram-june-2027': {
+    code: 'EARLYBIRDJUNE',
+    savingsLabel: 'Save $50',
+    discountedPriceLabel: '$249 early-bird price',
+    deadlineLabel: 'Ends May 9 at 11:59 PM.',
+    expiresAt: '2027-05-09T23:59:59-05:00',
+    urgencyLabel: 'Book now and enter code EARLYBIRDJUNE before the cutoff.'
+  },
+  'act-cram-july-2027': {
+    code: 'EARLYBIRDJULY',
+    savingsLabel: 'Save $50',
+    discountedPriceLabel: '$249 early-bird price',
+    deadlineLabel: 'Ends June 6 at 11:59 PM.',
+    expiresAt: '2027-06-06T23:59:59-05:00',
+    urgencyLabel: 'Book now and enter code EARLYBIRDJULY before the cutoff.'
   }
 };
 

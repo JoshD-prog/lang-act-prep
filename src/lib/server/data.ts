@@ -13,6 +13,7 @@ import { getStripeCheckoutConfig } from '$lib/server/stripe';
 const loggedFallbacks = new Set<string>();
 const SUPABASE_READ_TIMEOUT_MS = 1500;
 const DEV_SUPABASE_READ_TIMEOUT_MS = 5000;
+const CLASS_OFFERINGS_DISPLAY_LIMIT = 6;
 let loggedScholarshipTierWarningSignature = '';
 
 type ScholarshipTierRow = {
@@ -785,7 +786,10 @@ function mergeWithFallbackClassOfferings(offerings: ClassOffering[]) {
     });
   }
 
-  return [...bySlug.values()].sort(compareClassOfferings).slice(0, 3).map(applyCheckoutConfig);
+  return [...bySlug.values()]
+    .sort(compareClassOfferings)
+    .slice(0, CLASS_OFFERINGS_DISPLAY_LIMIT)
+    .map(applyCheckoutConfig);
 }
 
 export function calculateScholarshipProjections({

@@ -86,6 +86,6 @@
   {/if}
 
   <div class="md:col-span-2 flex justify-end">
-    <button class="rounded-full bg-sky px-6 py-3 text-sm font-bold text-white shadow-lg shadow-sky-900/20 transition hover:bg-teal-500">Send question</button>
+    <button class="min-h-11 w-full rounded-full bg-sky px-6 py-3 text-sm font-bold text-white shadow-lg shadow-sky-900/20 transition hover:bg-teal-500 sm:w-auto">Send question</button>
   </div>
 </form>

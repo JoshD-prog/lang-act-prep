@@ -85,3 +85,15 @@ a {
     box-shadow: 0 28px 80px -42px rgba(15, 23, 42, 0.72);
   }
 }
+
+@media (max-width: 639px) {
+  .page-hero {
+    border-radius: 1.5rem;
+    padding: 1.5rem !important;
+  }
+
+  .page-hero h1 {
+    font-size: 1.875rem !important;
+    line-height: 1.12 !important;
+  }
+}

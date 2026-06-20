@@ -23,13 +23,13 @@
       <p class="mb-4 inline-block rounded-full border border-white/70 bg-white/70 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-slate-700 backdrop-blur">
         {eyebrow}
       </p>
-      <h1 class="text-balance text-5xl font-black leading-[1.02] text-ink md:text-6xl">{title}</h1>
+      <h1 class="text-balance text-4xl font-black leading-[1.06] text-ink sm:text-5xl md:text-6xl">{title}</h1>
       <p class="mt-5 max-w-2xl text-pretty text-lg leading-relaxed text-slate-700 md:text-xl">{body}</p>
       <div class="mt-8 flex flex-wrap gap-3">
-        <a href={primaryCtaHref} class="rounded-full bg-ink px-6 py-3 text-sm font-bold text-white shadow-xl shadow-slate-900/20 transition hover:bg-slate-800">
+        <a href={primaryCtaHref} class="inline-flex min-h-11 w-full items-center justify-center rounded-full bg-ink px-6 py-3 text-sm font-bold text-white shadow-xl shadow-slate-900/20 transition hover:bg-slate-800 sm:w-auto">
           {primaryCtaLabel}
         </a>
-        <a href={secondaryCtaHref} class="rounded-full border border-slate-300/80 bg-white/75 px-6 py-3 text-sm font-bold text-slate-700 backdrop-blur transition hover:border-slate-900 hover:text-slate-900">
+        <a href={secondaryCtaHref} class="inline-flex min-h-11 w-full items-center justify-center rounded-full border border-slate-300/80 bg-white/75 px-6 py-3 text-sm font-bold text-slate-700 backdrop-blur transition hover:border-slate-900 hover:text-slate-900 sm:w-auto">
           {secondaryCtaLabel}
         </a>
       </div>

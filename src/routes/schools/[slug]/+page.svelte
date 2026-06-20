@@ -69,8 +69,8 @@
 />
 
 <section class="page-hero overflow-hidden">
-  <SchoolLogo school={data.school} frameClass="h-64 w-full p-10" />
-  <div class="p-8 md:p-10">
+  <SchoolLogo school={data.school} frameClass="h-48 w-full p-8 sm:h-64 sm:p-10" />
+  <div class="p-6 sm:p-8 md:p-10">
     <p class="text-xs font-bold uppercase tracking-[0.16em] text-sky-700">{data.school.district ?? 'School partner'}</p>
     <h1 class="mt-2 max-w-4xl text-4xl font-black leading-tight text-ink md:text-5xl">ACT prep for {data.school.name} families</h1>
     <p class="mt-4 text-lg text-slate-600">{data.school.shortPitch}</p>
@@ -86,7 +86,7 @@
         href={`/classes?school=${data.school.slug}`}
         use:preserveMarketingParams
         use:trackEnrollCta={{ cta_location: 'school_page', cta_label: 'View class options', school_slug: data.school.slug }}
-        class="rounded-full bg-sky px-6 py-3 text-sm font-bold text-white shadow-lg shadow-sky-900/20 transition hover:bg-teal-500"
+        class="inline-flex min-h-11 w-full items-center justify-center rounded-full bg-sky px-6 py-3 text-sm font-bold text-white shadow-lg shadow-sky-900/20 transition hover:bg-teal-500 sm:w-auto"
       >
         View class options
       </a>

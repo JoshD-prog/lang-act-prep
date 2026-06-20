@@ -228,7 +228,7 @@
         href={getEnrollHref(classOffering.slug)}
         use:preserveMarketingParams
         use:trackEnrollCta={{ cta_location: 'classes_card', cta_label: 'Reserve your seat', class_slug: classOffering.slug }}
-        class="mt-5 inline-flex rounded-full bg-sky px-5 py-2 text-sm font-bold text-white shadow-lg shadow-sky-900/20 transition hover:bg-teal-500"
+        class="mt-5 inline-flex min-h-11 w-full items-center justify-center rounded-full bg-sky px-5 py-2 text-sm font-bold text-white shadow-lg shadow-sky-900/20 transition hover:bg-teal-500 sm:w-auto"
       >
         Reserve your seat
       </a>
@@ -259,7 +259,7 @@
         href={pottersSchoolCatalogUrl}
         target="_blank"
         rel="noreferrer"
-        class="inline-flex rounded-full border border-slate-300 bg-white px-5 py-2 text-sm font-bold text-slate-700 transition hover:border-slate-900 hover:text-slate-900"
+        class="inline-flex min-h-11 w-full items-center justify-center rounded-full border border-slate-300 bg-white px-5 py-2 text-sm font-bold text-slate-700 transition hover:border-slate-900 hover:text-slate-900 sm:w-auto"
       >
         View online course catalog
       </a>
@@ -306,7 +306,7 @@
     <div class="shrink-0">
       <a
         href="/scholarship-calculator"
-        class="inline-flex rounded-full bg-white px-5 py-2 text-sm font-bold text-ink transition hover:bg-slate-100"
+        class="inline-flex min-h-11 w-full items-center justify-center rounded-full bg-white px-5 py-2 text-sm font-bold text-ink transition hover:bg-slate-100 sm:w-auto"
       >
         Try the scholarship calculator
       </a>

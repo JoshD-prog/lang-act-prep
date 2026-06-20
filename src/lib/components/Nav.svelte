@@ -12,7 +12,7 @@
       <img
         src="/branding/logo-nav.png"
         alt="KC Cram Course"
-        class="h-24 w-auto object-contain"
+        class="h-16 w-auto object-contain md:h-24"
         width="192"
         height="192"
         decoding="async"
@@ -86,7 +86,7 @@
           href="/classes"
           use:preserveMarketingParams
           use:trackEnrollCta={{ cta_location: 'mobile_nav', cta_label: 'Reserve Your Seat' }}
-          class="mt-2 inline-flex w-full items-center justify-center rounded-full bg-sky px-4 py-2 text-sm font-bold text-white shadow-glow transition hover:bg-teal-500"
+          class="mt-2 inline-flex min-h-11 w-full items-center justify-center rounded-full bg-sky px-4 py-2 text-sm font-bold text-white shadow-glow transition hover:bg-teal-500"
           on:click={() => {
             mobileMenuOpen = false;
           }}

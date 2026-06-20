@@ -41,6 +41,6 @@
       <p class="text-xs font-bold uppercase tracking-[0.16em] text-sky-200">Scholarship planning</p>
       <h2 class="mt-2 text-2xl font-black text-white">Find the next score target worth caring about.</h2>
     </div>
-    <a href="/scholarship-calculator" class="inline-flex rounded-full bg-white px-5 py-2 text-sm font-bold text-ink transition hover:bg-slate-100">Open scholarship calculator</a>
+    <a href="/scholarship-calculator" class="inline-flex min-h-11 w-full items-center justify-center rounded-full bg-white px-5 py-2 text-sm font-bold text-ink transition hover:bg-slate-100 sm:w-auto">Open scholarship calculator</a>
   </div>
 </section>

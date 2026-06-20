@@ -43,7 +43,7 @@
           href={officialActPracticeTestUrl}
           target="_blank"
           rel="noreferrer"
-          class="inline-flex rounded-full bg-sky px-6 py-3 text-sm font-bold text-white shadow-xl shadow-sky-900/20 transition hover:bg-teal-500"
+          class="inline-flex min-h-11 w-full items-center justify-center rounded-full bg-sky px-6 py-3 text-sm font-bold text-white shadow-xl shadow-sky-900/20 transition hover:bg-teal-500 sm:w-auto"
         >
           Get the free practice test
         </a>
@@ -51,7 +51,7 @@
           href={officialActFreePrepUrl}
           target="_blank"
           rel="noreferrer"
-          class="inline-flex rounded-full border border-slate-300 bg-white px-6 py-3 text-sm font-bold text-slate-700 transition hover:border-sky hover:text-sky"
+          class="inline-flex min-h-11 w-full items-center justify-center rounded-full border border-slate-300 bg-white px-6 py-3 text-sm font-bold text-slate-700 transition hover:border-sky hover:text-sky sm:w-auto"
         >
           See more free ACT prep
         </a>
@@ -116,7 +116,7 @@
         href={officialActPracticeTestUrl}
         target="_blank"
         rel="noreferrer"
-        class="inline-flex rounded-full bg-sky px-5 py-2.5 text-sm font-bold text-white shadow-glow transition hover:bg-teal-500"
+        class="inline-flex min-h-11 w-full items-center justify-center rounded-full bg-sky px-5 py-2.5 text-sm font-bold text-white shadow-glow transition hover:bg-teal-500 sm:w-auto"
       >
         Download the practice test
       </a>
@@ -124,7 +124,7 @@
         href={officialActFreePrepUrl}
         target="_blank"
         rel="noreferrer"
-        class="inline-flex rounded-full border border-slate-300 px-5 py-2.5 text-sm font-bold text-slate-700 transition hover:border-slate-900 hover:text-slate-900"
+        class="inline-flex min-h-11 w-full items-center justify-center rounded-full border border-slate-300 px-5 py-2.5 text-sm font-bold text-slate-700 transition hover:border-slate-900 hover:text-slate-900 sm:w-auto"
       >
         More official ACT prep
       </a>
@@ -157,7 +157,7 @@
     </div>
     <a
       href="/classes"
-      class="inline-flex rounded-full bg-white px-6 py-3 text-sm font-bold text-ink transition hover:bg-slate-100"
+      class="inline-flex min-h-11 w-full items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-bold text-ink transition hover:bg-slate-100 sm:w-auto"
     >
       View upcoming classes
     </a>

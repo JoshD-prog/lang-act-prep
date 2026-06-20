@@ -97,15 +97,15 @@
     </p>
 
     <div class="mt-6 grid gap-3 sm:grid-cols-3">
-      <div class="rounded-2xl bg-slate-50 p-4">
+      <div class="rounded-2xl bg-slate-50 p-4 text-center">
         <p class="text-2xl font-black text-ink">3</p>
         <p class="mt-1 text-sm font-semibold text-slate-700">Required sections</p>
       </div>
-      <div class="rounded-2xl bg-slate-50 p-4">
+      <div class="rounded-2xl bg-slate-50 p-4 text-center">
         <p class="text-2xl font-black text-ink">2</p>
         <p class="mt-1 text-sm font-semibold text-slate-700">Optional add-ons</p>
       </div>
-      <div class="rounded-2xl bg-slate-50 p-4">
+      <div class="rounded-2xl bg-slate-50 p-4 text-center">
         <p class="text-2xl font-black text-ink">$0</p>
         <p class="mt-1 text-sm font-semibold text-slate-700">Cost to students</p>
       </div>

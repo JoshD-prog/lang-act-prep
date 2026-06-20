@@ -13,17 +13,8 @@
 
   let imageFailed = $state(false);
 
-  const verifiedSchoolLogoUrls = new Set([
-    '/school-logos/christ-preparatory-academy.png',
-    '/school-logos/lansing-high-school.png',
-    '/school-logos/shawnee-mission-christian-school.png',
-    '/school-logos/southland-academy.png',
-    '/school-logos/wyandotte-high-school.png'
-  ]);
-
   const imageUrl = $derived(school.heroImageUrl.trim());
-  const verifiedImageUrl = $derived(verifiedSchoolLogoUrls.has(imageUrl) ? imageUrl : '');
-  const showImage = $derived(Boolean(verifiedImageUrl) && !imageFailed);
+  const showImage = $derived(Boolean(imageUrl) && !imageFailed);
   const initials = $derived(
     school.name
       .replace(/\b(high|school|academy|christian|preparatory|classical|conversations)\b/gi, '')
@@ -35,7 +26,7 @@
       .toUpperCase() || school.name.slice(0, 2).toUpperCase()
   );
   const needsDarkLogoBackdrop = $derived(
-    verifiedImageUrl.includes('FFFFFF') || verifiedImageUrl.includes('christ-preparatory-academy')
+    imageUrl.includes('FFFFFF') || imageUrl.includes('christ-preparatory-academy')
   );
   const backdropClass = $derived(needsDarkLogoBackdrop ? 'bg-slate-900' : 'bg-slate-50');
 </script>
@@ -43,7 +34,7 @@
 <div class={`flex items-center justify-center overflow-hidden ${backdropClass} ${frameClass}`}>
   {#if showImage}
     <img
-      src={verifiedImageUrl}
+      src={imageUrl}
       alt={school.name}
       class={`h-full w-full object-contain ${imageClass}`}
       loading="lazy"

@@ -32,6 +32,9 @@
   const structuredDataJson = $derived(
     structuredData ? JSON.stringify(structuredData).replace(/</g, '\\u003c') : ''
   );
+  const structuredDataScript = $derived(
+    structuredDataJson ? `<script type="application/ld+json">${structuredDataJson}<\/script>` : ''
+  );
 </script>
 
 <svelte:head>
@@ -52,9 +55,5 @@
   <meta name="twitter:description" content={description} />
   <meta name="twitter:image" content={imageUrl} />
 
-  {#if structuredDataJson}
-    <script type="application/ld+json">
-      {@html structuredDataJson}
-    </script>
-  {/if}
+  {@html structuredDataScript}
 </svelte:head>

@@ -6,6 +6,8 @@
   import { getFaqSchema, getOrganizationSchema, getSiteUrl, getWebsiteSchema } from '$lib/seo';
 
   const siteUrl = getSiteUrl();
+  const homepageDescription =
+    'KC Cram Course offers four focused 90-minute ACT prep classes in Kansas City during the week before the test, with pacing strategy, targeted practice, and enrollment support.';
   const money = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
@@ -74,14 +76,14 @@
 
 <Seo
   title="ACT Prep The Week Before the Test"
-  description="Four focused 90-minute ACT prep sessions designed to maximize your score right before test day."
+  description={homepageDescription}
   structuredData={structuredData}
 />
 
 <Hero
   eyebrow="ACT prep built for the week before your test"
   title="Make the week before your ACT count."
-  body="Four focused sessions to sharpen pacing, strengthen strategy, and improve performance, designed for busy students who need results fast."
+  body={homepageDescription}
   primaryCtaLabel="Reserve your seat"
   primaryCtaHref="/classes"
   secondaryCtaLabel="How it works"
@@ -174,7 +176,7 @@
       </div>
     </div>
 
-    <div class="flex h-full flex-col justify-center gap-5 lg:min-h-[34rem]">
+    <div class="flex h-full flex-col justify-center gap-5 lg:min-h-[34rem]" data-nosnippet>
       <blockquote class="rounded-3xl bg-white p-6 text-base leading-relaxed text-slate-700 shadow-xl shadow-slate-950/20">
         "I saw a big improvement in my score and even got above my target."
         <div class="mt-3 text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">Ariel S.</div>
@@ -193,7 +195,7 @@
   </div>
 </section>
 
-<section class="mt-10 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm shadow-slate-900/5 md:p-8">
+<section class="mt-10 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm shadow-slate-900/5 md:p-8" data-nosnippet>
   <p class="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">ACT prep questions</p>
   <h2 class="mt-2 text-2xl font-black text-ink">Quick answers for Kansas City families.</h2>
   <div class="mt-5 grid gap-4 md:grid-cols-2">

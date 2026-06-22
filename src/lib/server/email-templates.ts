@@ -170,8 +170,10 @@ export function buildEnrollmentFollowUpEmail(
     html: `
       <p>Hello,</p>
       <p>ACT's initial score release date for this test was ${safeScoreReleaseDate}, and I would love to hear how <strong>${safeStudentName}</strong> did.</p>
-      <p>If you are willing, just reply to this email with the score update and any notes about what improved, what felt different, or what would have helped more. Honest details are useful for me as I keep improving the course for future students.</p>
-      <p>As a thank-you, I will send a $10 Amazon e-gift card for a score-update response. This is a separate thank-you from the testimonial email, so families may receive both.</p>
+      <p>Even a short reply would be very helpful. If you know how much their scores improved in each category that would be great, but I'd love to at least hear how much their composite score improved.</p>
+      <p>As a thank-you, I will send a $10 Amazon e-gift card when you reply and let me know how the ACT went.</p>
+      <p>Also, if you did not respond to the earlier testimonial email, that offer is still open too. You can either reply with a short testimonial or leave a Google review here: <a href="https://g.page/r/CVduEj9ru6MqEBI/review">https://g.page/r/CVduEj9ru6MqEBI/review</a>. I will send an additional $10 Amazon e-gift card for either one.</p>
+      <p>If you have any other feedback for me, please let me know! I am grateful for any feedback that helps me improve the class for future students.</p>
       <p>Thank you,</p>
       <p>Adam Lang</p>
     `

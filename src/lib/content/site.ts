@@ -24,7 +24,7 @@ export const homepageSections: CmsSection[] = [
     id: 'who-its-for',
     eyebrow: 'Who it is for',
     title: 'Best for students who want structure, accountability, and a stronger test-day plan.',
-    body: 'This course is designed for students who already know some of the material but need sharper timing, better decision-making, and targeted review before the ACT.',
+    body: 'This course is designed for students who already know some of the material and need sharper timing, better decision-making, and targeted review before the ACT.',
     tone: 'sun',
     ctaLabel: 'How it works',
     ctaHref: '/how-it-works'

@@ -40,7 +40,7 @@
     {
       question: 'Will this help if my student has not studied much yet?',
       answer:
-        'Yes. The course is built to give students structure quickly. They will not master every topic in a week, but they can make better decisions, avoid common traps, and use their remaining practice time more wisely.'
+        'Yes. The course is built to give students structure quickly. In one week, students can make better decisions, avoid common traps, and use their remaining practice time more wisely.'
     },
     {
       question: 'When should we enroll?',
@@ -148,7 +148,7 @@
   <h1 class="mt-2 max-w-4xl text-4xl font-black leading-tight text-ink md:text-5xl">Choose your test date and reserve your seat.</h1>
   <p class="mt-4 max-w-3xl text-lg text-slate-600">
     Each ACT Cram Course includes four focused 90-minute sessions in the week before the test. Students get structured strategy,
-    pacing practice, and high-yield review designed to improve performance without months of prep.
+    pacing practice, and high-yield review designed for students who need a focused plan close to test day.
   </p>
 
   <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -165,6 +165,29 @@
       <p class="mt-1 text-sm text-slate-600">Students who want to improve their score and increase opportunities</p>
     </div>
 
+  </div>
+</section>
+
+<section class="mt-8 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl shadow-slate-900/10">
+  <img
+    src="/images/course/classroom-wide.jpg"
+    alt="Students attending a KC Cram Course ACT prep session"
+    class="h-72 w-full object-cover object-center md:h-[26rem]"
+    loading="lazy"
+    decoding="async"
+  />
+  <div class="grid gap-4 p-6 md:grid-cols-[1.3fr_0.7fr] md:items-center md:p-8">
+    <div>
+      <p class="text-xs font-bold uppercase tracking-[0.16em] text-sky-700">Real classroom format</p>
+      <h2 class="mt-2 text-2xl font-black text-ink">Focused instruction in a small, practical setting.</h2>
+      <p class="mt-3 text-sm leading-6 text-slate-700">
+        Students work through timing, strategy, and section-specific decisions in a room built for direct instruction,
+        note-taking, and focused practice.
+      </p>
+    </div>
+    <div class="rounded-2xl border border-amber-100 bg-amber-50 p-4 text-sm font-semibold text-amber-900">
+      Four 90-minute sessions during the week before the ACT, with limited seats for each test date.
+    </div>
   </div>
 </section>
 

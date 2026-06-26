@@ -19,7 +19,7 @@
     {
       question: 'Is ACT prep worth it if scholarships are not guaranteed?',
       answer:
-        'Often, yes. Scholarships are not guaranteed, but many published merit tiers reward stronger scores. If a higher ACT score moves your student into a better tier, the return can be many times the cost of prep.'
+        'Often, yes. Many published merit tiers reward stronger scores, even though scholarship decisions are never automatic. If a higher ACT score moves your student into a better tier, the return can be many times the cost of prep.'
     },
     {
       question: 'Why do GPA and residency matter?',

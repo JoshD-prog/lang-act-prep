@@ -88,8 +88,8 @@
   primaryCtaHref="/classes"
   secondaryCtaLabel="How it works"
   secondaryCtaHref="/how-it-works"
-  imageSrc="/images/homepage-hero.jpg"
-  imageAlt="Students in a classroom discussion with an instructor"
+  imageSrc="/images/course/instructor-at-podium.jpg"
+  imageAlt="Adam Lang teaching ACT strategy at the front of a Kansas City classroom"
   stats={[
     { value: '4', label: 'focused sessions' },
     { value: '90 min', label: 'per class' },
@@ -111,7 +111,7 @@
 
   <div class="relative grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
     <div>
-      <p class="text-xs font-bold uppercase tracking-[0.18em] text-sky-200">Proof, not promises</p>
+      <p class="text-xs font-bold uppercase tracking-[0.18em] text-sky-200">Real student results</p>
       <h2 class="mt-2 max-w-2xl text-3xl font-black text-white md:text-4xl">
         Students come out with a clearer plan and, often, dramatic score jumps.
       </h2>
@@ -190,6 +190,17 @@
       <blockquote class="rounded-3xl bg-white p-6 text-base leading-relaxed text-slate-700 shadow-xl shadow-slate-950/20">
         "I walked into the ACT with a clear plan for every section."
         <div class="mt-3 text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">Jack R.</div>
+      </blockquote>
+
+      <blockquote class="rounded-3xl bg-white p-6 text-base leading-relaxed text-slate-700 shadow-xl shadow-slate-950/20">
+        "I gained the appropriate time management skills to utilize during the test. I definitely felt more confident."
+        <div class="mt-3 text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">Harper W.</div>
+      </blockquote>
+
+      <blockquote class="rounded-3xl border border-amber-200 bg-amber-50 p-6 text-base leading-relaxed text-slate-700 shadow-xl shadow-amber-950/10">
+        <p class="mb-3 text-xs font-bold uppercase tracking-[0.14em] text-amber-700">Parent perspective</p>
+        "Thank you for the preparation and confidence you gave my daughter. It was a great, affordable option that I would highly recommend to other parents."
+        <div class="mt-3 text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">Rebecca W.</div>
       </blockquote>
     </div>
   </div>

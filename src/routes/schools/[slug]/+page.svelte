@@ -79,7 +79,7 @@
     </p>
     <p class="mt-3 text-base leading-7 text-slate-600">
       This page helps {data.school.name} families compare local ACT prep timing, class pricing, and scholarship planning
-      tools without starting from a generic test-prep search.
+      tools built around local ACT dates, class pricing, and nearby college goals.
     </p>
     <div class="mt-6 flex justify-center md:justify-start">
       <a

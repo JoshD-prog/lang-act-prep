@@ -217,11 +217,11 @@
                   <div>
                     <p class="text-xs font-bold uppercase tracking-[0.18em] text-emerald-700">Top Tier</p>
                     <h4 class="mt-2 text-2xl font-black text-ink">
-                      Your student already appears to be at the highest automatic scholarship tier, but competitive scholarships can provide even more value.
+                      Your student already appears to be at the highest automatic scholarship tier. Competitive scholarships can provide even more value.
                     </h4>
                     <p class="mt-3 text-sm leading-6 text-slate-600">
-                      A higher ACT score may not unlock another automatic award in this calculator, but
-                      <strong class="font-bold text-ink">students can still do even better.</strong>
+                      A higher ACT score can still strengthen applications for selective scholarships.
+                      <strong class="font-bold text-ink">Students can keep building opportunity.</strong>
                       Stronger scores can make them more competitive for selective scholarships,
                       departmental awards, honors college funding, and other application-based aid.
                     </p>

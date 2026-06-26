@@ -281,7 +281,7 @@ export const schools: School[] = [
     name: 'Leavenworth High School',
     district: 'Leavenworth USD 453',
     heroImageUrl: 'https://resources.finalsite.net/images/f_auto,q_auto/v1680771585/usd453org/v70fu90ujlpf7s6o4xjb/LHS_Logo_noBkg.png',
-    shortPitch: 'Efficient ACT prep for Leavenworth families who want focused review without months of extra coursework.'
+    shortPitch: 'Efficient ACT prep for Leavenworth families who want focused review close to test day.'
   },
   {
     id: 'sch-mill-valley',

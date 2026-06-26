@@ -24,6 +24,40 @@
   {/each}
 </div>
 
+<section class="mt-8 grid overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl shadow-slate-900/10 lg:grid-cols-[0.95fr_1.05fr]">
+  <div class="p-6 md:p-8">
+    <p class="text-xs font-bold uppercase tracking-[0.16em] text-sky-700">What students bring home</p>
+    <h2 class="mt-2 text-2xl font-black text-ink">A binder, notes, and a clear test-week plan.</h2>
+    <p class="mt-3 text-sm leading-6 text-slate-700">
+      The course is built around practical materials students can use immediately: pacing systems, practice questions,
+      section reminders, and a plan for the final days before the ACT.
+    </p>
+    <div class="mt-5 grid gap-3 sm:grid-cols-2">
+      <img
+        src="/images/course/prep-binder.jpg"
+        alt="KC Cram Course ACT prep binder"
+        class="aspect-[4/3] w-full rounded-2xl object-cover shadow-sm"
+        loading="lazy"
+        decoding="async"
+      />
+      <img
+        src="/images/course/notes-practice.jpg"
+        alt="Student ACT prep notes and practice materials"
+        class="aspect-[4/3] w-full rounded-2xl object-cover shadow-sm"
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+  </div>
+  <img
+    src="/images/course/students-listening.jpg"
+    alt="Students listening during an ACT prep class"
+    class="h-full min-h-80 w-full object-cover object-center"
+    loading="lazy"
+    decoding="async"
+  />
+</section>
+
 <section class="ink-band mt-8 rounded-3xl border p-8">
   <h2 class="text-2xl font-black text-white">Reserve your seat for your test date</h2>
   <p class="mt-3 text-sky-50/85">

@@ -54,6 +54,29 @@
   </div>
 </section>
 
+<section class="mt-8 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl shadow-slate-900/10">
+  <div class="grid gap-0 lg:grid-cols-[1.05fr_0.95fr] lg:items-stretch">
+    <img
+      src="/images/course/instructor-at-podium.jpg"
+      alt="Adam Lang teaching ACT strategy at the front of a KC Cram Course classroom"
+      class="h-80 w-full object-cover object-center lg:h-full"
+      loading="lazy"
+      decoding="async"
+    />
+    <div class="p-6 md:p-8">
+      <p class="text-xs font-bold uppercase tracking-[0.16em] text-sky-700">Teaching style</p>
+      <h2 class="mt-2 text-2xl font-black text-ink">Direct, practical instruction students can use right away.</h2>
+      <p class="mt-3 text-sm leading-6 text-slate-700">
+        The course focuses on the decisions students make under time pressure: when to move, what to skip, how to read
+        the question, and how to turn the final week before the test into useful practice.
+      </p>
+      <p class="mt-3 text-sm leading-6 text-slate-700">
+        Students leave with concrete systems for each section and a clearer sense of what to do on test day.
+      </p>
+    </div>
+  </div>
+</section>
+
 <section class="color-card mt-8 rounded-3xl border p-6 md:p-8">
   <p class="text-xs font-bold uppercase tracking-[0.16em] text-sky-700">Instructor credentials</p>
   <h2 class="mt-2 text-2xl font-black text-ink">A teacher with real test-score and classroom credibility.</h2>
@@ -89,8 +112,8 @@
   <article class="rounded-2xl border border-sky-100 bg-white/95 p-6 shadow-sm shadow-sky-900/5">
     <h2 class="text-xl font-extrabold text-ink">Focused preparation</h2>
     <p class="mt-3 text-sm text-slate-600">
-      This is not a long tutoring program. It is a short, high-yield course built for the week before the ACT, when
-      students need clarity, structure, and efficient review.
+      This short, high-yield course is built for the week before the ACT, when students need clarity, structure, and
+      efficient review.
     </p>
   </article>
 

@@ -31,7 +31,7 @@
   <article class="rounded-3xl border border-teal-200 bg-white p-6 shadow-lg shadow-teal-900/10">
     <p class="text-xs font-bold uppercase tracking-[0.16em] text-teal-700">15 days out</p>
     <h2 class="mt-2 text-xl font-black text-ink">Tighten decisions.</h2>
-    <p class="mt-3 text-sm leading-6 text-slate-700">Focus on pacing and error categories, not new content volume.</p>
+    <p class="mt-3 text-sm leading-6 text-slate-700">Focus on pacing, error categories, and the patterns that show up across practice sections.</p>
   </article>
 </section>
 

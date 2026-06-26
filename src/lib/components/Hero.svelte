@@ -66,7 +66,7 @@
             <div class="rounded-2xl border border-white/70 bg-white/70 px-4 py-4 shadow-lg shadow-slate-900/5 backdrop-blur">
               <p class="text-xs font-bold uppercase tracking-[0.16em] text-clay">Local and personal</p>
               <p class="mt-2 text-sm font-semibold text-slate-700">
-                Taught by a Kansas City high school teacher, not a faceless test-prep brand.
+                Personal instruction from a Kansas City high school teacher.
               </p>
             </div>
 

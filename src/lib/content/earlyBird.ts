@@ -17,12 +17,12 @@ const EARLY_BIRD_OFFERS: Record<string, EarlyBirdOffer> = {
     urgencyLabel: 'Book now and enter code EARLYBIRDJUNE before the cutoff.'
   },
   'act-cram-july-2026': {
-    code: 'EARLYBIRDJULY',
-    savingsLabel: 'Save $50',
-    discountedPriceLabel: '$249 early-bird price',
-    deadlineLabel: 'Ends June 7 at 11:59 PM.',
-    expiresAt: '2026-06-07T23:59:59-05:00',
-    urgencyLabel: 'Book now and enter code EARLYBIRDJULY before the cutoff.'
+    code: 'HAPPY-BDAY-USA',
+    savingsLabel: 'Save $49',
+    discountedPriceLabel: '$250 Independence Day price',
+    deadlineLabel: 'Ends July 10 at 11:59 PM.',
+    expiresAt: '2026-07-10T23:59:59-05:00',
+    urgencyLabel: 'Book now and enter code HAPPY-BDAY-USA before the cutoff.'
   },
   'act-cram-september-2026': {
     code: 'EARLYBIRDSEPT',

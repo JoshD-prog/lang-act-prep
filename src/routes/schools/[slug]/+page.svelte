@@ -2,11 +2,17 @@
   import { preserveMarketingParams, trackEnrollCta } from '$lib/analytics';
   import SchoolLogo from '$lib/components/SchoolLogo.svelte';
   import Seo from '$lib/components/Seo.svelte';
+  import { getLandingPageEarlyBirdOffer } from '$lib/content/earlyBird';
   import { getOrganizationSchema, getSiteUrl, toAbsoluteUrl } from '$lib/seo';
   import type { PageData } from './$types';
 
   let { data }: { data: PageData } = $props();
   const siteUrl = getSiteUrl();
+  const money = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    maximumFractionDigits: 0
+  });
 
   const description = $derived(
     `${data.school.name} families can review Kansas City-area ACT prep options, pricing, upcoming class dates, and scholarship planning tools.`
@@ -14,6 +20,7 @@
   const schoolPageName = $derived(
     `ACT prep for ${data.school.name} students in the Kansas City area`
   );
+  const earlyBirdPromotion = $derived(getLandingPageEarlyBirdOffer(data.classes));
   const structuredData = $derived([
     {
       '@context': 'https://schema.org',
@@ -74,9 +81,13 @@
     <p class="text-xs font-bold uppercase tracking-[0.16em] text-sky-700">{data.school.district ?? 'School partner'}</p>
     <h1 class="mt-2 max-w-4xl text-4xl font-black leading-tight text-ink md:text-5xl">ACT prep for {data.school.name} families</h1>
     <p class="mt-4 text-lg text-slate-600">{data.school.shortPitch}</p>
-    <p class="mt-3 text-lg text-slate-600">
-      Families who book early can pay $249 instead of $299.
-    </p>
+    {#if earlyBirdPromotion}
+      <p class="mt-3 text-lg text-slate-600">
+        Current offer: {earlyBirdPromotion.offer.discountedPriceLabel} with code {earlyBirdPromotion.offer.code} for
+        {earlyBirdPromotion.classOffering.title}. Regular price is
+        {money.format(earlyBirdPromotion.classOffering.priceCents / 100)}.
+      </p>
+    {/if}
     <p class="mt-3 text-base leading-7 text-slate-600">
       This page helps {data.school.name} families compare local ACT prep timing, class pricing, and scholarship planning
       tools built around local ACT dates, class pricing, and nearby college goals.

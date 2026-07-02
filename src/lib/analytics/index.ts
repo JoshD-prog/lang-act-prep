@@ -2,6 +2,7 @@ import { browser } from '$app/environment';
 import { env as publicEnv } from '$env/dynamic/public';
 
 const GTAG_SCRIPT_ID = 'ga4-google-tag';
+const META_PIXEL_SCRIPT_ID = 'meta-pixel-script';
 const MARKETING_PARAMS_STORAGE_KEY = 'marketing_params';
 
 export const MARKETING_PARAM_KEYS = [
@@ -12,7 +13,10 @@ export const MARKETING_PARAM_KEYS = [
   'utm_content'
 ] as const;
 
-export type AnalyticsEventParams = Record<string, string | number | boolean | null | undefined>;
+export type AnalyticsEventParams = Record<
+  string,
+  string | number | boolean | string[] | null | undefined
+>;
 export type MarketingParamKey = (typeof MARKETING_PARAM_KEYS)[number];
 export type MarketingParams = Partial<Record<MarketingParamKey, string>>;
 
@@ -20,13 +24,29 @@ declare global {
   interface Window {
     dataLayer: unknown[];
     gtag?: (...args: unknown[]) => void;
+    fbq?: MetaPixelFunction;
+    _fbq?: MetaPixelFunction;
   }
 }
 
+type MetaPixelFunction = {
+  (...args: unknown[]): void;
+  callMethod?: (...args: unknown[]) => void;
+  push?: MetaPixelFunction;
+  loaded?: boolean;
+  version?: string;
+  queue?: IArguments[];
+};
+
 let initialized = false;
+let metaInitialized = false;
 
 export function analyticsEnabled() {
   return browser && getGoogleTagIds().length > 0;
+}
+
+export function metaPixelEnabled() {
+  return browser && Boolean(publicEnv.PUBLIC_META_PIXEL_ID?.trim());
 }
 
 function toUrl(input: URL | Location | string) {
@@ -73,9 +93,42 @@ function ensureGtag() {
   return true;
 }
 
-export function initAnalytics() {
-  if (!ensureGtag()) {
+function ensureMetaPixel() {
+  if (!metaPixelEnabled()) {
     return false;
+  }
+
+  if (!window.fbq) {
+    let fbq: MetaPixelFunction;
+    fbq = function (...args: unknown[]) {
+      if (fbq.callMethod) {
+        fbq.callMethod(...args);
+        return;
+      }
+
+      fbq.queue?.push(arguments);
+    };
+
+    if (!window._fbq) {
+      window._fbq = fbq;
+    }
+
+    fbq.push = fbq;
+    fbq.loaded = true;
+    fbq.version = '2.0';
+    fbq.queue = [];
+    window.fbq = fbq;
+  }
+
+  return true;
+}
+
+export function initAnalytics() {
+  const hasGoogleAnalytics = ensureGtag();
+  const hasMetaPixel = initMetaPixel();
+
+  if (!hasGoogleAnalytics) {
+    return hasMetaPixel;
   }
 
   if (!document.getElementById(GTAG_SCRIPT_ID)) {
@@ -106,27 +159,85 @@ export function initAnalytics() {
   return true;
 }
 
+export function initMetaPixel() {
+  if (!ensureMetaPixel()) {
+    return false;
+  }
+
+  if (!document.getElementById(META_PIXEL_SCRIPT_ID)) {
+    const script = document.createElement('script');
+    script.id = META_PIXEL_SCRIPT_ID;
+    script.async = true;
+    script.src = 'https://connect.facebook.net/en_US/fbevents.js';
+    document.head.appendChild(script);
+  }
+
+  if (metaInitialized) {
+    return true;
+  }
+
+  metaInitialized = true;
+  window.fbq?.('init', publicEnv.PUBLIC_META_PIXEL_ID);
+
+  return true;
+}
+
 export function trackPageView(input: URL | Location | string) {
-  if (!initAnalytics()) {
+  const analyticsReady = initAnalytics();
+  const metaReady = initMetaPixel();
+
+  if (!analyticsReady && !metaReady) {
     return;
   }
 
   const url = toUrl(input);
   const pagePath = `${url.pathname}${url.search}`;
 
-  window.gtag?.('event', 'page_view', {
-    page_location: url.toString(),
-    page_path: pagePath,
-    page_title: document.title
-  });
+  if (analyticsReady) {
+    window.gtag?.('event', 'page_view', {
+      page_location: url.toString(),
+      page_path: pagePath,
+      page_title: document.title
+    });
+  }
+
+  if (metaReady) {
+    window.fbq?.('track', 'PageView');
+  }
 }
 
 export function trackEvent(name: string, params: AnalyticsEventParams = {}) {
-  if (!initAnalytics()) {
+  if (initAnalytics()) {
+    window.gtag?.('event', name, cleanEventParams(params));
+  }
+}
+
+export function trackMetaEvent(name: string, params: AnalyticsEventParams = {}) {
+  if (!initMetaPixel()) {
     return;
   }
 
-  window.gtag?.('event', name, cleanEventParams(params));
+  window.fbq?.('track', name, cleanEventParams(params));
+}
+
+export function trackMetaPurchase(params: {
+  value?: number;
+  currency?: string;
+  transactionId?: string;
+}) {
+  if (!initMetaPixel()) {
+    return;
+  }
+
+  window.fbq?.(
+    'track',
+    'Purchase',
+    cleanEventParams({
+      value: params.value,
+      currency: params.currency,
+      order_id: params.transactionId
+    })
+  );
 }
 
 export function trackGoogleAdsConversion(params: {

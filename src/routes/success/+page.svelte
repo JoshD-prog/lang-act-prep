@@ -1,6 +1,11 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { markEventOnce, trackEvent, trackGoogleAdsConversion } from '$lib/analytics';
+  import {
+    markEventOnce,
+    trackEvent,
+    trackGoogleAdsConversion,
+    trackMetaPurchase
+  } from '$lib/analytics';
   import Seo from '$lib/components/Seo.svelte';
   import type { PageData } from './$types';
 
@@ -21,6 +26,12 @@
     });
 
     trackGoogleAdsConversion({
+      transactionId: data.sessionId,
+      value: data.paymentAmount,
+      currency: data.currency || undefined
+    });
+
+    trackMetaPurchase({
       transactionId: data.sessionId,
       value: data.paymentAmount,
       currency: data.currency || undefined

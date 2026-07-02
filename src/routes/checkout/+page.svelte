@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { preserveMarketingParams, trackEvent } from '$lib/analytics';
+  import { preserveMarketingParams, trackEvent, trackMetaEvent } from '$lib/analytics';
   import { getClassScheduleDetails } from '$lib/content/classSchedule';
   import { getEarlyBirdOffer } from '$lib/content/earlyBird';
   import Seo from '$lib/components/Seo.svelte';
@@ -19,6 +19,11 @@
     trackEvent('checkout_visit', {
       class_slug: data.classSlug,
       lead_id: data.leadId || undefined
+    });
+
+    trackMetaEvent('InitiateCheckout', {
+      content_name: data.classTitle || undefined,
+      content_ids: data.classSlug ? [data.classSlug] : undefined
     });
   });
 </script>

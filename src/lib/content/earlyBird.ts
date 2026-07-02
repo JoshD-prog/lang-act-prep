@@ -1,3 +1,5 @@
+import type { ClassOffering } from '$lib/types';
+
 export type EarlyBirdOffer = {
   code: string;
   savingsLabel: string;
@@ -93,4 +95,17 @@ export function getEarlyBirdOffer(classSlug: string, now = new Date()) {
 
 export function getActiveEarlyBirdOffers(now = new Date()) {
   return Object.values(EARLY_BIRD_OFFERS).filter((offer) => isOfferActive(offer, now));
+}
+
+export function getLandingPageEarlyBirdOffer(classOfferings: ClassOffering[], now = new Date()) {
+  return classOfferings
+    .map((classOffering) => ({
+      classOffering,
+      offer: getEarlyBirdOffer(classOffering.slug, now)
+    }))
+    .filter(
+      (activeOffer): activeOffer is { classOffering: ClassOffering; offer: EarlyBirdOffer } =>
+        Boolean(activeOffer.offer)
+    )
+    .sort((a, b) => (a.classOffering.startDate ?? '').localeCompare(b.classOffering.startDate ?? ''))[0] ?? null;
 }

@@ -7,8 +7,8 @@ export const SERVICE_AREA = "Kansas City metro";
 export const PRIMARY_LOCATION = "Kansas City, Kansas";
 export const DEFAULT_DESCRIPTION =
   "Focused ACT prep classes, scholarship planning tools, and enrollment support designed for the week before test day.";
-export const BRAND_LOGO_IMAGE = "/branding/logo-nav.png";
-export const DEFAULT_OG_IMAGE = BRAND_LOGO_IMAGE;
+export const BRAND_LOGO_IMAGE = "/branding/logo.png";
+export const DEFAULT_OG_IMAGE = "/branding/logo.jpg";
 export const PRODUCTION_SITE_URL = "https://kccramcourse.com";
 
 export function getSiteUrl(fallbackOrigin?: string) {

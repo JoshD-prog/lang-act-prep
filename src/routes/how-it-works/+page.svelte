@@ -32,7 +32,7 @@
       The course is built around practical materials students can use immediately: pacing systems, practice questions,
       section reminders, and a plan for the final days before the ACT.
     </p>
-    <div class="mt-5 grid gap-3 sm:grid-cols-2">
+    <div class="mt-5 grid gap-3 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3">
       <img
         src="/images/course/prep-binder.jpg"
         alt="KC Cram Course ACT prep binder"
@@ -44,6 +44,13 @@
         src="/images/course/notes-practice.jpg"
         alt="Student ACT prep notes and practice materials"
         class="aspect-[4/3] w-full rounded-2xl object-cover shadow-sm"
+        loading="lazy"
+        decoding="async"
+      />
+      <img
+        src="/images/course/instructor-teaching-2026.webp"
+        alt="Adam Lang teaching an ACT prep lesson"
+        class="aspect-[4/3] w-full rounded-2xl object-cover object-[center_30%] shadow-sm sm:col-span-1 lg:col-span-2 xl:col-span-1"
         loading="lazy"
         decoding="async"
       />
@@ -63,7 +70,7 @@
   <p class="mt-3 text-sky-50/85">
     Seats are limited. Choose your ACT date and enroll in the course scheduled for the week before your exam.
   </p>
-  <a href="/classes" class="mt-5 inline-flex rounded-full bg-white px-6 py-3 text-sm font-bold text-ink transition hover:bg-slate-100">
+  <a href="/classes" class="mt-5 inline-flex min-h-11 items-center rounded-full bg-white px-6 py-3 text-sm font-bold text-ink transition hover:bg-slate-100">
     View upcoming classes
   </a>
 </section>

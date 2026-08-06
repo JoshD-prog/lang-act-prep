@@ -144,7 +144,7 @@
             <article class="rounded-2xl bg-white/10 p-4">
               <p class="text-2xl font-black text-white">+{money.format(example.deltaTotalUsd)}</p>
               <p class="mt-2 text-sm font-semibold text-sky-50">
-                <a href={example.sourceUrl} class="hover:underline" target="_blank" rel="noreferrer">
+                <a href={example.sourceUrl} class="inline-flex min-h-11 items-center hover:underline" target="_blank" rel="noreferrer">
                   {example.schoolName}
                 </a>
               </p>
@@ -162,13 +162,13 @@
         <div class="mt-4 flex flex-wrap gap-3">
           <a
             href="/scholarship-calculator"
-            class="inline-flex rounded-full border border-white/20 bg-white/10 px-5 py-3 text-sm font-bold text-white transition hover:bg-white hover:text-slate-900"
+            class="inline-flex min-h-11 items-center rounded-full border border-white/20 bg-white/10 px-5 py-3 text-sm font-bold text-white transition hover:bg-white hover:text-slate-900"
           >
             Explore scholarship examples
           </a>
           <a
             href="/classes"
-            class="inline-flex rounded-full bg-white px-5 py-3 text-sm font-bold text-slate-900 transition hover:bg-slate-100"
+            class="inline-flex min-h-11 items-center rounded-full bg-white px-5 py-3 text-sm font-bold text-slate-900 transition hover:bg-slate-100"
           >
             View classes
           </a>
@@ -215,7 +215,7 @@
         <h3 class="text-base font-extrabold text-ink">{faq.question}</h3>
         <p class="mt-2 text-sm leading-6 text-slate-700">{faq.answer}</p>
         {#if faq.question === 'Is ACT prep worth it?'}
-          <a href="/act-prep-roi" class="mt-3 inline-flex text-sm font-bold text-sky hover:underline">
+          <a href="/act-prep-roi" class="mt-3 inline-flex min-h-11 items-center text-sm font-bold text-sky hover:underline">
             See ACT prep ROI examples
           </a>
         {/if}
@@ -238,7 +238,7 @@
     <div class="flex md:justify-end">
       <a
         href="/classes"
-        class="inline-flex rounded-full bg-amber-500 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-amber-900/20 transition hover:bg-amber-600"
+        class="inline-flex min-h-11 items-center rounded-full bg-amber-500 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-amber-900/20 transition hover:bg-amber-600"
       >
         View class availability
       </a>

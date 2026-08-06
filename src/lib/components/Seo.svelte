@@ -1,6 +1,6 @@
 <script lang="ts">
   import { page } from '$app/state';
-  import { DEFAULT_DESCRIPTION, DEFAULT_OG_IMAGE, SITE_NAME, getSiteUrl, toAbsoluteUrl } from '$lib/seo';
+  import { DEFAULT_DESCRIPTION, DEFAULT_OG_IMAGE, SITE_NAME, TWITTER_HANDLE, getSiteUrl, toAbsoluteUrl } from '$lib/seo';
 
   type SchemaValue = Record<string, unknown> | Array<Record<string, unknown>>;
 
@@ -54,6 +54,8 @@
   <meta property="og:image:secure_url" content={imageUrl} />
 
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content={TWITTER_HANDLE} />
+  <meta name="twitter:creator" content={TWITTER_HANDLE} />
   <meta name="twitter:title" content={resolvedTitle} />
   <meta name="twitter:description" content={description} />
   <meta name="twitter:image" content={imageUrl} />

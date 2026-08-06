@@ -48,7 +48,7 @@
   <h2 class={`mt-2 text-2xl font-black ${theme.title}`}>{section.title}</h2>
   <p class={`mt-3 text-base leading-relaxed ${theme.body}`}>{section.body}</p>
   {#if section.ctaLabel && section.ctaHref}
-    <a href={section.ctaHref} class={`mt-5 inline-flex rounded-full px-4 py-2 text-sm font-semibold transition ${theme.cta}`}>
+    <a href={section.ctaHref} class={`mt-5 inline-flex min-h-11 items-center rounded-full px-4 py-2 text-sm font-semibold transition ${theme.cta}`}>
       {section.ctaLabel}
     </a>
   {/if}

@@ -45,7 +45,7 @@
     <!-- IMAGE -->
     <div class="flex justify-center md:justify-end">
       <img
-        src="/images/adam-lang.jpg"
+        src="/images/adam-lang-2026.webp"
         alt="Adam Lang, ACT instructor"
         class="w-full max-w-xs rounded-[1.75rem] border-4 border-white object-cover shadow-2xl shadow-slate-900/20 md:max-w-md lg:max-w-lg"
       />
@@ -57,9 +57,9 @@
 <section class="mt-8 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl shadow-slate-900/10">
   <div class="grid gap-0 lg:grid-cols-[1.05fr_0.95fr] lg:items-stretch">
     <img
-      src="/images/course/instructor-at-podium.jpg"
-      alt="Adam Lang teaching ACT strategy at the front of a KC Cram Course classroom"
-      class="h-80 w-full object-cover object-center lg:h-full"
+      src="/images/course/small-group-instruction-2026.webp"
+      alt="Adam Lang helping students work through ACT prep materials in a small group"
+      class="h-80 w-full object-cover object-[center_42%] lg:h-full"
       loading="lazy"
       decoding="async"
     />

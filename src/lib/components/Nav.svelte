@@ -8,13 +8,13 @@
 
 <header class="sticky top-0 z-40 border-b border-slate-200/80 bg-white/85 backdrop-blur">
   <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 md:px-6">
-    <a href="/" class="inline-flex items-center">
+    <a href="/" class="inline-flex min-h-11 items-center" aria-label="KC Cram Course home">
       <img
         src="/branding/logo-nav.png"
         alt="KC Cram Course"
-        class="h-16 w-auto object-contain md:h-24"
-        width="192"
-        height="192"
+        class="h-14 w-14 object-contain md:h-20 md:w-20"
+        width="256"
+        height="256"
         decoding="async"
       />
     </a>
@@ -33,13 +33,13 @@
         href="/classes"
         use:preserveMarketingParams
         use:trackEnrollCta={{ cta_location: 'desktop_nav', cta_label: 'Reserve Your Seat' }}
-        class="hidden rounded-full bg-sky px-5 py-2.5 text-sm font-bold text-white shadow-glow transition hover:bg-teal-500 md:inline-flex"
+        class="hidden min-h-11 items-center rounded-full bg-sky px-5 py-2.5 text-sm font-bold text-white shadow-glow transition hover:bg-teal-500 md:inline-flex"
       >
         Reserve Your Seat
       </a>
       <button
         type="button"
-        class="inline-flex items-center justify-center rounded-xl border border-slate-300 p-2 text-slate-700 transition hover:border-sky hover:text-sky md:hidden"
+        class="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-slate-300 text-slate-700 transition hover:border-sky hover:text-sky md:hidden"
         aria-expanded={mobileMenuOpen}
         aria-label="Toggle navigation menu"
         on:click={() => {
@@ -74,7 +74,7 @@
         {#each navItems as item}
           <a
             href={item.href}
-            class={`rounded-xl px-3 py-2 text-sm font-semibold transition-colors hover:bg-slate-50 hover:text-sky ${$page.url.pathname === item.href ? 'bg-slate-50 text-sky' : 'text-slate-700'}`}
+            class={`flex min-h-11 items-center rounded-xl px-3 py-2 text-sm font-semibold transition-colors hover:bg-slate-50 hover:text-sky ${$page.url.pathname === item.href ? 'bg-slate-50 text-sky' : 'text-slate-700'}`}
             on:click={() => {
               mobileMenuOpen = false;
             }}

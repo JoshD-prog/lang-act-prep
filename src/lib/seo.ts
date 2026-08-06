@@ -3,12 +3,13 @@ import { env as publicEnv } from "$env/dynamic/public";
 export const SITE_NAME = "KC Cram Course";
 export const LEGAL_NAME = "Kansas City Cram Course LLC";
 export const FOUNDER_NAME = "Adam Lang";
+export const TWITTER_HANDLE = "@KCCramCourse";
 export const SERVICE_AREA = "Kansas City metro";
 export const PRIMARY_LOCATION = "Kansas City, Kansas";
 export const DEFAULT_DESCRIPTION =
   "Focused ACT prep classes, scholarship planning tools, and enrollment support designed for the week before test day.";
 export const BRAND_LOGO_IMAGE = "/branding/logo.png";
-export const DEFAULT_OG_IMAGE = "/branding/logo.jpg";
+export const DEFAULT_OG_IMAGE = "/branding/logo-social.jpg";
 export const PRODUCTION_SITE_URL = "https://kccramcourse.com";
 
 export function getSiteUrl(fallbackOrigin?: string) {

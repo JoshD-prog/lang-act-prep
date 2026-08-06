@@ -1,5 +1,8 @@
 import { calculateScholarshipProjections, getScholarshipTiers } from '$lib/server/data';
-import { sendAdminContactInquiryNotification } from '$lib/server/email';
+import {
+  sendAdminContactInquiryNotification,
+  sendScholarshipResultsEmail
+} from '$lib/server/email';
 import { createAdminSupabaseClient } from '$lib/server/supabase';
 import { fail } from '@sveltejs/kit';
 import type { Actions } from './$types';
@@ -103,6 +106,13 @@ export const actions: Actions = {
     ]
       .filter(Boolean)
       .join('\n');
+    const resultsParams = new URLSearchParams({
+      gpa,
+      act,
+      residency,
+      filter
+    });
+    const resultsUrl = `https://kccramcourse.com/scholarship-calculator?${resultsParams.toString()}`;
 
     const supabase = createAdminSupabaseClient();
     let inquirySaved = false;
@@ -126,6 +136,7 @@ export const actions: Actions = {
       inquirySaved = !error;
     }
 
+    let adminNotificationSent = false;
     try {
       await sendAdminContactInquiryNotification({
         fullName,
@@ -134,15 +145,45 @@ export const actions: Actions = {
         studentGrade: studentGrade || null,
         studentSchool: null,
         heardAboutUs: 'Scholarship calculator',
-        message
+        interest: 'Scholarship calculator results',
+        message,
+        subject: `New Scholarship Calculator Lead - ${fullName}`
       });
+      adminNotificationSent = true;
     } catch {
       if (!inquirySaved) {
         return fail(500, {
-          message: 'We could not send the scholarship results. Please email hello@actprepclasses.com.',
+          message: 'We could not save your request. Please email director@kccramcourse.com.',
           values
         });
       }
+    }
+
+    try {
+      await sendScholarshipResultsEmail({
+        fullName,
+        email,
+        gpa,
+        act,
+        residency,
+        topOpportunitySchool: topOpportunitySchool || null,
+        topOpportunityActGap: topOpportunityActGap || null,
+        topOpportunityValue: formattedValue,
+        resultsUrl
+      });
+    } catch {
+      return fail(500, {
+        message:
+          'We received your information but could not email the results. Please email director@kccramcourse.com.',
+        values
+      });
+    }
+
+    if (!adminNotificationSent && !inquirySaved) {
+      return fail(500, {
+        message: 'We could not save your request. Please email director@kccramcourse.com.',
+        values
+      });
     }
 
     return {

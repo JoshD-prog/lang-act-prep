@@ -105,6 +105,7 @@ export async function sendAdminContactInquiryNotification({
   heardAboutUs,
   interest,
   message,
+  subject,
 }: {
   fullName: string;
   email: string;
@@ -114,6 +115,7 @@ export async function sendAdminContactInquiryNotification({
   heardAboutUs?: string | null;
   interest?: string | null;
   message: string;
+  subject?: string;
 }) {
   const safeFullName = escapeHtml(fullName);
   const safeEmail = escapeHtml(email);
@@ -123,12 +125,13 @@ export async function sendAdminContactInquiryNotification({
   const safeInterest = escapeHtml(interest || "Not provided");
   const safeHeardAboutUs = escapeHtml(heardAboutUs || "Not provided");
   const safeMessage = escapeHtml(message).replace(/\n/g, "<br/>");
+  const safeSubject = (subject || `New Contact Inquiry - ${fullName}`).replace(/[\r\n]+/g, " ");
 
   const result = await resend.emails.send({
     from: "KC Cram Course <noreply@kccramcourse.com>",
     to: "director@kccramcourse.com",
     replyTo: email,
-    subject: `New Contact Inquiry - ${fullName}`,
+    subject: safeSubject,
     html: `
       <p>A new contact inquiry was submitted.</p>
 
@@ -191,6 +194,76 @@ export async function sendEnrollmentFollowUpEmail(
     to: details.parentEmail,
     subject,
     html,
+  });
+
+  throwIfResendError(result);
+  return result;
+}
+
+export async function sendScholarshipResultsEmail({
+  fullName,
+  email,
+  gpa,
+  act,
+  residency,
+  topOpportunitySchool,
+  topOpportunityActGap,
+  topOpportunityValue,
+  resultsUrl,
+}: {
+  fullName: string;
+  email: string;
+  gpa: string;
+  act: string;
+  residency: string;
+  topOpportunitySchool?: string | null;
+  topOpportunityActGap?: string | null;
+  topOpportunityValue?: string | null;
+  resultsUrl: string;
+}) {
+  const safeFullName = escapeHtml(fullName);
+  const safeGpa = escapeHtml(gpa || "Not provided");
+  const safeAct = escapeHtml(act || "Not provided");
+  const safeResidency = escapeHtml(residency || "Not provided");
+  const safeSchool = escapeHtml(topOpportunitySchool || "No nearby tier was shown");
+  const safeActGap = escapeHtml(topOpportunityActGap || "");
+  const safeValue = escapeHtml(topOpportunityValue || "");
+  const safeResultsUrl = escapeHtml(resultsUrl);
+
+  const highlightedResult = topOpportunitySchool
+    ? `<p>
+        <strong>${safeSchool}</strong><br/>
+        ${safeActGap ? `An increase of ${safeActGap} ACT point${safeActGap === "1" ? "" : "s"} may add ` : "Possible additional scholarship amount: "}
+        <strong>${safeValue || "See the calculator"}</strong> over four years.
+      </p>`
+    : `<p>The calculator did not show a nearby higher-value ACT tier for these inputs.</p>`;
+
+  const result = await resend.emails.send({
+    from: "Adam Lang <director@kccramcourse.com>",
+    replyTo: "director@kccramcourse.com",
+    to: email,
+    subject: "Your KC Cram Course scholarship calculator results",
+    html: `
+      <p>Hi ${safeFullName},</p>
+
+      <p>Here are the scholarship calculator results you requested.</p>
+
+      <p>
+        <strong>GPA:</strong> ${safeGpa}<br/>
+        <strong>ACT score:</strong> ${safeAct}<br/>
+        <strong>State of residence:</strong> ${safeResidency}
+      </p>
+
+      ${highlightedResult}
+
+      <p><a href="${safeResultsUrl}">View the full calculator results</a></p>
+
+      <p>Scholarship information can change. Confirm eligibility, deadlines, and renewal requirements with each college before making a financial decision.</p>
+
+      <p>If you have a question about the results or the ACT course, reply to this email.</p>
+
+      <p>Adam Lang<br/>KC Cram Course</p>
+    `,
   });
 
   throwIfResendError(result);

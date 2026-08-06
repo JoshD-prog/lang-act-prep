@@ -5,7 +5,7 @@
 
 <Seo
   title="About"
-  description="Meet Adam Lang and learn how KC Cram Course approaches focused ACT prep, pacing strategy, and scholarship-minded score improvement."
+  description="Meet Adam Lang, a Kansas City teacher who has taught ACT preparation since 2015 and used his own ACT score improvement to earn substantial college scholarships."
 />
 
 <section class="page-hero p-8 md:p-10">
@@ -17,28 +17,37 @@
       <h1 class="mt-2 text-4xl font-black text-ink md:text-5xl">Hi, I'm Adam Lang.</h1>
 
       <p class="mt-4 text-lg text-slate-600">
-        I'm a high school teacher in Kansas City and have been
-        <strong>teaching test prep since 2015</strong>. I've spent years helping high school students
-        build confidence, prepare for high-stakes exams, and make complicated academic work feel manageable.
+        I'm a high school teacher in Kansas City, and I have been <strong>teaching test preparation since 2015</strong>.
       </p>
 
       <p class="mt-4 text-lg text-slate-600">
-        I also know the scholarship side of this process personally. When I was a student, my first ACT score left my
-        dream school financially out of reach. I needed a higher score to be invited to its competitive scholarship
-        competition, so I studied the ACT, learned how the test worked, and <strong>raised my score four points</strong>.
-        That improvement helped me earn an invitation, win <strong>more than $100,000 in college scholarships</strong>,
-        and later earn an <strong>additional $50,000 in scholarships</strong> while working on my master's degree. This
-        experience is a major reason why I teach ACT prep. I understand the strategies students need to score well, and
-        I also understand how life-changing score improvements like this can be.
+        I started taking the ACT seriously for a practical reason. My first score left my first-choice college
+        financially out of reach. I needed two more points to qualify for its competitive scholarship program.
       </p>
 
       <p class="mt-4 text-lg text-slate-600">
-        In college, I graduated <em>summa cum laude</em> with honors. In the classroom, I was named
-        <strong>Teacher of the Year</strong> at my school in 2021. I understand the content students need to know, and I
-        know how to communicate it in an engaging and effective way. My style is direct, encouraging, and practical:
-        students leave knowing exactly what to do differently. The results speak for themselves: My students have seen an
-        <strong>average improvement of 5-6 points</strong> on the ACT over my last three years of teaching ACT Prep
-        classes.
+        I started working through old tests and paying close attention to why I missed questions. Over time, I began to
+        see patterns in the test and in my own mistakes. I <strong>raised my score by four points</strong>.
+      </p>
+
+      <p class="mt-4 text-lg text-slate-600">
+        That improvement earned me an invitation to the scholarship competition, where I received
+        <strong>more than $100,000 in college scholarships</strong>. I later earned another
+        <strong>$50,000 in scholarships</strong> for my master's degree.
+      </p>
+
+      <p class="mt-4 text-lg text-slate-600">
+        Those four points changed the direction of my life. They opened the door to the college I wanted to attend. I
+        graduated from college debt free and have been able to pursue my master's degree without taking on student debt.
+        That has been an enormous blessing to me and my family. It is also one reason I care so much about helping
+        students understand what their ACT score may mean for their future.
+      </p>
+
+      <p class="mt-4 text-lg text-slate-600">
+        I graduated <em>summa cum laude</em> with honors and was named <strong>Teacher of the Year</strong> at Augustine
+        School in 2021. I have spent years learning how to explain difficult ideas to high school students. Over the past
+        three years, students in my ACT classes have improved their composite scores by an
+        <strong>average of five to six points</strong>.
       </p>
     </div>
 
@@ -65,13 +74,15 @@
     />
     <div class="p-6 md:p-8">
       <p class="text-xs font-bold uppercase tracking-[0.16em] text-sky-700">Teaching style</p>
-      <h2 class="mt-2 text-2xl font-black text-ink">Direct, practical instruction students can use right away.</h2>
+      <h2 class="mt-2 text-2xl font-black text-ink">I teach students what to do when they get stuck.</h2>
       <p class="mt-3 text-sm leading-6 text-slate-700">
-        The course focuses on the decisions students make under time pressure: when to move, what to skip, how to read
-        the question, and how to turn the final week before the test into useful practice.
+        A student may know how to solve a math problem and spend too long trying to make it come together. A strong
+        reader may keep returning to the same paragraph without knowing what to look for. After several difficult
+        questions, a student may begin rushing through questions they could have answered.
       </p>
       <p class="mt-3 text-sm leading-6 text-slate-700">
-        Students leave with concrete systems for each section and a clearer sense of what to do on test day.
+        These are problems students can learn to handle. In class, we talk plainly about when to move on, what to write
+        down, how to narrow the choices, and how to recover after losing time.
       </p>
     </div>
   </div>
@@ -79,13 +90,13 @@
 
 <section class="color-card mt-8 rounded-3xl border p-6 md:p-8">
   <p class="text-xs font-bold uppercase tracking-[0.16em] text-sky-700">Instructor credentials</p>
-  <h2 class="mt-2 text-2xl font-black text-ink">A teacher with real test-score and classroom credibility.</h2>
+  <h2 class="mt-2 text-2xl font-black text-ink">Why I'm qualified to teach this course</h2>
 
   <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
     <article class="rounded-2xl border border-sky-100 bg-white p-5">
       <p class="text-3xl font-black text-sky-800">+5-6</p>
       <p class="mt-2 text-sm font-semibold text-slate-700">
-        Running three-year average composite ACT score improvement for my ACT students
+        Average composite improvement among my ACT students over the past three years
       </p>
     </article>
 
@@ -110,26 +121,26 @@
 
 <section class="mt-8 grid gap-5 md:grid-cols-3">
   <article class="rounded-2xl border border-sky-100 bg-white/95 p-6 shadow-sm shadow-sky-900/5">
-    <h2 class="text-xl font-extrabold text-ink">Focused preparation</h2>
+    <h2 class="text-xl font-extrabold text-ink">Four classes during ACT week</h2>
     <p class="mt-3 text-sm text-slate-600">
-      This short, high-yield course is built for the week before the ACT, when students need clarity, structure, and
-      efficient review.
+      The course concentrates on the mistakes, timing problems, and decisions that are most likely to matter on the
+      upcoming test.
     </p>
   </article>
 
   <article class="rounded-2xl border border-amber-100 bg-white/95 p-6 shadow-sm shadow-amber-900/5">
-    <h2 class="text-xl font-extrabold text-ink">Effective communication</h2>
+    <h2 class="text-xl font-extrabold text-ink">Explanations students can remember</h2>
     <p class="mt-3 text-sm text-slate-600">
-      Students respond when strategy is clear, concrete, and easy to remember. My job is to make a complicated test
-      feel manageable, especially for students who are smart but overwhelmed by timing.
+      I explain each strategy in concrete terms and give students time to practice it. By Saturday, the process should
+      feel familiar enough to use without a teacher beside them.
     </p>
   </article>
 
   <article class="rounded-2xl border border-teal-100 bg-white/95 p-6 shadow-sm shadow-teal-900/5">
-    <h2 class="text-xl font-extrabold text-ink">Local scholarship perspective</h2>
+    <h2 class="text-xl font-extrabold text-ink">Scholarships are part of the conversation</h2>
     <p class="mt-3 text-sm text-slate-600">
-      I teach here, live here, and understand the schools, families, and college goals many Kansas City students are
-      working toward. Even modest score gains can affect college options and scholarship opportunities.
+      I teach in Kansas City and pay attention to the scholarship programs families here are considering. Scholarship
+      decisions vary by school, but families should know when another point or two may affect the cost of college.
     </p>
   </article>
 </section>
@@ -137,11 +148,11 @@
 <section class="ink-band mt-8 rounded-3xl border p-6 md:p-8">
   <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
     <div class="max-w-2xl">
-      <p class="text-xs font-bold uppercase tracking-[0.16em] text-sky-200">Ready to choose a date?</p>
-      <h2 class="mt-2 text-2xl font-black text-white">Reserve a seat in the week-before-test ACT course.</h2>
+      <p class="text-xs font-bold uppercase tracking-[0.16em] text-sky-200">Upcoming classes</p>
+      <h2 class="mt-2 text-2xl font-black text-white">Find the class scheduled for your ACT date.</h2>
       <p class="mt-2 text-sm leading-relaxed text-sky-50/85">
-        Compare upcoming class dates, see current seat availability, and start enrollment for the cohort that matches
-        your ACT test date.
+        The course meets during the week leading up to each listed ACT. View the schedule, check the remaining seats,
+        and choose the test date your student is preparing for.
       </p>
     </div>
 

@@ -72,9 +72,10 @@
 
 <section class="page-hero p-8 md:p-10">
   <p class="text-xs font-bold uppercase tracking-[0.16em] text-sky-700">Enrollment</p>
-  <h1 class="mt-2 max-w-4xl text-4xl font-black leading-tight text-ink md:text-5xl">Secure your spot in the next cohort.</h1>
+  <h1 class="mt-2 max-w-4xl text-4xl font-black leading-tight text-ink md:text-5xl">Enroll in an upcoming ACT course</h1>
   <p class="mt-4 max-w-3xl text-lg text-slate-600">
-    Select your class, confirm the schedule and location, and enter your student and parent information to continue to checkout.
+    Choose the class matching the student's ACT date and enter the information below. The next screen will take you to
+    Stripe, a secure payment processor, to complete payment.
   </p>
 </section>
 
@@ -227,10 +228,10 @@
   <div class="md:col-span-2">
     <div class="rounded-2xl border border-sky-100 bg-white/85 p-4">
       <p class="text-sm font-semibold text-slate-800">
-        Checkout is handled securely through Stripe.
+        Payment is processed securely by Stripe.
       </p>
       <p class="mt-1 text-sm text-slate-600">
-        Your seat is reserved after payment is complete, and confirmation details are sent by email.
+        The seat is reserved when payment is complete. We will send the receipt and class information to the parent email above.
       </p>
       <p class="mt-2 text-xs text-slate-500">
         By continuing, you agree to the

@@ -1,7 +1,6 @@
 <script lang="ts">
   import { HEAR_ABOUT_US_OPTIONS } from '$lib/content/hearAboutUsOptions';
   import Seo from '$lib/components/Seo.svelte';
-  import { SERVICE_AREA } from '$lib/seo';
   import type { ActionData, PageData } from './$types';
 
   let { data, form }: { data: PageData; form: ActionData } = $props();
@@ -13,15 +12,7 @@
 />
 
 <section class="page-hero p-8 md:p-10">
-  <p class="text-xs font-bold uppercase tracking-[0.16em] text-sky-700">Contact</p>
-  <h1 class="mt-2 text-4xl font-black text-ink md:text-5xl">Questions before you enroll?</h1>
-  <p class="mt-4 max-w-3xl text-lg text-slate-600">
-    Reach out if you want help deciding whether the course is a good fit, which test date to choose,
-    or what to expect from the week-before-test format.
-  </p>
-  <p class="mt-3 max-w-3xl text-sm text-slate-500">
-    We respond with details on class fit, scheduling, and next steps for families across the {SERVICE_AREA}.
-  </p>
+  <h1 class="text-4xl font-black text-ink md:text-5xl">Questions before you enroll?</h1>
 </section>
 
 <form method="POST" class="color-card mt-8 grid gap-4 rounded-3xl border p-6 md:grid-cols-2">
@@ -71,7 +62,7 @@
   </label>
 
   <p class="md:col-span-2 text-sm text-slate-500">
-    A short message is fine. Tell us your question, student grade, and intended ACT date if you know it.
+    A short message is fine. Include the student's intended ACT date if you know it.
   </p>
 
   <label class="block md:col-span-2">

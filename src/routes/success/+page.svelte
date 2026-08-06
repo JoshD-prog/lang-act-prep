@@ -58,7 +58,7 @@
     {#if data.paymentReceived && data.webhookRecorded}
       You're enrolled.
     {:else if data.paymentReceived}
-      Payment received. Finalizing enrollment.
+      Payment received. We are confirming your enrollment.
     {:else}
       We couldn't confirm payment yet.
     {/if}
@@ -67,10 +67,9 @@
   <p class="mt-4 text-lg text-slate-600">
     {#if data.paymentReceived && data.webhookRecorded}
       {data.classTitle ? `${data.classTitle} is confirmed.` : 'Your enrollment is confirmed.'}
-      You will receive an email with course details and next steps.
+      You will receive an email with the class dates, time, and location.
     {:else if data.paymentReceived}
-      Your payment went through, and we are finishing your enrollment confirmation.
-      Refresh this page in a few seconds, or contact us if you do not receive your course email soon.
+      Your payment went through. Refresh this page in a few seconds. Contact me if you do not receive a course email soon.
     {:else if data.sessionFound}
       We found your checkout, but payment has not been confirmed yet.
       If you just completed payment, wait a moment and refresh. Otherwise, return to classes and try again.

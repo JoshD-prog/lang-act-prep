@@ -7,7 +7,7 @@
 
   const siteUrl = getSiteUrl();
   const homepageDescription =
-    'KC Cram Course offers four focused 90-minute ACT prep classes in Kansas City during the week before the test, with pacing strategy, targeted practice, and enrollment support.';
+    'KC Cram Course gives students four 90-minute ACT classes during the week before the test. We work on timing, common mistakes, and what to do when students get stuck on a question.';
   const money = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
@@ -49,22 +49,22 @@
     {
       question: 'Is this ACT prep course a good fit for my student?',
       answer:
-        'It is a good fit for students who want a focused plan before test day, especially if they need help with timing, strategy, and knowing what to practice first.'
+        'This course is most useful for a student who understands much of the material but is losing points to timing, inconsistent methods, careless errors, or uncertainty about what to do next. Students who need extensive instruction in foundational math or reading will usually benefit from a longer period of preparation.'
     },
     {
       question: 'Is ACT prep worth it?',
       answer:
-        'For many families, yes. Even a small ACT score increase can open the door to higher scholarship tiers, which can be worth far more than the cost of the course. See the ACT Prep ROI page for examples.'
+        'It depends on the student and the schools being considered. If one or two additional points move a student into a higher scholarship tier, the financial return can be much larger than the price of the course. Our scholarship calculator uses published university information to help families investigate that question.'
     },
     {
       question: 'What will my student get out of the week-before-test format?',
       answer:
-        'Students leave with a clearer plan for each ACT section, stronger pacing habits, and a short list of high-value skills to focus on before test day.'
+        'Students can correct timing habits, practice a consistent approach to each section, and identify which mistakes are most worth addressing before Saturday. The goal is to make a few important changes that students can remember and use.'
     },
     {
       question: 'Should we wait until my student has more time to study?',
       answer:
-        'Not necessarily. The week before the ACT is a valuable time to sharpen decisions, timing, and confidence. A short, focused course can help students use that final stretch well.'
+        'The final week is useful because students can practice a strategy in class and use it on the ACT a few days later.'
     }
   ];
   const structuredData = [
@@ -81,8 +81,8 @@
 />
 
 <Hero
-  eyebrow="ACT prep built for the week before your test"
-  title="Make the week before your ACT count."
+  eyebrow="Four classes during ACT week"
+  title="What can change in the week before the ACT?"
   body={homepageDescription}
   primaryCtaLabel="Reserve your seat"
   primaryCtaHref="/classes"
@@ -91,9 +91,9 @@
   imageSrc="/images/course/instructor-at-podium.jpg"
   imageAlt="Adam Lang teaching ACT strategy at the front of a Kansas City classroom"
   stats={[
-    { value: '4', label: 'focused sessions' },
-    { value: '90 min', label: 'per class' },
-    { value: '1 week', label: 'before test day' }
+    { value: '4', label: 'classes' },
+    { value: '90 min', label: 'each' },
+    { value: '1 week', label: 'before the ACT' }
   ]}
 />
 
@@ -113,11 +113,12 @@
     <div>
       <p class="text-xs font-bold uppercase tracking-[0.18em] text-sky-200">Real student results</p>
       <h2 class="mt-2 max-w-2xl text-3xl font-black text-white md:text-4xl">
-        Students come out with a clearer plan and, often, dramatic score jumps.
+        These are real score increases from students I have taught.
       </h2>
       <p class="mt-4 max-w-2xl text-base leading-relaxed text-sky-50/90">
-        These are real score increases from past students taught by the instructor. They show what can happen when
-        students tighten pacing, sharpen section strategy, and practice the right skills in the final stretch.
+        Results vary because students begin in different places and put in different amounts of work. These scores show
+        what has happened when students have corrected recurring mistakes and practiced a more disciplined approach to
+        the test.
       </p>
 
       <div class="mt-6 grid gap-3 sm:grid-cols-3">
@@ -134,9 +135,9 @@
       <div class="mt-6 rounded-3xl border border-white/10 bg-white/10 p-5 backdrop-blur">
         <p class="text-xs font-bold uppercase tracking-[0.16em] text-sky-100/80">What that can mean in dollars</p>
         <p class="mt-2 max-w-2xl text-sm leading-relaxed text-sky-50/85">
-          These examples use published scholarship tables to show how a stronger ACT score can affect merit aid. Even a
-          1 to 3 point improvement can be worth about {money.format(4000)} to {money.format(6000)} over four years, and
-          larger score gains can create much bigger opportunities.
+          A few ACT points can have a surprisingly large effect on merit aid. These examples come from published
+          scholarship tables. At some schools, moving from one score tier to the next can be worth thousands of dollars
+          over four years.
         </p>
 
         <div class="mt-4 grid gap-3 md:grid-cols-3">
@@ -216,7 +217,7 @@
         <p class="mt-2 text-sm leading-6 text-slate-700">{faq.answer}</p>
         {#if faq.question === 'Is ACT prep worth it?'}
           <a href="/act-prep-roi" class="mt-3 inline-flex min-h-11 items-center text-sm font-bold text-sky hover:underline">
-            See ACT prep ROI examples
+            See scholarship examples
           </a>
         {/if}
       </article>
@@ -228,10 +229,11 @@
   <div class="grid gap-6 md:grid-cols-[1.5fr,1fr] md:items-center">
     <div>
       <p class="text-xs font-bold uppercase tracking-[0.16em] text-amber-700">Limited seats</p>
-      <h2 class="mt-2 text-2xl font-black text-ink">Small class sizes. Enrollment closes as seats fill.</h2>
+      <h2 class="mt-2 text-2xl font-black text-ink">Small classes leave time for individual help.</h2>
       <p class="mt-3 max-w-2xl text-slate-700">
-        Each ACT Cram Course has limited seats so students can get focused instruction and a better classroom experience.
-        Check current availability by test date and reserve your seat before your preferred class fills.
+        I limit the number of students in each class so I can answer questions, watch how students are working, and help
+        them identify the problems that are costing them points. Check the schedule to see whether there is space in the
+        class for your ACT date.
       </p>
     </div>
 

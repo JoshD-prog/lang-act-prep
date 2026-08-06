@@ -11,7 +11,7 @@
   {:else}
     <p class="text-lg font-semibold text-ink">Enter GPA and ACT score to estimate scholarships.</p>
     <p class="mt-2 max-w-2xl text-sm text-slate-600">
-      The calculator will show what is already on the table, what the next target looks like, and where a score increase could create the biggest upside.
+      The calculator will show the published tier for the current score and the next ACT score that may qualify for a larger award.
     </p>
   {/if}
 </div>

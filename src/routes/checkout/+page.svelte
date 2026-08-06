@@ -30,14 +30,14 @@
 
 <Seo
   title="Checkout"
-  description="Review your ACT course details and continue to secure Stripe checkout to finalize enrollment."
+  description="Review your ACT course dates and location, then continue to Stripe to pay for the course."
   robots="noindex, nofollow"
 />
 
 {#if !data.stripeReady}
   <section class="mx-auto mb-4 max-w-3xl rounded-2xl border border-amber-300 bg-amber-50 p-4">
     <p class="text-sm font-semibold text-amber-900">
-      Checkout is temporarily unavailable. Please contact us and we can help finish your enrollment.
+      Online payment is temporarily unavailable. Please contact me for help completing your enrollment.
     </p>
   </section>
 {/if}
@@ -46,7 +46,7 @@
   <p class="text-xs font-bold uppercase tracking-[0.16em] text-sky-700">Enrollment Checkout</p>
   <h1 class="mt-2 text-4xl font-black text-ink md:text-5xl">Complete your enrollment.</h1>
   <p class="mt-4 text-slate-600">
-    Review your course details and continue to secure checkout through Stripe.
+    Check the dates, time, and location below. You will enter your payment information through Stripe, a secure payment processor.
   </p>
 
   <form method="POST" use:preserveMarketingParams={data.marketingParams} class="mt-6 grid gap-5">
@@ -58,7 +58,6 @@
       <input type="hidden" name={key} value={value} />
     {/each}
 
-    <!-- UPDATED SUMMARY BLOCK -->
     <div class="rounded-2xl border border-sky-100 bg-white/85 p-6 text-sm text-slate-700 shadow-sm">
       <p class="text-xs font-bold uppercase tracking-[0.16em] text-sky-700">
         Enrollment Summary
@@ -106,7 +105,7 @@
       </div>
 
       <p class="mt-4 text-sm text-slate-600">
-        Your seat will be reserved once payment is completed. Full course details will be emailed immediately after checkout.
+        Your seat will be reserved when payment is complete. We will email your receipt and class information afterward.
       </p>
 
       {#if earlyBirdOffer}
@@ -143,7 +142,7 @@
       class={`rounded-full px-6 py-3 text-sm font-bold text-white shadow-lg transition ${data.stripeReady ? 'bg-sky shadow-sky-900/20 hover:bg-teal-500' : 'cursor-not-allowed bg-slate-400 shadow-slate-900/10'}`}
       disabled={!data.stripeReady}
     >
-      Continue to Secure Checkout
+      Continue to Stripe
     </button>
 
     <p class="text-xs text-slate-500">
@@ -154,7 +153,7 @@
     </p>
 
     <p class="text-xs text-slate-500">
-      You’ll review payment details on Stripe before the charge is completed.
+      You will review the price and payment details on Stripe before completing the purchase.
     </p>
   </form>
 </section>

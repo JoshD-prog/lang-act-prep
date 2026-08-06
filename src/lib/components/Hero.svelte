@@ -86,20 +86,20 @@
 
           <div class="relative">
             <div class="rounded-[1.5rem] bg-[linear-gradient(160deg,#0f172a,#1e3a8a,#0f766e)] p-6 text-white shadow-xl shadow-slate-900/20">
-              <p class="text-xs font-bold uppercase tracking-[0.16em] text-sky-200">Focused ACT prep</p>
-              <h2 class="mt-3 text-2xl font-extrabold">A clear plan for the week before test day.</h2>
+              <p class="text-xs font-bold uppercase tracking-[0.16em] text-sky-200">Four classes during ACT week</p>
+              <h2 class="mt-3 text-2xl font-extrabold">Practice what to do when time is short.</h2>
               <p class="mt-3 text-sm leading-relaxed text-slate-200">
-                Students practice timing, section strategy, and the decisions that matter most when the clock is running.
+                Students work through ACT questions and learn when to keep working, when to move on, and how to recover lost time.
               </p>
 
               <div class="mt-5 grid gap-3 sm:grid-cols-2">
                 <div class="rounded-2xl bg-white/10 px-4 py-3 backdrop-blur">
-                  <p class="text-xs font-bold uppercase tracking-[0.14em] text-sky-100/80">Class focus</p>
-                  <p class="mt-2 text-sm font-semibold">High-yield practice and pacing systems</p>
+                  <p class="text-xs font-bold uppercase tracking-[0.14em] text-sky-100/80">In class</p>
+                  <p class="mt-2 text-sm font-semibold">Timed questions and review</p>
                 </div>
                 <div class="rounded-2xl bg-white/10 px-4 py-3 backdrop-blur">
                   <p class="text-xs font-bold uppercase tracking-[0.14em] text-sky-100/80">Goal</p>
-                  <p class="mt-2 text-sm font-semibold">Walk in with a repeatable test-day plan</p>
+                  <p class="mt-2 text-sm font-semibold">Know what to do when you get stuck</p>
                 </div>
               </div>
             </div>
@@ -111,11 +111,11 @@
               </div>
               <div class="rounded-2xl border border-slate-200 bg-white px-4 py-4 shadow-lg shadow-slate-900/5">
                 <p class="text-xs font-bold uppercase tracking-[0.14em] text-sky-700">Math</p>
-                <p class="mt-2 text-sm font-semibold text-slate-700">High-yield problem types</p>
+                <p class="mt-2 text-sm font-semibold text-slate-700">Common problem types</p>
               </div>
               <div class="rounded-2xl border border-slate-200 bg-white px-4 py-4 shadow-lg shadow-slate-900/5">
                 <p class="text-xs font-bold uppercase tracking-[0.14em] text-amber-700">Reading</p>
-                <p class="mt-2 text-sm font-semibold text-slate-700">Section timing under pressure</p>
+                <p class="mt-2 text-sm font-semibold text-slate-700">When to reread or move on</p>
               </div>
             </div>
           </div>

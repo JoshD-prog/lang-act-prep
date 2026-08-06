@@ -20,8 +20,8 @@
       Optional ACT Science Test Lecture
     </h1>
     <p class="mt-4 max-w-3xl text-lg leading-relaxed text-slate-600">
-      Use this lesson to prepare for the science section with a practical plan for reading data, handling experiments,
-      managing time, and avoiding common traps.
+      This lesson explains how to read graphs and tables, understand experiment descriptions, and manage time on the
+      optional science section.
     </p>
   </div>
 </section>
@@ -43,8 +43,7 @@
           The optional science test lecture will appear here.
         </h2>
         <p class="mt-4 max-w-xl text-sm leading-6 text-slate-300">
-          This resource is designed to help you attack science passages more efficiently and answer data-based questions
-          with more confidence.
+          The lesson will cover reading graphs and tables, understanding experiments, and managing time on the section.
         </p>
       </div>
     {/if}

@@ -4,10 +4,13 @@ export const SITE_NAME = "KC Cram Course";
 export const LEGAL_NAME = "Kansas City Cram Course LLC";
 export const FOUNDER_NAME = "Adam Lang";
 export const TWITTER_HANDLE = "@KCCramCourse";
+export const TWITTER_URL = "https://x.com/KCCramCourse";
+export const FACEBOOK_URL = "https://www.facebook.com/profile.php?id=61574479443415";
+export const INSTAGRAM_URL = "https://www.instagram.com/kansascitycramcourse/";
 export const SERVICE_AREA = "Kansas City metro";
 export const PRIMARY_LOCATION = "Kansas City, Kansas";
 export const DEFAULT_DESCRIPTION =
-  "Focused ACT prep classes, scholarship planning tools, and enrollment support designed for the week before test day.";
+  "Four ACT preparation classes held during the week before the test, with practice on timing, difficult questions, and common mistakes.";
 export const BRAND_LOGO_IMAGE = "/branding/logo.png";
 export const DEFAULT_OG_IMAGE = "/branding/logo-social.jpg";
 export const PRODUCTION_SITE_URL = "https://kccramcourse.com";
@@ -52,6 +55,7 @@ export function getOrganizationSchema(siteUrl = getSiteUrl()) {
     url: siteUrl,
     logo: toAbsoluteUrl(BRAND_LOGO_IMAGE, siteUrl),
     image: toAbsoluteUrl(DEFAULT_OG_IMAGE, siteUrl),
+    sameAs: [FACEBOOK_URL, INSTAGRAM_URL, TWITTER_URL],
     founder: {
       "@type": "Person",
       name: FOUNDER_NAME,

@@ -14,12 +14,12 @@
     {
       question: 'How should I use these scholarship estimates?',
       answer:
-        'Use the calculator to see which score increases may matter most. It can help your family decide whether one or two more ACT points could change the college cost conversation.'
+        'Look at the difference between the scholarship shown for the current score and the next score tier. This tells you which ACT score increases could affect the cost of a particular college.'
     },
     {
-      question: 'Is ACT prep worth it if scholarships are not guaranteed?',
+      question: 'Are these scholarship amounts guaranteed?',
       answer:
-        'Often, yes. Many published merit tiers reward stronger scores, even though scholarship decisions are never automatic. If a higher ACT score moves your student into a better tier, the return can be many times the cost of prep.'
+        'No. The calculator summarizes published scholarship information for planning. The college makes the final award decision, so families should confirm eligibility, deadlines, and renewal requirements with the school.'
     },
     {
       question: 'Why do GPA and residency matter?',
@@ -29,7 +29,7 @@
     {
       question: 'What should we do after we see the results?',
       answer:
-        'Look for nearby score targets that create meaningful value, then choose the ACT date and prep option that gives your student the best chance to reach the next tier.'
+        'Compare the next ACT score with the possible four-year scholarship difference. Then decide whether that target belongs in your student’s college and test-preparation plans.'
     }
   ];
   const structuredData = [
@@ -60,9 +60,10 @@
 
 <section class="page-hero p-8 md:p-10">
   <p class="text-xs font-bold uppercase tracking-[0.16em] text-sky-700">Scholarship calculator</p>
-  <h1 class="mt-2 max-w-4xl text-4xl font-black leading-tight text-ink md:text-5xl">Estimate likely offers and next target tiers.</h1>
+  <h1 class="mt-2 max-w-4xl text-4xl font-black leading-tight text-ink md:text-5xl">See what the next ACT score tier could be worth.</h1>
   <p class="mt-4 max-w-3xl text-lg text-slate-600">
-    Enter student GPA and ACT score to estimate current scholarship levels, next targets, and longer-range merit tiers for each school.
+    Enter a GPA, ACT score, and state of residence. The calculator compares that information with published scholarship
+    tiers and shows the next ACT score that may qualify for a larger award.
   </p>
 </section>
 
@@ -143,9 +144,9 @@
       <article class="rounded-2xl border border-amber-100 bg-white p-5">
         <h3 class="text-base font-extrabold text-ink">{faq.question}</h3>
         <p class="mt-2 text-sm leading-6 text-slate-700">{faq.answer}</p>
-        {#if faq.question === 'Is ACT prep worth it if scholarships are not guaranteed?'}
+        {#if faq.question === 'Are these scholarship amounts guaranteed?'}
           <a href="/act-prep-roi" class="mt-3 inline-flex text-sm font-bold text-sky hover:underline">
-            See ACT prep ROI examples
+            See scholarship and college-cost examples
           </a>
         {/if}
       </article>

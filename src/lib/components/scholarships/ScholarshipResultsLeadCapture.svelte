@@ -30,9 +30,9 @@
     <div class="grid gap-6 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
       <div>
         <p class="text-xs font-bold uppercase tracking-[0.18em] text-clay">Want help interpreting this?</p>
-        <h2 class="mt-2 text-2xl font-black text-ink">Send the snapshot and turn it into a score plan.</h2>
+        <h2 class="mt-2 text-2xl font-black text-ink">Email these results and ask a question.</h2>
         <p class="mt-3 text-sm leading-6 text-slate-700">
-          We can help compare the nearby scholarship upside with the student&apos;s timeline, current score, and realistic prep target.
+          Send yourself a copy of the results. You can also include the student&apos;s next ACT date, target schools, or a question about the course.
         </p>
 
         {#if strongestOpportunity}
@@ -40,7 +40,7 @@
             <p class="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">Included result</p>
             <p class="mt-1 text-sm font-bold text-ink">{strongestOpportunity.schoolName}</p>
             <p class="mt-1 text-sm text-slate-600">
-              +{strongestOpportunity.actGap} ACT point{strongestOpportunity.actGap === 1 ? '' : 's'} could unlock
+              +{strongestOpportunity.actGap} ACT point{strongestOpportunity.actGap === 1 ? '' : 's'} may add
               <strong class="font-black text-clay">{formatCurrency(strongestOpportunity.additionalFourYearValue)}</strong>
               over 4 years.
             </p>
@@ -94,7 +94,7 @@
 
         <div class="md:col-span-2">
           <button class="w-full rounded-full bg-clay px-6 py-3.5 text-sm font-black uppercase tracking-[0.12em] text-white shadow-lg shadow-rose-900/20 transition hover:bg-rose-800">
-            Send my scholarship snapshot
+            Email my scholarship results
           </button>
         </div>
       </form>

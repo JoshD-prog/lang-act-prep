@@ -38,9 +38,7 @@
       <div class="pt-5">
         <p class="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">Don't see your school?</p>
         <h3 class="mt-1 text-xl font-black text-ink transition group-hover:text-sky">We still have classes for you.</h3>
-        <p class="mt-2 text-sm text-slate-600">
-          Our ACT cram courses are open to families across the Kansas City area, even if your school does not have a dedicated page yet.
-        </p>
+        <p class="mt-2 text-sm text-slate-600">Students from any school may enroll in an available class.</p>
       </div>
     </div>
     <p class="mt-4 text-sm font-bold text-sky">View class options</p>

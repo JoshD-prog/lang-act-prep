@@ -37,7 +37,8 @@
   <p class="text-xs font-bold uppercase tracking-[0.16em] text-sky-700">Kansas City ACT prep</p>
   <h1 class="mt-2 max-w-4xl text-4xl font-black leading-tight text-ink md:text-5xl">ACT prep for Kansas City high schools</h1>
   <p class="mt-4 max-w-3xl text-lg text-slate-600">
-    Find your Kansas City-area high school and explore upcoming ACT prep classes, dates, pricing, locations, and enrollment options.
+    Select your school to see upcoming course dates, locations, pricing, and the scholarship calculator. Students from
+    any school may enroll in an available class.
   </p>
 </section>
 

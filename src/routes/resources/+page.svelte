@@ -13,7 +13,7 @@
     },
     {
       label: 'During review',
-      body: 'Sort misses by cause: content gap, pacing decision, reading error, or avoidable trap.'
+      body: 'For every missed question, write down what happened. Did you forget the material, run short on time, misread something, or fall for a tempting answer?'
     },
     {
       label: 'Before test day',
@@ -35,8 +35,8 @@
         Download a free official ACT practice test.
       </h1>
       <p class="mt-4 max-w-3xl text-lg leading-relaxed text-slate-600">
-        Start your prep with a real practice test from ACT. Use it to find your baseline, spot patterns in missed
-        questions, and make your next study session much more focused.
+        Take the test with a timer and score it when you finish. Then review every missed question and write down why
+        you missed it. Those notes will tell you what to study next.
       </p>
       <div class="mt-6 flex flex-wrap gap-3">
         <a
@@ -67,7 +67,7 @@
         </div>
         <div class="rounded-2xl bg-white p-4">
           <p class="text-sm font-extrabold text-ink">Answer key and scoring</p>
-          <p class="mt-1 text-sm text-slate-600">Check your work and estimate where your score currently sits.</p>
+          <p class="mt-1 text-sm text-slate-600">Check your answers and calculate a practice score for each section.</p>
         </div>
         <div class="rounded-2xl bg-white p-4">
           <p class="text-sm font-extrabold text-ink">Test-day information</p>
@@ -92,8 +92,8 @@
 
     <p class="mt-4 text-base leading-relaxed text-slate-600">
       The current ACT has three required sections: English, math, and reading. Science and writing are optional add-ons.
-      The practice test is most useful when you treat the required sections like a real diagnostic, then review missed
-      questions by category so your prep time goes toward the biggest score gains.
+      Set aside enough time to take the required sections under timed conditions. When you finish, check your answers
+      and review the questions you missed. Grouping those mistakes by cause can help you decide what to practice next.
     </p>
 
     <div class="mt-6 grid gap-3 sm:grid-cols-3">
@@ -133,7 +133,7 @@
 
   <article class="rounded-3xl border border-slate-800 bg-ink p-6 text-white shadow-xl shadow-slate-950/20 md:p-8">
     <p class="text-xs font-bold uppercase tracking-[0.16em] text-sky-200">How to use it</p>
-    <h2 class="mt-2 text-2xl font-black">Turn the test into a score-improvement plan.</h2>
+    <h2 class="mt-2 text-2xl font-black">Use the results to decide what to practice next.</h2>
     <div class="mt-5 space-y-3">
       {#each timingPlan as step}
         <div class="rounded-2xl bg-white/10 p-4">
@@ -149,10 +149,10 @@
   <div class="grid gap-6 md:grid-cols-[1fr_auto] md:items-center">
     <div>
       <p class="text-xs font-bold uppercase tracking-[0.16em] text-sky-200">Next step</p>
-      <h2 class="mt-2 text-2xl font-black text-white">Want help turning practice into points?</h2>
+      <h2 class="mt-2 text-2xl font-black text-white">Want help reviewing the questions you missed?</h2>
       <p class="mt-3 max-w-2xl text-base leading-relaxed text-sky-50/85">
-        The KC Cram Course helps students turn missed questions into a test-day plan for pacing, strategy, and the most
-        common ACT question types.
+        In class, students work through ACT questions and practice how to handle timing, difficult questions, and common
+        mistakes in each section.
       </p>
     </div>
     <a

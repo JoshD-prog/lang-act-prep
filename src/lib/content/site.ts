@@ -6,7 +6,7 @@ export const navItems = [
   { href: '/schools', label: 'Find Your School' },
   { href: '/resources', label: 'Resources' },
   { href: '/scholarship-calculator', label: 'Scholarship Calculator' },
-  { href: '/act-prep-roi', label: 'ACT Prep ROI' },
+  { href: '/act-prep-roi', label: 'Is ACT Prep Worth It?' },
   { href: '/about', label: 'About' }
 ];
 
@@ -14,8 +14,8 @@ export const homepageSections: CmsSection[] = [
   {
     id: 'what-it-is',
     eyebrow: 'What it is',
-    title: 'A four-session ACT cram course built for the week before your test.',
-    body: 'Students get focused instruction in strategy, pacing, and high-yield review across the most important ACT question types in four 90-minute sessions.',
+    title: 'Four classes built around the decisions students make while the clock is running.',
+    body: 'Students work through real ACT questions and practice how to handle them. We cover when to keep working, when to move on, how to recover lost time, and how to recognize common traps.',
     tone: 'sky',
     ctaLabel: 'See upcoming dates',
     ctaHref: '/classes'
@@ -23,8 +23,8 @@ export const homepageSections: CmsSection[] = [
   {
     id: 'who-its-for',
     eyebrow: 'Who it is for',
-    title: 'Best for students who want structure, accountability, and a stronger test-day plan.',
-    body: 'This course is designed for students who already know some of the material and need sharper timing, better decision-making, and targeted review before the ACT.',
+    title: 'For students who know more than their score is showing.',
+    body: 'This course is a good fit for students who understand much of the material but work too slowly, get stuck, misread questions, or approach each practice test differently.',
     tone: 'sun',
     ctaLabel: 'How it works',
     ctaHref: '/how-it-works'
@@ -32,8 +32,8 @@ export const homepageSections: CmsSection[] = [
   {
     id: 'why-it-works',
     eyebrow: 'Why it works',
-    title: 'Built around real strategy, timed practice, and the most-tested skills.',
-    body: 'Instead of dragging students through a long prep program, this course focuses on the highest-yield ideas, common mistake patterns, and practical systems they can use immediately on test day.',
+    title: 'The ACT tests how well students make decisions under time pressure.',
+    body: 'Students need to recognize which questions deserve more time, which details matter, and when it is time to make the best choice they can and move forward.',
     tone: 'ink',
     ctaLabel: 'Meet the instructor',
     ctaHref: '/about'
@@ -50,13 +50,13 @@ export const enrollmentJourneySections: CmsSection[] = [
   {
     id: 'step-2',
     eyebrow: 'Step 2',
-    title: 'Attend four focused sessions during test week',
-    body: 'Each 90-minute class covers strategy, pacing systems, and high-yield review so students know exactly how to approach each section.'
+    title: 'Attend four classes during test week',
+    body: 'Each 90-minute class gives students time to work through ACT questions, practice their timing, and learn what to do when they get stuck.'
   },
   {
     id: 'step-3',
     eyebrow: 'Step 3',
-    title: 'Take the ACT with a clear plan',
-    body: 'Students enter test day with practiced timing, section strategies, and a structured approach they can execute under pressure.'
+    title: 'Use what you practiced on test day',
+    body: 'Students take the ACT a few days after the course, with recent practice handling each section and making decisions when time is short.'
   }
 ];

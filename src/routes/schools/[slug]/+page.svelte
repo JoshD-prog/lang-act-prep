@@ -15,7 +15,7 @@
   });
 
   const description = $derived(
-    `${data.school.name} families can review Kansas City-area ACT prep options, pricing, upcoming class dates, and scholarship planning tools.`
+    `View KC Cram Course ACT prep dates, locations, pricing, and enrollment information for ${data.school.name} students.`
   );
   const schoolPageName = $derived(
     `ACT prep for ${data.school.name} students in the Kansas City area`
@@ -62,7 +62,7 @@
         '@type': 'School',
         name: data.school.name,
         areaServed: data.school.district,
-        description: data.school.shortPitch
+        description: `ACT preparation classes available to ${data.school.name} students during the week before each ACT.`
       }
     }
   ]);
@@ -80,7 +80,10 @@
   <div class="p-6 sm:p-8 md:p-10">
     <p class="text-xs font-bold uppercase tracking-[0.16em] text-sky-700">{data.school.district ?? 'School partner'}</p>
     <h1 class="mt-2 max-w-4xl text-4xl font-black leading-tight text-ink md:text-5xl">ACT prep for {data.school.name} families</h1>
-    <p class="mt-4 text-lg text-slate-600">{data.school.shortPitch}</p>
+    <p class="mt-4 text-lg text-slate-600">
+      Students from {data.school.name} can enroll in any available KC Cram Course. Each course meets Monday through
+      Thursday during the week before the ACT.
+    </p>
     {#if earlyBirdPromotion}
       <p class="mt-3 text-lg text-slate-600">
         Current offer: {earlyBirdPromotion.offer.discountedPriceLabel} with code {earlyBirdPromotion.offer.code} for
@@ -89,8 +92,8 @@
       </p>
     {/if}
     <p class="mt-3 text-base leading-7 text-slate-600">
-      This page helps {data.school.name} families compare local ACT prep timing, class pricing, and scholarship planning
-      tools built around local ACT dates, class pricing, and nearby college goals.
+      View the dates and locations below, then choose the class that matches your student's ACT date. You can also use
+      the scholarship calculator to compare the student's current score with published merit-aid tiers.
     </p>
     <div class="mt-6 flex justify-center md:justify-start">
       <a

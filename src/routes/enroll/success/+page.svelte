@@ -4,7 +4,7 @@
 
 <Seo
   title="Enrollment Complete"
-  description="Enrollment has been completed and a confirmation email with next steps is on the way."
+  description="Enrollment is complete, and an email with the class dates, time, and location is on the way."
   robots="noindex, nofollow"
 />
 
@@ -18,7 +18,7 @@
   </h1>
 
   <p class="mt-4 text-lg text-slate-600">
-    Your payment has been received. You will receive an email with course details and next steps.
+    Your payment has been received. You will receive an email with the class dates, time, and location.
   </p>
 
   <a

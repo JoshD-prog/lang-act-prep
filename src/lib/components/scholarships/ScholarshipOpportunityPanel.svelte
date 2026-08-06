@@ -27,13 +27,13 @@
 <div class="space-y-6">
   {#if roiOpportunity.target && roiOpportunity.showStrongCta}
     <section class="rounded-[1.75rem] border border-rose-200 bg-gradient-to-br from-rose-50 via-white to-amber-50 p-5 shadow-sm shadow-rose-900/5">
-      <p class="text-xs font-bold uppercase tracking-[0.18em] text-clay">Big upside</p>
+      <p class="text-xs font-bold uppercase tracking-[0.18em] text-clay">Next score tier</p>
       <h4 class="mt-3 text-2xl font-black text-ink">
         <span>+{roiOpportunity.target.actGap} ACT point{roiOpportunity.target.actGap === 1 ? '' : 's'}</span>
-        <span class="block text-clay">could unlock {formatCurrency(roiOpportunity.target.additionalFourYearValue)}</span>
+        <span class="block text-clay">may add {formatCurrency(roiOpportunity.target.additionalFourYearValue)}</span>
       </h4>
       <p class="mt-3 text-sm text-slate-700">
-        Reaching {getTierDisplayName(roiOpportunity.target, school.primary.tier_name)} creates one of the biggest scholarship jumps available within four ACT points.
+        This is the published difference between the student's current tier and {getTierDisplayName(roiOpportunity.target, school.primary.tier_name)}.
       </p>
       <a
         href="/enroll"
@@ -46,10 +46,10 @@
     </section>
   {:else if roiOpportunity.target && roiOpportunity.showSoftMessage}
     <section class="rounded-[1.75rem] border border-rose-200 bg-gradient-to-br from-rose-50 via-white to-amber-50 p-5 shadow-sm shadow-rose-900/5">
-      <p class="text-xs font-bold uppercase tracking-[0.18em] text-clay">Big upside</p>
+      <p class="text-xs font-bold uppercase tracking-[0.18em] text-clay">Possible four-year increase</p>
       <h4 class="mt-3 text-2xl font-black text-ink">
         {formatCurrency(roiOpportunity.target.additionalFourYearValue)}
-        <span class="block text-clay">is still in play</span>
+        <span class="block text-clay">at the higher tier</span>
       </h4>
       <p class="mt-3 text-sm text-slate-700">
         A score improvement of just {roiOpportunity.target.actGap} ACT point{roiOpportunity.target.actGap === 1 ? '' : 's'} could move your student toward {getTierDisplayName(roiOpportunity.target, school.primary.tier_name)}.
@@ -72,16 +72,16 @@
     </section>
   {:else if roiOpportunity.target && roiOpportunity.showNearbyValue}
     <section class="rounded-[1.75rem] border border-rose-200 bg-gradient-to-br from-rose-50 via-white to-amber-50 p-5 shadow-sm shadow-rose-900/5">
-      <p class="text-xs font-bold uppercase tracking-[0.18em] text-clay">Nearby upside</p>
+      <p class="text-xs font-bold uppercase tracking-[0.18em] text-clay">Nearby score tier</p>
       <h4 class="mt-3 text-2xl font-black text-ink">
         <span>+{roiOpportunity.target.actGap} ACT point{roiOpportunity.target.actGap === 1 ? '' : 's'}</span>
-        <span class="block text-clay">could unlock {formatCurrency(roiOpportunity.target.additionalFourYearValue)}</span>
+        <span class="block text-clay">may add {formatCurrency(roiOpportunity.target.additionalFourYearValue)}</span>
       </h4>
       <p class="mt-3 text-sm text-slate-700">
         Reaching {getTierDisplayName(roiOpportunity.target, school.primary.tier_name)} appears to be the closest score-based scholarship move from here.
       </p>
       <p class="mt-2 text-sm text-slate-600">
-        This is the kind of nearby band that can be worth using as a concrete score target.
+        Check the college's full requirements before using this score as a target.
       </p>
       <a
         href="/enroll"
@@ -95,7 +95,7 @@
   {:else if !isCompetitiveOnlyTarget}
     <section class="rounded-[1.75rem] border border-slate-200 bg-gradient-to-br from-slate-50 to-white p-5 shadow-sm">
       {#if school.nextSteps.length === 0}
-        <p class="text-xs font-bold uppercase tracking-[0.18em] text-slate-500">Competitive upside</p>
+        <p class="text-xs font-bold uppercase tracking-[0.18em] text-slate-500">Competitive scholarships</p>
         <h4 class="mt-3 text-2xl font-black text-ink">The automatic ladder may be maxed, but the scholarship search is not.</h4>
         <p class="mt-3 text-sm text-slate-600">
           Once a student reaches the highest automatic tier, stronger scores can still matter for competitive scholarships, honors programs, departmental awards, and other funding that may require a separate application.
@@ -105,7 +105,7 @@
         </p>
       {:else}
         {#if hasScoreTarget}
-          <p class="text-xs font-bold uppercase tracking-[0.18em] text-slate-500">Longer-range upside</p>
+          <p class="text-xs font-bold uppercase tracking-[0.18em] text-slate-500">Later score tier</p>
           <h4 class="mt-3 text-2xl font-black text-ink">The next automatic score jump is farther out.</h4>
           <p class="mt-3 text-sm text-slate-600">
             This school still has higher automatic tiers, but the next score-based move is not a nearby ACT target from the current inputs.
@@ -123,7 +123,7 @@
             Stronger scores can still help with competitive, selective, honors, or departmental scholarships beyond the automatic GPA-based award.
           </p>
         {:else}
-          <p class="text-xs font-bold uppercase tracking-[0.18em] text-slate-500">Competitive upside</p>
+          <p class="text-xs font-bold uppercase tracking-[0.18em] text-slate-500">Competitive scholarships</p>
           <h4 class="mt-3 text-2xl font-black text-ink">Scores may still matter beyond the automatic path.</h4>
           <p class="mt-3 text-sm text-slate-600">
             The automatic tiers shown here do not point to a nearby ACT-based jump.
@@ -138,7 +138,7 @@
 
   {#if nearbyScoreTargets.length > 0}
     <section class="rounded-[1.75rem] border border-slate-200 bg-white p-5">
-      <p class="text-xs font-bold uppercase tracking-[0.18em] text-slate-500">Score target snapshot</p>
+      <p class="text-xs font-bold uppercase tracking-[0.18em] text-slate-500">Nearby ACT score tiers</p>
       <div class="mt-3 space-y-3">
         {#each nearbyScoreTargets as target}
           <div class="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3">
@@ -176,7 +176,7 @@
           Compare what your student already qualifies for with the next scholarship jump before setting a score goal.
         </li>
         <li class="rounded-2xl bg-slate-50 px-4 py-3">
-          If the next jump adds meaningful four-year value, it is often worth treating that score range as a real prep target.
+          Compare the four-year difference with the time and preparation required to reach the next score tier.
         </li>
         <li class="rounded-2xl bg-slate-50 px-4 py-3">
           The clearest opportunities are usually the schools where one to three ACT points can noticeably lower the total cost.

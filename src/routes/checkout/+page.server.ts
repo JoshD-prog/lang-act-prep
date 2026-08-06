@@ -118,7 +118,7 @@ export const actions: Actions = {
 
     if (!sessionUrl) {
       return fail(500, {
-        message: 'Checkout is temporarily unavailable. Please contact us and we can help finish your enrollment.'
+        message: 'Online payment is temporarily unavailable. Please contact me for help completing your enrollment.'
       });
     }
 

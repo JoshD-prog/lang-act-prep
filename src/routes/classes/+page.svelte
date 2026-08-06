@@ -30,17 +30,17 @@
     {
       question: 'Is ACT prep worth it for my student?',
       answer:
-        'For many families, it is. A stronger ACT score can improve admissions confidence and may move a student into higher scholarship tiers. The ACT Prep ROI page shows why even a modest score increase can matter.'
+        'A higher ACT score may qualify a student for more scholarship money. The ACT Prep ROI page uses published scholarship tables to show how much the next score tier could be worth.'
     },
     {
       question: 'What does the course include?',
       answer:
-        'Each course includes four 90-minute sessions during the week before the ACT, with practical work on timing, strategy, common question types, and test-day decisions.'
+        'Each course includes four 90-minute classes during the week before the ACT. Students work on timing, common question types, and what to do when they get stuck.'
     },
     {
       question: 'Will this help if my student has not studied much yet?',
       answer:
-        'Yes. The course is built to give students structure quickly. In one week, students can make better decisions, avoid common traps, and use their remaining practice time more wisely.'
+        'It can. Students who already understand most of the school material can make useful changes in a week. Students with large gaps in the underlying math or reading skills will usually need more time.'
     },
     {
       question: 'When should we enroll?',
@@ -75,7 +75,7 @@
             '@type': 'Course',
             name: classOffering.title,
             description:
-              'Four focused 90-minute ACT prep sessions in the week before the test, with pacing practice and high-yield review.',
+              'Four 90-minute ACT prep classes in the week before the test, with timing practice and work on common question types.',
             provider: {
               '@type': 'EducationalOrganization',
               name: 'KC Cram Course',
@@ -147,8 +147,8 @@
   <p class="text-xs font-bold uppercase tracking-[0.16em] text-sky-700">ACT Cram Course</p>
   <h1 class="mt-2 max-w-4xl text-4xl font-black leading-tight text-ink md:text-5xl">Choose your test date and reserve your seat.</h1>
   <p class="mt-4 max-w-3xl text-lg text-slate-600">
-    Each ACT Cram Course includes four focused 90-minute sessions in the week before the test. Students get structured strategy,
-    pacing practice, and high-yield review designed for students who need a focused plan close to test day.
+    Each course meets for 90 minutes on Monday through Thursday during the week before the ACT. Students work through real
+    questions, practice their timing, and learn how to respond when a question or section is taking too long.
   </p>
 
   <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -162,7 +162,7 @@
     </div>
     <div class="rounded-2xl border border-teal-100 bg-white/85 p-4 shadow-sm">
       <p class="text-sm font-bold text-teal-700">Who it is for</p>
-      <p class="mt-1 text-sm text-slate-600">Students who want to improve their score and increase opportunities</p>
+      <p class="mt-1 text-sm text-slate-600">Students who understand the material but lose points to timing and mistakes</p>
     </div>
 
   </div>
@@ -179,10 +179,10 @@
   <div class="grid gap-4 p-6 md:grid-cols-[1.3fr_0.7fr] md:items-center md:p-8">
     <div>
       <p class="text-xs font-bold uppercase tracking-[0.16em] text-sky-700">Real classroom format</p>
-      <h2 class="mt-2 text-2xl font-black text-ink">Focused instruction in a small, practical setting.</h2>
+      <h2 class="mt-2 text-2xl font-black text-ink">A small class leaves room for questions and individual help.</h2>
       <p class="mt-3 text-sm leading-6 text-slate-700">
-        Students work through timing, strategy, and section-specific decisions in a room built for direct instruction,
-        note-taking, and focused practice.
+        I teach each section, work through examples with the class, and watch how students solve problems. That gives me time
+        to answer questions and point out the habits that are costing a student time or points.
       </p>
     </div>
     <div class="rounded-2xl border border-amber-100 bg-amber-50 p-4 text-sm font-semibold text-amber-900">
@@ -244,7 +244,7 @@
       </div>
 
       <p class="mt-4 text-sm text-slate-600">
-        Your seat is reserved immediately after checkout. Confirmation details are sent by email after enrollment.
+        After checkout, you will receive an email confirming your enrollment and class details.
       </p>
 
       <a
@@ -265,15 +265,13 @@
       <p class="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">Need a different format?</p>
       <h2 class="mt-2 text-2xl font-black text-ink">Longer online ACT, SAT, and CLT options are also available.</h2>
       <p class="mt-3 text-sm leading-relaxed text-slate-700">
-        The in-person ACT Cram Course is built for focused prep close to test day. If you need a broader online course,
-        The Potter's School offers two sister courses: one focused on math and science, and one focused on reading,
+        The Potter's School offers two longer online courses. One covers math and science, and the other covers reading,
         English, and writing. I teach one of these courses, and a colleague teaches the other. Students can enroll in
-        either course or both, depending on need.
+        either course or both.
       </p>
       <p class="mt-3 text-sm leading-relaxed text-slate-700">
-        Both courses cover ACT, SAT, and CLT prep with general strategies, scheduled practice assignments, and live online
-        classes. Students who need more flexibility can watch recordings or complete assignments according to their own
-        goals and timetable.
+        Both courses prepare students for the ACT, SAT, and CLT through live online classes and scheduled practice assignments.
+        Class recordings are available when a student cannot attend live.
       </p>
     </div>
 
@@ -295,7 +293,7 @@
 
 <section class="color-card mt-8 rounded-3xl border p-6 md:p-8">
   <p class="text-xs font-bold uppercase tracking-[0.16em] text-sky-700">Class details</p>
-  <h2 class="mt-2 text-2xl font-black text-ink">Common questions before families enroll.</h2>
+  <h2 class="mt-2 text-2xl font-black text-ink">Questions families ask before enrolling</h2>
   <div class="mt-5 grid gap-4 md:grid-cols-2">
     {#each classFaqs as faq}
       <article class="rounded-2xl border border-sky-100 bg-white p-5">
@@ -303,7 +301,7 @@
         <p class="mt-2 text-sm leading-6 text-slate-700">{faq.answer}</p>
         {#if faq.question === 'Is ACT prep worth it for my student?'}
           <a href="/act-prep-roi" class="mt-3 inline-flex text-sm font-bold text-sky hover:underline">
-            See ACT prep ROI examples
+            See scholarship examples
           </a>
         {/if}
       </article>
@@ -314,15 +312,15 @@
 <section class="ink-band mt-8 rounded-3xl border p-6">
   <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
     <div class="max-w-2xl">
-      <p class="text-xs font-bold uppercase tracking-[0.16em] text-sky-200">Compare value first</p>
-      <h2 class="mt-2 text-2xl font-black text-white">Estimate the scholarship upside before you enroll.</h2>
+      <p class="text-xs font-bold uppercase tracking-[0.16em] text-sky-200">Scholarship calculator</p>
+      <h2 class="mt-2 text-2xl font-black text-white">See what the next ACT score tier could be worth.</h2>
       <p class="mt-2 text-sm text-sky-50/85">
-        If you are still weighing whether the course is worth it, use the scholarship calculator to see how a score increase can
-        change potential merit aid.
+        Choose a college and enter a current ACT score. The calculator will show the published scholarship amount at that score
+        and the next score that may qualify for more aid.
       </p>
       <p class="mt-2 text-sm text-sky-100/75">
         Have questions about paying for prep? Review the
-        <a href="/act-prep-roi" class="font-semibold text-white hover:underline"> ACT prep ROI guide</a>.
+        <a href="/act-prep-roi" class="font-semibold text-white hover:underline"> guide to ACT scores and college cost</a>.
       </p>
     </div>
 

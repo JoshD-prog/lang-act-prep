@@ -54,17 +54,17 @@
         <summary class="cursor-pointer list-none border-b border-slate-200 bg-slate-50 px-6 py-6">
           <div class="grid gap-5 xl:grid-cols-[1fr_22rem] xl:items-center">
             <div class="min-w-0">
-              <p class="text-xs font-bold uppercase tracking-[0.18em] text-sky-700">Scholarship snapshot</p>
+              <p class="text-xs font-bold uppercase tracking-[0.18em] text-sky-700">Scholarship estimate</p>
               <h3 class="mt-2 text-2xl font-black text-ink">{school.schoolName}</h3>
               <p class="mt-2 max-w-2xl text-sm text-slate-600">
                 {#if cardRoiTarget}
-                  Nearby score upside is visible here. Open the card to compare the full scholarship path.
+                  The next ACT-based tier is shown here. Open the card to compare its requirements and four-year value.
                 {:else if isCompetitiveOnlyTarget}
                   Competitive scholarship opportunity. Open the card for context on how to read it.
                 {:else if isGpaOnlyAutomaticTargetCard}
-                  GPA-based automatic path. Open the card to compare the award and non-ACT upside.
+                  This automatic award is based on GPA. Open the card to see its requirements and value.
                 {:else}
-                  Current scholarship position and next target. Open the card for details.
+                  The current published tier and the next higher tier are shown here. Open the card for details.
                 {/if}
               </p>
               <div class="mt-3 flex flex-wrap gap-2">
@@ -93,11 +93,11 @@
             <div class={`rounded-[1.5rem] border bg-white p-4 shadow-sm ${isCompetitiveOnlyTarget ? 'border-slate-300' : 'border-sky-200'}`}>
               {#if cardRoiTarget}
                 <p class="text-xs font-bold uppercase tracking-[0.16em] text-sky-700">
-                  {cardRoiTarget.actGap <= 2 ? 'Big upside' : 'Nearby upside'}
+                  {cardRoiTarget.actGap <= 2 ? 'Next score tier' : 'Later score tier'}
                 </p>
                 <p class="mt-2 text-2xl font-black text-ink">
                   <span>+{cardRoiTarget.actGap} ACT point{cardRoiTarget.actGap === 1 ? '' : 's'}</span>
-                  <span class="block text-sky-800">could unlock {formatCurrency(cardRoiUpside)}</span>
+                  <span class="block text-sky-800">may add {formatCurrency(cardRoiUpside)}</span>
                 </p>
                 <p class="mt-1 text-sm text-slate-600">
                   Toward {getTierDisplayName(cardRoiTarget, school.primary.tier_name)}
@@ -117,7 +117,7 @@
               {/if}
               <div class="mt-4 flex items-center justify-between gap-3 border-t border-slate-100 pt-3">
                 <span class="text-xs font-bold uppercase tracking-[0.14em] text-slate-500">
-                  {formatCurrency(currentFourYearValue)} current value
+                  {formatCurrency(currentFourYearValue)} current estimate
                 </span>
               </div>
             </div>
@@ -158,14 +158,14 @@
                       {#if isCompetitiveOnlyTarget}
                         A score-influenced scholarship opportunity to review with the school. It is competitive, so this is not a guaranteed automatic award.
                       {:else}
-                        The most natural next scholarship move from your student's current position.
+                        The next published scholarship tier above the student's current score and GPA.
                       {/if}
                     </p>
                   </div>
 
                   <div class="rounded-2xl border border-sky-200 bg-white px-4 py-3">
                     <p class="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">
-                      {isCompetitiveOnlyTarget ? 'Potential value' : 'Target value'}
+                      {isCompetitiveOnlyTarget ? 'Possible amount' : 'Four-year estimate'}
                     </p>
                     <p class="mt-2 text-lg font-black text-ink">{formatCurrency(featuredNext.projected_total_usd)}</p>
                     <p class="text-xs text-slate-500">
@@ -176,7 +176,7 @@
 
                 {#if additionalFourYearValue > 0 && !isCompetitiveOnlyTarget}
                   <div class="mt-4 rounded-2xl bg-ink px-4 py-4 text-white">
-                    <p class="text-xs font-bold uppercase tracking-[0.18em] text-sky-200">Value unlocked</p>
+                    <p class="text-xs font-bold uppercase tracking-[0.18em] text-sky-200">Possible increase</p>
                     <p class="mt-2 text-2xl font-black">+{formatCurrency(additionalFourYearValue)}</p>
                     <p class="mt-1 text-sm text-slate-200">additional scholarship value over 4 years from this next step alone</p>
                   </div>
@@ -184,7 +184,7 @@
 
                 {#if isCompetitiveOnlyTarget}
                   <div class="mt-5 rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-600">
-                    <p class="font-semibold text-ink">Score-influenced competitive path</p>
+                    <p class="font-semibold text-ink">Competitive scholarship</p>
                     <p class="mt-1">
                       Nebraska considers academic strength when reviewing these awards, but it does not publish a simple ACT/GPA-to-dollar ladder for this scholarship. A stronger score can still help the student compete.
                     </p>
@@ -246,7 +246,7 @@
                   <div class="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-600">
                     <p class="font-semibold text-ink">Why scores still matter</p>
                     <p class="mt-1">
-                      Stronger scores can help when awards are reviewed holistically or when funding is limited.
+                      A higher score may help with scholarships that consider the student's full application.
                     </p>
                   </div>
                 </div>
@@ -257,8 +257,8 @@
               <details class="group/paths rounded-[1.75rem] border border-slate-200 bg-slate-50/80 p-5">
                 <summary class="flex cursor-pointer list-none items-center justify-between gap-4">
                   <div>
-                    <p class="text-xs font-bold uppercase tracking-[0.18em] text-slate-500">Other scholarship paths</p>
-                    <p class="mt-2 text-sm text-slate-600">Compare additional options that may trade off award size, GPA lift, and ACT target.</p>
+                    <p class="text-xs font-bold uppercase tracking-[0.18em] text-slate-500">Other scholarship tiers</p>
+                    <p class="mt-2 text-sm text-slate-600">Compare the requirements and estimated amounts for additional tiers.</p>
                   </div>
                   <span class="shrink-0 rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-bold uppercase tracking-[0.14em] text-slate-600 group-open/paths:hidden">
                     See more

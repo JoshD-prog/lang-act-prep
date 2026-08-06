@@ -83,7 +83,7 @@ export const actions: Actions = {
 
     if (!fullName || !email) {
       return fail(400, {
-        message: 'Name and email are required to send the scholarship snapshot.',
+        message: 'Enter your name and email to receive the scholarship results.',
         values
       });
     }
@@ -139,7 +139,7 @@ export const actions: Actions = {
     } catch {
       if (!inquirySaved) {
         return fail(500, {
-          message: 'We could not send the scholarship snapshot. Please email hello@actprepclasses.com.',
+          message: 'We could not send the scholarship results. Please email hello@actprepclasses.com.',
           values
         });
       }
@@ -147,7 +147,7 @@ export const actions: Actions = {
 
     return {
       success: true,
-      message: 'Thanks. We received the scholarship snapshot and will follow up soon.',
+      message: 'The scholarship results have been sent to your email.',
       values: {
         fullName: '',
         email: '',

@@ -82,7 +82,7 @@
 
 <Hero
   eyebrow="Four classes during ACT week"
-  title="What can change in the week before the ACT?"
+  title="What can change in just one week before the ACT?"
   body={homepageDescription}
   primaryCtaLabel="Reserve your seat"
   primaryCtaHref="/classes"
